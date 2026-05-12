@@ -1,0 +1,40 @@
+{
+  "pdf.preset.default": "Predefinito",
+  "pdf.preset.academic": "Accademico",
+  "pdf.preset.compact": "Compatto",
+  "pdf.preset.elegant": "Elegante",
+  "pdf.preset.custom": "Personalizzato",
+  "pdf.pageSetup.size": "Dimensione",
+  "pdf.pageSetup.orientation": "Orientamento",
+  "pdf.pageSetup.orientation.portrait": "Verticale",
+  "pdf.pageSetup.orientation.landscape": "Orizzontale",
+  "pdf.pageSetup.margins": "Margini",
+  "pdf.pageSetup.margins.normal": "Normali",
+  "pdf.pageSetup.margins.narrow": "Stretti",
+  "pdf.pageSetup.margins.wide": "Ampi",
+  "pdf.pageSetup.margins.custom": "Personalizzati",
+  "pdf.pageSetup.marginUnit": "mm",
+  "pdf.typography": "Tipografia",
+  "pdf.typography.fontSize": "Dimensione carattere",
+  "pdf.typography.lineHeight": "Interlinea",
+  "pdf.typography.cjkSpacing": "Spaziatura CJK",
+  "pdf.typography.cjkSpacing.off": "Disattivata",
+  "pdf.typography.latinFont": "Font latino",
+  "pdf.typography.cjkFont": "Font CJK",
+  "pdf.typography.font.systemDefault": "Predefinito di sistema",
+  "pdf.appearance": "Aspetto",
+  "pdf.appearance.useEditorTheme": "Usa il tema dell’editor",
+  "pdf.exportButton": "Esporta PDF",
+  "pdf.exporting": "Esportazione…",
+  "pdf.progress.preparing": "Preparazione…",
+  "pdf.progress.loading": "Caricamento contenuto…",
+  "pdf.progress.rendering": "Generazione PDF…",
+  "pdf.progress.done": "Fatto",
+  "pdf.saveDialog.title": "Esporta PDF",
+  "pdf.defaultTitle": "Documento",
+  "pdf": {
+    "pageSetup": {
+      "marginUnit": "mm"
+    }
+  }
+}

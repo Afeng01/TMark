@@ -1,0 +1,389 @@
+//! MCP Server Process Management
+//!
+//! Manages the MCP bridge WebSocket server and optional sidecar process.
+//!
+//! Architecture:
+//! - The BRIDGE is a WebSocket server that AI sidecars connect to
+//! - The SIDECAR is spawned by AI clients (Claude Code, Codex, etc.), NOT by VMark
+//! - VMark only starts the bridge; AI clients spawn their own sidecars
+//!
+//! For development/testing, mcp_server_start can spawn a local sidecar,
+//! but this should NOT be used when AI clients are configured to use VMark.
+
+use crate::mcp_bridge;
+use serde::{Deserialize, Serialize};
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Mutex;
+use tauri::{command, AppHandle, Emitter};
+use tauri_plugin_shell::process::CommandChild;
+use tauri_plugin_shell::ShellExt;
+
+/// Health check result from sidecar --health-check
+#[derive(Clone, Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct McpHealthInfo {
+    pub status: String,
+    pub version: String,
+    pub tool_count: usize,
+    pub resource_count: usize,
+    pub tools: Vec<String>,
+    #[serde(default)]
+    pub error: Option<String>,
+}
+
+/// MCP server process state (for optional local sidecar)
+static MCP_SERVER: Mutex<Option<CommandChild>> = Mutex::new(None);
+
+/// Guard to prevent concurrent sidecar spawn attempts
+static SIDECAR_SPAWNING: AtomicBool = AtomicBool::new(false);
+
+/// RAII guard that clears `SIDECAR_SPAWNING` on drop (including panics).
+struct SpawningGuard;
+impl Drop for SpawningGuard {
+    fn drop(&mut self) {
+        SIDECAR_SPAWNING.store(false, Ordering::SeqCst);
+    }
+}
+
+/// Bridge running state
+static BRIDGE_RUNNING: AtomicBool = AtomicBool::new(false);
+
+/// Bridge port (stored when started)
+static BRIDGE_PORT: Mutex<Option<u16>> = Mutex::new(None);
+
+/// MCP server status for frontend
+#[derive(Clone, Serialize, Deserialize)]
+pub struct McpServerStatus {
+    pub running: bool,
+    pub port: Option<u16>,
+    /// Whether a local sidecar is running (vs external AI client sidecar)
+    #[serde(default)]
+    pub local_sidecar: bool,
+}
+
+/// Start only the MCP bridge WebSocket server (no sidecar).
+/// This is the recommended way to enable MCP - AI clients spawn their own sidecars.
+/// The port parameter is ignored - the OS assigns an available port automatically.
+/// The actual port is written to the app data directory (mcp-port) for sidecar discovery.
+#[command]
+pub async fn mcp_bridge_start(app: AppHandle, port: u16) -> Result<McpServerStatus, String> {
+    // Check if bridge is already running
+    if BRIDGE_RUNNING.load(Ordering::SeqCst) {
+        let current_port = BRIDGE_PORT.lock().map_err(|e| e.to_string())?.unwrap_or(port);
+        return Ok(McpServerStatus {
+            running: true,
+            port: Some(current_port),
+            local_sidecar: false,
+        });
+    }
+
+    // Start the bridge WebSocket server (returns actual port assigned by OS).
+    // The on_exit callback resets state if the server loop exits unexpectedly.
+    let app_for_cleanup = app.clone();
+    let actual_port = mcp_bridge::start_bridge(app.clone(), port, move || {
+        log::warn!("[MCP] Bridge server loop exited — resetting BRIDGE_RUNNING");
+        BRIDGE_RUNNING.store(false, Ordering::SeqCst);
+        if let Ok(mut p) = BRIDGE_PORT.lock() {
+            *p = None;
+        }
+        mcp_bridge::remove_port_file(&app_for_cleanup);
+    })
+    .await?;
+
+    // Mark bridge as running with actual port
+    BRIDGE_RUNNING.store(true, Ordering::SeqCst);
+    {
+        let mut port_guard = BRIDGE_PORT.lock().map_err(|e| e.to_string())?;
+        *port_guard = Some(actual_port);
+    }
+
+    // Emit started event with actual port
+    let _ = app.emit("mcp-server:started", actual_port);
+
+    log::info!(
+        "[MCP] Bridge started on port {} (waiting for AI client sidecars)",
+        actual_port
+    );
+
+    Ok(McpServerStatus {
+        running: true,
+        port: Some(actual_port),
+        local_sidecar: false,
+    })
+}
+
+/// Stop the MCP bridge WebSocket server.
+#[command]
+pub async fn mcp_bridge_stop(app: AppHandle) -> Result<McpServerStatus, String> {
+    // Stop the bridge
+    mcp_bridge::stop_bridge(&app).await;
+
+    // Mark bridge as stopped
+    BRIDGE_RUNNING.store(false, Ordering::SeqCst);
+    {
+        let mut port_guard = BRIDGE_PORT.lock().map_err(|e| e.to_string())?;
+        *port_guard = None;
+    }
+
+    // Also stop any local sidecar if running
+    {
+        let mut guard = MCP_SERVER.lock().map_err(|e| e.to_string())?;
+        if let Some(child) = guard.take() {
+            let _ = child.kill();
+        }
+    }
+
+    // Emit stopped event
+    let _ = app.emit("mcp-server:stopped", ());
+
+    Ok(McpServerStatus {
+        running: false,
+        port: None,
+        local_sidecar: false,
+    })
+}
+
+/// Start the MCP bridge AND a local sidecar process.
+/// This is mainly for development/testing. In production, AI clients spawn their own sidecars.
+#[command]
+pub async fn mcp_server_start(app: AppHandle, port: u16) -> Result<McpServerStatus, String> {
+    // Check if local sidecar is already running
+    {
+        let guard = MCP_SERVER.lock().map_err(|e| e.to_string())?;
+        if guard.is_some() {
+            let port = BRIDGE_PORT.lock().map_err(|e| e.to_string())?.unwrap_or(port);
+            return Ok(McpServerStatus {
+                running: true,
+                port: Some(port),
+                local_sidecar: true,
+            });
+        }
+    }
+
+    // Prevent concurrent spawn attempts (TOCTOU guard)
+    if SIDECAR_SPAWNING
+        .compare_exchange(false, true, Ordering::SeqCst, Ordering::SeqCst)
+        .is_err()
+    {
+        return Err(rust_i18n::t!("errors.mcp.spawnInProgress").to_string());
+    }
+    // RAII guard — cleared on normal return, early `?`, or panic
+    let _spawning = SpawningGuard;
+
+    // Re-check MCP_SERVER after acquiring the spawn guard to close the TOCTOU window
+    // (another task may have completed a spawn between our first check and acquiring the guard)
+    {
+        let guard = MCP_SERVER.lock().map_err(|e| e.to_string())?;
+        if guard.is_some() {
+            let port = BRIDGE_PORT.lock().map_err(|e| e.to_string())?.unwrap_or(port);
+            return Ok(McpServerStatus {
+                running: true,
+                port: Some(port),
+                local_sidecar: true,
+            });
+        }
+    }
+
+    // Start the bridge first (if not already running)
+    let actual_port = if !BRIDGE_RUNNING.load(Ordering::SeqCst) {
+        let app_for_cleanup2 = app.clone();
+        let actual = mcp_bridge::start_bridge(app.clone(), port, move || {
+            log::warn!("[MCP] Bridge server loop exited — resetting BRIDGE_RUNNING");
+            BRIDGE_RUNNING.store(false, Ordering::SeqCst);
+            if let Ok(mut p) = BRIDGE_PORT.lock() {
+                *p = None;
+            }
+            mcp_bridge::remove_port_file(&app_for_cleanup2);
+        })
+        .await?;
+        BRIDGE_RUNNING.store(true, Ordering::SeqCst);
+        {
+            let mut port_guard = BRIDGE_PORT.lock().map_err(|e| e.to_string())?;
+            *port_guard = Some(actual);
+        }
+        actual
+    } else {
+        // Re-read the port from the lock to get the actual bridge port
+        BRIDGE_PORT.lock().map_err(|e| e.to_string())?.unwrap_or(port)
+    };
+
+    // Small delay to ensure bridge is ready
+    tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+
+    // Spawn the sidecar process (no --port arg needed, it reads from file)
+    let shell = app.shell();
+    let sidecar = shell
+        .sidecar("vmark-mcp-server")
+        .map_err(|e| format!("Failed to create sidecar command: {}", e))?;
+
+    let (mut rx, child) = sidecar.spawn().map_err(|e| {
+        format!("Failed to spawn MCP server: {}", e)
+    })?;
+
+    // Store the child process — on mutex failure, kill child and stop bridge to avoid orphaned state
+    let store_result = {
+        match MCP_SERVER.lock() {
+            Ok(mut guard) => {
+                *guard = Some(child);
+                Ok(())
+            }
+            Err(e) => {
+                let _ = child.kill();
+                Err(format!("Failed to lock MCP_SERVER mutex (child killed): {}", e))
+            }
+        }
+    };
+    if let Err(e) = store_result {
+        // Roll back bridge state started earlier in this call
+        mcp_bridge::stop_bridge(&app).await;
+        BRIDGE_RUNNING.store(false, Ordering::SeqCst);
+        if let Ok(mut p) = BRIDGE_PORT.lock() {
+            *p = None;
+        }
+        return Err(format!("{}, bridge stopped", e));
+    }
+
+    // Spawn a task to monitor the process output
+    let app_handle = app.clone();
+    tauri::async_runtime::spawn(async move {
+        use tauri_plugin_shell::process::CommandEvent;
+
+        while let Some(event) = rx.recv().await {
+            match event {
+                CommandEvent::Stdout(line) => {
+                    log::debug!("[MCP Server] {}", String::from_utf8_lossy(&line));
+                }
+                CommandEvent::Stderr(line) => {
+                    log::warn!("[MCP Server stderr] {}", String::from_utf8_lossy(&line));
+                }
+                CommandEvent::Terminated(payload) => {
+                    log::debug!(
+                        "[MCP Server] Process terminated with code: {:?}, signal: {:?}",
+                        payload.code, payload.signal
+                    );
+
+                    // Clear the stored process
+                    if let Ok(mut guard) = MCP_SERVER.lock() {
+                        *guard = None;
+                    }
+
+                    // Notify frontend so it can update MCP status indicator
+                    let _ = app_handle.emit(
+                        "mcp-server:sidecar-terminated",
+                        serde_json::json!({ "code": payload.code, "signal": payload.signal }),
+                    );
+
+                    // Emit a status-changed event so the frontend can refresh its
+                    // status indicator (bridge may still be running without a sidecar)
+                    let bridge_running = BRIDGE_RUNNING.load(Ordering::SeqCst);
+                    let port = BRIDGE_PORT.lock().ok().and_then(|p| *p);
+                    let _ = app_handle.emit(
+                        "mcp-server:status-changed",
+                        serde_json::json!({
+                            "running": bridge_running,
+                            "port": port,
+                            "local_sidecar": false,
+                        }),
+                    );
+
+                    break;
+                }
+                _ => {}
+            }
+        }
+
+        // Ensure cleanup on ANY loop exit (channel closed without Terminated, break, etc.)
+        if let Ok(mut guard) = MCP_SERVER.lock() {
+            *guard = None;
+        }
+    });
+
+    // Emit started event with actual port
+    let _ = app.emit("mcp-server:started", actual_port);
+
+    // `_spawning` guard dropped here — clears SIDECAR_SPAWNING
+    Ok(McpServerStatus {
+        running: true,
+        port: Some(actual_port),
+        local_sidecar: true,
+    })
+}
+
+/// Stop the MCP server (bridge + local sidecar).
+#[command]
+pub async fn mcp_server_stop(app: AppHandle) -> Result<McpServerStatus, String> {
+    // Use the bridge stop which handles everything
+    mcp_bridge_stop(app).await
+}
+
+/// Get the current MCP server status.
+#[command]
+pub fn mcp_server_status() -> Result<McpServerStatus, String> {
+    let bridge_running = BRIDGE_RUNNING.load(Ordering::SeqCst);
+    let port = *BRIDGE_PORT.lock().map_err(|e| e.to_string())?;
+    let local_sidecar = MCP_SERVER.lock().map_err(|e| e.to_string())?.is_some();
+
+    Ok(McpServerStatus {
+        running: bridge_running,
+        port,
+        local_sidecar,
+    })
+}
+
+/// Run MCP sidecar health check.
+/// This runs the sidecar binary with --health-check flag to get real tool/version info.
+#[command]
+pub async fn mcp_sidecar_health(app: AppHandle) -> Result<McpHealthInfo, String> {
+    let shell = app.shell();
+
+    // Run sidecar with --health-check flag
+    let output = shell
+        .sidecar("vmark-mcp-server")
+        .map_err(|e| format!("Failed to create sidecar command: {}", e))?
+        .args(["--health-check"])
+        .output()
+        .await
+        .map_err(|e| format!("Failed to run health check: {}", e))?;
+
+    if output.status.success() {
+        // Parse JSON output from sidecar
+        let result: McpHealthInfo = serde_json::from_slice(&output.stdout)
+            .map_err(|e| format!("Failed to parse health check output: {}", e))?;
+        Ok(result)
+    } else {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        Err(format!("Health check failed: {}", stderr))
+    }
+}
+
+/// Get the number of connected MCP clients.
+#[command]
+pub async fn mcp_bridge_client_count() -> Result<usize, String> {
+    Ok(mcp_bridge::client_count().await)
+}
+
+/// Get list of connected MCP clients with their identities.
+#[command]
+pub async fn mcp_bridge_connected_clients() -> Result<Vec<mcp_bridge::ConnectedClientInfo>, String>
+{
+    Ok(mcp_bridge::connected_clients().await)
+}
+
+/// Cleanup function to kill the MCP server on app exit.
+/// Uses block_on to ensure cleanup completes before app exits.
+pub fn cleanup(app: &AppHandle) {
+    // Stop the bridge synchronously - must complete before exit
+    let app_clone = app.clone();
+    tauri::async_runtime::block_on(async move {
+        mcp_bridge::stop_bridge(&app_clone).await;
+    });
+
+    BRIDGE_RUNNING.store(false, Ordering::SeqCst);
+
+    // Stop the local sidecar if running
+    if let Ok(mut guard) = MCP_SERVER.lock() {
+        if let Some(child) = guard.take() {
+            let _ = child.kill();
+        }
+    }
+}

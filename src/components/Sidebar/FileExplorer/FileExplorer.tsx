@@ -1,0 +1,542 @@
+/**
+ * FileExplorer
+ *
+ * Purpose: Workspace file tree panel using react-arborist for virtualized tree rendering.
+ * Only available in workspace mode — shows markdown files (and optionally all files via
+ * showAllFiles config) with drag-and-drop, rename, delete, and context menu operations.
+ * Non-markdown files open with the system default app.
+ * User-visible strings are translated via the "sidebar" i18n namespace.
+ *
+ * User interactions:
+ *   - Double-click or Enter to open a file in a tab
+ *   - Right-click for context menu (file/folder/empty area variants)
+ *   - Drag-and-drop to move files between folders
+ *   - Inline rename on F2 or via context menu
+ *
+ * Key decisions:
+ *   - Uses forwardRef + useImperativeHandle to expose createNewFile / createNewFolder /
+ *     collapseAll / expandAll to the Sidebar header buttons.
+ *   - File tree is workspace-only — no inferred root from file path (single-file mode
+ *     has no explorer).
+ *   - Tree height is measured dynamically via ResizeObserver because react-arborist
+ *     (react-window) requires an explicit numeric pixel height.
+ *   - After create operations, a small timeout allows the tree to refresh before
+ *     auto-entering edit mode on the new node.
+ *   - Folders default to collapsed (openByDefault=false). Open/closed state is persisted
+ *     across Files ↔ Outline ↔ History view switches via useFileExplorerOpenState, which
+ *     snapshots uiStore at mount and mirrors toggles back.
+ *
+ * @coordinates-with useFileTree.ts — loads directory tree and watches for fs changes
+ * @coordinates-with useExplorerOperations.ts — CRUD operations on files and folders
+ * @coordinates-with useFileExplorerOpenState.ts — persists folder open state across remounts
+ * @coordinates-with Sidebar.tsx — parent component that provides the ref
+ * @module components/Sidebar/FileExplorer/FileExplorer
+ */
+import { useState, useCallback, useRef, forwardRef, useImperativeHandle, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { Tree, type TreeApi } from "react-arborist";
+import { ChevronDown, ChevronRight, Folder } from "lucide-react";
+import { open as openDialog } from "@tauri-apps/plugin-dialog";
+import { useFileTree } from "./useFileTree";
+import { useExplorerOperations } from "./useExplorerOperations";
+import { useFileExplorerOpenState } from "./useFileExplorerOpenState";
+import { FileNode } from "./FileNode";
+import { ContextMenu, type ContextMenuType, type ContextMenuPosition } from "./ContextMenu";
+import { useObservedHeight } from "./useObservedHeight";
+import { getCompactTreeHeight, getExpandedFolderState } from "./treeLayout";
+import { useWorkspaceStore } from "@/stores/workspaceStore";
+import { useWindowLabel } from "@/contexts/WindowContext";
+import { getFileName, getParentDir, isWithinRoot, normalizePath } from "@/utils/paths";
+import { getWorkspaceRootWatchId } from "@/utils/workspaceWatchIds";
+import { handleOpenFile } from "@/hooks/useFileOpen";
+import { useTabStore, type Tab } from "@/stores/tabStore";
+import {
+  isMarkdownFileName,
+  isSupportedFileName,
+  isVMarkFileName,
+} from "@/utils/dropPaths";
+import { isWorkflowEnabled } from "@/utils/workflowFeatureFlag";
+import type { FileNode as FileNodeType } from "./types";
+import "./FileExplorer.css";
+
+// Stable empty array reference to avoid re-renders
+const EMPTY_FOLDERS: string[] = [];
+const EMPTY_TABS: Tab[] = [];
+
+interface ContextMenuState {
+  visible: boolean;
+  type: ContextMenuType;
+  position: ContextMenuPosition;
+  targetPath: string | null;
+  targetIsFolder: boolean;
+}
+
+/** Imperative handle exposed by FileExplorer for programmatic file/folder creation and tree expansion. */
+export interface FileExplorerHandle {
+  createNewFile: () => void;
+  createNewFolder: () => void;
+  collapseAll: () => void;
+  expandAll: () => void;
+}
+
+interface FileExplorerProps {
+  currentFilePath: string | null;
+  rootPathOverride?: string | null;
+  compactLayout?: boolean;
+}
+
+/** Workspace file tree panel with virtualized rendering, drag-and-drop, and context menu support. */
+export const FileExplorer = forwardRef<FileExplorerHandle, FileExplorerProps>(
+  function FileExplorer({ currentFilePath, rootPathOverride, compactLayout = false }, ref) {
+  const { t } = useTranslation("sidebar");
+  // Workspace-only: file tree only shows when in workspace mode
+  const workspaceRootPath = useWorkspaceStore((s) => s.rootPath);
+  const isWorkspaceMode = useWorkspaceStore((s) => s.isWorkspaceMode);
+  const excludeFolders = useWorkspaceStore(
+    (s) => s.config?.excludeFolders ?? EMPTY_FOLDERS
+  );
+  const showHiddenFiles = useWorkspaceStore(
+    (s) => s.config?.showHiddenFiles ?? false
+  );
+  const showAllFiles = useWorkspaceStore(
+    (s) => s.config?.showAllFiles ?? false
+  );
+  const windowLabel = useWindowLabel();
+  const tabsForWindow = useTabStore((state) => state.tabs[windowLabel] ?? EMPTY_TABS);
+
+  const [contextMenu, setContextMenu] = useState<ContextMenuState>({
+    visible: false,
+    type: "empty",
+    position: { x: 0, y: 0 },
+    targetPath: null,
+    targetIsFolder: false,
+  });
+  const [isWorkspaceCollapsed, setIsWorkspaceCollapsed] = useState(false);
+  const treeRef = useRef<TreeApi<FileNodeType> | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [treeContainerRef, treeHeight] = useObservedHeight<HTMLDivElement>();
+
+  // Workspace-only: no inferred root from file path
+  const rootPath = rootPathOverride ?? (isWorkspaceMode ? workspaceRootPath : null);
+  const watchId = rootPath
+    ? getWorkspaceRootWatchId(windowLabel, rootPath, workspaceRootPath)
+    : windowLabel;
+
+  // Persisted folder open state — preserved across sidebar view-mode switches
+  // (react-arborist unmounts on viewMode change, losing internal state otherwise).
+  const { initialOpenState, handleToggle, collapseAll, expandAll } =
+    useFileExplorerOpenState(treeRef);
+  const [compactOpenState, setCompactOpenState] = useState(initialOpenState);
+
+  const { tree, isLoading, refresh } = useFileTree(rootPath, {
+    excludeFolders,
+    showHidden: showHiddenFiles,
+    showAllFiles,
+    watchId,
+  });
+  const treeViewportHeight = useMemo(
+    () => compactLayout ? getCompactTreeHeight(tree, compactOpenState) : treeHeight,
+    [compactLayout, compactOpenState, tree, treeHeight]
+  );
+  const pinnedFilePaths = useMemo(() => {
+    const paths = new Set<string>();
+    for (const tab of tabsForWindow) {
+      if (tab.isPinned && tab.filePath) paths.add(normalizePath(tab.filePath));
+    }
+    return paths;
+  }, [tabsForWindow]);
+  const {
+    createFile,
+    createFolder,
+    renameItem,
+    deleteItem,
+    moveItem,
+    openFile,
+    openWithDefaultApp,
+    duplicateFile,
+    copyPath,
+    revealInFinder,
+  } = useExplorerOperations();
+
+  // Close context menu
+  const closeContextMenu = useCallback(() => {
+    setContextMenu((prev) => ({ ...prev, visible: false }));
+  }, []);
+
+  // Handle context menu on tree area
+  const handleContextMenu = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+
+      // Check if right-clicked on a tree item
+      const target = e.target as HTMLElement;
+      const nodeElement = target.closest(".file-node");
+
+      if (nodeElement) {
+        // Right-clicked on a node - get node data from tree
+        const nodeId = nodeElement.getAttribute("data-node-id");
+        if (nodeId) {
+          const node = treeRef.current?.get(nodeId);
+          if (node) {
+            setContextMenu({
+              visible: true,
+              type: node.data.isFolder ? "folder" : "file",
+              position: { x: e.clientX, y: e.clientY },
+              targetPath: node.data.id,
+              targetIsFolder: node.data.isFolder,
+            });
+            return;
+          }
+        }
+      }
+
+      // Right-clicked on empty area
+      setContextMenu({
+        visible: true,
+        type: "empty",
+        position: { x: e.clientX, y: e.clientY },
+        targetPath: null,
+        targetIsFolder: false,
+      });
+    },
+    []
+  );
+
+  // Shared: open supported files in VMark, others with system default app
+  const openFileByType = useCallback(
+    (path: string) => {
+      const fileName = getFileName(path);
+      // Phase 1B: any registered format opens in VMark. The workflow-
+      // engine / markdown-only fallback covers the pre-bootstrap edge.
+      const isSupported =
+        fileName &&
+        (isSupportedFileName(fileName) ||
+          (isWorkflowEnabled()
+            ? isVMarkFileName(fileName)
+            : isMarkdownFileName(fileName)));
+      if (isSupported) {
+        openFile(path);
+      } else {
+        void openWithDefaultApp(path);
+      }
+    },
+    [openFile, openWithDefaultApp]
+  );
+
+  const handleTogglePinFile = useCallback(
+    async (path: string) => {
+      const fileName = getFileName(path);
+      const isSupported =
+        fileName &&
+        (isSupportedFileName(fileName) ||
+          (isWorkflowEnabled()
+            ? isVMarkFileName(fileName)
+            : isMarkdownFileName(fileName)));
+      if (!isSupported) return;
+
+      let tab = useTabStore.getState().findTabByPath(windowLabel, path);
+      if (!tab) {
+        await handleOpenFile(windowLabel, path);
+        tab = useTabStore.getState().findTabByPath(windowLabel, path);
+      }
+
+      if (tab) {
+        useTabStore.getState().togglePin(windowLabel, tab.id);
+      }
+    },
+    [windowLabel]
+  );
+
+  // Handle context menu actions
+  const handleContextMenuAction = useCallback(
+    async (action: string) => {
+      const { targetPath, targetIsFolder } = contextMenu;
+
+      switch (action) {
+        case "open":
+          if (targetPath && !targetIsFolder) {
+            openFileByType(targetPath);
+          }
+          break;
+
+        case "rename":
+          if (targetPath) {
+            const node = treeRef.current?.get(targetPath);
+            node?.edit();
+          }
+          break;
+
+        case "duplicate":
+          if (targetPath && !targetIsFolder) {
+            await duplicateFile(targetPath);
+          }
+          break;
+
+        case "moveTo":
+          if (targetPath && !targetIsFolder) {
+            const currentFolder = getParentDir(targetPath);
+            const destFolder = await openDialog({
+              title: `Move "${getFileName(targetPath)}" to...`,
+              directory: true,
+              defaultPath: currentFolder ?? undefined,
+            });
+            if (destFolder) {
+              await moveItem(targetPath, destFolder);
+            }
+          }
+          break;
+
+        case "delete":
+          if (targetPath) {
+            await deleteItem(targetPath, targetIsFolder);
+          }
+          break;
+
+        case "copyPath":
+          if (targetPath) {
+            await copyPath(targetPath);
+          }
+          break;
+
+        case "revealInFinder":
+          if (targetPath) {
+            await revealInFinder(targetPath);
+          }
+          break;
+
+        case "newFile":
+          await handleNewFile(targetPath);
+          break;
+
+        case "newFolder":
+          await handleNewFolder(targetPath);
+          break;
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- handleNewFile/handleNewFolder use getState() pattern
+    [contextMenu, openFileByType, duplicateFile, moveItem, deleteItem, copyPath, revealInFinder]
+  );
+
+  // Handle file activation (double-click or Enter)
+  const handleTreeToggle = useCallback((id: string) => {
+    handleToggle(id);
+    if (!compactLayout) return;
+    const isOpen = treeRef.current?.isOpen(id);
+    if (typeof isOpen !== "boolean") return;
+    setCompactOpenState((prev) => ({ ...prev, [id]: isOpen }));
+  }, [compactLayout, handleToggle]);
+
+  const handleActivate = useCallback(
+    (node: { data: FileNodeType }) => {
+      if (!node.data.isFolder) {
+        openFileByType(node.data.id);
+      }
+    },
+    [openFileByType]
+  );
+
+  // Handle rename
+  const handleRename = useCallback(
+    async ({ id, name }: { id: string; name: string }) => {
+      await renameItem(id, name);
+    },
+    [renameItem]
+  );
+
+  // Handle delete
+  const handleDelete = useCallback(
+    async ({ ids }: { ids: string[] }) => {
+      for (const id of ids) {
+        const node = treeRef.current?.get(id);
+        if (node) {
+          await deleteItem(id, node.data.isFolder);
+        }
+      }
+    },
+    [deleteItem]
+  );
+
+  // Handle move (drag-and-drop)
+  const handleMove = useCallback(
+    async ({
+      dragIds,
+      parentId,
+    }: {
+      dragIds: string[];
+      parentId: string | null;
+    }) => {
+      const destFolder = parentId || rootPath;
+      if (!destFolder) return;
+
+      for (const id of dragIds) {
+        await moveItem(id, destFolder);
+      }
+    },
+    [moveItem, rootPath]
+  );
+
+  // Create new file
+  const handleNewFile = useCallback(
+    async (parentPath?: string | null) => {
+      if (!rootPath) return;
+
+      // Use provided path, selected folder, or root
+      let targetPath = parentPath;
+      if (!targetPath && currentFilePath && rootPath && isWithinRoot(rootPath, currentFilePath)) {
+        targetPath = getParentDir(currentFilePath) ?? rootPath;
+      }
+      if (!targetPath) {
+        const selected = treeRef.current?.selectedNodes[0];
+        targetPath = selected?.data.isFolder ? selected.data.id : rootPath;
+      }
+
+      const path = await createFile(targetPath, t("defaultFileName"));
+      if (path) {
+        await refresh();
+        setTimeout(() => {
+          const node = treeRef.current?.get(path);
+          node?.edit();
+        }, 100);
+      }
+    },
+    [rootPath, currentFilePath, createFile, refresh, t]
+  );
+
+  // Create new folder
+  const handleNewFolder = useCallback(
+    async (parentPath?: string | null) => {
+      if (!rootPath) return;
+
+      let targetPath = parentPath;
+      if (!targetPath && currentFilePath && rootPath && isWithinRoot(rootPath, currentFilePath)) {
+        targetPath = getParentDir(currentFilePath) ?? rootPath;
+      }
+      if (!targetPath) {
+        const selected = treeRef.current?.selectedNodes[0];
+        targetPath = selected?.data.isFolder ? selected.data.id : rootPath;
+      }
+
+      const path = await createFolder(targetPath, t("defaultFolderName"));
+      if (path) {
+        await refresh();
+        setTimeout(() => {
+          const node = treeRef.current?.get(path);
+          node?.edit();
+        }, 100);
+      }
+    },
+    [rootPath, currentFilePath, createFolder, refresh, t]
+  );
+
+  // Expose methods to parent via ref
+  useImperativeHandle(ref, () => ({
+    createNewFile: () => handleNewFile(),
+    createNewFolder: () => handleNewFolder(),
+    collapseAll: () => {
+      collapseAll();
+      if (compactLayout) setCompactOpenState({});
+    },
+    expandAll: () => {
+      expandAll();
+      if (compactLayout) setCompactOpenState(getExpandedFolderState(tree));
+    },
+  }), [handleNewFile, handleNewFolder, collapseAll, expandAll, compactLayout, tree]);
+
+  // Extract workspace name from path
+  const workspaceName = rootPath
+    ? getFileName(rootPath) || t("workspaceFallback")
+    : null;
+  const workspaceToggleLabel = isWorkspaceCollapsed
+    ? t("expandWorkspaceRoot", { name: workspaceName })
+    : t("collapseWorkspaceRoot", { name: workspaceName });
+
+  // Show empty state if no workspace is open
+  if (!rootPath) {
+    return (
+      <div className="file-explorer">
+        <div className="file-explorer-empty">
+          {t("noWorkspace")}
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading && tree.length === 0) {
+    return (
+      <div className="file-explorer">
+        <div className="file-explorer-empty">{t("loading")}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`file-explorer ${compactLayout ? "compact" : ""}`} ref={containerRef}>
+      {/* Workspace header when in workspace mode */}
+      {isWorkspaceMode && workspaceName && (
+        <div className="file-explorer-workspace-header">
+          <button
+            type="button"
+            className="file-explorer-root-toggle"
+            onClick={() => setIsWorkspaceCollapsed((collapsed) => !collapsed)}
+            title={workspaceToggleLabel}
+            aria-label={workspaceToggleLabel}
+            aria-expanded={!isWorkspaceCollapsed}
+          >
+            {isWorkspaceCollapsed ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
+          </button>
+          <Folder size={14} />
+          <span className="file-explorer-workspace-name">{workspaceName}</span>
+        </div>
+      )}
+      {!isWorkspaceCollapsed && (
+        <div className="file-explorer-tree" ref={treeContainerRef} onContextMenu={handleContextMenu}>
+          <Tree<FileNodeType>
+            ref={treeRef}
+            data={tree}
+            openByDefault={false}
+            initialOpenState={initialOpenState}
+            width="100%"
+            height={treeViewportHeight}
+            indent={16}
+            rowHeight={26}
+            onActivate={handleActivate}
+            onToggle={handleTreeToggle}
+            onRename={handleRename}
+            onDelete={handleDelete}
+            onMove={handleMove}
+            disableDrag={false}
+            disableDrop={false}
+            disableEdit={false}
+          >
+            {(props) => (
+              <FileNode
+                {...props}
+                currentFilePath={currentFilePath}
+                isPinned={pinnedFilePaths.has(normalizePath(props.node.data.id))}
+                onTogglePin={handleTogglePinFile}
+                onDelete={(path, isFolder) => {
+                  void deleteItem(path, isFolder);
+                }}
+                labels={{
+                  rename: t("quickActions.rename"),
+                  delete: t("quickActions.delete"),
+                  pin: t("quickActions.pin"),
+                  unpin: t("quickActions.unpin"),
+                }}
+              />
+            )}
+          </Tree>
+        </div>
+      )}
+
+      {contextMenu.visible && (
+        <ContextMenu
+          type={contextMenu.type}
+          position={contextMenu.position}
+          onAction={handleContextMenuAction}
+          onClose={closeContextMenu}
+        />
+      )}
+    </div>
+  );
+});

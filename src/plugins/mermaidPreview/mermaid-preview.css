@@ -1,0 +1,226 @@
+/**
+ * Mermaid Preview Popup Styles
+ */
+
+/* Fallback styles are imported via mermaid.css which imports mermaid-fallback.css */
+
+.mermaid-preview-popup {
+  position: absolute;
+  z-index: var(--z-context-menu);
+  background: var(--bg-color);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--popup-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mermaid-preview-popup.dragging {
+  user-select: none;
+  cursor: grabbing;
+}
+
+/* Header with drag handle and pin button */
+.mermaid-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-1-5) var(--spacing-2) var(--space-1-5) var(--spacing-3);
+  border-bottom: var(--border-thin) solid var(--border-color);
+  cursor: grab;
+  flex-shrink: 0;
+}
+
+.mermaid-preview-popup.dragging .mermaid-preview-header {
+  cursor: grabbing;
+}
+
+.mermaid-preview-title {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Zoom controls */
+.mermaid-preview-zoom {
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+}
+
+.mermaid-preview-zoom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-btn-xs);
+  height: var(--size-btn-xs);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--duration-base);
+}
+
+.mermaid-preview-zoom-btn:hover {
+  background: var(--hover-bg);
+}
+
+.mermaid-preview-zoom-btn:active {
+  background: var(--bg-tertiary);
+}
+
+/* Focus: U-shaped underline per 33-focus-indicators */
+.mermaid-preview-zoom-btn:focus-visible {
+  outline: none;
+  position: relative;
+}
+
+.mermaid-preview-zoom-btn:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
+
+.mermaid-preview-zoom-value {
+  min-width: var(--space-10);
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Resize handles - invisible but functional at corners and edges */
+.mermaid-preview-resize {
+  position: absolute;
+}
+
+/* Corner handles */
+.mermaid-preview-resize-nw {
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  cursor: nwse-resize;
+}
+
+.mermaid-preview-resize-ne {
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  cursor: nesw-resize;
+}
+
+.mermaid-preview-resize-sw {
+  bottom: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  cursor: nesw-resize;
+}
+
+.mermaid-preview-resize-se {
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  cursor: nwse-resize;
+}
+
+/* Edge handles */
+.mermaid-preview-resize-n {
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.mermaid-preview-resize-s {
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.mermaid-preview-resize-w {
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.mermaid-preview-resize-e {
+  top: 12px;
+  bottom: 12px;
+  right: 0;
+  width: 6px;
+  cursor: ew-resize;
+}
+
+.mermaid-preview-popup.resizing {
+  user-select: none;
+}
+
+.mermaid-preview-content {
+  min-width: 200px;
+  min-height: 100px;
+  padding: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  flex: 1;
+  /* Scale container based on --mermaid-scale (set by JS from editor font size) */
+  zoom: var(--mermaid-scale, 1);
+}
+
+.mermaid-preview-content svg {
+  /* Dimensions set by JS zoom control */
+  flex-shrink: 0;
+}
+
+.mermaid-preview-empty {
+  color: var(--text-tertiary);
+  font-style: italic;
+  font-size: var(--font-size-base);
+}
+
+.mermaid-preview-loading {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  padding: var(--space-5);
+}
+
+.mermaid-preview-error {
+  color: var(--error-color);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-2);
+  text-align: center;
+}
+
+.mermaid-preview-error-state {
+  border: var(--border-thin) dashed var(--error-color);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-3);
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  background: var(--error-bg);
+}
+
+/* Dark theme */
+.dark-theme .mermaid-preview-popup {
+  box-shadow: var(--popup-shadow-dark);
+}

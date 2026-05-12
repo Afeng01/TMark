@@ -1,0 +1,115 @@
+/**
+ * Typewriter Mode Plugin for CodeMirror (Source Mode)
+ *
+ * Purpose: Keeps the cursor vertically centered at ~40% from the top of the viewport
+ * as the user types, creating a typewriter-like scrolling experience.
+ *
+ * Key decisions:
+ *   - Mirrors the WYSIWYG typewriter mode plugin for consistent cross-mode UX
+ *   - Uses a scroll threshold (30px) to avoid jittery scrolling on small cursor movements
+ *   - Skips initial updates to prevent jarring scroll on editor load
+ *   - Smooth scrolling for a polished feel
+ *
+ * @coordinates-with typewriterMode/tiptap.ts — WYSIWYG counterpart
+ * @coordinates-with stores/editorStore.ts — reads typewriterMode state
+ * @module plugins/codemirror/typewriterModePlugin
+ */
+
+import { ViewPlugin, type ViewUpdate } from "@codemirror/view";
+import { useEditorStore } from "@/stores/editorStore";
+import { isCodeMirrorComposing } from "@/utils/imeGuard";
+
+// Threshold for scrolling (pixels from target position)
+const SCROLL_THRESHOLD = 30;
+// Number of initial updates to skip (avoid jarring scroll on load)
+const SKIP_INITIAL_UPDATES = 3;
+// Target position: cursor at 40% from top
+const TARGET_POSITION = 0.4;
+
+/**
+ * Creates a ViewPlugin that keeps cursor centered vertically.
+ */
+export function createSourceTypewriterPlugin() {
+  return ViewPlugin.fromClass(
+    class {
+      private updateCount = 0;
+      private rafId: number | null = null;
+
+      update(update: ViewUpdate) {
+        // Check if typewriter mode is enabled
+        if (!useEditorStore.getState().typewriterModeEnabled) return;
+
+        // Only scroll if selection changed
+        if (!update.selectionSet) return;
+
+        // Never scroll while an IME is composing — each pinyin/kana/hangul
+        // keystroke moves the cursor, and smooth-scrolling on every step
+        // produces visible viewport jitter (issue #814). Cancel any rAF
+        // queued before composition started so it cannot fire mid-compose.
+        if (isCodeMirrorComposing(update.view)) {
+          if (this.rafId !== null) {
+            cancelAnimationFrame(this.rafId);
+            this.rafId = null;
+          }
+          return;
+        }
+
+        // Skip initial updates to avoid jarring scroll on load
+        this.updateCount++;
+        if (this.updateCount <= SKIP_INITIAL_UPDATES) return;
+
+        // Cancel any pending scroll to handle rapid cursor movement
+        if (this.rafId !== null) {
+          cancelAnimationFrame(this.rafId);
+        }
+
+        // Use requestAnimationFrame to batch scroll updates
+        this.rafId = requestAnimationFrame(() => {
+          this.rafId = null;
+
+          try {
+            const view = update.view;
+            const { from } = view.state.selection.main;
+
+            // Get cursor position in viewport coordinates
+            const coords = view.coordsAtPos(from);
+            if (!coords) return;
+
+            // Find the scrollable container
+            const scrollContainer =
+              (view.dom.closest(".editor-content") as HTMLElement) ||
+              view.dom.parentElement;
+            if (!scrollContainer) return;
+
+            // Get container dimensions
+            const containerRect = scrollContainer.getBoundingClientRect();
+            const containerHeight = containerRect.height;
+
+            // Target: keep cursor at 40% from top (comfortable reading position)
+            const targetY = containerRect.top + containerHeight * TARGET_POSITION;
+
+            // Calculate how much to scroll
+            const scrollOffset = coords.top - targetY;
+
+            // Only scroll if the offset is significant (avoid jitter)
+            if (Math.abs(scrollOffset) > SCROLL_THRESHOLD) {
+              scrollContainer.scrollBy({
+                top: scrollOffset,
+                behavior: "smooth",
+              });
+            }
+          } catch {
+            // coordsAtPos can throw if position is invalid
+          }
+        });
+      }
+
+      destroy() {
+        // Clean up pending animation frame
+        if (this.rafId !== null) {
+          cancelAnimationFrame(this.rafId);
+        }
+      }
+    }
+  );
+}

@@ -1,0 +1,285 @@
+/**
+ * Workspace Store
+ *
+ * Purpose: Manages workspace (folder) state — open/close, config, excluded
+ *   folders, trust management, and session restore via lastOpenTabs.
+ *
+ * Key decisions:
+ *   - Uses window-scoped storage so each Tauri window persists its own
+ *     workspace independently. skipHydration is set to true — WindowContext
+ *     calls setCurrentWindowLabel() then rehydrate() at mount time.
+ *   - Workspace identity (UUID + trust) enables future features like
+ *     workspace-scoped AI settings and security gating.
+ *   - Default excluded folders (.git, node_modules) are merged on open
+ *     to ensure new defaults propagate to existing workspaces.
+ *
+ * Known limitations:
+ *   - Config is stored in localStorage (via windowScopedStorage), not on
+ *     disk — workspace settings don't transfer between machines.
+ *   - No workspace indexing or search — only folder exclusion.
+ *
+ * @coordinates-with tabStore.ts — lastOpenTabs drives session restore
+ * @coordinates-with useWorkspaceBootstrap.ts — loads config from Tauri on startup
+ * @module stores/workspaceStore
+ */
+
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { isPathExcluded as checkPathExcluded } from "@/utils/paths";
+import {
+  createWorkspaceIdentity,
+  grantTrust,
+  revokeTrust,
+  isTrusted,
+  type WorkspaceIdentity,
+} from "@/utils/workspaceIdentity";
+import { windowScopedStorage } from "@/utils/workspaceStorage";
+
+/** Workspace configuration — excluded folders, session restore tabs, file visibility, and trust identity. */
+export interface WorkspaceConfig {
+  version: 1;
+  excludeFolders: string[];
+  lastOpenTabs: string[]; // File paths for session restore
+  showHiddenFiles: boolean;
+  showAllFiles: boolean; // Show non-markdown files in the file explorer
+  ai?: Record<string, unknown>; // Future AI settings
+  identity?: WorkspaceIdentity; // Workspace identity and trust info
+}
+
+// Runtime workspace state
+interface WorkspaceState {
+  rootPath: string | null;
+  workspaceRoots: string[];
+  config: WorkspaceConfig | null;
+  isWorkspaceMode: boolean; // true if opened via "Open Workspace"
+}
+
+interface WorkspaceActions {
+  // Workspace management
+  openWorkspace: (rootPath: string, config?: WorkspaceConfig | null) => void;
+  addWorkspaceRoot: (rootPath: string) => void;
+  removeWorkspaceRoot: (rootPath: string) => void;
+  closeWorkspace: () => void;
+  updateConfig: (updates: Partial<WorkspaceConfig>) => void;
+
+  // Bootstrap: load config on restart when rootPath was persisted
+  bootstrapConfig: (config: WorkspaceConfig | null) => void;
+
+  // Config helpers
+  addExcludedFolder: (folder: string) => void;
+  removeExcludedFolder: (folder: string) => void;
+  setLastOpenTabs: (tabs: string[]) => void;
+
+  // Trust management
+  trustWorkspace: () => void;
+  untrustWorkspace: () => void;
+
+  // Selectors
+  isPathExcluded: (path: string) => boolean;
+  isWorkspaceTrusted: () => boolean;
+  getWorkspaceId: () => string | null;
+}
+
+const DEFAULT_EXCLUDED_FOLDERS = [".git", "node_modules"];
+
+const DEFAULT_CONFIG: WorkspaceConfig = {
+  version: 1,
+  excludeFolders: DEFAULT_EXCLUDED_FOLDERS,
+  lastOpenTabs: [],
+  showHiddenFiles: false,
+  showAllFiles: false,
+};
+
+function normalizeWorkspaceRoots(workspaceRoots: unknown, rootPath: string | null): string[] {
+  if (Array.isArray(workspaceRoots)) {
+    return workspaceRoots.filter((root): root is string => typeof root === "string" && root.length > 0);
+  }
+  return rootPath ? [rootPath] : [];
+}
+
+/** Manages workspace folder state — open/close, config, excluded folders, and trust. Use selectors, not destructuring. */
+export const useWorkspaceStore = create<WorkspaceState & WorkspaceActions>()(
+  persist(
+    (set, get) => ({
+      rootPath: null,
+      workspaceRoots: [],
+      config: null,
+      isWorkspaceMode: false,
+
+      openWorkspace: (rootPath, config = null) => {
+        // Merge defaults to ensure new fields are populated
+        const finalConfig = { ...DEFAULT_CONFIG, ...(config ?? {}) };
+        // Ensure workspace has an identity
+        if (!finalConfig.identity) {
+          finalConfig.identity = createWorkspaceIdentity();
+        }
+        set({
+          rootPath,
+          workspaceRoots: [rootPath],
+          config: finalConfig,
+          isWorkspaceMode: true,
+        });
+      },
+
+      addWorkspaceRoot: (rootPath) => {
+        set((state) => {
+          const currentRoots = normalizeWorkspaceRoots(state.workspaceRoots, state.rootPath);
+          if (currentRoots.includes(rootPath)) return state;
+          const workspaceRoots = [...currentRoots, rootPath];
+          return {
+            rootPath: state.rootPath ?? rootPath,
+            workspaceRoots,
+            config: state.config ?? { ...DEFAULT_CONFIG, identity: createWorkspaceIdentity() },
+            isWorkspaceMode: true,
+          };
+        });
+      },
+
+      removeWorkspaceRoot: (rootPath) => {
+        set((state) => {
+          const currentRoots = normalizeWorkspaceRoots(state.workspaceRoots, state.rootPath);
+          const workspaceRoots = currentRoots.filter((root) => root !== rootPath);
+          const nextRootPath =
+            state.rootPath === rootPath ? (workspaceRoots[0] ?? null) : state.rootPath;
+          return {
+            rootPath: nextRootPath,
+            workspaceRoots,
+            config: workspaceRoots.length > 0 ? state.config : null,
+            isWorkspaceMode: workspaceRoots.length > 0,
+          };
+        });
+      },
+
+      closeWorkspace: () => {
+        set({
+          rootPath: null,
+          workspaceRoots: [],
+          config: null,
+          isWorkspaceMode: false,
+        });
+      },
+
+      bootstrapConfig: (config) => {
+        const { rootPath, isWorkspaceMode, workspaceRoots } = get();
+        // Only bootstrap if we have a workspace but no config
+        if (!rootPath || !isWorkspaceMode) return;
+        const normalizedRoots = normalizeWorkspaceRoots(workspaceRoots, rootPath);
+
+        set({
+          workspaceRoots: normalizedRoots.length > 0 ? normalizedRoots : [rootPath],
+          config: config ? { ...DEFAULT_CONFIG, ...config } : { ...DEFAULT_CONFIG },
+        });
+      },
+
+      updateConfig: (updates) => {
+        const { config } = get();
+        if (!config) return;
+
+        set({
+          config: { ...config, ...updates },
+        });
+      },
+
+      addExcludedFolder: (folder) => {
+        const { config } = get();
+        if (!config) return;
+
+        if (!config.excludeFolders.includes(folder)) {
+          set({
+            config: {
+              ...config,
+              excludeFolders: [...config.excludeFolders, folder],
+            },
+          });
+        }
+      },
+
+      removeExcludedFolder: (folder) => {
+        const { config } = get();
+        if (!config) return;
+
+        set({
+          config: {
+            ...config,
+            excludeFolders: config.excludeFolders.filter((f) => f !== folder),
+          },
+        });
+      },
+
+      setLastOpenTabs: (tabs) => {
+        const { config } = get();
+        if (!config) return;
+
+        set({
+          config: {
+            ...config,
+            lastOpenTabs: tabs,
+          },
+        });
+      },
+
+      trustWorkspace: () => {
+        const { config } = get();
+        if (!config) return;
+
+        // Ensure identity exists, then grant trust
+        const identity = config.identity ?? createWorkspaceIdentity();
+        set({
+          config: {
+            ...config,
+            identity: grantTrust(identity),
+          },
+        });
+      },
+
+      untrustWorkspace: () => {
+        const { config } = get();
+        if (!config || !config.identity) return;
+
+        set({
+          config: {
+            ...config,
+            identity: revokeTrust(config.identity),
+          },
+        });
+      },
+
+      isPathExcluded: (path) => {
+        const { config, rootPath } = get();
+        if (!config || !rootPath) return false;
+
+        return checkPathExcluded(path, rootPath, config.excludeFolders);
+      },
+
+      isWorkspaceTrusted: () => {
+        const { config } = get();
+        return isTrusted(config?.identity);
+      },
+
+      getWorkspaceId: () => {
+        const { config } = get();
+        return config?.identity?.id ?? null;
+      },
+    }),
+    {
+      // Name is ignored by windowScopedStorage (uses window label instead)
+      name: "vmark-workspace",
+      // Use window-scoped storage for per-window workspace persistence
+      storage: createJSONStorage(() => windowScopedStorage),
+      // Persist workspace state including config for seamless reload
+      partialize: (state) => ({
+        rootPath: state.rootPath,
+        workspaceRoots: state.workspaceRoots,
+        isWorkspaceMode: state.isWorkspaceMode,
+        config: state.config,
+      }),
+      // CRITICAL: Skip auto-hydration on store creation.
+      // WindowContext will call setCurrentWindowLabel() first, then rehydrate()
+      // to ensure each window reads from its own storage key.
+      skipHydration: true,
+    }
+  )
+);
+
+// Default excluded folders for reference
+export { DEFAULT_EXCLUDED_FOLDERS };

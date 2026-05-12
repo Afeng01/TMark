@@ -1,0 +1,143 @@
+/**
+ * Multi-cursor Clipboard Handling
+ *
+ * Purpose: Manages cut/copy/paste operations across multiple cursor positions.
+ * Serializes multi-selection content with newline separators for copy, and
+ * distributes pasted text across cursors (one line per cursor when line count matches).
+ *
+ * Key decisions:
+ *   - Copy joins ranges with newlines (each range on its own line)
+ *   - Paste splits by newline; if line count matches range count, distributes 1:1
+ *   - Cut/delete operations run in reverse doc order to preserve positions
+ *
+ * @coordinates-with multiCursorPlugin.ts — integrates clipboard handlers into the plugin
+ * @coordinates-with rangeUtils.ts — sorting ranges for safe reverse-order editing
+ * @module plugins/multiCursor/clipboard
+ */
+import { SelectionRange } from "@tiptap/pm/state";
+import type { EditorState, Transaction } from "@tiptap/pm/state";
+import { MultiSelection } from "./MultiSelection";
+import { normalizeRangesWithPrimary, sortRangesDescending } from "./rangeUtils";
+
+/**
+ * Serialize multi-selection content for clipboard.
+ */
+export function getMultiCursorClipboardText(state: EditorState): string {
+  const { selection } = state;
+  if (!(selection instanceof MultiSelection)) return "";
+  return selection.getTextContent(state.doc);
+}
+
+/**
+ * Handle cut for multi-cursor selections.
+ * Deletes text at all selections (cursors with no selection are no-ops).
+ *
+ * @returns Transaction or null if not a MultiSelection or nothing to cut
+ */
+export function handleMultiCursorCut(
+  state: EditorState
+): Transaction | null {
+  const { selection } = state;
+
+  if (!(selection instanceof MultiSelection)) {
+    return null;
+  }
+
+  const hasNonEmptyRange = selection.ranges.some(
+    (r) => r.$from.pos !== r.$to.pos
+  );
+  if (!hasNonEmptyRange) return null;
+
+  // Pre-merge overlapping ranges so each edit targets a disjoint span
+  const preMerged = normalizeRangesWithPrimary(
+    selection.ranges, state.doc, selection.primaryIndex, true
+  );
+  const sortedRanges = sortRangesDescending(preMerged.ranges);
+  let tr = state.tr;
+
+  for (const range of sortedRanges) {
+    const from = range.$from.pos;
+    const to = range.$to.pos;
+    if (from !== to) {
+      tr = tr.delete(from, to);
+    }
+  }
+
+  // Remap all cursors to collapsed positions
+  const newRanges: SelectionRange[] = preMerged.ranges.map((range) => {
+    const newPos = tr.mapping.map(range.$from.pos);
+    const $pos = tr.doc.resolve(newPos);
+    return new SelectionRange($pos, $pos);
+  });
+
+  const normalized = normalizeRangesWithPrimary(
+    newRanges,
+    tr.doc,
+    preMerged.primaryIndex,
+    true
+  );
+
+  const newSel = new MultiSelection(normalized.ranges, normalized.primaryIndex);
+  tr = tr.setSelection(newSel);
+  tr = tr.setMeta("addToHistory", true);
+
+  return tr;
+}
+
+/**
+ * Handle paste for multi-cursor selections.
+ * Distributes lines if line count matches cursor count.
+ */
+export function handleMultiCursorPaste(
+  state: EditorState,
+  text: string
+): Transaction | null {
+  const { selection } = state;
+
+  if (!(selection instanceof MultiSelection)) {
+    return null;
+  }
+
+  // Pre-merge overlapping ranges so each edit targets a disjoint span
+  const preMerged = normalizeRangesWithPrimary(
+    selection.ranges, state.doc, selection.primaryIndex, true
+  );
+  const ranges = preMerged.ranges;
+  /* v8 ignore next -- @preserve MultiSelection always has at least one range; empty guard is defensive */
+  if (ranges.length === 0) return null;
+
+  const lines = text.split(/\r?\n/);
+  const textsToInsert =
+    lines.length === ranges.length ? lines : ranges.map(() => text);
+
+  const sorted = ranges
+    .map((range, index) => ({ range, text: textsToInsert[index] }))
+    .sort((a, b) => b.range.$from.pos - a.range.$from.pos);
+
+  let tr = state.tr;
+
+  for (const entry of sorted) {
+    tr = tr.insertText(entry.text, entry.range.$from.pos, entry.range.$to.pos);
+  }
+
+  const newRanges: SelectionRange[] = ranges.map((range) => {
+    const newFrom = tr.mapping.map(range.$from.pos);
+    const newTo = tr.mapping.map(range.$to.pos);
+    const newPos = Math.max(newFrom, newTo);
+    const $pos = tr.doc.resolve(newPos);
+    return new SelectionRange($pos, $pos);
+  });
+
+  const normalized = normalizeRangesWithPrimary(
+    newRanges,
+    tr.doc,
+    preMerged.primaryIndex,
+    true
+  );
+
+  const newSel = new MultiSelection(normalized.ranges, normalized.primaryIndex);
+  tr = tr.setSelection(newSel);
+  tr = tr.setMeta("addToHistory", true);
+
+  return tr;
+}

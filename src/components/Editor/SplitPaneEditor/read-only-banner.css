@@ -1,0 +1,58 @@
+/* WI-4.2 — Read-only banner styles. Token-only; dark-theme via tokens. */
+
+.read-only-banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  padding: var(--spacing-1) var(--spacing-2);
+  background: var(--bg-tertiary);
+  border-bottom: var(--border-thin) solid var(--border-color);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+}
+
+.read-only-banner__label {
+  color: var(--text-secondary);
+}
+
+.read-only-banner__actions {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-1);
+}
+
+.read-only-banner__btn {
+  position: relative;
+  padding: var(--spacing-1) var(--spacing-2);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background var(--duration-fast);
+}
+
+.read-only-banner__btn:hover {
+  background: var(--hover-bg);
+}
+
+/* U-shaped underline focus indicator — matches popup/toolbar button
+ * pattern in .claude/rules/33-focus-indicators.md § 1. */
+.read-only-banner__btn:focus-visible {
+  outline: none;
+}
+
+.read-only-banner__btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: var(--space-half);
+  left: var(--space-1);
+  right: var(--space-1);
+  height: var(--space-1);
+  border-bottom: var(--border-medium) solid var(--accent-primary);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}

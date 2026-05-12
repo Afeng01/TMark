@@ -1,0 +1,174 @@
+/**
+ * GitHub-style Collapsible Block Styles
+ *
+ * Styles for <details>/<summary> blocks
+ */
+
+/* Details container */
+.details-block {
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin: 0 0 var(--editor-block-spacing, var(--list-indent)) 0;
+  overflow: hidden;
+  line-height: var(--editor-line-height-px);
+}
+
+/* Block font size — kept here so the detailsBlock plugin owns its own typography */
+.tiptap-editor .details-block {
+  font-size: var(--editor-font-size-block);
+}
+
+/* Summary (clickable header) */
+.details-block > summary,
+.details-summary {
+  padding: 0.625em 0.75em;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: var(--details-header-bg, var(--bg-secondary));
+  border-bottom: var(--border-thin) solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  user-select: none;
+  list-style: none;
+}
+
+/* Remove default marker */
+.details-block > summary::-webkit-details-marker,
+.details-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Custom disclosure triangle */
+.details-block > summary::before,
+.details-summary::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  flex-shrink: 0;
+  transition: transform var(--duration-base) ease-out;
+}
+
+/* Hover state */
+.details-block > summary:hover,
+.details-summary:hover {
+  background-color: var(--details-header-hover-bg, var(--bg-tertiary));
+}
+
+/* Keyboard focus indicator for accessibility */
+.details-block > summary:focus-visible,
+.details-summary:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: -2px;
+}
+
+/* Open state - rotate triangle */
+.details-block[open] > summary::before,
+.details-block[open] .details-summary::before {
+  transform: rotate(90deg);
+}
+
+/* Open state - show border */
+.details-block[open] > summary,
+.details-block[open] .details-summary {
+  border-bottom-color: var(--border-color);
+}
+
+/* Content area - hidden when collapsed
+   Horizontal padding for simple content (p, headings), not for blocks with their own padding
+   Use explicit left/right to not interfere with first/last child vertical padding */
+.details-block > *:not(summary):not(.details-summary):not(ul):not(ol):not(blockquote):not(pre):not(.alert-block) {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.details-block > *:not(summary):not(.details-summary) {
+  display: none;
+}
+
+/* Show content when open */
+.details-block[open] > *:not(summary):not(.details-summary) {
+  display: block;
+}
+
+/* First content element - top padding (blocks with own rules handle themselves) */
+.details-block > *:not(summary):not(.details-summary):not(ul):not(ol):not(blockquote):first-of-type {
+  margin-top: 0;
+  padding-top: 0.75em;
+}
+
+/* Last content element - bottom padding (blocks with own rules handle themselves) */
+.details-block > *:not(summary):not(.details-summary):not(ul):not(ol):not(blockquote):last-child {
+  margin-bottom: 0;
+  padding-bottom: 0.75em;
+}
+
+/* Paragraphs inside details - reduce margin for tighter spacing
+   Uses --list-indent with 1em fallback (variable scoped to .tiptap-editor lists) */
+.details-block > p:not(.details-summary) {
+  margin-bottom: calc(var(--list-indent, 1em) * 0.5);
+}
+
+/* Lists inside details - handle all padding explicitly */
+.details-block > ul:not(.details-summary),
+.details-block > ol:not(.details-summary) {
+  --list-padding: calc(var(--list-indent, 1em) * 2);
+  margin: 0.5em 0;
+  padding-left: var(--list-padding);
+  padding-right: 1em;
+}
+
+/* First list - add top padding */
+.details-block > ul:not(.details-summary):first-of-type,
+.details-block > ol:not(.details-summary):first-of-type {
+  margin-top: 0;
+  padding-top: 0.75em;
+}
+
+/* Last list - add bottom padding */
+.details-block > ul:not(.details-summary):last-child,
+.details-block > ol:not(.details-summary):last-child {
+  margin-bottom: 0;
+  padding-bottom: 0.75em;
+}
+
+/* Blockquote inside details - reset margins, add consistent spacing */
+.details-block > blockquote:not(.details-summary) {
+  margin: 0.5em 1em;
+  padding: 0 1em;
+}
+
+/* First blockquote - add top padding */
+.details-block > blockquote:not(.details-summary):first-of-type {
+  margin-top: 0.75em;
+}
+
+/* Last blockquote - add bottom padding */
+.details-block > blockquote:not(.details-summary):last-child {
+  margin-bottom: 0.75em;
+}
+
+/* Code blocks inside details - consistent margins */
+.details-block > pre:not(.details-summary),
+.details-block > .code-block-wrapper:not(.details-summary) {
+  margin: 0.5em 1em;
+}
+
+.details-block > pre:not(.details-summary):first-of-type,
+.details-block > .code-block-wrapper:not(.details-summary):first-of-type {
+  margin-top: 0.75em;
+}
+
+.details-block > pre:not(.details-summary):last-child,
+.details-block > .code-block-wrapper:not(.details-summary):last-child {
+  margin-bottom: 0.75em;
+}
+
+/* Dark mode uses the same CSS variables - no override needed */

@@ -1,0 +1,40 @@
+{
+  "pdf.preset.default": "默认",
+  "pdf.preset.academic": "学术",
+  "pdf.preset.compact": "紧凑",
+  "pdf.preset.elegant": "优雅",
+  "pdf.preset.custom": "自定义",
+  "pdf.pageSetup.size": "纸张大小",
+  "pdf.pageSetup.orientation": "方向",
+  "pdf.pageSetup.orientation.portrait": "纵向",
+  "pdf.pageSetup.orientation.landscape": "横向",
+  "pdf.pageSetup.margins": "边距",
+  "pdf.pageSetup.margins.normal": "标准",
+  "pdf.pageSetup.margins.narrow": "窄",
+  "pdf.pageSetup.margins.wide": "宽",
+  "pdf.pageSetup.margins.custom": "自定义",
+  "pdf.pageSetup.marginUnit": "mm",
+  "pdf.typography": "排版",
+  "pdf.typography.fontSize": "字号",
+  "pdf.typography.lineHeight": "行高",
+  "pdf.typography.cjkSpacing": "中日韩间距",
+  "pdf.typography.cjkSpacing.off": "关闭",
+  "pdf.typography.latinFont": "西文字体",
+  "pdf.typography.cjkFont": "中日韩字体",
+  "pdf.typography.font.systemDefault": "系统默认",
+  "pdf.appearance": "外观",
+  "pdf.appearance.useEditorTheme": "使用编辑器主题",
+  "pdf.exportButton": "导出 PDF",
+  "pdf.exporting": "导出中…",
+  "pdf.progress.preparing": "准备中…",
+  "pdf.progress.loading": "正在加载内容…",
+  "pdf.progress.rendering": "正在生成 PDF…",
+  "pdf.progress.done": "完成",
+  "pdf.saveDialog.title": "导出 PDF",
+  "pdf.defaultTitle": "文档",
+  "pdf": {
+    "pageSetup": {
+      "marginUnit": "mm"
+    }
+  }
+}

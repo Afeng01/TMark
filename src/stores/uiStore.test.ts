@@ -1,0 +1,462 @@
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { useUIStore } from "./uiStore";
+
+function resetUIStore() {
+  useUIStore.setState({
+    sidebarVisible: false,
+    sidebarWidth: 260,
+    sidebarViewMode: "outline",
+    activeHeadingLine: null,
+    statusBarVisible: true,
+    universalToolbarVisible: false,
+    universalToolbarHasFocus: false,
+    toolbarSessionFocusIndex: -1,
+    toolbarDropdownOpen: false,
+    terminalVisible: false,
+    terminalHeight: 250,
+    terminalWidth: 400,
+    effectiveTerminalPosition: "bottom",
+    fileExplorerOpenState: {},
+  });
+}
+
+beforeEach(resetUIStore);
+
+describe("uiStore", () => {
+  describe("focus toggle per spec Section 1.2", () => {
+    it("opens toolbar with focus on first toggle", () => {
+      const store = useUIStore.getState();
+
+      store.toggleUniversalToolbar();
+      expect(useUIStore.getState().universalToolbarVisible).toBe(true);
+      expect(useUIStore.getState().universalToolbarHasFocus).toBe(true);
+    });
+
+    it("toggles focus (not visibility) when toolbar already visible", () => {
+      const store = useUIStore.getState();
+
+      // First toggle: opens toolbar with focus
+      store.toggleUniversalToolbar();
+      expect(useUIStore.getState().universalToolbarVisible).toBe(true);
+      expect(useUIStore.getState().universalToolbarHasFocus).toBe(true);
+
+      // Second toggle: keeps toolbar visible, toggles focus off
+      store.toggleUniversalToolbar();
+      expect(useUIStore.getState().universalToolbarVisible).toBe(true);
+      expect(useUIStore.getState().universalToolbarHasFocus).toBe(false);
+
+      // Third toggle: keeps toolbar visible, toggles focus on
+      store.toggleUniversalToolbar();
+      expect(useUIStore.getState().universalToolbarVisible).toBe(true);
+      expect(useUIStore.getState().universalToolbarHasFocus).toBe(true);
+    });
+
+    it("clears focus when toolbar is hidden", () => {
+      useUIStore.setState({
+        universalToolbarVisible: true,
+        universalToolbarHasFocus: true,
+      });
+
+      const store = useUIStore.getState();
+      store.setUniversalToolbarVisible(false);
+
+      expect(useUIStore.getState().universalToolbarVisible).toBe(false);
+      expect(useUIStore.getState().universalToolbarHasFocus).toBe(false);
+    });
+
+    it("does not force focus when showing toolbar via setVisible", () => {
+      const store = useUIStore.getState();
+      store.setUniversalToolbarVisible(true);
+
+      expect(useUIStore.getState().universalToolbarVisible).toBe(true);
+      expect(useUIStore.getState().universalToolbarHasFocus).toBe(false);
+    });
+  });
+
+  describe("session memory per spec Section 4.5", () => {
+    it("stores session focus index", () => {
+      const store = useUIStore.getState();
+
+      store.setToolbarSessionFocusIndex(3);
+      expect(useUIStore.getState().toolbarSessionFocusIndex).toBe(3);
+
+      store.setToolbarSessionFocusIndex(5);
+      expect(useUIStore.getState().toolbarSessionFocusIndex).toBe(5);
+    });
+
+    it("clears session focus index when toolbar hidden via setVisible", () => {
+      useUIStore.setState({
+        universalToolbarVisible: true,
+        toolbarSessionFocusIndex: 5,
+      });
+
+      useUIStore.getState().setUniversalToolbarVisible(false);
+
+      expect(useUIStore.getState().toolbarSessionFocusIndex).toBe(-1);
+    });
+
+    it("preserves session focus index when toolbar stays visible", () => {
+      useUIStore.setState({
+        universalToolbarVisible: true,
+        toolbarSessionFocusIndex: 5,
+      });
+
+      // Toggle focus, not visibility
+      useUIStore.getState().toggleUniversalToolbar();
+
+      expect(useUIStore.getState().universalToolbarVisible).toBe(true);
+      expect(useUIStore.getState().toolbarSessionFocusIndex).toBe(5);
+    });
+
+    it("starts with -1 indicating smart focus should be used", () => {
+      expect(useUIStore.getState().toolbarSessionFocusIndex).toBe(-1);
+    });
+  });
+
+  describe("dropdown state for two-step Escape", () => {
+    it("tracks dropdown open state", () => {
+      const store = useUIStore.getState();
+
+      expect(useUIStore.getState().toolbarDropdownOpen).toBe(false);
+
+      store.setToolbarDropdownOpen(true);
+      expect(useUIStore.getState().toolbarDropdownOpen).toBe(true);
+
+      store.setToolbarDropdownOpen(false);
+      expect(useUIStore.getState().toolbarDropdownOpen).toBe(false);
+    });
+
+    it("clearToolbarSession closes dropdown", () => {
+      useUIStore.setState({
+        universalToolbarVisible: true,
+        toolbarDropdownOpen: true,
+      });
+
+      useUIStore.getState().clearToolbarSession();
+
+      expect(useUIStore.getState().toolbarDropdownOpen).toBe(false);
+    });
+  });
+
+  describe("toggleSidebarView", () => {
+    it("shows sidebar with requested view when hidden", () => {
+      useUIStore.getState().toggleSidebarView("files");
+
+      const state = useUIStore.getState();
+      expect(state.sidebarVisible).toBe(true);
+      expect(state.sidebarViewMode).toBe("files");
+    });
+
+    it("switches view when sidebar is showing a different view", () => {
+      useUIStore.setState({ sidebarVisible: true, sidebarViewMode: "files" });
+
+      useUIStore.getState().toggleSidebarView("outline");
+
+      const state = useUIStore.getState();
+      expect(state.sidebarVisible).toBe(true);
+      expect(state.sidebarViewMode).toBe("outline");
+    });
+
+    it("hides sidebar when already showing the same view", () => {
+      useUIStore.setState({ sidebarVisible: true, sidebarViewMode: "history" });
+
+      useUIStore.getState().toggleSidebarView("history");
+
+      expect(useUIStore.getState().sidebarVisible).toBe(false);
+    });
+
+    it("preserves view mode when hiding", () => {
+      useUIStore.setState({ sidebarVisible: true, sidebarViewMode: "outline" });
+
+      useUIStore.getState().toggleSidebarView("outline");
+
+      // Sidebar hidden but mode preserved (so re-opening shows same view)
+      expect(useUIStore.getState().sidebarVisible).toBe(false);
+      expect(useUIStore.getState().sidebarViewMode).toBe("outline");
+    });
+  });
+
+  describe("terminalWidth", () => {
+    it("clamps to min/max", () => {
+      const store = useUIStore.getState();
+
+      store.setTerminalWidth(50);
+      expect(useUIStore.getState().terminalWidth).toBe(200);
+
+      store.setTerminalWidth(1000);
+      expect(useUIStore.getState().terminalWidth).toBe(800);
+
+      store.setTerminalWidth(400);
+      expect(useUIStore.getState().terminalWidth).toBe(400);
+    });
+  });
+
+  describe("effectiveTerminalPosition", () => {
+    it("defaults to bottom", () => {
+      expect(useUIStore.getState().effectiveTerminalPosition).toBe("bottom");
+    });
+
+    it("can be set to right", () => {
+      useUIStore.getState().setEffectiveTerminalPosition("right");
+      expect(useUIStore.getState().effectiveTerminalPosition).toBe("right");
+    });
+  });
+
+  describe("clearToolbarSession", () => {
+    it("clears all toolbar state at once", () => {
+      useUIStore.setState({
+        universalToolbarVisible: true,
+        universalToolbarHasFocus: true,
+        toolbarSessionFocusIndex: 5,
+        toolbarDropdownOpen: true,
+      });
+
+      useUIStore.getState().clearToolbarSession();
+
+      const state = useUIStore.getState();
+      expect(state.universalToolbarVisible).toBe(false);
+      expect(state.universalToolbarHasFocus).toBe(false);
+      expect(state.toolbarSessionFocusIndex).toBe(-1);
+      expect(state.toolbarDropdownOpen).toBe(false);
+    });
+
+    it("is idempotent on already closed toolbar", () => {
+      // Already reset from beforeEach
+      useUIStore.getState().clearToolbarSession();
+
+      const state = useUIStore.getState();
+      expect(state.universalToolbarVisible).toBe(false);
+      expect(state.universalToolbarHasFocus).toBe(false);
+      expect(state.toolbarSessionFocusIndex).toBe(-1);
+      expect(state.toolbarDropdownOpen).toBe(false);
+    });
+  });
+
+  describe("toggleSidebar", () => {
+    it("toggles sidebar visibility", () => {
+      expect(useUIStore.getState().sidebarVisible).toBe(false);
+
+      useUIStore.getState().toggleSidebar();
+      expect(useUIStore.getState().sidebarVisible).toBe(true);
+
+      useUIStore.getState().toggleSidebar();
+      expect(useUIStore.getState().sidebarVisible).toBe(false);
+    });
+  });
+
+  describe("setSidebarViewMode", () => {
+    it("sets sidebar view mode directly", () => {
+      useUIStore.getState().setSidebarViewMode("files");
+      expect(useUIStore.getState().sidebarViewMode).toBe("files");
+
+      useUIStore.getState().setSidebarViewMode("history");
+      expect(useUIStore.getState().sidebarViewMode).toBe("history");
+    });
+  });
+
+  describe("showSidebarWithView", () => {
+    it("opens sidebar and sets view mode", () => {
+      useUIStore.getState().showSidebarWithView("files");
+
+      const state = useUIStore.getState();
+      expect(state.sidebarVisible).toBe(true);
+      expect(state.sidebarViewMode).toBe("files");
+    });
+
+    it("changes view mode when sidebar already visible", () => {
+      useUIStore.setState({ sidebarVisible: true, sidebarViewMode: "outline" });
+
+      useUIStore.getState().showSidebarWithView("history");
+
+      const state = useUIStore.getState();
+      expect(state.sidebarVisible).toBe(true);
+      expect(state.sidebarViewMode).toBe("history");
+    });
+  });
+
+  describe("setActiveHeadingLine", () => {
+    it("sets active heading line", () => {
+      useUIStore.getState().setActiveHeadingLine(42);
+      expect(useUIStore.getState().activeHeadingLine).toBe(42);
+    });
+
+    it("clears active heading line with null", () => {
+      useUIStore.getState().setActiveHeadingLine(10);
+      useUIStore.getState().setActiveHeadingLine(null);
+      expect(useUIStore.getState().activeHeadingLine).toBeNull();
+    });
+  });
+
+  describe("setSidebarWidth", () => {
+    it("clamps to minimum width", () => {
+      useUIStore.getState().setSidebarWidth(50);
+      expect(useUIStore.getState().sidebarWidth).toBe(180);
+    });
+
+    it("clamps to maximum width", () => {
+      useUIStore.getState().setSidebarWidth(1000);
+      expect(useUIStore.getState().sidebarWidth).toBe(480);
+    });
+
+    it("accepts values within range", () => {
+      useUIStore.getState().setSidebarWidth(300);
+      expect(useUIStore.getState().sidebarWidth).toBe(300);
+    });
+  });
+
+  describe("setStatusBarVisible", () => {
+    it("sets status bar visibility", () => {
+      useUIStore.getState().setStatusBarVisible(false);
+      expect(useUIStore.getState().statusBarVisible).toBe(false);
+
+      useUIStore.getState().setStatusBarVisible(true);
+      expect(useUIStore.getState().statusBarVisible).toBe(true);
+    });
+  });
+
+  describe("setUniversalToolbarHasFocus", () => {
+    it("sets toolbar focus directly", () => {
+      useUIStore.getState().setUniversalToolbarHasFocus(true);
+      expect(useUIStore.getState().universalToolbarHasFocus).toBe(true);
+
+      useUIStore.getState().setUniversalToolbarHasFocus(false);
+      expect(useUIStore.getState().universalToolbarHasFocus).toBe(false);
+    });
+  });
+
+  describe("setDraggingFiles", () => {
+    it("sets file dragging state", () => {
+      useUIStore.getState().setDraggingFiles(true);
+      expect(useUIStore.getState().isDraggingFiles).toBe(true);
+
+      useUIStore.getState().setDraggingFiles(false);
+      expect(useUIStore.getState().isDraggingFiles).toBe(false);
+    });
+  });
+
+  describe("toggleTerminal", () => {
+    it("toggles terminal visibility", () => {
+      expect(useUIStore.getState().terminalVisible).toBe(false);
+
+      useUIStore.getState().toggleTerminal();
+      expect(useUIStore.getState().terminalVisible).toBe(true);
+
+      useUIStore.getState().toggleTerminal();
+      expect(useUIStore.getState().terminalVisible).toBe(false);
+    });
+  });
+
+  describe("setTerminalHeight", () => {
+    it("clamps to minimum height", () => {
+      useUIStore.getState().setTerminalHeight(50);
+      expect(useUIStore.getState().terminalHeight).toBe(100);
+    });
+
+    it("clamps to maximum height", () => {
+      useUIStore.getState().setTerminalHeight(1000);
+      expect(useUIStore.getState().terminalHeight).toBe(600);
+    });
+
+    it("accepts values within range", () => {
+      useUIStore.getState().setTerminalHeight(300);
+      expect(useUIStore.getState().terminalHeight).toBe(300);
+    });
+  });
+
+  describe("fileExplorerOpenState", () => {
+    it("starts with an empty map", () => {
+      expect(useUIStore.getState().fileExplorerOpenState).toEqual({});
+    });
+
+    it("sets a single folder open", () => {
+      useUIStore.getState().setFileExplorerNodeOpen("/a/b", true);
+      expect(useUIStore.getState().fileExplorerOpenState).toEqual({ "/a/b": true });
+    });
+
+    it("overwrites open → closed for the same path", () => {
+      useUIStore.getState().setFileExplorerNodeOpen("/a", true);
+      useUIStore.getState().setFileExplorerNodeOpen("/a", false);
+      expect(useUIStore.getState().fileExplorerOpenState).toEqual({ "/a": false });
+    });
+
+    it("preserves other entries when updating one", () => {
+      useUIStore.getState().setFileExplorerNodeOpen("/a", true);
+      useUIStore.getState().setFileExplorerNodeOpen("/b", true);
+      useUIStore.getState().setFileExplorerNodeOpen("/a", false);
+
+      expect(useUIStore.getState().fileExplorerOpenState).toEqual({
+        "/a": false,
+        "/b": true,
+      });
+    });
+
+    it("returns a new reference when a value actually changes", () => {
+      useUIStore.getState().setFileExplorerNodeOpen("/a", true);
+      const before = useUIStore.getState().fileExplorerOpenState;
+
+      useUIStore.getState().setFileExplorerNodeOpen("/a", false);
+      const after = useUIStore.getState().fileExplorerOpenState;
+
+      expect(after).not.toBe(before);
+    });
+
+    it("is a no-op when the value is unchanged (stable reference)", () => {
+      useUIStore.getState().setFileExplorerNodeOpen("/a", true);
+      const before = useUIStore.getState().fileExplorerOpenState;
+
+      useUIStore.getState().setFileExplorerNodeOpen("/a", true);
+      const after = useUIStore.getState().fileExplorerOpenState;
+
+      expect(after).toBe(before);
+    });
+
+    it("replaces the whole map via setFileExplorerOpenState", () => {
+      useUIStore.getState().setFileExplorerNodeOpen("/a", true);
+
+      useUIStore.getState().setFileExplorerOpenState({ "/x": true, "/y": false });
+
+      expect(useUIStore.getState().fileExplorerOpenState).toEqual({
+        "/x": true,
+        "/y": false,
+      });
+    });
+
+    it("does not notify subscribers on a no-op write", () => {
+      useUIStore.getState().setFileExplorerNodeOpen("/a", true);
+      const listener = vi.fn();
+      const unsubscribe = useUIStore.subscribe(listener);
+
+      useUIStore.getState().setFileExplorerNodeOpen("/a", true);
+
+      expect(listener).not.toHaveBeenCalled();
+      unsubscribe();
+    });
+
+    it("notifies subscribers exactly once when the value changes", () => {
+      useUIStore.getState().setFileExplorerNodeOpen("/a", true);
+      const listener = vi.fn();
+      const unsubscribe = useUIStore.subscribe(listener);
+
+      useUIStore.getState().setFileExplorerNodeOpen("/a", false);
+
+      expect(listener).toHaveBeenCalledOnce();
+      unsubscribe();
+    });
+  });
+
+  describe("setUniversalToolbarVisible", () => {
+    it("preserves focus when keeping toolbar visible", () => {
+      useUIStore.setState({
+        universalToolbarVisible: true,
+        universalToolbarHasFocus: true,
+        toolbarSessionFocusIndex: 3,
+      });
+
+      useUIStore.getState().setUniversalToolbarVisible(true);
+
+      const state = useUIStore.getState();
+      expect(state.universalToolbarHasFocus).toBe(true);
+      expect(state.toolbarSessionFocusIndex).toBe(3);
+    });
+  });
+});

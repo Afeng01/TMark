@@ -1,0 +1,693 @@
+/**
+ * Tests for useFinderFileOpen — Finder file open handling.
+ *
+ * Covers:
+ *   - Event listener registration
+ *   - File routing: existing tab, replaceable tab, new tab, new window
+ *   - Hot exit restore waiting
+ *   - Pending file queue from Rust (cold start path)
+ *   - Hot open: app:open-file event when app is already running (warm path)
+ *   - Workspace adoption, different workspace (new window)
+ *   - Error handling in loadFileIntoTab
+ */
+
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { renderHook } from "@testing-library/react";
+
+const {
+  mockListen,
+  mockReadTextFile,
+  mockInvoke,
+  mockFindExistingTabForPath,
+  mockGetReplaceableTab,
+  mockOpenWorkspaceWithConfig,
+  mockWaitForRestoreComplete,
+  mockUseWindowLabel,
+} = vi.hoisted(() => ({
+  mockListen: vi.fn(() => Promise.resolve(vi.fn())),
+  mockReadTextFile: vi.fn(() => Promise.resolve("content")),
+  mockInvoke: vi.fn(() => Promise.resolve([])),
+  mockFindExistingTabForPath: vi.fn(() => null),
+  mockGetReplaceableTab: vi.fn(() => null),
+  mockOpenWorkspaceWithConfig: vi.fn(() => Promise.resolve()),
+  mockWaitForRestoreComplete: vi.fn(() => Promise.resolve(true)),
+  mockUseWindowLabel: vi.fn(() => "main"),
+}));
+
+vi.mock("@tauri-apps/api/event", () => ({
+  listen: (...args: unknown[]) => mockListen(...args),
+}));
+
+vi.mock("@tauri-apps/plugin-fs", () => ({
+  readTextFile: (...args: unknown[]) => mockReadTextFile(...args),
+}));
+
+vi.mock("@tauri-apps/api/core", () => ({
+  invoke: (...args: unknown[]) => mockInvoke(...args),
+}));
+
+vi.mock("@/contexts/WindowContext", () => ({
+  useWindowLabel: () => mockUseWindowLabel(),
+}));
+
+const mockSetActiveTab = vi.fn();
+const mockCreateTab = vi.fn(() => "new-tab");
+const mockUpdateTabPath = vi.fn();
+const mockDetachTab = vi.fn();
+const mockGetActiveTab = vi.fn(() => null);
+vi.mock("@/stores/tabStore", () => ({
+  useTabStore: {
+    getState: () => ({
+      setActiveTab: mockSetActiveTab,
+      createTab: mockCreateTab,
+      updateTabPath: mockUpdateTabPath,
+      detachTab: mockDetachTab,
+      getActiveTab: mockGetActiveTab,
+    }),
+  },
+}));
+
+const mockToastError = vi.fn();
+vi.mock("sonner", () => ({
+  toast: { error: (...args: unknown[]) => mockToastError(...args) },
+}));
+
+vi.mock("@/i18n", () => ({
+  default: { t: (key: string, vars?: Record<string, unknown>) => `${key}:${JSON.stringify(vars ?? {})}` },
+}));
+
+const mockInitDocument = vi.fn();
+const mockLoadContent = vi.fn();
+const mockSetLineMetadata = vi.fn();
+vi.mock("@/stores/documentStore", () => ({
+  useDocumentStore: {
+    getState: () => ({
+      initDocument: mockInitDocument,
+      loadContent: mockLoadContent,
+      setLineMetadata: mockSetLineMetadata,
+    }),
+  },
+}));
+
+let mockWorkspaceRootPath: string | null = null;
+vi.mock("@/stores/workspaceStore", () => ({
+  useWorkspaceStore: {
+    getState: () => ({ rootPath: mockWorkspaceRootPath }),
+  },
+}));
+
+vi.mock("@/stores/recentFilesStore", () => ({
+  useRecentFilesStore: {
+    getState: () => ({ addFile: vi.fn() }),
+  },
+}));
+
+vi.mock("@/hooks/useReplaceableTab", () => ({
+  getReplaceableTab: (...args: unknown[]) => mockGetReplaceableTab(...args),
+  findExistingTabForPath: (...args: unknown[]) => mockFindExistingTabForPath(...args),
+}));
+
+vi.mock("@/utils/linebreakDetection", () => ({
+  detectLinebreaks: vi.fn(() => ({ type: "lf", original: "lf" })),
+}));
+
+vi.mock("@/hooks/openWorkspaceWithConfig", () => ({
+  openWorkspaceWithConfig: (...args: unknown[]) => mockOpenWorkspaceWithConfig(...args),
+}));
+
+const mockIsWithinRoot = vi.fn(() => false);
+vi.mock("@/utils/paths", () => ({
+  isWithinRoot: (...args: unknown[]) => mockIsWithinRoot(...args),
+}));
+
+vi.mock("@/utils/hotExit/hotExitCoordination", () => ({
+  waitForRestoreComplete: (...args: unknown[]) => mockWaitForRestoreComplete(...args),
+  RESTORE_WAIT_TIMEOUT_MS: 5000,
+}));
+
+vi.mock("@/utils/debug", () => ({
+  finderFileOpenWarn: vi.fn(),
+  finderFileOpenError: vi.fn(),
+}));
+
+import { useFinderFileOpen } from "./useFinderFileOpen";
+
+describe("useFinderFileOpen", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockUseWindowLabel.mockReturnValue("main");
+    mockInvoke.mockResolvedValue([]);
+    mockWaitForRestoreComplete.mockResolvedValue(true);
+    mockReadTextFile.mockResolvedValue("file content");
+    mockFindExistingTabForPath.mockReturnValue(null);
+    mockGetReplaceableTab.mockReturnValue(null);
+    mockWorkspaceRootPath = null;
+    mockIsWithinRoot.mockReturnValue(false);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("registers event listener on mount", async () => {
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockListen).toHaveBeenCalledWith("app:open-file", expect.any(Function));
+    });
+  });
+
+  it("does nothing for non-main windows", () => {
+    mockUseWindowLabel.mockReturnValue("doc-0");
+    renderHook(() => useFinderFileOpen());
+    expect(mockListen).not.toHaveBeenCalled();
+  });
+
+  it("cleans up listener on unmount", async () => {
+    const mockUnlisten = vi.fn();
+    mockListen.mockResolvedValue(mockUnlisten);
+
+    const { unmount } = renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockListen).toHaveBeenCalled();
+    });
+
+    unmount();
+    expect(mockUnlisten).toHaveBeenCalled();
+  });
+
+  it("fetches pending file opens after restore", async () => {
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockInvoke).toHaveBeenCalledWith("get_pending_file_opens");
+    });
+  });
+
+  it("activates existing tab when file is already open", async () => {
+    mockFindExistingTabForPath.mockReturnValue("existing-tab");
+    mockInvoke.mockResolvedValue([{ path: "/test/file.md", workspace_root: null }]);
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockSetActiveTab).toHaveBeenCalledWith("main", "existing-tab");
+    });
+  });
+
+  it("loads file into replaceable tab", async () => {
+    mockGetReplaceableTab.mockReturnValue({ tabId: "empty-tab" });
+    mockInvoke.mockResolvedValue([{ path: "/test/file.md", workspace_root: null }]);
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockLoadContent).toHaveBeenCalled();
+      expect(mockUpdateTabPath).toHaveBeenCalledWith("empty-tab", "/test/file.md");
+    });
+  });
+
+  it("creates new tab for same workspace file", async () => {
+    mockInvoke.mockResolvedValue([{ path: "/test/file.md", workspace_root: null }]);
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockCreateTab).toHaveBeenCalledWith("main", "/test/file.md");
+    });
+  });
+
+  it("detaches orphan tab and toasts on loadFileIntoTab error for new tab", async () => {
+    mockReadTextFile.mockRejectedValue(new Error("forbidden path: /bad/file.md"));
+    mockInvoke.mockResolvedValue([{ path: "/bad/file.md", workspace_root: null }]);
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      // Orphan tab is cleaned up and the error surfaces via toast — no
+      // silent empty tab, no initDocument zeroing the path.
+      expect(mockDetachTab).toHaveBeenCalledWith("main", "new-tab");
+      expect(mockToastError).toHaveBeenCalledWith(
+        expect.stringContaining("forbidden path"),
+        expect.objectContaining({ action: expect.any(Object) }),
+      );
+    });
+    expect(mockInitDocument).not.toHaveBeenCalled();
+  });
+
+  it("waits for hot exit restore before processing", async () => {
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockWaitForRestoreComplete).toHaveBeenCalled();
+    });
+  });
+
+  it("warns when restore times out but continues processing", async () => {
+    const { finderFileOpenWarn } = await import("@/utils/debug");
+    mockWaitForRestoreComplete.mockResolvedValue(false);
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(finderFileOpenWarn).toHaveBeenCalledWith(
+        "Hot exit restore timed out, proceeding anyway",
+      );
+    });
+  });
+
+  it("opens new window with workspaceRoot when file is in different workspace", async () => {
+    mockWorkspaceRootPath = "/current/workspace";
+    mockIsWithinRoot.mockReturnValue(false);
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([
+          { path: "/other/workspace/file.md", workspace_root: "/other/workspace" },
+        ]);
+      }
+      return Promise.resolve(null);
+    });
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockInvoke).toHaveBeenCalledWith("open_workspace_in_new_window", {
+        workspaceRoot: "/other/workspace",
+        filePath: "/other/workspace/file.md",
+      });
+    });
+  });
+
+  it("opens file in new window without workspace when file is in different workspace and no workspaceRoot", async () => {
+    mockWorkspaceRootPath = "/current/workspace";
+    mockIsWithinRoot.mockReturnValue(false);
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([
+          { path: "/outside/file.md", workspace_root: null },
+        ]);
+      }
+      return Promise.resolve(null);
+    });
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockInvoke).toHaveBeenCalledWith("open_file_in_new_window", {
+        path: "/outside/file.md",
+      });
+    });
+  });
+
+  it("opens workspaceWithConfig when replaceable tab exists and workspaceRoot provided", async () => {
+    mockGetReplaceableTab.mockReturnValue({ tabId: "empty-tab" });
+    mockWorkspaceRootPath = null; // no current workspace
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([
+          { path: "/new/workspace/file.md", workspace_root: "/new/workspace" },
+        ]);
+      }
+      return Promise.resolve(null);
+    });
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockOpenWorkspaceWithConfig).toHaveBeenCalledWith("/new/workspace");
+    });
+  });
+
+  it("handles loadFileIntoTab error gracefully for replaceable tab", async () => {
+    mockGetReplaceableTab.mockReturnValue({ tabId: "empty-tab" });
+    mockReadTextFile.mockRejectedValue(new Error("read error"));
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([{ path: "/test/file.md", workspace_root: null }]);
+      }
+      return Promise.resolve(null);
+    });
+
+    // Should not throw
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockGetReplaceableTab).toHaveBeenCalled();
+    });
+  });
+
+  it("opens workspaceWithConfig for same-workspace new tab when workspaceRoot and no rootPath", async () => {
+    mockWorkspaceRootPath = null;
+    mockIsWithinRoot.mockReturnValue(false);
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([
+          { path: "/new/workspace/file.md", workspace_root: "/new/workspace" },
+        ]);
+      }
+      return Promise.resolve(null);
+    });
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockOpenWorkspaceWithConfig).toHaveBeenCalledWith("/new/workspace");
+      expect(mockCreateTab).toHaveBeenCalledWith("main", "/new/workspace/file.md");
+    });
+  });
+
+  it("queues events that arrive before restore completes", async () => {
+    let resolveRestore!: (value: boolean) => void;
+    const restorePromise = new Promise<boolean>((resolve) => {
+      resolveRestore = resolve;
+    });
+    mockWaitForRestoreComplete.mockReturnValue(restorePromise);
+
+    let eventHandler!: (event: { payload: { path: string; workspace_root: string | null } }) => void;
+    mockListen.mockImplementation(
+      (_event: string, handler: typeof eventHandler) => {
+        eventHandler = handler;
+        return Promise.resolve(vi.fn());
+      },
+    );
+
+    renderHook(() => useFinderFileOpen());
+
+    // Wait for listener to be set up
+    await vi.waitFor(() => {
+      expect(mockListen).toHaveBeenCalledWith("app:open-file", expect.any(Function));
+    });
+
+    // Dispatch event before restore is complete — should be queued
+    eventHandler({ payload: { path: "/queued/file.md", workspace_root: null } });
+    expect(mockCreateTab).not.toHaveBeenCalled();
+
+    // Now let restore complete
+    resolveRestore(true);
+
+    await vi.waitFor(() => {
+      expect(mockCreateTab).toHaveBeenCalledWith("main", "/queued/file.md");
+    });
+  });
+
+  it("handles error in different-workspace new window invoke gracefully", async () => {
+    mockWorkspaceRootPath = "/current/workspace";
+    mockIsWithinRoot.mockReturnValue(false);
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([
+          { path: "/other/workspace/file.md", workspace_root: "/other/workspace" },
+        ]);
+      }
+      // Size-check must not reject — falling through on error is the
+      // intentional contract of routeOpenBySize, but treating this file
+      // as "small" keeps the test focused on the new-window invoke error.
+      if (cmd === "get_file_size_bytes") return Promise.resolve(0);
+      // Throw on the invoke for open_workspace_in_new_window
+      return Promise.reject(new Error("window open failed"));
+    });
+
+    // Should not throw
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockInvoke).toHaveBeenCalledWith("open_workspace_in_new_window", expect.any(Object));
+    });
+  });
+
+  // Regression test: hot open (app already running) was silently dropped because
+  // Rust used main_window.emit() (webview-specific) but the hook used global listen().
+  // In Tauri v2, webview-specific events are NOT delivered to global listen() —
+  // only to currentWindow.listen(). The fix changes Rust to app.emit() (global).
+  it("processes app:open-file event when app is already running (hot open)", async () => {
+    let eventHandler!: (event: { payload: { path: string; workspace_root: string | null } }) => void;
+    mockListen.mockImplementation(
+      (_event: string, handler: typeof eventHandler) => {
+        eventHandler = handler;
+        return Promise.resolve(vi.fn());
+      },
+    );
+
+    renderHook(() => useFinderFileOpen());
+
+    // Wait for restore to complete and listener to be active
+    await vi.waitFor(() => {
+      expect(mockInvoke).toHaveBeenCalledWith("get_pending_file_opens");
+    });
+
+    // Simulate Rust firing app:open-file after app is already running (warm path)
+    eventHandler({ payload: { path: "/hot/opened/file.md", workspace_root: null } });
+
+    await vi.waitFor(() => {
+      expect(mockCreateTab).toHaveBeenCalledWith("main", "/hot/opened/file.md");
+    });
+
+    // Must also explicitly activate to survive concurrent focus steals
+    await vi.waitFor(() => {
+      expect(mockSetActiveTab).toHaveBeenCalledWith("main", "new-tab");
+    });
+  });
+
+  it("explicitly activates new tab after loading (resilient to concurrent focus steals)", async () => {
+    mockInvoke.mockResolvedValue([{ path: "/new/file.md", workspace_root: null }]);
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockCreateTab).toHaveBeenCalledWith("main", "/new/file.md");
+    });
+
+    // setActiveTab must be called AFTER createTab (not relying solely on
+    // createTab auto-activation, which can be overridden by concurrent ops)
+    await vi.waitFor(() => {
+      expect(mockSetActiveTab).toHaveBeenCalledWith("main", "new-tab");
+    });
+  });
+
+  it("explicitly activates replaceable tab after loading", async () => {
+    mockGetReplaceableTab.mockReturnValue({ tabId: "empty-tab" });
+    mockInvoke.mockResolvedValue([{ path: "/new/file.md", workspace_root: null }]);
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockUpdateTabPath).toHaveBeenCalledWith("empty-tab", "/new/file.md");
+    });
+
+    // Replaceable tab must be explicitly activated after load
+    await vi.waitFor(() => {
+      expect(mockSetActiveTab).toHaveBeenCalledWith("main", "empty-tab");
+    });
+  });
+
+  it("recovers the processing chain after an unhandled error in processFileOpen", async () => {
+    // First file: findExistingTabForPath throws (uncaught path before the fix)
+    let callCount = 0;
+    mockFindExistingTabForPath.mockImplementation(() => {
+      callCount++;
+      if (callCount === 1) {
+        throw new Error("unexpected error");
+      }
+      return null;
+    });
+
+    let handler: ((event: { payload: OpenFilePayload }) => void) | null = null;
+    mockListen.mockImplementation((_event: string, cb: (event: { payload: OpenFilePayload }) => void) => {
+      handler = cb;
+      return Promise.resolve(vi.fn());
+    });
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(handler).not.toBeNull();
+    });
+
+    // First file open — triggers the error
+    handler!({ payload: { path: "/fail.md", workspace_root: null } });
+    // Second file open — should still work because chain recovered
+    handler!({ payload: { path: "/ok.md", workspace_root: null } });
+
+    await vi.waitFor(() => {
+      expect(mockCreateTab).toHaveBeenCalledWith("main", "/ok.md");
+    });
+  });
+});
+
+describe("useFinderFileOpen — size-tier routing", () => {
+  beforeEach(async () => {
+    vi.clearAllMocks();
+    mockUseWindowLabel.mockReturnValue("main");
+    mockWaitForRestoreComplete.mockResolvedValue(true);
+    mockReadTextFile.mockResolvedValue("file content");
+    mockFindExistingTabForPath.mockReturnValue(null);
+    mockGetReplaceableTab.mockReturnValue(null);
+    mockWorkspaceRootPath = null;
+    mockIsWithinRoot.mockReturnValue(false);
+    const { useSettingsStore } = await import("@/stores/settingsStore");
+    useSettingsStore.getState().resetSettings();
+    const { useLargeFileSessionStore } = await import(
+      "@/stores/largeFileSessionStore"
+    );
+    useLargeFileSessionStore.setState({ forcedSourceTabs: {} });
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("small files proceed to createTab as usual", async () => {
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([{ path: "/docs/small.md", workspace_root: null }]);
+      }
+      if (cmd === "get_file_size_bytes") return Promise.resolve(50_000);
+      return Promise.resolve(null);
+    });
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockCreateTab).toHaveBeenCalledWith("main", "/docs/small.md");
+    });
+  });
+
+  it("refused files (≥ 50 MB) never call createTab", async () => {
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([{ path: "/docs/huge.md", workspace_root: null }]);
+      }
+      if (cmd === "get_file_size_bytes") return Promise.resolve(60 * 1024 * 1024);
+      return Promise.resolve(null);
+    });
+
+    renderHook(() => useFinderFileOpen());
+
+    // Wait long enough for the refusal dialog to resolve and bail.
+    await vi.waitFor(() => {
+      expect(mockInvoke).toHaveBeenCalledWith("get_file_size_bytes", {
+        path: "/docs/huge.md",
+      });
+    });
+
+    expect(mockCreateTab).not.toHaveBeenCalled();
+  });
+
+  it("huge files (≥ 5 MB) confirm before reading; cancel aborts the open without createTab", async () => {
+    // Mock the plugin-dialog ask to decline the confirmation.
+    const { ask } = await import("@tauri-apps/plugin-dialog");
+    (ask as unknown as { mockResolvedValueOnce: (v: unknown) => void })
+      .mockResolvedValueOnce(false);
+
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([{ path: "/docs/huge.md", workspace_root: null }]);
+      }
+      if (cmd === "get_file_size_bytes") return Promise.resolve(10 * 1024 * 1024);
+      return Promise.resolve(null);
+    });
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockInvoke).toHaveBeenCalledWith("get_file_size_bytes", {
+        path: "/docs/huge.md",
+      });
+    });
+    // The warn dialog should resolve false and the flow should NOT createTab.
+    await new Promise((r) => setTimeout(r, 20));
+    expect(mockCreateTab).not.toHaveBeenCalled();
+  });
+
+  it("huge files proceed to Source mode when user confirms", async () => {
+    const { ask } = await import("@tauri-apps/plugin-dialog");
+    (ask as unknown as { mockResolvedValueOnce: (v: unknown) => void })
+      .mockResolvedValueOnce(true);
+
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([{ path: "/docs/confirm-huge.md", workspace_root: null }]);
+      }
+      if (cmd === "get_file_size_bytes") return Promise.resolve(10 * 1024 * 1024);
+      return Promise.resolve(null);
+    });
+    mockCreateTab.mockReturnValue("tab-confirm-huge");
+    mockGetActiveTab
+      .mockReturnValueOnce(null)
+      .mockReturnValue({ id: "tab-confirm-huge" } as never);
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockCreateTab).toHaveBeenCalledWith("main", "/docs/confirm-huge.md");
+    });
+
+    const { useLargeFileSessionStore } = await import(
+      "@/stores/largeFileSessionStore"
+    );
+    await vi.waitFor(() => {
+      expect(
+        useLargeFileSessionStore.getState().isForcedSource("tab-confirm-huge")
+      ).toBe(true);
+    });
+  });
+
+  it("replaceable-tab branch activates the indicator for medium WYSIWYG files (300 KB–1 MB)", async () => {
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([{ path: "/docs/medium.md", workspace_root: null }]);
+      }
+      if (cmd === "get_file_size_bytes") return Promise.resolve(400 * 1024);
+      return Promise.resolve(null);
+    });
+    mockGetReplaceableTab.mockReturnValue({ tabId: "empty-tab" });
+    const { useFileLoadStore } = await import("@/stores/fileLoadStore");
+    useFileLoadStore.getState().endLoad();
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockLoadContent).toHaveBeenCalled();
+    });
+    // Indicator was started for the ≥ 300 KB WYSIWYG open. The replaceable-tab
+    // branch successfully loaded, so the document path is set — no failure
+    // clear. Indicator remains active until the editor's onCreate clears it
+    // (not mounted in this unit test), proving the activateIndicator branch
+    // ran without the failure path being taken.
+    expect(useFileLoadStore.getState().active).toBe(true);
+  });
+
+  it("large files (≥ 1 MB) route through createTab and mark the tab as forced-source", async () => {
+    mockInvoke.mockImplementation((cmd: string) => {
+      if (cmd === "get_pending_file_opens") {
+        return Promise.resolve([{ path: "/docs/large.md", workspace_root: null }]);
+      }
+      if (cmd === "get_file_size_bytes") return Promise.resolve(2 * 1024 * 1024);
+      return Promise.resolve(null);
+    });
+    mockCreateTab.mockReturnValue("tab-for-large");
+    // After createNewTabForFile, the hook reads getActiveTab to identify
+    // the new tab. The finder flow expects the tab ID to change between
+    // before/after the createNewTabForFile call — so the mock returns
+    // null initially, then the created tab.
+    mockGetActiveTab
+      .mockReturnValueOnce(null)
+      .mockReturnValue({ id: "tab-for-large" } as never);
+
+    renderHook(() => useFinderFileOpen());
+
+    await vi.waitFor(() => {
+      expect(mockCreateTab).toHaveBeenCalledWith("main", "/docs/large.md");
+    });
+
+    const { useLargeFileSessionStore } = await import(
+      "@/stores/largeFileSessionStore"
+    );
+    await vi.waitFor(() => {
+      expect(
+        Object.keys(useLargeFileSessionStore.getState().forcedSourceTabs).length
+      ).toBeGreaterThan(0);
+    });
+  });
+});

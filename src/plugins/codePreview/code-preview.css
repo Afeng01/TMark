@@ -1,0 +1,293 @@
+/**
+ * Code Block Preview Styles
+ *
+ * Styles for LaTeX and Mermaid previews rendered below code blocks.
+ * Supports view mode (rendered only) and edit mode (header + code + live preview).
+ */
+
+.code-block-preview {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--subtle-bg);
+  cursor: pointer;
+  transition: background-color var(--duration-base) ease;
+}
+
+.code-block-preview:hover {
+  background-color: var(--subtle-bg-hover);
+}
+
+/* LaTeX preview - match .math-block-preview layout */
+.code-block-preview.latex-preview {
+  min-height: var(--space-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.code-block-preview.latex-preview .katex-display {
+  margin: 0;
+}
+
+/* Mermaid preview styles are defined in mermaid.css to avoid duplication */
+
+/* Loading state */
+.code-block-preview.mermaid-loading {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Error states */
+.code-block-preview.mermaid-error,
+.code-block-preview .math-error {
+  color: var(--error-color);
+  background-color: var(--error-bg);
+  font-family: ui-monospace, monospace;
+  font-size: var(--editor-font-size-mono);
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+}
+
+.code-block-preview.mermaid-error svg {
+  flex-shrink: 0;
+}
+
+.code-block-preview-placeholder {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Hide source for preview-only code blocks */
+/* Note: The decoration is applied to code-block-wrapper, not pre directly */
+/* Use .tiptap-editor prefix for higher specificity over code-block-line-numbers.css rules */
+.tiptap-editor .code-block-wrapper.code-block-preview-only {
+  /* Make wrapper invisible but keep it in DOM for ProseMirror */
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  /* Override flex display from code-block-line-numbers.css */
+  display: block !important;
+  background: transparent !important;
+}
+
+/* Highlight preview when the hidden code block is selected */
+.tiptap-editor .code-block-wrapper.code-block-preview-only.ProseMirror-selectednode + .code-block-preview {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Edit Mode Styles
+   ============================================ */
+
+/* Edit header with title and cancel/save buttons */
+.code-block-edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-1-5) var(--spacing-3);
+  margin: 1rem 0 0 0;
+  background-color: var(--bg-secondary);
+  border: var(--border-thin) solid var(--border-color);
+  border-bottom: none;
+  border-radius: var(--radius-md) var(--radius-md, 6px) 0 0;
+}
+
+.code-block-edit-title {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.code-block-edit-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.code-block-edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-btn-sm);
+  height: var(--size-btn-sm);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color var(--duration-base), color var(--duration-base);
+}
+
+.code-block-edit-btn:hover {
+  background: var(--hover-bg);
+}
+
+.code-block-edit-btn--success {
+  color: var(--success-color);
+}
+
+.code-block-edit-btn:focus-visible {
+  outline: none;
+  position: relative;
+}
+
+.code-block-edit-btn:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
+
+.code-block-edit-cancel:hover {
+  color: var(--error-color);
+}
+
+.code-block-edit-save:hover {
+  color: var(--success-color);
+}
+
+/* Editing state: show source code */
+/* Note: The decoration is applied to code-block-wrapper, not pre directly */
+.code-block-wrapper.code-block-editing {
+  margin: 0;
+}
+
+.code-block-wrapper.code-block-editing pre {
+  margin: 0;
+  padding: var(--spacing-3);
+  border: var(--border-thin) solid var(--border-color);
+  border-top: none;
+  border-bottom: none;
+  border-radius: 0;
+  background-color: var(--subtle-bg);
+  text-align: left;
+}
+
+.code-block-wrapper.code-block-editing pre code {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--editor-font-size-mono);
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
+
+/* Live preview during editing */
+.code-block-live-preview {
+  padding: var(--spacing-3);
+  margin: 0 0 1rem 0;
+  background-color: var(--bg-color);
+  border: var(--border-thin) solid var(--border-color);
+  border-top: var(--border-thin) dashed var(--border-color);
+  border-radius: 0 0 var(--radius-md, 6px) var(--radius-md, 6px);
+  min-height: var(--space-15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code-block-live-preview.mermaid-live-preview {
+  min-height: 80px;
+  overflow: auto;
+}
+
+.code-block-live-preview.mermaid-live-preview svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mermaid live preview fallback styles are in mermaid-fallback.css */
+
+.code-block-live-preview.latex-live-preview .katex-display {
+  margin: 0;
+}
+
+.code-block-live-preview-loading,
+.code-block-live-preview-empty {
+  color: var(--text-tertiary);
+  font-style: italic;
+  font-size: var(--font-size-base);
+}
+
+.code-block-live-preview-error {
+  color: var(--error-color);
+  font-style: italic;
+  font-size: var(--font-size-base);
+}
+
+/* Hide language selector for preview-only blocks (mermaid, latex) */
+/* These blocks have special rendering and shouldn't allow language change */
+.code-block-wrapper[data-language="mermaid"] .code-lang-selector,
+.code-block-wrapper[data-language="latex"] .code-lang-selector,
+.code-block-wrapper[data-language="$$math$$"] .code-lang-selector {
+  display: none;
+}
+
+/* Dark theme adjustments */
+.dark-theme .code-block-edit-header {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+.dark-theme .code-block-edit-btn:hover {
+  background: var(--hover-bg);
+}
+
+.dark-theme .code-block-live-preview {
+  background-color: var(--bg-color);
+  border-color: var(--border-color);
+}
+
+/* GitHub Actions workflow preview — reuses Mermaid SVG so inherits most
+   styling from mermaid.css; these rules cover the loading/error states. */
+.code-block-preview.workflow-preview {
+  --workflow-preview-max-height: 480px;
+  text-align: center;
+}
+
+/* Mermaid emits the SVG with a hardcoded `max-width` matching the
+   intrinsic render size (e.g. 144px for a tight vertical flowchart)
+   alongside `width="100%"` as an attribute. The first squeezes the
+   graph; lifting only the max-width lets a tall portrait graph
+   blow up vertically (a 3-job stack at 800px wide is ~1500px tall).
+   Override both axes with reasonable bounds so the graph scales to
+   fit a viewport-friendly box while preserving its aspect ratio. */
+.code-block-preview.workflow-preview svg {
+  max-width: 100% !important;
+  max-height: var(--workflow-preview-max-height);
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.code-block-preview.workflow-preview--loading {
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: var(--space-3);
+}
+
+.code-block-preview.workflow-preview--error {
+  color: var(--error-color);
+  background: var(--error-bg);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+}

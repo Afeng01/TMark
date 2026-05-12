@@ -1,0 +1,131 @@
+/**
+ * Link Popup Styles - Compact Inline Style
+ * Single-line popup: input + icon buttons
+ */
+
+.link-popup {
+  position: fixed;
+  z-index: var(--z-popup);
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+  padding: var(--spacing-1);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-color);
+  box-shadow: var(--shadow-md);
+  animation: link-popup-fade-in var(--duration-fast) ease-out;
+}
+
+@keyframes link-popup-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* URL Input - borderless */
+.link-popup-input {
+  width: 200px;
+  padding: var(--spacing-1) var(--spacing-2);
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-mono, monospace);
+  outline: none;
+}
+
+/* Input focus: caret is the indicator (per design rules) */
+.link-popup-input:focus,
+.link-popup-input:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  /* Caret visibility indicates focus */
+}
+
+.link-popup-input::placeholder {
+  color: var(--text-secondary);
+  opacity: var(--opacity-muted);
+}
+
+/* Icon-only buttons */
+.link-popup-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: default;
+  user-select: none;
+}
+
+.link-popup-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+.link-popup-btn:active {
+  opacity: 0.8;
+}
+
+/* Focus state for keyboard navigation - U-shaped underline (keyboard focus only) */
+.link-popup-btn:focus-visible {
+  outline: none;
+  color: var(--primary-color);
+}
+
+.link-popup-btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  background: transparent;
+  border-bottom: var(--border-medium) solid var(--primary-color);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.link-popup-btn svg {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* Save button - primary color on hover */
+.link-popup-btn-save:hover {
+  color: var(--primary-color);
+}
+
+/* Delete button - danger color on hover */
+.link-popup-btn-delete:hover {
+  color: var(--error-color);
+}
+
+/* Dark theme */
+.dark-theme .link-popup-btn:hover {
+  background: var(--hover-bg-dark);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .link-popup {
+    animation: none;
+  }
+}

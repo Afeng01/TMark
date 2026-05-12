@@ -1,0 +1,119 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "VMark",
+  "version": "0.7.7",
+  "identifier": "app.vmark",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "VMark",
+        "label": "main",
+        "width": 800,
+        "height": 600,
+        "minWidth": 480,
+        "minHeight": 400,
+        "resizable": true,
+        "fullscreen": false,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'unsafe-inline'; img-src 'self' asset: https://asset.localhost blob: data: https: http:; style-src 'self' 'unsafe-inline'",
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["**/*"]
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "createUpdaterArtifacts": true,
+    "shortDescription": "Plain-text workspace for humans and AI",
+    "longDescription": "VMark is the plain-text workspace where humans and AI collaborate. Both parties read and write the same artifacts — markdown, YAML, JSON, TOML, Mermaid, SVG, HTML, code — directly. Schema-aware previews render the right view for known artifacts (GitHub Actions workflows, Cargo.toml, package.json, pyproject.toml).",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "fileAssociations": [
+      {
+        "ext": ["md", "markdown", "mdown", "mkd", "mdx"],
+        "mimeType": "text/markdown",
+        "description": "Markdown Document",
+        "role": "Editor"
+      },
+      {
+        "ext": ["txt"],
+        "mimeType": "text/plain",
+        "description": "Plain Text Document",
+        "role": "Editor"
+      },
+      {
+        "ext": ["json", "jsonl"],
+        "mimeType": "application/json",
+        "description": "JSON Document",
+        "role": "Editor"
+      },
+      {
+        "ext": ["yaml", "yml"],
+        "mimeType": "text/yaml",
+        "description": "YAML Document",
+        "role": "Editor"
+      },
+      {
+        "ext": ["toml"],
+        "mimeType": "text/x-toml",
+        "description": "TOML Document",
+        "role": "Editor"
+      },
+      {
+        "ext": ["mmd"],
+        "mimeType": "text/x-mermaid",
+        "description": "Mermaid Diagram",
+        "role": "Editor"
+      },
+      {
+        "ext": ["svg"],
+        "mimeType": "image/svg+xml",
+        "description": "SVG Image",
+        "role": "Editor"
+      },
+      {
+        "ext": ["html", "htm"],
+        "mimeType": "text/html",
+        "description": "HTML Document",
+        "role": "Editor"
+      }
+    ],
+    "externalBin": [
+      "binaries/vmark-mcp-server"
+    ],
+    "macOS": {
+      "entitlements": "sidecar-entitlements.plist",
+      "minimumSystemVersion": "10.15",
+      "files": {}
+    }
+  },
+  "plugins": {
+    "fs": {
+      "requireLiteralLeadingDot": false
+    },
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEZFQ0NGRjU5RUZBM0RBMDIKUldRQzJxUHZXZi9NL2k3RU9JbGg5amYxS2FVVFNGU0hTUWdEbUppcHpxTTRQMThkOVlKL0F3MUcK",
+      "endpoints": [
+        "https://log.vmark.app/update/latest.json?target={{target}}&arch={{arch}}&version={{current_version}}"
+      ]
+    }
+  }
+}

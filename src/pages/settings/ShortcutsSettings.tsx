@@ -1,0 +1,266 @@
+/**
+ * Shortcuts Settings
+ *
+ * UI for viewing and customizing keyboard shortcuts.
+ */
+
+import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  useShortcutsStore,
+  DEFAULT_SHORTCUTS,
+  CATEGORY_ORDER,
+  formatKeyForDisplay,
+  getCategoryLabel,
+  getShortcutLabel,
+  type ShortcutDefinition,
+  type ShortcutCategory,
+} from "@/stores/shortcutsStore";
+import { KeyCapture } from "./KeyCapture";
+import { Button, SearchInput } from "./components";
+
+export function ShortcutsSettings() {
+  const { t } = useTranslation("settings");
+  const [search, setSearch] = useState("");
+  const [capturing, setCapturing] = useState<ShortcutDefinition | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Subscribe to customBindings so component re-renders when shortcuts change
+  useShortcutsStore((s) => s.customBindings);
+
+  // Access action methods via getState() — avoids subscribing to entire store
+  const {
+    getShortcut,
+    setShortcut,
+    resetShortcut,
+    resetAllShortcuts,
+    getConflict,
+    exportConfig,
+    importConfig,
+    isCustomized,
+  } = useShortcutsStore.getState();
+
+  // Only show shortcuts that have an effective key binding
+  // Re-evaluated when customBindings changes (the only relevant state)
+  const visibleShortcuts = DEFAULT_SHORTCUTS.filter(
+    (s) => getShortcut(s.id) !== ""
+  );
+
+  // Filter shortcuts by search (label, translated label, category, description, key format, display format)
+  const filteredShortcuts = search.trim()
+    ? visibleShortcuts.filter((s) => {
+        const q = search.trim().toLowerCase();
+        const effectiveKey = getShortcut(s.id);
+        const displayKey = formatKeyForDisplay(effectiveKey).toLowerCase();
+        const translatedLabel = getShortcutLabel(s).toLowerCase();
+        return (
+          s.label.toLowerCase().includes(q) ||
+          translatedLabel.includes(q) ||
+          s.category.toLowerCase().includes(q) ||
+          (s.description?.toLowerCase().includes(q) ?? false) ||
+          effectiveKey.toLowerCase().includes(q) ||
+          displayKey.includes(q)
+        );
+      })
+    : null;
+
+  const handleCapture = (key: string) => {
+    if (capturing) {
+      setShortcut(capturing.id, key);
+      setCapturing(null);
+    }
+  };
+
+  const handleExport = () => {
+    const config = exportConfig();
+    const blob = new Blob([config], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "vmark-shortcuts.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = importConfig(reader.result as string);
+      if (!result.success && result.errors) {
+        alert(`Import errors:\n${result.errors.join("\n")}`);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  };
+
+  const renderShortcutRow = (shortcut: ShortcutDefinition) => {
+    const currentKey = getShortcut(shortcut.id);
+    const customized = isCustomized(shortcut.id);
+
+    return (
+      <div
+        key={shortcut.id}
+        className={`flex items-center justify-between py-2 px-2 -mx-2
+                   hover:bg-[var(--bg-secondary)]/50 rounded transition-colors`}
+      >
+        <div className="flex-1 min-w-0">
+          <div className="text-sm text-[var(--text-primary)]">
+            {getShortcutLabel(shortcut)}
+          </div>
+          {shortcut.description && (
+            <div className="text-xs text-[var(--text-tertiary)] truncate">
+              {shortcut.description}
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2 ml-4">
+          {/* Key display/edit button */}
+          <button
+            onClick={() => setCapturing(shortcut)}
+            className={`px-3 py-1 rounded text-xs font-mono min-w-[90px] text-center
+                       ${customized
+                         ? "bg-[var(--accent-primary)]/20 text-[var(--accent-primary)] ring-1 ring-[var(--accent-primary)]/30"
+                         : "bg-[var(--bg-tertiary)] text-[var(--text-secondary)]"
+                       } hover:bg-[var(--bg-tertiary)] hover:ring-1 hover:ring-[var(--text-tertiary)]/30 transition-all`}
+            title={t("shortcuts.clickToChange")}
+          >
+            {formatKeyForDisplay(currentKey)}
+          </button>
+
+          {/* Reset button (only show if customized) */}
+          {customized && (
+            <button
+              onClick={() => resetShortcut(shortcut.id)}
+              className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)]
+                         hover:bg-[var(--bg-secondary)] rounded transition-colors"
+              title={t("shortcuts.resetToDefault")}
+              aria-label={t("shortcuts.resetToDefault")}
+            >
+              <svg
+                className="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const renderCategorySection = (category: ShortcutCategory) => {
+    const shortcuts = visibleShortcuts.filter((s) => s.category === category);
+    if (shortcuts.length === 0) return null;
+
+    return (
+      <div key={category} className="mb-6">
+        {/* Category heading */}
+        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-2 pb-1
+                       border-b border-[var(--bg-tertiary)]">
+          {getCategoryLabel(category)}
+        </h3>
+        {/* Indented shortcut list */}
+        <div className="space-y-0.5">
+          {shortcuts.map(renderShortcutRow)}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <p className="text-xs text-[var(--text-tertiary)] mb-4">
+        {t("shortcuts.hint")}
+      </p>
+
+      {/* Toolbar */}
+      <div className="flex flex-wrap items-center gap-3 mb-4">
+        {/* Search */}
+        <div className="flex-1 min-w-[200px]">
+          <SearchInput
+            type="search"
+            placeholder={t("shortcuts.searchPlaceholder")}
+            value={search}
+            onChange={setSearch}
+          />
+        </div>
+
+        {/* Import/Export */}
+        <Button onClick={handleExport}>
+          {t("shortcuts.export")}
+        </Button>
+        <Button onClick={() => fileInputRef.current?.click()}>
+          {t("shortcuts.import")}
+        </Button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".json"
+          onChange={handleImport}
+          className="hidden"
+        />
+
+        {/* Reset All */}
+        <Button
+          variant="danger"
+          onClick={() => {
+            if (confirm(t("shortcuts.resetAllConfirm"))) {
+              resetAllShortcuts();
+            }
+          }}
+        >
+          {t("shortcuts.resetAll")}
+        </Button>
+      </div>
+
+      {/* Shortcuts list */}
+      <div className="max-h-[60vh] overflow-y-auto pr-2">
+        {filteredShortcuts ? (
+          // Search results (flat list)
+          <div>
+            <div className="text-xs text-[var(--text-tertiary)] mb-3">
+              {t(
+                filteredShortcuts.length === 1 ? "shortcuts.resultCount_one" : "shortcuts.resultCount_other",
+                { count: filteredShortcuts.length }
+              )}
+            </div>
+            <div className="space-y-0.5">
+              {filteredShortcuts.map(renderShortcutRow)}
+            </div>
+            {filteredShortcuts.length === 0 && (
+              <div className="text-sm text-[var(--text-tertiary)] py-8 text-center">
+                {t("shortcuts.noResults")}
+              </div>
+            )}
+          </div>
+        ) : (
+          // Grouped by category with headings
+          CATEGORY_ORDER.map((category) => renderCategorySection(category))
+        )}
+      </div>
+
+      {/* Key capture modal */}
+      {capturing && (
+        <KeyCapture
+          shortcut={capturing}
+          conflict={getConflict(getShortcut(capturing.id), capturing.id)}
+          onCapture={handleCapture}
+          onCancel={() => setCapturing(null)}
+        />
+      )}
+    </div>
+  );
+}

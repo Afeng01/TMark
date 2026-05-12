@@ -1,0 +1,370 @@
+/**
+ * StatusBar
+ *
+ * Purpose: Bottom bar combining tab strip, word/character counts, auto-save indicator,
+ * AI status indicator, MCP status, terminal toggle, and editor mode toggle into a
+ * single horizontal bar. Auto-shows when AI has active status (hasActiveStatus).
+ *
+ * User interactions:
+ *   - Click a tab pill to switch documents; middle-click or X to close
+ *   - Right-click a tab for context menu (pin, close others, move to window, etc.)
+ *   - Drag tabs to reorder or detach to new windows
+ *   - Click the "+" button to create a new empty tab
+ *   - Click mode button to toggle Source/WYSIWYG
+ *   - Click terminal button to toggle terminal panel
+ *
+ * Key decisions:
+ *   - Tab drag/drop is implemented in useStatusBarTabDrag via pointer events,
+ *     not HTML5 drag API, for finer control over reorder vs. detach threshold.
+ *   - Word/char counts are isolated in StatusBarCounts component to avoid
+ *     re-rendering the entire StatusBar on every keystroke.
+ *   - Auto-save timestamp fades out after 5 seconds but continues updating
+ *     in the background (10s interval) so re-showing is accurate.
+ *   - An ARIA live region announces drag-and-drop outcomes for screen readers.
+ *
+ * @coordinates-with StatusBarRight.tsx — right section split out to reduce render scope
+ * @coordinates-with StatusBarCounts.tsx — word/char count isolated to prevent parent re-renders
+ * @coordinates-with useStatusBarTabDrag.ts — all drag/drop logic including cross-window transfer
+ * @coordinates-with Tabs/Tab.tsx — individual tab pill component
+ * @coordinates-with Tabs/TabContextMenu.tsx — right-click menu for tabs
+ * @module components/StatusBar/StatusBar
+ */
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { PanelLeft, Plus } from "lucide-react";
+import { useEditorStore } from "@/stores/editorStore";
+import { useUIStore } from "@/stores/uiStore";
+import { useWindowLabel, useIsDocumentWindow } from "@/contexts/WindowContext";
+import { useTabStore, type Tab as TabType } from "@/stores/tabStore";
+import { useDocumentStore } from "@/stores/documentStore";
+import { closeTabWithDirtyCheck } from "@/hooks/useTabOperations";
+import { toggleSourceModeWithCheckpoint } from "@/hooks/useUnifiedHistory";
+import {
+  useDocumentLastAutoSave,
+  useDocumentIsMissing,
+  useDocumentIsDivergent,
+} from "@/hooks/useDocumentState";
+import { useSettingsStore } from "@/stores/settingsStore";
+import { useAiInvocationStore } from "@/stores/aiInvocationStore";
+import { formatRelativeTime } from "@/utils/dateUtils";
+import { Tab } from "@/components/Tabs/Tab";
+import { TabContextMenu, type ContextMenuPosition } from "@/components/Tabs/TabContextMenu";
+import { SourceModeUpgrade } from "./SourceModeUpgrade";
+import { FileLoadIndicator } from "./FileLoadIndicator";
+import { looksLikeWorkflowPath } from "@/lib/ghaWorkflow/detection";
+import { useLargeFileSessionStore } from "@/stores/largeFileSessionStore";
+import { useShortcutsStore } from "@/stores/shortcutsStore";
+import { useMcpServer } from "@/hooks/useMcpServer";
+import { useMcpClients } from "@/hooks/useMcpClients";
+import { openSettingsWindow } from "@/utils/settingsWindow";
+import { StatusBarRight } from "./StatusBarRight";
+import { useStatusBarTabDrag } from "./useStatusBarTabDrag";
+import { useQuitFeedback } from "./useQuitFeedback";
+import "./StatusBar.css";
+
+// Stable empty array to avoid creating new reference on each render.
+const EMPTY_TABS: never[] = [];
+
+const ARIA_LIVE_STYLE = {
+  position: "absolute",
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: -1,
+  overflow: "hidden",
+  clip: "rect(0, 0, 0, 0)",
+  whiteSpace: "nowrap",
+  border: 0,
+} as const;
+
+/**
+ * Prevent Cmd+A from selecting all page content when focus is on non-input elements.
+ * Only prevents when active element is a button or similar non-text element.
+ */
+function preventSelectAllOnButtons(event: KeyboardEvent) {
+  if ((event.metaKey || event.ctrlKey) && event.key === "a") {
+    const target = event.target as HTMLElement;
+    if (target.tagName !== "INPUT" && target.tagName !== "TEXTAREA") {
+      event.preventDefault();
+    }
+  }
+}
+
+/** Bottom bar combining tab strip, word/char counts, auto-save indicator, AI status, and mode toggle. */
+export function StatusBar() {
+  const { t } = useTranslation("statusbar");
+  const isDocumentWindow = useIsDocumentWindow();
+  const windowLabel = useWindowLabel();
+  const lastAutoSave = useDocumentLastAutoSave();
+  const isMissing = useDocumentIsMissing();
+  const isDivergent = useDocumentIsDivergent();
+  const autoSaveEnabled = useSettingsStore((state) => state.general.autoSaveEnabled);
+  const globalSourceMode = useEditorStore((state) => state.sourceMode);
+  const statusBarVisible = useUIStore((state) => state.statusBarVisible);
+  const sidebarVisible = useUIStore((state) => state.sidebarVisible);
+  const terminalVisible = useUIStore((state) => state.terminalVisible);
+  const sourceModeShortcut = useShortcutsStore((state) => state.getShortcut("sourceMode"));
+  const readOnlyShortcut = useShortcutsStore((state) => state.getShortcut("readOnly"));
+  const terminalShortcut = useShortcutsStore((state) => state.getShortcut("toggleTerminal"));
+  const saveShortcut = useShortcutsStore((state) => state.getShortcut("save"));
+  const aiRunning = useAiInvocationStore((state) => state.isRunning);
+  const aiElapsed = useAiInvocationStore((state) => state.elapsedSeconds);
+  const aiError = useAiInvocationStore((state) => state.error);
+  const aiShowSuccess = useAiInvocationStore((state) => state.showSuccess);
+  const aiHasActiveStatus = useAiInvocationStore((state) => state.hasActiveStatus);
+  const { running: mcpRunning, loading: mcpLoading, error: mcpError } = useMcpServer();
+  const mcpClients = useMcpClients(mcpRunning);
+
+  const openMcpSettings = useCallback(() => openSettingsWindow("integrations"), []);
+  const handleRetryAi = useCallback(() => {
+    // Dismiss error in status bar — user can retry from the picker or resubmit
+    useAiInvocationStore.getState().dismissError();
+  }, []);
+  const showAutoSavePaused = (isMissing || isDivergent) && autoSaveEnabled;
+
+  const tabs = useTabStore((state) => (isDocumentWindow ? state.tabs[windowLabel] ?? EMPTY_TABS : EMPTY_TABS));
+  const activeTabId = useTabStore((state) => (isDocumentWindow ? state.activeTabId[windowLabel] : null));
+  /* v8 ignore next 3 -- @preserve defensive `!activeTabId` fallback is not exercised — the StatusBar always has an active tab in tests */
+  const activeTabForcedSource = useLargeFileSessionStore((s) =>
+    activeTabId ? Boolean(s.forcedSourceTabs[activeTabId]) : false
+  );
+  // Effective mode mirrors Editor.tsx: a forced-source tab shows as Source
+  // even when the window-global mode is WYSIWYG. So the mode indicator and
+  // the menu/click-to-toggle flow respect the per-tab override.
+  const sourceMode = globalSourceMode || activeTabForcedSource;
+  const readOnly = useDocumentStore((state) => activeTabId ? state.documents[activeTabId]?.readOnly ?? false : false);
+  // Hide the WYSIWYG↔Source toggle for YAML workflow tabs — the
+  // markdown round-trip would silently corrupt YAML indentation. The
+  // toggle handler refuses for YAML paths anyway (defense in depth in
+  // useUnifiedHistory.ts), but hiding the button removes the foot gun.
+  const activeTabFilePath = useDocumentStore((s) =>
+    activeTabId ? s.documents[activeTabId]?.filePath ?? null : null,
+  );
+  const modeToggleHidden = looksLikeWorkflowPath(
+    activeTabFilePath ?? undefined,
+  );
+
+  const [contextMenu, setContextMenu] = useState<{
+    position: ContextMenuPosition;
+    tab: TabType;
+  } | null>(null);
+  const [showAutoSave, setShowAutoSave] = useState(false);
+  const [autoSaveTime, setAutoSaveTime] = useState("");
+  const quitMessage = useQuitFeedback();
+
+  const tabDragScopeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!lastAutoSave) return;
+
+    setAutoSaveTime(formatRelativeTime(lastAutoSave));
+    setShowAutoSave(true);
+
+    const updateInterval = setInterval(() => {
+      setAutoSaveTime(formatRelativeTime(lastAutoSave));
+    }, 10000);
+
+    const fadeTimeout = setTimeout(() => {
+      setShowAutoSave(false);
+    }, 5000);
+
+    return () => {
+      clearInterval(updateInterval);
+      clearTimeout(fadeTimeout);
+    };
+  }, [lastAutoSave]);
+
+  const handleActivateTab = useCallback(
+    (tabId: string) => {
+      useTabStore.getState().setActiveTab(windowLabel, tabId);
+    },
+    [windowLabel]
+  );
+
+  const handleCloseTab = useCallback(
+    (tabId: string) => {
+      closeTabWithDirtyCheck(windowLabel, tabId);
+    },
+    [windowLabel]
+  );
+
+  const handleContextMenu = useCallback((event: MouseEvent, tab: TabType) => {
+    event.preventDefault();
+    setContextMenu({
+      position: { x: event.clientX, y: event.clientY },
+      tab,
+    });
+  }, []);
+
+  const handleCloseContextMenu = useCallback(() => {
+    setContextMenu(null);
+  }, []);
+
+  const handleNewTab = useCallback(() => {
+    const tabId = useTabStore.getState().createTab(windowLabel, null);
+    useDocumentStore.getState().initDocument(tabId, "", null);
+  }, [windowLabel]);
+
+  const {
+    getTabDragHandlers,
+    isDragging,
+    isReordering,
+    dragMode,
+    dragTabId,
+    dropIndex,
+    dragPoint,
+    snapbackTabId,
+    isDropPreviewTarget,
+    isDropInvalid,
+    isReorderBlocked,
+    dragHint,
+    ariaAnnouncement,
+    handleTabKeyDown,
+  } = useStatusBarTabDrag({
+    tabs,
+    windowLabel,
+    tabBarRef: tabDragScopeRef,
+    onActivateTab: handleActivateTab,
+  });
+
+  const dragTab = dragTabId ? tabs.find((tab) => tab.id === dragTabId) ?? null : null;
+
+  const showTabs = isDocumentWindow && tabs.length >= 1;
+  const showNewTabButton = isDocumentWindow;
+
+  if (!statusBarVisible && !aiHasActiveStatus) return null;
+
+  return (
+    <>
+      <div
+        className={`status-bar-container visible${isDropPreviewTarget ? " status-bar-container--drop-target" : ""}`}
+        role="contentinfo"
+        onKeyDown={preventSelectAllOnButtons}
+      >
+        <div className="status-bar">
+          <div className="status-bar-left" ref={tabDragScopeRef}>
+            {!sidebarVisible && isDocumentWindow && (
+              <button
+                type="button"
+                className="status-sidebar-toggle"
+                onClick={() => useUIStore.getState().toggleSidebar()}
+                aria-expanded={false}
+                aria-label={t("openSidebar")}
+                title={t("openSidebar")}
+              >
+                <PanelLeft size={14} />
+              </button>
+            )}
+            <FileLoadIndicator />
+            <SourceModeUpgrade />
+            {showNewTabButton && (
+              <button
+                type="button"
+                className="status-new-tab"
+                onClick={handleNewTab}
+                aria-label={t("newTab")}
+                title={t("newTabTitle")}
+              >
+                <Plus className="w-3 h-3" />
+              </button>
+            )}
+
+            {showTabs && (
+              <div className="status-tabs" role="tablist">
+                {tabs.map((tab, index) => {
+                  const dragHandlers = getTabDragHandlers(tab.id, tab.isPinned);
+                  const isBeingDragged = dragTabId === tab.id;
+                  const showDropBefore = isReordering && dropIndex === index && !isBeingDragged && !isReorderBlocked;
+
+                  return (
+                    <Tab
+                      key={tab.id}
+                      tab={tab}
+                      isActive={tab.id === activeTabId}
+                      isDragTarget={isDragging && isBeingDragged}
+                      isReordering={isReordering && isBeingDragged}
+                      isInvalidDrop={isDropInvalid && isBeingDragged}
+                      isSnapback={snapbackTabId === tab.id}
+                      showDropIndicator={showDropBefore}
+                      onActivate={handleActivateTab}
+                      onKeyDown={handleTabKeyDown}
+                      onClose={handleCloseTab}
+                      onContextMenu={handleContextMenu}
+                      onPointerDown={dragHandlers.onPointerDown}
+                    />
+                  );
+                })}
+                {isReordering && dropIndex !== null && dropIndex >= tabs.length && !isReorderBlocked && (
+                  <div className="tab-drop-indicator" />
+                )}
+              </div>
+            )}
+
+            {quitMessage && (
+              <span className="status-quit-message">
+                {t("pressAgainToQuit", { key: navigator.platform.includes("Mac") ? "⌘Q" : "Ctrl+Q" })}
+              </span>
+            )}
+          </div>
+
+          <StatusBarRight
+            aiRunning={aiRunning}
+            elapsedSeconds={aiElapsed}
+            aiError={aiError}
+            showSuccess={aiShowSuccess}
+            onCancelAi={() => useAiInvocationStore.getState().cancel()}
+            onRetryAi={handleRetryAi}
+            onDismissError={() => useAiInvocationStore.getState().dismissError()}
+            mcpRunning={mcpRunning}
+            mcpLoading={mcpLoading}
+            mcpError={mcpError}
+            mcpClients={mcpClients}
+            openMcpSettings={openMcpSettings}
+            showAutoSavePaused={showAutoSavePaused}
+            isDivergent={isDivergent}
+            showAutoSave={showAutoSave}
+            lastAutoSave={lastAutoSave}
+            autoSaveTime={autoSaveTime}
+            terminalVisible={terminalVisible}
+            terminalShortcut={terminalShortcut}
+            saveShortcut={saveShortcut}
+            sourceMode={sourceMode}
+            sourceModeShortcut={sourceModeShortcut}
+            onToggleSourceMode={() => toggleSourceModeWithCheckpoint(windowLabel)}
+            modeToggleHidden={modeToggleHidden}
+            readOnly={readOnly}
+            readOnlyShortcut={readOnlyShortcut}
+            onToggleReadOnly={() => {
+              if (activeTabId) useDocumentStore.getState().toggleReadOnly(activeTabId);
+            }}
+          />
+        </div>
+      </div>
+
+      {dragPoint && dragTab && dragMode !== "idle" && (
+        <div
+          className={`tab-drag-ghost${isDropInvalid ? " invalid" : ""}`}
+          style={{ transform: `translate3d(${dragPoint.clientX + 14}px, ${dragPoint.clientY + 14}px, 0)` }}
+        >
+          <span className="tab-drag-ghost-title">{dragTab.title}</span>
+          <span className="tab-drag-ghost-hint">{dragHint}</span>
+        </div>
+      )}
+
+      <div aria-live="polite" aria-atomic="true" style={ARIA_LIVE_STYLE}>
+        {ariaAnnouncement}
+      </div>
+
+      {contextMenu && (
+        <TabContextMenu
+          tab={contextMenu.tab}
+          position={contextMenu.position}
+          windowLabel={windowLabel}
+          onClose={handleCloseContextMenu}
+        />
+      )}
+    </>
+  );
+}
+
+export default StatusBar;

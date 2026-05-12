@@ -1,0 +1,136 @@
+/**
+ * AI Suggestion Styles
+ *
+ * Visual treatment for AI-generated content suggestions.
+ * UNDO/REDO SAFE: Document is NOT modified until user accepts.
+ *
+ * - Insert: Ghost text preview (not in document)
+ * - Replace: Original with strikethrough + ghost text for new
+ * - Delete: Original with strikethrough
+ * - Buttons: Icon only, no background
+ */
+
+/* Ghost text - preview of content to be inserted */
+.ai-suggestion-ghost {
+  color: var(--primary-color);
+  opacity: var(--opacity-subtle);
+  font-style: italic;
+}
+
+.ai-suggestion-ghost-focused {
+  opacity: 0.8;
+}
+
+/* Containers for widget decorations */
+.ai-suggestion-insert-container,
+.ai-suggestion-replace-container {
+  display: inline;
+}
+
+/* Base suggestion styles (for inline decorations) */
+.ai-suggestion {
+  border-radius: 2px;
+}
+
+/* Replace suggestion - strikethrough on original text */
+.ai-suggestion-replace {
+  text-decoration: line-through wavy;
+  text-decoration-color: var(--error-color);
+  text-decoration-thickness: 1px;
+  opacity: var(--opacity-subtle);
+}
+
+/* Delete suggestion - red wavy strikethrough */
+.ai-suggestion-delete {
+  text-decoration: line-through wavy;
+  text-decoration-color: var(--error-color);
+  text-decoration-thickness: 1px;
+  opacity: var(--opacity-subtle);
+}
+
+/* Focused state - no visual change, buttons indicate focus */
+.ai-suggestion-focused {
+  /* Focus indicated by presence of buttons */
+}
+
+/* Accept/Reject buttons container */
+.ai-suggestion-buttons {
+  display: inline-flex;
+  gap: var(--spacing-1);
+  margin-left: var(--space-1-5);
+  vertical-align: middle;
+}
+
+/* Button base styles - icon only, no background */
+.ai-suggestion-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-btn-xs);
+  height: var(--size-btn-xs);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform var(--duration-fast), opacity var(--duration-base);
+  vertical-align: middle;
+  opacity: var(--opacity-half-faded);
+}
+
+.ai-suggestion-btn:hover {
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+.ai-suggestion-btn:active {
+  transform: scale(0.95);
+}
+
+/* Focus state - U-shaped underline (keyboard focus only) */
+.ai-suggestion-btn:focus-visible {
+  outline: none;
+  opacity: 1;
+}
+
+.ai-suggestion-btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 1px;
+  right: 1px;
+  height: 2px;
+  background: transparent;
+  border-bottom: var(--border-medium) solid currentColor;
+  border-radius: 0 0 2px 2px;
+}
+
+/* Icon sizing */
+.ai-suggestion-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* Accept button - green icon only */
+.ai-suggestion-btn-accept {
+  color: var(--success-color);
+}
+
+.ai-suggestion-btn-accept:hover {
+  color: var(--success-color-hover);
+}
+
+/* Reject button - red icon only */
+.ai-suggestion-btn-reject {
+  color: var(--error-color);
+}
+
+.ai-suggestion-btn-reject:hover {
+  color: var(--error-color-hover);
+}

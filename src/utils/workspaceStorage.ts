@@ -1,0 +1,210 @@
+/**
+ * Workspace Storage Utilities
+ *
+ * Purpose: Handles storage key derivation, migration, and cross-window discovery
+ * for window-scoped persistence. Each window gets its own localStorage key so
+ * multi-window state doesn't collide.
+ *
+ * Key decisions:
+ *   - Storage keys are derived from window label: `vmark-workspace:{label}`
+ *   - Legacy migration handles the old single-key `vmark-workspace` format
+ *   - getCurrentWindowLabel() is cached per session for consistent key derivation
+ *   - findActiveWorkspaceLabel() scans localStorage for the settings window to
+ *     discover which document window has an active workspace
+ *
+ * @coordinates-with workspaceStore.ts — uses createWindowStorage for persist middleware
+ * @coordinates-with window_manager.rs — assigns window labels on creation
+ * @module utils/workspaceStorage
+ */
+import type { StateStorage } from "zustand/middleware";
+import { imeToast as toast } from "@/utils/imeToast";
+import { workspaceStorageWarn } from "@/utils/debug";
+
+/** Tracks which workspace keys have already shown a quota warning. */
+const quotaWarnedKeys = new Set<string>();
+
+/** Callback to resolve the i18n quota message — set by the app after i18n initialises. */
+let resolveQuotaMessage: (() => string) | null = null;
+
+/**
+ * Register an i18n-aware message resolver (called once from app init).
+ * Pass `null` to clear (test only — production code never unregisters).
+ */
+export function setWorkspaceStorageMessageResolver(
+  resolver: (() => string) | null,
+): void {
+  resolveQuotaMessage = resolver;
+}
+
+/** Test-only: clear the per-key warned-keys cache between tests. */
+export function __resetQuotaWarnedKeys(): void {
+  quotaWarnedKeys.clear();
+}
+
+/** Base key prefix for workspace storage */
+const STORAGE_KEY_PREFIX = "vmark-workspace";
+
+/** Legacy storage key used before window-scoped persistence */
+export const LEGACY_STORAGE_KEY = "vmark-workspace";
+
+/**
+ * Current window label. Set by WindowProvider on initialization.
+ * Defaults to "main" for the primary window.
+ */
+let currentWindowLabel = "main";
+
+/**
+ * Get the storage key for a specific window's workspace state.
+ *
+ * @param windowLabel - The window label (e.g., "main", "doc-1")
+ * @returns Storage key in format "vmark-workspace:{windowLabel}"
+ *
+ * @example
+ * getWorkspaceStorageKey("main") // "vmark-workspace:main"
+ * getWorkspaceStorageKey("doc-1") // "vmark-workspace:doc-1"
+ */
+export function getWorkspaceStorageKey(windowLabel: string): string {
+  return `${STORAGE_KEY_PREFIX}:${windowLabel}`;
+}
+
+/**
+ * Migrate legacy workspace storage to window-scoped storage.
+ *
+ * If the legacy "vmark-workspace" key exists and "vmark-workspace:main" doesn't,
+ * copies the data to the main window's key and removes the legacy key.
+ *
+ * This should be called once at app startup (in the main window).
+ *
+ * @example
+ * // Call on app initialization
+ * migrateWorkspaceStorage();
+ */
+export function migrateWorkspaceStorage(): void {
+  try {
+    const mainKey = getWorkspaceStorageKey("main");
+    const existingMain = localStorage.getItem(mainKey);
+
+    // Don't migrate if main key already exists
+    if (existingMain) {
+      return;
+    }
+
+    const legacyData = localStorage.getItem(LEGACY_STORAGE_KEY);
+
+    // Remove legacy key regardless if it exists (even if empty)
+    if (legacyData !== null) {
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+    }
+
+    // Nothing to migrate if legacy key doesn't exist or is empty
+    if (!legacyData) {
+      return;
+    }
+
+    // Migrate legacy data to main window key
+    localStorage.setItem(mainKey, legacyData);
+  } catch (error) {
+    // Log but don't throw - migration failure shouldn't crash the app
+    workspaceStorageWarn("Migration failed:", error);
+  }
+}
+
+/**
+ * Set the current window label for workspace storage operations.
+ *
+ * Must be called by WindowProvider when the window label is determined.
+ * This affects which storage key the workspace store reads from/writes to.
+ *
+ * @param label - The window label (e.g., "main", "doc-1")
+ */
+export function setCurrentWindowLabel(label: string): void {
+  currentWindowLabel = label;
+}
+
+/**
+ * Get the current window label.
+ *
+ * @returns The current window label
+ */
+export function getCurrentWindowLabel(): string {
+  return currentWindowLabel;
+}
+
+/**
+ * Find the label of a document window that has an active workspace.
+ * Used by the settings window to read workspace state from the correct key.
+ * Prefers "main" over other window labels.
+ *
+ * @returns The window label, or null if no active workspace found
+ */
+export function findActiveWorkspaceLabel(): string | null {
+  let fallback: string | null = null;
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (!key || !key.startsWith(`${STORAGE_KEY_PREFIX}:`)) continue;
+
+    const label = key.slice(STORAGE_KEY_PREFIX.length + 1);
+    if (!label || (label !== "main" && !label.startsWith("doc-"))) continue;
+
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) continue;
+      const data = JSON.parse(raw);
+      if (data?.state?.isWorkspaceMode && data?.state?.rootPath) {
+        if (label === "main") return "main";
+        fallback ??= label;
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return fallback;
+}
+
+/**
+ * Custom storage adapter for Zustand's persist middleware.
+ *
+ * Reads/writes to a window-specific key based on the current window label.
+ * The storage key changes dynamically based on setCurrentWindowLabel calls.
+ *
+ * Note: The 'name' parameter from persist config is ignored since we
+ * derive the key from the window label.
+ */
+export const windowScopedStorage: StateStorage = {
+  getItem: (_name: string): string | null => {
+    // Use window-specific key, ignoring the passed name
+    const key = getWorkspaceStorageKey(currentWindowLabel);
+    return localStorage.getItem(key);
+  },
+  setItem: (_name: string, value: string): void => {
+    const key = getWorkspaceStorageKey(currentWindowLabel);
+    try {
+      localStorage.setItem(key, value);
+    } catch (error) {
+      if (
+        error instanceof DOMException &&
+        error.name === "QuotaExceededError"
+      ) {
+        workspaceStorageWarn(`QuotaExceededError for key "${key}" — localStorage is full`);
+        if (!quotaWarnedKeys.has(key)) {
+          // Only mark this key as "already warned" when we actually showed a
+          // toast. A quota event during the bootstrap window (before i18n
+          // registers the resolver) would otherwise permanently suppress
+          // future warnings for that key.
+          if (resolveQuotaMessage) {
+            quotaWarnedKeys.add(key);
+            toast.warning(resolveQuotaMessage());
+          }
+        }
+      } else {
+        throw error;
+      }
+    }
+  },
+  removeItem: (_name: string): void => {
+    const key = getWorkspaceStorageKey(currentWindowLabel);
+    localStorage.removeItem(key);
+  },
+};

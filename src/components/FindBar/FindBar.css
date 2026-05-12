@@ -1,0 +1,235 @@
+.find-bar {
+  --find-bar-height: 38px; /* 5px padding + 28px row + 5px padding */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: var(--find-bar-height);
+  z-index: var(--z-bar); /* Same level as StatusBar */
+  background: var(--bg-color);
+  padding: 5px var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+}
+
+.find-bar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  row-gap: var(--space-1-5);
+  flex-wrap: wrap;
+  min-height: var(--space-7);
+}
+
+.find-bar-input-group {
+  display: flex;
+  align-items: center;
+  flex: 1 1 200px;
+  min-width: 120px;
+  max-width: none;
+  background: transparent;
+  border: none;
+  border-bottom: var(--border-thin) solid var(--border-color, #e0e0e0);
+  border-radius: 0;
+  padding: 0 var(--spacing-1);
+}
+
+.find-bar-input-group:focus-within {
+  border-bottom-color: var(--border-color, #e0e0e0);
+}
+
+.find-bar-icon {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+  color: var(--text-tertiary, #999);
+  flex-shrink: 0;
+}
+
+.find-bar-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: var(--spacing-1) var(--space-1-5);
+  font-size: var(--font-size-base);
+  color: var(--text-primary, #333);
+  outline: none;
+  box-shadow: none;
+  min-width: 0;
+}
+
+/* Input focus: caret is the indicator (per design rules) */
+.find-bar-input:focus,
+.find-bar-input:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  /* Caret visibility indicates focus */
+}
+
+.find-bar-input::placeholder {
+  color: var(--text-tertiary, #999);
+}
+
+.find-bar-toggles {
+  display: flex;
+  gap: var(--space-half);
+}
+
+.find-bar-toggle {
+  position: relative;
+  padding: var(--spacing-1) var(--space-1-5);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  font-family: var(--font-mono, monospace);
+  background: transparent;
+  border: var(--border-thin) solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.find-bar-toggle:hover {
+  background: var(--bg-tertiary, #eee);
+}
+
+/* Active state: U-shaped underline */
+.find-bar-toggle.active {
+  color: var(--accent-primary, #007aff);
+}
+
+.find-bar-toggle.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  background: transparent;
+  border-bottom: var(--border-medium) solid var(--accent-primary, #007aff);
+  border-radius: 0 0 4px 4px;
+}
+
+.find-bar-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.find-bar-nav-btn {
+  position: relative;
+  width: var(--size-btn-sm);
+  height: var(--size-btn-sm);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.find-bar-nav-btn:hover:not(:disabled) {
+  background: var(--bg-tertiary, #eee);
+}
+
+.find-bar-nav-btn:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.find-bar-nav-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.find-bar-count {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary, #666);
+  min-width: var(--space-15);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.find-bar-close {
+  position: relative;
+  width: var(--size-btn-sm);
+  height: var(--size-btn-sm);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary, #999);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+  margin-left: auto;
+}
+
+.find-bar-close:hover {
+  background: var(--bg-tertiary, #eee);
+  color: var(--text-primary, #333);
+}
+
+.find-bar-close svg {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+}
+
+.find-bar-replace-actions {
+  display: flex;
+  gap: var(--spacing-1);
+}
+
+.find-bar-icon-btn {
+  position: relative;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: var(--border-thin) solid var(--border-color, #e0e0e0);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary, #333);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.find-bar-icon-btn:hover:not(:disabled) {
+  background: var(--bg-tertiary, #eee);
+}
+
+.find-bar-icon-btn:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* Focus indicators for FindBar buttons */
+.find-bar-nav-btn:focus-visible,
+.find-bar-toggle:focus-visible,
+.find-bar-close:focus-visible,
+.find-bar-icon-btn:focus-visible {
+  outline: none;
+}
+
+.find-bar-nav-btn:focus-visible::after,
+.find-bar-toggle:focus-visible::after,
+.find-bar-close:focus-visible::after,
+.find-bar-icon-btn:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}

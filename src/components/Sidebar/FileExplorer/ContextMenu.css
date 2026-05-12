@@ -1,0 +1,95 @@
+/**
+ * Context Menu Styles - macOS System Menu Style
+ * Matches trigger-menu.css design
+ */
+
+.context-menu {
+  position: fixed;
+  z-index: var(--z-context-menu);
+  min-width: 180px;
+  max-width: 240px;
+  background: var(--bg-color);
+  background: color-mix(in srgb, var(--bg-color) 97%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: var(--border-hairline) solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--popup-shadow);
+  padding: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  font-size: var(--font-size-base);
+}
+
+.context-menu-separator {
+  height: 1px;
+  background: var(--border-color);
+  opacity: var(--opacity-subtle);
+  margin: 5px var(--space-2-5);
+}
+
+.context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2-5);
+  width: 100%;
+  padding: 5px var(--space-2-5);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: default;
+  color: var(--text-color);
+  font: inherit;
+  text-align: left;
+  transition: none;
+  user-select: none;
+  outline: none;
+}
+
+.context-menu-item:hover,
+.context-menu-item:focus-visible {
+  background: var(--primary-color);
+  color: var(--contrast-text);
+}
+
+.context-menu-item:hover .context-menu-item-icon,
+.context-menu-item:focus-visible .context-menu-item-icon {
+  color: var(--contrast-text);
+}
+
+.context-menu-item:hover .context-menu-item-shortcut,
+.context-menu-item:focus-visible .context-menu-item-shortcut {
+  color: var(--contrast-text);
+  opacity: var(--opacity-half-faded);
+}
+
+.context-menu-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-icon-medium);
+  height: var(--size-icon-medium);
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  opacity: var(--opacity-mostly-opaque);
+}
+
+.context-menu-item-icon svg {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.context-menu-item-label {
+  flex: 1;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.context-menu-item-shortcut {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  opacity: var(--opacity-subtle);
+}

@@ -1,0 +1,104 @@
+/**
+ * Focus Mode Styles
+ *
+ * Dims all blocks except the one with .md-focus class.
+ */
+
+/* Transition for smooth dimming effect */
+.focus-mode .tiptap-editor .ProseMirror > * {
+  transition: color var(--duration-medium) ease, opacity var(--duration-medium) ease, border-color var(--duration-medium) ease;
+}
+
+/* Dim all top-level blocks that don't have focus */
+.focus-mode .tiptap-editor .ProseMirror > *:not(.md-focus) {
+  color: var(--blur-text-color);
+}
+
+/* Dim images in non-focused blocks */
+.focus-mode .tiptap-editor .ProseMirror > *:not(.md-focus) img {
+  opacity: var(--blur-image-opacity);
+  filter: grayscale(30%);
+}
+
+/* Dim code blocks */
+.focus-mode .tiptap-editor .ProseMirror > pre:not(.md-focus) {
+  opacity: var(--opacity-disabled);
+}
+
+/* Nested code blocks in non-focused parents */
+.focus-mode .tiptap-editor .ProseMirror > *:not(.md-focus) pre {
+  opacity: var(--opacity-subtle);
+}
+
+/* Dim blockquote borders */
+.focus-mode .tiptap-editor .ProseMirror > blockquote:not(.md-focus) {
+  border-left-color: var(--blur-text-color);
+}
+
+/* Dim horizontal rules */
+.focus-mode .tiptap-editor .ProseMirror > hr:not(.md-focus) {
+  opacity: 0.3;
+}
+
+/* Dim tables */
+.focus-mode .tiptap-editor .ProseMirror > *:not(.md-focus) table,
+.focus-mode .tiptap-editor .ProseMirror > table:not(.md-focus) {
+  opacity: var(--opacity-muted);
+}
+
+/* Dim alert blocks */
+.focus-mode .tiptap-editor .ProseMirror > .alert-block:not(.md-focus) {
+  opacity: var(--opacity-disabled);
+}
+
+/* Dim details blocks */
+.focus-mode .tiptap-editor .ProseMirror > .details-block:not(.md-focus) {
+  opacity: var(--opacity-disabled);
+}
+
+/* Focused block stays fully visible */
+.focus-mode .tiptap-editor .ProseMirror > .md-focus {
+  color: inherit;
+  opacity: 1;
+}
+
+.focus-mode .tiptap-editor .ProseMirror > .md-focus img {
+  opacity: 1;
+  filter: none;
+}
+
+.focus-mode .tiptap-editor .ProseMirror > .md-focus pre {
+  opacity: 1;
+}
+
+/* =========================
+ * CodeMirror Focus Mode
+ * Dims non-current paragraph lines
+ * ========================= */
+
+/* Transition for smooth dimming effect */
+.focus-mode .source-editor .cm-line {
+  transition: color var(--duration-medium) ease, opacity var(--duration-medium) ease;
+}
+
+/* Dim all blurred lines */
+.focus-mode .source-editor .cm-line.cm-blur {
+  color: var(--blur-text-color);
+}
+
+/* Dim syntax highlighting in blurred lines */
+.focus-mode .source-editor .cm-line.cm-blur .tok-heading,
+.focus-mode .source-editor .cm-line.cm-blur .tok-strong,
+.focus-mode .source-editor .cm-line.cm-blur .tok-emphasis,
+.focus-mode .source-editor .cm-line.cm-blur .tok-link,
+.focus-mode .source-editor .cm-line.cm-blur .tok-meta,
+.focus-mode .source-editor .cm-line.cm-blur .tok-string,
+.focus-mode .source-editor .cm-line.cm-blur .tok-keyword {
+  color: var(--blur-text-color);
+}
+
+/* Keep current paragraph visible */
+.focus-mode .source-editor .cm-line:not(.cm-blur) {
+  color: inherit;
+  opacity: 1;
+}

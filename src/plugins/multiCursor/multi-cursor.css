@@ -1,0 +1,53 @@
+/**
+ * Multi-cursor styles for WYSIWYG editor
+ *
+ * Provides visual styling for multi-cursor caret widgets and selections.
+ * When multi-cursor is active, we hide the native caret to sync blinking.
+ */
+
+/* Hide native caret when multi-cursor is active */
+.multi-cursor-active {
+  caret-color: transparent;
+}
+
+/* Secondary cursor caret */
+.multi-cursor-caret {
+  position: relative;
+  display: inline;
+  pointer-events: none;
+}
+
+.multi-cursor-caret::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--multi-cursor-color);
+  animation: multi-cursor-blink var(--duration-1s) step-end infinite;
+}
+
+/* Cursor blink animation */
+@keyframes multi-cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Secondary selection highlight */
+.multi-cursor-selection {
+  background-color: var(--multi-cursor-selection-bg);
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .multi-cursor-caret::before {
+    animation: none;
+    opacity: 1;
+  }
+}

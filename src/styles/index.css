@@ -1,0 +1,324 @@
+@import "tailwindcss";
+/* Note: KaTeX CSS is imported in main.tsx (after this file) for consistent
+   dev/prod cascade order. CSS @import from node_modules doesn't work in Vite. */
+
+/* Enable selector-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Theme CSS Variables - GitHub Style */
+:root {
+  /* Core colors - Paper theme default */
+  --bg-color: #eeeded;
+  --text-color: #1a1a1a;
+  --primary-color: #0066cc;
+
+  /* Focus mode */
+  --blur-text-color: #c8c8c8;
+  --blur-image-opacity: 0.5;
+
+  /* Syntax elements */
+  --md-char-color: #777777;
+  --meta-content-color: #777777;
+
+  /* Code blocks */
+  --code-bg-color: #e5e4e4;
+  --code-text-color: #1a1a1a;
+  --code-border-color: #d5d4d4;
+  --code-line-height: 1.45;
+  --code-padding: 18px; /* Dynamically set by useTheme.ts to fontSize (1em of base, not code font) */
+
+  /* UI chrome */
+  --sidebar-bg: #e5e4e4;
+  --sidebar-width: 260px;
+  --outline-width: 200px;
+  --border-color: #d5d4d4;
+  --table-border-color: #d5d4d4;
+  --selection-color: rgba(0, 102, 204, 0.2);
+  --bg-secondary: #e5e4e4;
+  --text-secondary: #666666;
+
+  /* Settings UI - additional aliases */
+  --bg-primary: var(--bg-color);
+  --bg-tertiary: #f0f0f0;
+  --text-primary: var(--text-color);
+  --text-tertiary: #999999;
+  --accent-primary: #0066cc;
+  --accent-bg: rgba(0, 102, 204, 0.1);
+
+  /* Border radius tokens */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 100px;
+
+  /* Popup shared tokens (format toolbar, source popup, etc.) */
+  --popup-padding: 6px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --popup-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --popup-shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  /* Typography */
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "SF Pro SC",
+    "SF Pro Text", "Helvetica Neue", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Helvetica, Arial, sans-serif;
+  --font-mono: "SauceCodePro NF", "Courier New", Consolas,
+    monospace;
+
+  /* Text emphasis colors */
+  --strong-color: rgb(63, 86, 99);
+  --emphasis-color: rgb(91, 4, 17);
+
+  /* Source mode */
+  --source-mode-bg: rgba(0, 0, 0, 0.02);
+
+  /* Alert block colors */
+  --alert-note: #0969da;
+  --alert-tip: #1a7f37;
+  --alert-important: #8250df;
+  --alert-warning: #9a6700;
+  --alert-caution: var(--error-color);
+
+  /* Highlight mark */
+  --highlight-bg: #fff3a3;
+  --highlight-text: inherit;
+
+  /* Error states (default for light mode) */
+  --error-color: #cf222e;
+  --error-color-hover: #b91c1c;
+  --error-bg: #ffebe9;
+
+  /* Warning states */
+  --warning-color: #9a6700;
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --warning-border: rgba(245, 158, 11, 0.3);
+
+  /* Success states */
+  --success-color: #16a34a;
+  --success-color-hover: #15803d;
+  --success-color-dark: #4ade80;
+
+  /* Contrast text (for colored backgrounds like primary buttons) */
+  --contrast-text: white;
+
+  /* Hover states (standardized) */
+  --hover-bg: rgba(0, 0, 0, 0.04);
+  --hover-bg-strong: rgba(0, 0, 0, 0.08);
+
+  /* Dark mode hover (use in .dark-theme selectors) */
+  --hover-bg-dark: rgba(255, 255, 255, 0.08);
+  --hover-bg-dark-strong: rgba(255, 255, 255, 0.12);
+
+  /* Subtle backgrounds */
+  --subtle-bg: rgba(0, 0, 0, 0.02);
+  --subtle-bg-hover: rgba(0, 0, 0, 0.03);
+
+  /* Spacing scale (common values) */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+
+  /* Icon button sizes */
+  --icon-size-sm: 22px;   /* StatusBar buttons */
+  --icon-size-md: 26px;   /* Popup buttons */
+  --icon-size-lg: 28px;   /* Toolbar buttons */
+
+  /* Global list indent (inherited by nested contexts) */
+  --list-indent: 1em;
+
+  /* Editor typography - computed dynamically in useTheme.ts.
+     Static fallbacks ensure print and SSR work correctly.
+     Defaults match settingsStore defaults: fontSize=18, lineHeight=1.6, blockSpacing=1 */
+  --editor-font-size: 18px;
+  --editor-font-size-sm: 16.2px;       /* 18 * 0.9 */
+  --editor-font-size-mono: 15.3px;     /* 18 * 0.85 */
+  --editor-line-height: 1.6;
+  --editor-line-height-px: 28.8px;     /* 18 * 1.6 */
+  --editor-block-spacing: 1em;         /* blockSpacing=1 → margin = lineHeight*(1-1)+1 = 1em */
+  --editor-content-padding: 36px;      /* fontSize * 2 */
+  --cjk-letter-spacing: 0.05em;        /* Default CJK spacing */
+  --editor-width: 50em;                /* Default editor width */
+
+  /* Search match colors */
+  --search-match-color: rgba(255, 180, 0, 0.8);
+  --search-match-active-color: rgba(255, 200, 0, 0.7);
+
+  /* Multi-cursor */
+  --multi-cursor-color: hsl(217 91% 60%);
+  --multi-cursor-selection-bg: hsla(217, 91%, 60%, 0.3);
+
+  /* Alert tokens for dark mode (centralized) */
+  --alert-note-dark: #58a6ff;
+  --alert-tip-dark: #3fb950;
+  --alert-important-dark: #a371f7;
+  --alert-warning-dark: #d29922;
+  --alert-caution-dark: #f85149;
+
+  /* Media type colors (light mode) */
+  --media-video: #0d9488;
+  --media-audio: #6366f1;
+  --media-youtube: #dc2626;
+  --media-vimeo: #00adef;
+  --media-bilibili: #fb7299;
+
+  /* Media type colors (dark mode) */
+  --media-video-dark: #2dd4bf;
+  --media-audio-dark: #818cf8;
+  --media-youtube-dark: #f87171;
+  --media-vimeo-dark: #4ac3f0;
+  --media-bilibili-dark: #fc9cb5;
+
+  /* ========================================
+     PRIMITIVES LAYER
+     Use semantic tokens above when they cover the case (--popup-padding,
+     --icon-size-lg, --radius-sm, --spacing-2). Reach for primitives only when
+     no semantic name exists. See .claude/rules/31-design-tokens.md.
+     ======================================== */
+
+  /* Spacing scale (4px-based, with half-steps for common 6/10/14px) */
+  --space-px: 1px;
+  --space-half: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
+  --space-3-5: 14px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-15: 60px;
+
+  /* Border widths */
+  --border-hairline: 0.5px;
+  --border-thin: 1px;
+  --border-medium: 2px;
+  --border-thick: 4px;
+
+  /* UI font sizes (separate from runtime --editor-font-size-*) */
+  --font-size-2xs: 10px;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+
+  /* Component dimensions not covered by --icon-size-* */
+  --size-icon-xs: 14px;     /* small inline icons (popup buttons, dropdown items) */
+  --size-icon-medium: 18px; /* standard SVG icon */
+  --size-btn-xs: 20px;      /* mermaid zoom button, file-remove button */
+  --size-btn-sm: 24px;      /* find-bar nav/close button */
+
+  /* Line heights */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.35;
+  --line-height-base: 1.4;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+
+  /* Letter spacing (UI labels, uppercase headings) */
+  --letter-spacing-tight: 0.3px;
+  --letter-spacing-loose: 0.5px;
+
+  /* Opacity scale */
+  --opacity-disabled: 0.4;
+  --opacity-muted: 0.5;
+  --opacity-subtle: 0.6;
+  --opacity-half-faded: 0.7;
+  --opacity-mostly-opaque: 0.85;
+
+  /* Animation durations */
+  --duration-fast: 0.1s;
+  --duration-base: 0.15s;
+  --duration-medium: 0.2s;
+  --duration-slow: 0.3s;
+  --duration-slower: 0.6s;
+  --duration-1s: 1s;
+  --duration-1-5s: 1.5s;
+  --duration-2s: 2s;
+  --duration-5s: 5s;
+
+  /* Z-index stack (mirrors 32-component-patterns.md hierarchy) */
+  --z-resize-handle: 10;
+  --z-bar: 100;
+  --z-toolbar: 102;
+  --z-toolbar-dropdown: 103;
+  --z-context-menu: 1000;
+  --z-mcp-overlay: 1200;
+  --z-popup: 9999;
+  --z-table-context: 10000;
+
+  /* Bar heights (status-bar, universal-toolbar; find-bar is 38px because
+     of its smaller padding/row arithmetic). Editor padding-bottom matches. */
+  --bar-height: 40px;
+}
+
+/* Dark theme token overrides */
+.dark-theme {
+  --multi-cursor-color: hsl(217 91% 70%);
+  --multi-cursor-selection-bg: hsla(217, 91%, 70%, 0.25);
+  --search-match-color: rgba(255, 200, 0, 0.7);
+  --search-match-active-color: rgba(255, 200, 0, 0.5);
+  --divergent-border-dark: rgba(0, 136, 255, 0.25);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--selection-color);
+}
+
+/* Scrollbar styling - thin scrollbars */
+::-webkit-scrollbar {
+  width: 1px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-char-color);
+}
+
+/* Window drag region */
+[data-tauri-drag-region] {
+  -webkit-app-region: drag;
+  app-region: drag;
+  cursor: default;
+}
+
+/* ===========================================
+   Global Focus Reset
+   Components define their own focus indicators (U-shaped underlines, etc.)
+   Using :where() for zero specificity so component styles can override
+   =========================================== */
+:where(*):focus-visible {
+  outline: none;
+}

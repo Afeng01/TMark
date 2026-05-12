@@ -1,0 +1,126 @@
+/**
+ * Workflow Side Panel Styles
+ * Uses VMark design tokens — no hardcoded colors.
+ */
+
+.workflow-side-panel {
+  display: flex;
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+  border-left: var(--border-thin) solid var(--border-color);
+  background: var(--bg-color);
+}
+
+.workflow-side-panel__resize-handle {
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background var(--duration-base);
+  flex-shrink: 0;
+}
+
+.workflow-side-panel__resize-handle:hover {
+  background: var(--border-color);
+}
+
+.workflow-side-panel__content {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.workflow-side-panel__error {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--space-4);
+  margin: var(--spacing-3);
+  background: var(--error-bg);
+  border: var(--border-thin) solid var(--error-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  color: var(--error-color);
+}
+
+.workflow-side-panel__error-icon {
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+}
+
+.workflow-side-panel__error-text {
+  word-break: break-word;
+}
+
+.workflow-side-panel__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-base);
+  font-style: italic;
+  padding: var(--space-4);
+}
+
+/* Run/Cancel toolbar (WI-4.2) */
+.workflow-side-panel__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-bottom: var(--border-thin) solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.workflow-side-panel__btn {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-thin) solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  position: relative;
+}
+
+.workflow-side-panel__btn:hover:not(:disabled) {
+  background: var(--bg-tertiary);
+}
+
+.workflow-side-panel__btn:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.workflow-side-panel__btn:focus-visible {
+  outline: none;
+}
+
+.workflow-side-panel__btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: var(--space-half);
+  left: var(--space-1);
+  right: var(--space-1);
+  height: var(--space-1);
+  border-bottom: var(--border-medium) solid var(--primary-color);
+}
+
+.workflow-side-panel__btn--run {
+  color: var(--success-color);
+}
+
+.workflow-side-panel__btn--cancel {
+  color: var(--error-color);
+}
+
+/* Dark theme */
+.dark-theme .workflow-side-panel {
+  box-shadow: none;
+}

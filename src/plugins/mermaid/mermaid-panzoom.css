@@ -1,0 +1,156 @@
+/**
+ * Mermaid Pan+Zoom Styles
+ *
+ * Container overflow/position set via inline style in mermaidPanZoom.ts
+ * to avoid CSS specificity fights.
+ */
+
+/* Reset button — top-right, appears on hover */
+.mermaid-panzoom-reset {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: var(--size-btn-sm);
+  height: var(--size-btn-sm);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--duration-base), background var(--duration-base), color var(--duration-base);
+  z-index: var(--z-resize-handle);
+}
+
+.panzoom-enabled:hover .mermaid-panzoom-reset {
+  opacity: 1;
+}
+
+.mermaid-panzoom-reset:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+/* Focus: U-shaped underline per 33-focus-indicators */
+.mermaid-panzoom-reset:focus-visible {
+  outline: none;
+  opacity: 1;
+}
+
+.mermaid-panzoom-reset:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
+
+.mermaid-panzoom-reset svg {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+}
+
+/* Export button — to the left of reset */
+.mermaid-export-btn {
+  position: absolute;
+  top: 8px;
+  right: 40px; /* 8 + 24 (reset) + 8 gap */
+  width: var(--size-btn-sm);
+  height: var(--size-btn-sm);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--duration-base), background var(--duration-base), color var(--duration-base);
+  z-index: var(--z-resize-handle);
+}
+
+.panzoom-enabled:hover .mermaid-export-btn {
+  opacity: 1;
+}
+
+.mermaid-export-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+.mermaid-export-btn:focus-visible {
+  outline: none;
+  opacity: 1;
+}
+
+.mermaid-export-btn:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
+
+.mermaid-export-btn svg {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+}
+
+/* Theme picker menu — fixed to escape overflow:hidden container */
+.mermaid-export-menu {
+  position: fixed;
+  z-index: var(--z-popup);
+  padding: var(--spacing-1);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-color);
+  box-shadow: var(--popup-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-half);
+  min-width: 100px;
+}
+
+.mermaid-export-menu-item {
+  padding: var(--spacing-1) var(--spacing-2);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  white-space: nowrap;
+}
+
+.mermaid-export-menu-item:hover {
+  background: var(--hover-bg);
+}
+
+/* Focus: background highlight per 33-focus-indicators (list item pattern) */
+.mermaid-export-menu-item:focus-visible {
+  outline: none;
+  background: var(--accent-bg);
+}
+
+.mermaid-export-menu-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: var(--border-thin) solid var(--border-color);
+}

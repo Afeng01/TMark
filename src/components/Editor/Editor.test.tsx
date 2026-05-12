@@ -1,0 +1,151 @@
+import { render } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { Editor } from "./Editor";
+import { WindowProvider } from "@/contexts/WindowContext";
+import {
+  bootstrapFormats,
+  __resetBootstrap,
+} from "@/lib/formats";
+import { __resetRegistry } from "@/lib/formats/registry";
+
+beforeEach(() => {
+  __resetRegistry();
+  __resetBootstrap();
+  bootstrapFormats();
+});
+afterEach(() => {
+  __resetRegistry();
+  __resetBootstrap();
+});
+
+type Selector<T> = (state: T) => unknown;
+
+function createZustandMock<T extends object>(state: T) {
+  const store = ((selector?: Selector<T>) => {
+    if (typeof selector === "function") {
+      return selector(state);
+    }
+    return state;
+  }) as unknown as {
+    (selector: Selector<T>): unknown;
+    getState: () => T;
+    subscribe: (listener: (state: T, prev: T) => void) => () => void;
+  };
+
+  store.getState = () => state;
+  store.subscribe = () => () => {};
+
+  return store;
+}
+
+// Mock Tauri APIs
+vi.mock("@tauri-apps/api/webviewWindow", () => ({
+  getCurrentWebviewWindow: () => ({
+    label: "main",
+    listen: vi.fn(() => Promise.resolve(() => {})),
+    emit: vi.fn(),
+  }),
+}));
+
+// Mock useEditorStore
+vi.mock("@/stores/editorStore", () => {
+  const state = {
+    content: "",
+    setContent: vi.fn(),
+    sourceMode: false,
+    focusModeEnabled: false,
+    typewriterModeEnabled: false,
+  };
+
+  return { useEditorStore: createZustandMock(state) };
+});
+
+vi.mock("@/stores/documentStore", () => {
+  const mockDoc = {
+    content: "",
+    savedContent: "",
+    lastDiskContent: "",
+    filePath: null,
+    isDirty: false,
+    documentId: 1,
+    cursorInfo: null,
+    lastAutoSave: null,
+    isMissing: false,
+    isDivergent: false,
+    lineEnding: "unknown" as const,
+    hardBreakStyle: "unknown" as const,
+  };
+  const mockDocumentStore = {
+    documents: { "tab-1": mockDoc },
+    getDocument: () => mockDoc,
+    initDocument: vi.fn(),
+  };
+
+  return { useDocumentStore: createZustandMock(mockDocumentStore) };
+});
+
+vi.mock("@/stores/tabStore", () => {
+  const mockTabStore = {
+    tabs: { main: [{ id: "tab-1", filePath: null, title: "Untitled", isPinned: false }] },
+    activeTabId: { main: "tab-1" },
+    getTabsByWindow: () => [{ id: "tab-1", filePath: null, title: "Untitled", isPinned: false }],
+    createTab: vi.fn(() => "tab-1"),
+  };
+
+  return { useTabStore: createZustandMock(mockTabStore) };
+});
+
+vi.mock("@/stores/settingsStore", () => {
+  const state = {
+    appearance: {
+      cjkLetterSpacing: "0",
+    },
+    markdown: {
+      mediaBorderStyle: "none",
+      mediaAlignment: "center",
+      headingAlignment: "left",
+      blockFontSize: "1",
+      htmlRenderingMode: "sanitized",
+    },
+    advanced: {
+      keepBothEditorsAlive: false,
+    },
+  };
+
+  return { useSettingsStore: createZustandMock(state) };
+});
+
+function renderWithProvider(ui: React.ReactElement) {
+  return render(<WindowProvider>{ui}</WindowProvider>);
+}
+
+describe("Editor", () => {
+  it("renders the editor container", () => {
+    renderWithProvider(<Editor />);
+
+    const container = document.querySelector(".editor-container");
+    expect(container).toBeInTheDocument();
+  });
+
+  it("renders the editor content area", () => {
+    renderWithProvider(<Editor />);
+
+    const content = document.querySelector(".editor-content");
+    expect(content).toBeInTheDocument();
+  });
+
+  describe("WI-1A.5 — dispatch by FormatConfig.kind", () => {
+    it("dispatchEditor maps a .txt path to a non-wysiwyg format", async () => {
+      // The Editor.tsx dispatcher mounts SplitPaneEditor when
+      // dispatchEditor returns kind !== "wysiwyg". This focused test
+      // verifies the registry contract end-to-end (the integration
+      // path that drives Editor.tsx). UI-level dispatch is exercised
+      // by SplitPaneEditor's own test suite plus the overall
+      // bootstrap test in src/lib/formats/index.test.ts.
+      const { dispatchEditor } = await import("@/lib/formats/registry");
+      const cfg = dispatchEditor("/x/notes.txt");
+      expect(cfg.id).toBe("txt");
+      expect(cfg.kind).not.toBe("wysiwyg");
+    });
+  });
+});

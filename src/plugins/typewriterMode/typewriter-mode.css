@@ -1,0 +1,16 @@
+/**
+ * Typewriter Mode Styles
+ *
+ * Adds padding to allow scrolling cursor to center of viewport
+ */
+
+/* Add padding so content can scroll to center the cursor */
+.typewriter-mode .tiptap-editor .ProseMirror {
+  padding-bottom: 50vh;
+}
+
+/* NOTE: Do NOT set scroll-behavior:smooth on .editor-content here.
+   It causes PM's resetScrollPos (which uses direct scrollTop assignment)
+   to animate instead of jumping, creating visible scroll jitter in tables (#754).
+   Typewriter mode's JS already uses scrollBy({behavior:'smooth'}) for its own
+   centering, so this CSS rule was redundant anyway. */

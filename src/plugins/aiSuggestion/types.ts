@@ -1,0 +1,45 @@
+/**
+ * AI Suggestion Types
+ *
+ * Purpose: Shared type definitions and event name constants for the AI suggestion
+ * approval system — used by the store, tiptap plugin, and MCP bridge.
+ *
+ * @coordinates-with tiptap.ts — consumes AiSuggestion for decoration rendering
+ * @coordinates-with stores/aiSuggestionStore.ts — stores AiSuggestion instances
+ * @module plugins/aiSuggestion/types
+ */
+
+/** The kind of modification an AI suggestion represents. */
+export type SuggestionType = "insert" | "replace" | "delete";
+
+/**
+ * Event names for AI suggestion system.
+ * Use these constants instead of magic strings.
+ */
+export const AI_SUGGESTION_EVENTS = {
+  ADDED: "ai-suggestion:added",
+  ACCEPT: "ai-suggestion:accept",
+  REJECT: "ai-suggestion:reject",
+  ACCEPT_ALL: "ai-suggestion:accept-all",
+  REJECT_ALL: "ai-suggestion:reject-all",
+  FOCUS_CHANGED: "ai-suggestion:focus-changed",
+} as const;
+
+export interface AiSuggestion {
+  /** Unique identifier for this suggestion */
+  id: string;
+  /** Tab that owns this suggestion */
+  tabId: string;
+  /** Type of modification */
+  type: SuggestionType;
+  /** Start position in document */
+  from: number;
+  /** End position in document */
+  to: number;
+  /** New content for insert/replace operations */
+  newContent?: string;
+  /** Original content for replace/delete operations (used to restore on reject) */
+  originalContent?: string;
+  /** Timestamp when suggestion was created */
+  createdAt: number;
+}

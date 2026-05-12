@@ -1,0 +1,88 @@
+/**
+ * Frontmatter Panel Styles
+ *
+ * Collapsible YAML editor panel at the top of the document in WYSIWYG mode.
+ */
+
+.frontmatter-panel {
+  margin-bottom: var(--spacing-2);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  user-select: none;
+}
+
+.frontmatter-panel-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  padding: var(--spacing-1) var(--space-2-5);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.frontmatter-panel-header:hover {
+  background: var(--hover-bg);
+}
+
+.frontmatter-panel-header:focus-visible {
+  outline: none;
+  position: relative;
+}
+
+.frontmatter-panel-header:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
+
+.frontmatter-panel-chevron {
+  width: 12px;
+  height: 12px;
+  transition: transform var(--duration-base);
+}
+
+.frontmatter-panel.expanded .frontmatter-panel-chevron {
+  transform: rotate(90deg);
+}
+
+.frontmatter-panel-editor {
+  display: none;
+  padding: 0;
+}
+
+.frontmatter-panel.expanded .frontmatter-panel-editor {
+  display: block;
+}
+
+.frontmatter-panel-textarea {
+  width: 100%;
+  min-height: var(--space-15);
+  max-height: 300px;
+  resize: vertical;
+  border: none;
+  border-top: var(--border-thin) solid var(--border-color);
+  background: var(--subtle-bg);
+  color: var(--text-color);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  padding: var(--spacing-2) var(--space-2-5);
+  outline: none;
+}
+
+.frontmatter-panel-textarea:focus {
+  background: transparent;
+}
+
+.dark-theme .frontmatter-panel-textarea {
+  background: rgba(255, 255, 255, 0.03);
+}

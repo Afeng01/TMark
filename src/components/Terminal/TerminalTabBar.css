@@ -1,0 +1,132 @@
+.terminal-tab-bar {
+  --tab-bar-width: 28px;
+  --tab-size: 20px;
+  --tab-font-size: 11px;
+  --tab-icon-size: 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: var(--tab-bar-width);
+  padding: var(--spacing-1) 0;
+  background: var(--bg-color);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Horizontal layout: tab bar at the bottom of the right-side panel.
+   Height matches the editor status bar (40px) for visual alignment. */
+.terminal-tab-bar--horizontal {
+  flex-direction: row;
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--spacing-2);
+}
+
+.terminal-tab-bar-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-half);
+}
+
+.terminal-tab-bar--horizontal .terminal-tab-bar-tabs {
+  flex-direction: row;
+}
+
+.terminal-tab-bar--horizontal .terminal-tab-bar-actions {
+  flex-direction: row;
+}
+
+.terminal-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tab-size);
+  height: var(--tab-size);
+  padding: 0;
+  border: none;
+  font-size: var(--tab-font-size);
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  transition: background-color var(--duration-base) ease, color var(--duration-base) ease;
+}
+
+.terminal-tab:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+.terminal-tab-active {
+  color: var(--text-color);
+  background: var(--accent-bg);
+}
+
+.terminal-tab-dead {
+  color: var(--error-color);
+  opacity: var(--opacity-subtle);
+}
+
+.terminal-tab-dead.terminal-tab-active {
+  opacity: 1;
+}
+
+.terminal-tab-bar-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-half);
+}
+
+.terminal-tab-bar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tab-size);
+  height: var(--tab-size);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: background-color var(--duration-base) ease, color var(--duration-base) ease;
+}
+
+.terminal-tab-bar-btn:hover:not(:disabled) {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+.terminal-tab-bar-btn:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.terminal-tab-bar-btn svg {
+  width: var(--tab-icon-size);
+  height: var(--tab-icon-size);
+}
+
+/* Focus indicators (accessibility) */
+.terminal-tab:focus-visible,
+.terminal-tab-bar-btn:focus-visible {
+  outline: none;
+  position: relative;
+}
+
+.terminal-tab:focus-visible::after,
+.terminal-tab-bar-btn:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: 3px;
+  right: 3px;
+  height: 2px;
+  background: var(--accent-primary);
+  border-radius: 1px;
+}

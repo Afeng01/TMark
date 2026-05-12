@@ -1,0 +1,53 @@
+{
+  "name": "@vmark/mcp-server",
+  "version": "0.7.7",
+  "description": "MCP server for VMark — the plain-text workspace where humans and AI collaborate",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "vmark-mcp-server": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src",
+    "prepublishOnly": "pnpm build",
+    "build:sidecar": "pnpm build && node scripts/build-sidecar.js"
+  },
+  "keywords": [
+    "mcp",
+    "vmark",
+    "tiptap",
+    "editor",
+    "ai",
+    "claude",
+    "codex"
+  ],
+  "author": "VMark",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "ws": "^8.18.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/ws": "^8.5.13",
+    "@vitest/coverage-v8": "^4.0.16",
+    "@yao-pkg/pkg": "^6.14.1",
+    "esbuild": "^0.27.2",
+    "typescript": "~5.8.3",
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}

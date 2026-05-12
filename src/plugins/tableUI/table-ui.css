@@ -1,0 +1,154 @@
+/**
+ * Table UI Styles
+ * Context menu and column resize for table editing
+ */
+
+/* ===========================================
+ * Context Menu Styles
+ * =========================================== */
+
+.table-context-menu {
+  position: fixed;
+  z-index: var(--z-table-context);
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: var(--spacing-1);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-color);
+  box-shadow: var(--popup-shadow);
+  animation: table-context-menu-fade-in var(--duration-fast) ease-out;
+}
+
+@keyframes table-context-menu-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Menu items */
+.table-context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: var(--space-1-5) var(--space-2-5);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-base);
+  text-align: left;
+  cursor: default;
+  user-select: none;
+  transition: background var(--duration-fast);
+}
+
+.table-context-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.table-context-menu-icon svg {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.table-context-menu-label {
+  flex: 1;
+}
+
+.table-context-menu-item:hover {
+  background: var(--hover-bg);
+}
+
+.table-context-menu-item:active {
+  opacity: 0.8;
+}
+
+.table-context-menu-item:focus-visible {
+  outline: none;
+  background: var(--accent-bg);
+}
+
+/* Danger items */
+.table-context-menu-item-danger {
+  color: var(--text-color);
+}
+
+.table-context-menu-item-danger:hover {
+  background: var(--error-bg);
+  color: var(--error-color);
+}
+
+/* Divider */
+.table-context-menu-divider {
+  height: 1px;
+  margin: var(--spacing-1) var(--spacing-2);
+  background: var(--border-color);
+  opacity: var(--opacity-muted);
+}
+
+/* Dark theme */
+.dark-theme .table-context-menu {
+  box-shadow: var(--popup-shadow-dark);
+}
+
+.dark-theme .table-context-menu-item:hover {
+  background: var(--hover-bg-dark);
+}
+
+/* ===========================================
+ * Column Resize Handle Styles
+ * =========================================== */
+
+.table-resize-handle {
+  position: absolute;
+  top: 0;
+  right: -3px;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  z-index: var(--z-resize-handle);
+  transition: background var(--duration-base);
+}
+
+.table-resize-handle:hover,
+.table-resize-handle.active {
+  background: var(--primary-color);
+}
+
+/* Ensure table cells have relative positioning for handle placement */
+.ProseMirror table th,
+.ProseMirror table td {
+  position: relative;
+}
+
+/* Visual feedback during resize */
+.table-resize-handle.active {
+  background: var(--primary-color);
+  opacity: 0.8;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .table-context-menu {
+    animation: none;
+  }
+}

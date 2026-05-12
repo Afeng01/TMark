@@ -1,0 +1,40 @@
+{
+  "pdf.preset.default": "기본",
+  "pdf.preset.academic": "학술",
+  "pdf.preset.compact": "컴팩트",
+  "pdf.preset.elegant": "엘레간트",
+  "pdf.preset.custom": "사용자 지정",
+  "pdf.pageSetup.size": "크기",
+  "pdf.pageSetup.orientation": "납방향",
+  "pdf.pageSetup.orientation.portrait": "세로",
+  "pdf.pageSetup.orientation.landscape": "가로",
+  "pdf.pageSetup.margins": "여백",
+  "pdf.pageSetup.margins.normal": "보통",
+  "pdf.pageSetup.margins.narrow": "좀게",
+  "pdf.pageSetup.margins.wide": "넓게",
+  "pdf.pageSetup.margins.custom": "사용자 지정",
+  "pdf.pageSetup.marginUnit": "mm",
+  "pdf.typography": "타이포그래피",
+  "pdf.typography.fontSize": "글꼴 크기",
+  "pdf.typography.lineHeight": "줄 높이",
+  "pdf.typography.cjkSpacing": "CJK 간격",
+  "pdf.typography.cjkSpacing.off": "끄기",
+  "pdf.typography.latinFont": "라틴 글꼴",
+  "pdf.typography.cjkFont": "CJK 글꼴",
+  "pdf.typography.font.systemDefault": "시스템 기본값",
+  "pdf.appearance": "외관",
+  "pdf.appearance.useEditorTheme": "에디터 테마 사용",
+  "pdf.exportButton": "PDF 내보내기",
+  "pdf.exporting": "내보내는 중…",
+  "pdf.progress.preparing": "준비 중…",
+  "pdf.progress.loading": "콘텐츠 로드 중…",
+  "pdf.progress.rendering": "PDF 생성 중…",
+  "pdf.progress.done": "완료",
+  "pdf.saveDialog.title": "PDF 내보내기",
+  "pdf.defaultTitle": "문서",
+  "pdf": {
+    "pageSetup": {
+      "marginUnit": "mm"
+    }
+  }
+}

@@ -1,0 +1,101 @@
+/**
+ * Math Popup Styles
+ */
+
+.math-popup {
+  position: fixed;
+  z-index: var(--z-popup);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+  padding: var(--spacing-2);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-color);
+  box-shadow: var(--shadow-md);
+  width: 360px;
+}
+
+.math-popup-input {
+  width: 100%;
+  min-height: 64px;
+  resize: vertical;
+  padding: var(--space-1-5) var(--spacing-2);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-mono);
+  outline: none;
+}
+
+/* Input focus: distinguishable border color (dialog input pattern) */
+.math-popup-input:focus,
+.math-popup-input:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border-color: var(--primary-color);
+}
+
+.math-popup-preview {
+  min-height: var(--space-8);
+  padding: var(--space-1-5) var(--spacing-2);
+  border-radius: var(--radius-md);
+  background: var(--hover-bg);
+  color: var(--text-color);
+  font-size: var(--font-size-md);
+  overflow: hidden;
+}
+
+.math-popup-error {
+  min-height: var(--space-3-5);
+  color: var(--error-color);
+  font-size: var(--font-size-xs);
+}
+
+.math-popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+}
+
+.math-popup-btn {
+  padding: var(--spacing-1) var(--space-2-5);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+  cursor: default;
+}
+
+.math-popup-btn:hover {
+  background: var(--hover-bg);
+}
+
+.math-popup-btn-save {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.math-popup-btn:focus-visible {
+  outline: none;
+  position: relative;
+}
+
+.math-popup-btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  background: transparent;
+  border-bottom: var(--border-medium) solid var(--primary-color);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.dark-theme .math-popup-btn:hover {
+  background: var(--hover-bg-dark);
+}

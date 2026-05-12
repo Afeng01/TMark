@@ -1,0 +1,152 @@
+/**
+ * Source Image Popup Styles - Two-row layout
+ * Row 1: src input + action buttons
+ * Row 2: caption/alt input
+ */
+
+.source-image-popup {
+  position: absolute;
+  z-index: var(--z-popup);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-color);
+  box-shadow: var(--popup-shadow);
+  animation: source-image-popup-fade-in var(--duration-fast) ease-out;
+}
+
+@keyframes source-image-popup-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Row container */
+.source-image-popup-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+}
+
+/* URL/Path Input - borderless */
+.source-image-popup-src {
+  width: 220px;
+  padding: var(--spacing-1) var(--spacing-2);
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-mono);
+  outline: none;
+}
+
+/* Caption/Alt Input - full width */
+.source-image-popup-alt {
+  flex: 1;
+  padding: var(--spacing-1) var(--spacing-2);
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+  outline: none;
+}
+
+/* Input focus: caret is the primary indicator */
+.source-image-popup-src:focus,
+.source-image-popup-alt:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Keyboard focus: subtle background hint alongside caret */
+.source-image-popup-src:focus-visible,
+.source-image-popup-alt:focus-visible {
+  outline: none;
+  background: var(--hover-bg);
+}
+
+.source-image-popup-src::placeholder,
+.source-image-popup-alt::placeholder {
+  color: var(--text-secondary);
+  opacity: var(--opacity-muted);
+}
+
+/* Icon-only buttons */
+.source-image-popup-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: default;
+  user-select: none;
+  position: relative;
+}
+
+.source-image-popup-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+.source-image-popup-btn:active {
+  opacity: 0.8;
+}
+
+/* Focus state - U-shaped underline (keyboard focus only) */
+.source-image-popup-btn:focus-visible {
+  outline: none;
+  color: var(--primary-color);
+}
+
+.source-image-popup-btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  background: transparent;
+  border-bottom: var(--border-medium) solid var(--primary-color);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.source-image-popup-btn svg {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* Delete button - danger color on hover */
+.source-image-popup-btn-delete:hover {
+  color: var(--error-color);
+}
+
+/* Dark theme */
+.dark-theme .source-image-popup-btn:hover {
+  background: var(--hover-bg-dark);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .source-image-popup {
+    animation: none;
+  }
+}

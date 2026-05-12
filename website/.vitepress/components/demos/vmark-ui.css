@@ -1,0 +1,753 @@
+/**
+ * VMark UI Styles for Demo Components
+ *
+ * Inherits from VitePress theme variables (--vp-c-*) which are set
+ * by data-vmark-theme attribute in style.css. This ensures demos
+ * automatically follow the website's 5-theme system.
+ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (VMark Design Tokens)
+   Mapped to VitePress theme variables
+   ============================================ */
+
+.vmark-demo {
+  /* Core colors - inherit from VitePress theme */
+  --bg-color: var(--vp-c-bg);
+  --text-color: var(--vp-c-text-1);
+  --primary-color: var(--vp-c-brand-1);
+
+  /* UI Chrome */
+  --bg-primary: var(--vp-c-bg);
+  --bg-secondary: var(--vp-c-bg-alt);
+  --bg-tertiary: var(--vp-c-bg-soft);
+  --text-primary: var(--vp-c-text-1);
+  --text-secondary: var(--vp-c-text-2);
+  --text-tertiary: var(--vp-c-text-3);
+  --border-color: var(--vp-c-border);
+  --accent-primary: var(--vp-c-brand-1);
+  --accent-bg: var(--vp-c-brand-soft);
+
+  /* Hover States */
+  --hover-bg: var(--vp-c-bg-soft);
+  --hover-bg-strong: var(--vp-c-bg-alt);
+
+  /* Subtle backgrounds */
+  --subtle-bg: var(--vp-c-bg-soft);
+
+  /* Code & Content */
+  --code-bg-color: var(--vp-c-bg-alt);
+  --code-text-color: var(--vp-c-text-1);
+  --md-char-color: var(--vp-c-text-3);
+  --selection-color: var(--vp-c-brand-soft);
+
+  /* Semantic - these don't change per theme */
+  --error-color: #cf222e;
+  --success-color: #16a34a;
+  --warning-color: #9a6700;
+  --contrast-text: white;
+
+  /* Typography - Serif for clear curly quotes (66/99 style) */
+  --font-sans: var(--vmark-font-family, Charter, Palatino, "Book Antiqua", Georgia, serif);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Text emphasis - theme-aware */
+  --strong-color: var(--vp-c-text-1);
+  --emphasis-color: var(--vp-c-text-2);
+
+  /* Spacing */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+
+  /* Icon sizes */
+  --icon-size-sm: 22px;
+  --icon-size-md: 26px;
+  --icon-size-lg: 28px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 100px;
+
+  /* Popup */
+  --popup-padding: 6px;
+  --popup-radius: 8px;
+  --popup-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+  /* Base styles */
+  font-family: var(--font-sans);
+  color: var(--text-color);
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin: 24px 0;
+}
+
+/* Night theme adjustments for values not covered by VitePress vars */
+[data-vmark-theme="night"] .vmark-demo {
+  --popup-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --error-color: #f85149;
+  --success-color: #3fb950;
+  --warning-color: #d29922;
+  --contrast-text: #1a1a1a;
+}
+
+/* ============================================
+   DEMO HEADER
+   ============================================ */
+
+.vmark-demo__subtitle {
+  margin: 0 0 16px 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+/* Toolbar button (28px) */
+.vmark-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.vmark-btn:hover:not(:disabled) {
+  background-color: var(--bg-tertiary);
+}
+
+.vmark-btn:active:not(:disabled) {
+  background-color: var(--bg-secondary);
+}
+
+.vmark-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Active state: dot indicator */
+.vmark-btn.active::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+}
+
+/* Focus: U-shaped underline */
+.vmark-btn:focus-visible {
+  outline: none;
+  color: var(--accent-primary);
+}
+
+.vmark-btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  border-bottom: 2px solid var(--accent-primary);
+  border-radius: 0 0 4px 4px;
+}
+
+.vmark-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* Popup button (26px) */
+.vmark-btn--sm {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: var(--text-secondary);
+}
+
+.vmark-btn--sm:hover:not(:disabled) {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+.vmark-btn--sm svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.5;
+}
+
+/* Pill button - uses VitePress hover style (outside demo styling) */
+.vmark-btn--pill {
+  width: auto;
+  height: auto;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 500;
+  gap: 6px;
+  color: var(--vp-c-text-2, var(--text-secondary)) !important;
+  background: transparent !important;
+}
+
+.vmark-btn--pill:hover:not(:disabled):not(.active) {
+  background: var(--vp-c-bg-soft, rgba(0, 0, 0, 0.06)) !important;
+  color: var(--vp-c-text-1, var(--text-color)) !important;
+}
+
+.vmark-btn--pill.active {
+  background: var(--vp-c-brand-1, var(--accent-primary)) !important;
+  color: var(--vp-c-white, var(--contrast-text)) !important;
+}
+
+.vmark-btn--pill.active::before {
+  display: none;
+}
+
+/* Primary variant */
+.vmark-btn--primary:hover:not(:disabled) {
+  color: var(--primary-color);
+}
+
+/* Danger variant */
+.vmark-btn--danger:hover:not(:disabled) {
+  color: var(--error-color);
+}
+
+/* ============================================
+   INPUTS
+   ============================================ */
+
+/* Base input */
+.vmark-input {
+  padding: 4px 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  outline: none;
+}
+
+.vmark-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.vmark-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.vmark-input--mono {
+  font-family: var(--font-mono);
+}
+
+.vmark-input--full {
+  width: 100%;
+}
+
+/* Bordered input (for standalone use) */
+.vmark-input--bordered {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+}
+
+.vmark-input--bordered:focus {
+  border-color: var(--accent-primary);
+}
+
+/* Textarea */
+.vmark-textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-color);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+}
+
+.vmark-textarea:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+}
+
+.vmark-textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* ============================================
+   SELECT / DROPDOWN
+   Matches VMark Settings dialog exactly
+   ============================================ */
+
+.vmark-select {
+  padding: 4px 24px 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-color);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23666' d='M2.5 3.5L5 6.5L7.5 3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+}
+
+.vmark-select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.vmark-select:hover:not(:focus) {
+  border-color: var(--text-secondary);
+}
+
+.vmark-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[data-vmark-theme="night"] .vmark-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%239aa0a6' d='M2.5 3.5L5 6.5L7.5 3.5'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   DROPDOWN MENU
+   ============================================ */
+
+.vmark-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  min-width: 160px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--popup-shadow);
+}
+
+.vmark-dropdown__item {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 8px 0 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-color);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  text-align: left;
+  gap: 8px;
+  position: relative;
+}
+
+.vmark-dropdown__item:hover {
+  background: var(--bg-tertiary);
+}
+
+.vmark-dropdown__item:focus-visible {
+  outline: none;
+  background: var(--bg-tertiary);
+}
+
+.vmark-dropdown__item.active::before {
+  content: "✓";
+  position: absolute;
+  left: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.vmark-dropdown__item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.vmark-dropdown__separator {
+  height: 1px;
+  margin: 4px 8px;
+  background: var(--border-color);
+}
+
+.vmark-dropdown__icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.vmark-dropdown__label {
+  flex: 1;
+}
+
+.vmark-dropdown__shortcut {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   POPUP
+   ============================================ */
+
+.vmark-popup {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: var(--popup-padding);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-color);
+  box-shadow: var(--popup-shadow);
+  animation: vmark-popup-fade-in 0.1s ease-out;
+}
+
+.vmark-popup--vertical {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+@keyframes vmark-popup-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vmark-popup__row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ============================================
+   TOGGLE / CHECKBOX
+   ============================================ */
+
+.vmark-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+  color: var(--text-color);
+}
+
+.vmark-toggle__input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--text-secondary);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+}
+
+.vmark-toggle__input:hover {
+  border-color: var(--primary-color);
+}
+
+.vmark-toggle__input:checked {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.vmark-toggle__input:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.vmark-toggle__input:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   SLIDER
+   ============================================ */
+
+.vmark-slider {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-color);
+  appearance: none;
+  cursor: pointer;
+}
+
+.vmark-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  cursor: pointer;
+  border: 2px solid var(--bg-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.vmark-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  cursor: pointer;
+  border: 2px solid var(--bg-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.vmark-slider:focus-visible {
+  outline: none;
+}
+
+.vmark-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+/* ============================================
+   PREVIEW CONTAINER
+   ============================================ */
+
+.vmark-preview {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+/* ============================================
+   LABEL & VALUE
+   ============================================ */
+
+.vmark-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 6px;
+}
+
+.vmark-value {
+  font-weight: 400;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   BADGE / TAG
+   ============================================ */
+
+.vmark-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  background: var(--accent-bg);
+  color: var(--accent-primary);
+}
+
+.vmark-badge--success {
+  background: rgba(22, 163, 74, 0.1);
+  color: var(--success-color);
+}
+
+.vmark-badge--warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning-color);
+}
+
+.vmark-badge--error {
+  background: rgba(207, 34, 46, 0.1);
+  color: var(--error-color);
+}
+
+/* ============================================
+   CODE BLOCK
+   ============================================ */
+
+.vmark-code {
+  margin: 0;
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  background: var(--code-bg-color);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  color: var(--code-text-color);
+}
+
+/* ============================================
+   HINT / NOTE
+   ============================================ */
+
+.vmark-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--subtle-bg);
+  border-radius: var(--radius-md);
+}
+
+.vmark-hint__icon {
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+/* ============================================
+   GRID LAYOUTS
+   ============================================ */
+
+.vmark-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.vmark-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.vmark-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.vmark-grid--auto {
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+@media (max-width: 640px) {
+  .vmark-grid--2,
+  .vmark-grid--3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   CONTROLS GROUP
+   ============================================ */
+
+.vmark-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.vmark-control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ============================================
+   COMPARISON (Before/After)
+   ============================================ */
+
+.vmark-comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.vmark-comparison__arrow {
+  font-size: 20px;
+  color: var(--text-secondary);
+  align-self: center;
+  margin-top: 24px;
+}
+
+@media (max-width: 640px) {
+  .vmark-comparison {
+    grid-template-columns: 1fr;
+  }
+  .vmark-comparison__arrow {
+    transform: rotate(90deg);
+    justify-self: center;
+    margin-top: 0;
+  }
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+.vmark-demo ::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.vmark-demo ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.vmark-demo ::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+.vmark-demo ::-webkit-scrollbar-thumb:hover {
+  background: var(--md-char-color);
+}

@@ -1,0 +1,194 @@
+/**
+ * LaTeX Plugin Styles
+ *
+ * Includes custom styles for math nodes.
+ * Note: katex.css and katexFixes.css are imported in main.tsx.
+ */
+
+/* Inline math node */
+.math-inline {
+  display: inline;
+  position: relative;
+  vertical-align: baseline;
+  line-height: var(--editor-line-height-px);
+}
+
+.math-inline:hover:not(.editing) {
+  background-color: var(--selection-color);
+  border-radius: 2px;
+}
+
+/* Inline math in edit mode - no background, only underline on input */
+.math-inline.editing {
+  background: transparent;
+}
+
+.math-inline-preview {
+  display: inline;
+}
+
+.math-inline-preview:empty {
+  display: none;
+}
+
+.math-inline-content {
+  display: none;
+}
+
+.math-inline-placeholder {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Loading indicator while KaTeX loads */
+.math-inline-loading {
+  color: var(--text-secondary);
+  font-style: italic;
+  animation: math-loading-pulse var(--duration-1s) ease-in-out infinite;
+}
+
+@keyframes math-loading-pulse {
+  0%, 100% {
+    opacity: var(--opacity-muted);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Inline math input field - minimal underline style */
+.math-inline-input {
+  display: inline;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-color);
+  font-family: var(--font-mono);
+  font-size: var(--editor-font-size-mono);
+  line-height: inherit;
+  outline: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* No underline - clean editing */
+  text-decoration: none;
+}
+
+/* Input focus: caret is the indicator (per design rules) */
+.math-inline-input:focus,
+.math-inline-input:focus-visible {
+  outline: none;
+  box-shadow: none;
+  /* Caret visibility indicates focus */
+}
+
+.math-inline-input::placeholder {
+  color: var(--text-secondary);
+  font-style: italic;
+  text-decoration: none;
+}
+
+/* Selected inline math - subtle highlight only */
+.ProseMirror-selectednode .math-inline,
+.math-inline.ProseMirror-selectednode {
+  background-color: var(--selection-color);
+  border-radius: var(--radius-sm);
+}
+
+/* Math rendering errors */
+.math-error {
+  color: var(--error-color);
+  background-color: var(--error-bg);
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--editor-font-size-mono);
+}
+
+/* Block math node - block style */
+.math-block {
+  margin: 0 0 var(--editor-block-spacing, 1em) 0;
+  padding: 1rem;
+  background-color: var(--subtle-bg);
+  border-radius: var(--radius-md);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--duration-base) ease;
+}
+
+.math-block:hover {
+  background-color: var(--subtle-bg-hover);
+}
+
+/* Media border feature (setting-driven) */
+.media-border-always .math-block {
+  border: var(--border-thin) solid var(--border-color);
+}
+
+.media-border-hover .math-block:hover {
+  border: var(--border-thin) solid var(--border-color);
+}
+
+.math-block.editing {
+  cursor: default;
+}
+
+.math-block.ProseMirror-selectednode {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.math-block-preview {
+  min-height: var(--space-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.math-block-preview .katex-display {
+  margin: 0;
+}
+
+.math-block-placeholder {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.math-block-editor {
+  display: none;
+  width: 100%;
+  min-height: var(--space-15);
+  padding: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--editor-font-size-mono);
+  line-height: var(--line-height-normal);
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  resize: none;
+  outline: none;
+  text-align: left;
+}
+
+.math-block-editor:focus-visible {
+  box-shadow: inset 2px 0 0 var(--primary-color);
+}
+
+.math-block.editing .math-block-editor {
+  display: block;
+}
+
+.math-block.editing .math-block-preview {
+  display: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .math-inline-loading {
+    animation: none;
+  }
+}

@@ -1,0 +1,253 @@
+/**
+ * Code block line numbers styling.
+ *
+ * Line numbers are hidden by default and shown when
+ * .show-line-numbers class is on the editor container.
+ */
+
+/* Code block wrapper for gutter layout - wrapper owns the frame */
+.tiptap-editor .code-block-wrapper {
+  display: flex;
+  position: relative;
+  margin: 0 0 var(--editor-block-spacing, 1em) 0;
+  background: var(--code-bg-color);
+  border-radius: var(--radius-md);
+}
+
+/* Wrapper owns the frame — pre must be flat (no bg, border, radius) */
+.tiptap-editor .code-block-wrapper pre {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Line numbers gutter - hidden by default */
+.tiptap-editor .code-line-numbers {
+  display: none;
+  flex-direction: column;
+  flex-shrink: 0;
+  padding: var(--code-padding, 18px) 0.5em;
+  font-family: var(--font-mono);
+  font-size: var(--editor-font-size-mono);
+  color: var(--text-tertiary);
+  text-align: right;
+  user-select: none;
+  pointer-events: none;
+  border-right: var(--border-thin) solid var(--border-color);
+  background: var(--code-bg-color);
+}
+
+/* Individual line number */
+.tiptap-editor .code-line-numbers .line-num {
+  line-height: var(--code-line-height, 1.45);
+}
+
+/* Show line numbers when enabled */
+.tiptap-editor.show-line-numbers .code-line-numbers {
+  display: flex;
+}
+
+/* Dark theme adjustments */
+.dark-theme .tiptap-editor .code-line-numbers {
+  color: var(--text-tertiary);
+  border-right-color: var(--border-color);
+}
+
+/* ===========================================
+ * Code Block Actions (copy button + language selector)
+ * =========================================== */
+
+/* Actions container */
+.tiptap-editor .code-block-actions {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+  z-index: var(--z-resize-handle);
+  user-select: none;
+}
+
+/* Copy button — hidden by default, appears on code block hover */
+.tiptap-editor .code-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--md-char-color);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--duration-base), color var(--duration-base), background var(--duration-base);
+}
+
+.tiptap-editor .code-block-wrapper:hover .code-copy-btn {
+  opacity: var(--opacity-half-faded);
+}
+
+.tiptap-editor .code-copy-btn:hover {
+  opacity: 1;
+  background: var(--hover-bg);
+  color: var(--text-secondary);
+}
+
+/* Success state after copying — must override wrapper:hover opacity */
+.tiptap-editor .code-block-wrapper .code-copy-btn.code-copy-btn--success {
+  opacity: 1;
+  color: var(--success-color);
+}
+
+.dark-theme .tiptap-editor .code-block-wrapper .code-copy-btn.code-copy-btn--success {
+  color: var(--success-color-dark);
+}
+
+/* Error state when clipboard write fails or clipboard API is unavailable */
+.tiptap-editor .code-block-wrapper .code-copy-btn.code-copy-btn--error {
+  opacity: 1;
+  color: var(--error-color);
+}
+
+/* Focus indicator — U-shaped underline (matches code-lang-selector pattern) */
+.tiptap-editor .code-copy-btn:focus-visible {
+  opacity: 1;
+  outline: none;
+  position: relative;
+}
+
+.tiptap-editor .code-copy-btn:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
+
+/* Language selector chip */
+.tiptap-editor .code-lang-selector {
+  position: relative;
+  padding: var(--space-half) var(--space-1-5);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--md-char-color);
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--duration-base), opacity var(--duration-base);
+  opacity: var(--opacity-half-faded);
+}
+
+.tiptap-editor .code-lang-selector:hover {
+  color: var(--text-secondary);
+  opacity: 1;
+}
+
+.tiptap-editor .code-lang-selector:focus-visible {
+  outline: none;
+  color: var(--text-color);
+  opacity: 1;
+}
+
+.tiptap-editor .code-lang-selector:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 2px;
+  right: 2px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
+
+/* Language dropdown - appended to body, so no .tiptap-editor prefix */
+.code-lang-dropdown {
+  width: 180px;
+  background: var(--bg-color);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--popup-shadow);
+  z-index: var(--z-popup);
+  overflow: hidden;
+}
+
+/* Search input */
+.code-lang-dropdown .code-lang-search {
+  width: 100%;
+  padding: var(--spacing-2) var(--space-2-5);
+  border: none;
+  border-bottom: var(--border-thin) solid var(--border-color);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--text-color);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.code-lang-dropdown .code-lang-search:focus {
+  border-bottom-color: var(--primary-color);
+}
+
+.code-lang-dropdown .code-lang-search::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Language list */
+.code-lang-dropdown .code-lang-list {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: var(--spacing-1);
+}
+
+/* Scrollbar for language list */
+.code-lang-dropdown .code-lang-list::-webkit-scrollbar {
+  width: 1px;
+}
+
+.code-lang-dropdown .code-lang-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.code-lang-dropdown .code-lang-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+/* Language item */
+.code-lang-dropdown .code-lang-item {
+  padding: var(--space-1-5) var(--spacing-2);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--text-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--duration-fast);
+  outline: none;
+}
+
+.code-lang-dropdown .code-lang-item:hover,
+.code-lang-dropdown .code-lang-item.highlighted,
+.code-lang-dropdown .code-lang-item:focus,
+.code-lang-dropdown .code-lang-item:focus-visible {
+  background: var(--bg-tertiary);
+}
+
+.code-lang-dropdown .code-lang-item.active {
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+/* Dark theme for language selector */
+.dark-theme .code-lang-dropdown {
+  box-shadow: var(--popup-shadow-dark);
+}

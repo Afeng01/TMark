@@ -1,0 +1,215 @@
+/**
+ * UI Store
+ *
+ * Purpose: Transient UI state — sidebar visibility/width/mode, status bar,
+ *   universal toolbar focus management, terminal panel, file drag state, and
+ *   FileExplorer folder open/closed state across view-mode switches.
+ *
+ * Key decisions:
+ *   - Not persisted — UI state resets on reload. Persistent prefs go in
+ *     settingsStore, persistent workspace state in workspaceStore.
+ *   - Universal toolbar has a 3-state focus toggle: closed → open+focused →
+ *     open+editor-focused → back to open+focused (Section 1.2 spec).
+ *   - toolbarSessionFocusIndex is ephemeral — cleared when toolbar closes
+ *     to avoid stale focus positions on reopen.
+ *   - Sidebar width is clamped to [180, 480]px; terminal height to [100, 600]px;
+ *     terminal width (right position) to [200, 800]px.
+ *   - Terminal pixel dimensions are transient — computed from the persisted
+ *     panelRatio in settingsStore by useTerminalPosition on each resize.
+ *   - effectiveTerminalPosition tracks the resolved position ("bottom" | "right")
+ *     computed by useTerminalPosition from settings + window dimensions.
+ *   - fileExplorerOpenState is keyed by absolute path; setFileExplorerNodeOpen
+ *     short-circuits before `set()` when the value is unchanged so Zustand
+ *     publishes nothing and listeners stay silent.
+ *
+ * @coordinates-with UniversalToolbar component — reads toolbar visibility/focus
+ * @coordinates-with useViewShortcuts.ts — calls toggle methods from keyboard shortcuts
+ * @coordinates-with useTerminalPosition.ts — writes effectiveTerminalPosition
+ * @coordinates-with useFileExplorerOpenState.ts — reads/writes fileExplorerOpenState
+ * @module stores/uiStore
+ */
+
+import { create } from "zustand";
+
+/** Sidebar panel view: file explorer, document outline, or history. */
+export type SidebarViewMode = "files" | "outline" | "history";
+
+/** Resolved terminal panel position after "auto" evaluation. */
+export type EffectiveTerminalPosition = "bottom" | "right";
+
+/** Minimum sidebar width in pixels. */
+const SIDEBAR_MIN_WIDTH = 180;
+const SIDEBAR_MAX_WIDTH = 480;
+const SIDEBAR_DEFAULT_WIDTH = 260;
+
+/** Minimum terminal panel height in pixels (bottom position). */
+export const TERMINAL_MIN_HEIGHT = 100;
+/** Maximum terminal panel height in pixels (bottom position). */
+export const TERMINAL_MAX_HEIGHT = 600;
+const TERMINAL_DEFAULT_HEIGHT = 250;
+
+/** Minimum terminal panel width in pixels (right position). */
+export const TERMINAL_MIN_WIDTH = 200;
+/** Maximum terminal panel width in pixels (right position). */
+export const TERMINAL_MAX_WIDTH = 800;
+const TERMINAL_DEFAULT_WIDTH = 400;
+
+interface UIState {
+  sidebarVisible: boolean;
+  sidebarWidth: number;
+  sidebarViewMode: SidebarViewMode;
+  activeHeadingLine: number | null; // Current heading line for outline highlight
+  statusBarVisible: boolean; // Simple toggle for status bar visibility (Cmd+J)
+  /** Saved StatusBar state before displacement by a transient bar (FindBar/Toolbar). Null = no displacement in progress. */
+  _savedStatusBarVisible: boolean | null;
+  universalToolbarVisible: boolean; // Universal formatting toolbar (shortcut configurable)
+  universalToolbarHasFocus: boolean; // Keyboard focus is inside the universal toolbar
+  toolbarSessionFocusIndex: number; // Session-only focus index (cleared on toolbar close)
+  toolbarDropdownOpen: boolean; // Whether a dropdown menu is currently open
+  isDraggingFiles: boolean; // Files are being dragged over the window
+  terminalVisible: boolean;
+  terminalHeight: number;
+  terminalWidth: number;
+  effectiveTerminalPosition: EffectiveTerminalPosition;
+  /** FileExplorer folder open state, keyed by absolute path. Preserved across
+   * sidebar view switches (Files ↔ Outline ↔ History); cleared on app reload. */
+  fileExplorerOpenState: Record<string, boolean>;
+}
+
+interface UIActions {
+  toggleSidebar: () => void;
+  /** Toggle a specific sidebar view: show if hidden/different, hide if already showing */
+  toggleSidebarView: (mode: SidebarViewMode) => void;
+  setSidebarViewMode: (mode: SidebarViewMode) => void;
+  showSidebarWithView: (mode: SidebarViewMode) => void;
+  setActiveHeadingLine: (line: number | null) => void;
+  setSidebarWidth: (width: number) => void;
+  setStatusBarVisible: (visible: boolean) => void;
+  /** Hide StatusBar and save its previous state for later restoration. Idempotent — won't overwrite an existing save. */
+  displaceStatusBar: () => void;
+  /** Restore StatusBar to the state saved by displaceStatusBar. No-op if nothing was saved. */
+  restoreStatusBar: () => void;
+  /** Focus toggle per spec Section 1.2 */
+  toggleUniversalToolbar: () => void;
+  setUniversalToolbarVisible: (visible: boolean) => void;
+  setUniversalToolbarHasFocus: (hasFocus: boolean) => void;
+  setToolbarSessionFocusIndex: (index: number) => void;
+  setToolbarDropdownOpen: (open: boolean) => void;
+  /** Clear session memory when toolbar closes */
+  clearToolbarSession: () => void;
+  setDraggingFiles: (dragging: boolean) => void;
+  toggleTerminal: () => void;
+  setTerminalHeight: (height: number) => void;
+  setTerminalWidth: (width: number) => void;
+  setEffectiveTerminalPosition: (pos: EffectiveTerminalPosition) => void;
+  /** Record whether a single folder node is open (true) or closed (false). */
+  setFileExplorerNodeOpen: (id: string, open: boolean) => void;
+  /** Replace the entire FileExplorer open-state map. */
+  setFileExplorerOpenState: (next: Record<string, boolean>) => void;
+}
+
+/** Manages transient UI state — sidebar, toolbar, terminal, status bar, and drag state. Use selectors, not destructuring. */
+export const useUIStore = create<UIState & UIActions>((set) => ({
+  sidebarVisible: false,
+  sidebarWidth: SIDEBAR_DEFAULT_WIDTH,
+  sidebarViewMode: "outline",
+  activeHeadingLine: null,
+  statusBarVisible: true, // Default to visible
+  _savedStatusBarVisible: null,
+  universalToolbarVisible: false,
+  universalToolbarHasFocus: false,
+  toolbarSessionFocusIndex: -1, // Session-only, -1 = use smart focus
+  toolbarDropdownOpen: false,
+  isDraggingFiles: false,
+  terminalVisible: false,
+  terminalHeight: TERMINAL_DEFAULT_HEIGHT,
+  terminalWidth: TERMINAL_DEFAULT_WIDTH,
+  effectiveTerminalPosition: "bottom",
+  fileExplorerOpenState: {},
+
+  toggleSidebar: () => set((state) => ({ sidebarVisible: !state.sidebarVisible })),
+  toggleSidebarView: (mode) => set((state) => {
+    if (state.sidebarVisible && state.sidebarViewMode === mode) {
+      return { sidebarVisible: false };
+    }
+    return { sidebarVisible: true, sidebarViewMode: mode };
+  }),
+  setSidebarViewMode: (mode) => set({ sidebarViewMode: mode }),
+  showSidebarWithView: (mode) => set({ sidebarVisible: true, sidebarViewMode: mode }),
+  setActiveHeadingLine: (line) => set({ activeHeadingLine: line }),
+  setSidebarWidth: (width) => set({
+    sidebarWidth: Math.min(SIDEBAR_MAX_WIDTH, Math.max(SIDEBAR_MIN_WIDTH, width)),
+  }),
+  setStatusBarVisible: (visible) => set({ statusBarVisible: visible, _savedStatusBarVisible: null }),
+
+  displaceStatusBar: () => set((state) => ({
+    statusBarVisible: false,
+    _savedStatusBarVisible: state._savedStatusBarVisible ?? state.statusBarVisible,
+  })),
+
+  restoreStatusBar: () => set((state) => {
+    if (state._savedStatusBarVisible === null) return {};
+    return { statusBarVisible: state._savedStatusBarVisible, _savedStatusBarVisible: null };
+  }),
+
+  /**
+   * Focus toggle per spec Section 1.2:
+   * - Toolbar closed → Open + focus toolbar
+   * - Toolbar open, editor focused → Focus toolbar (use session memory)
+   * - Toolbar open, toolbar focused → Focus editor (toolbar stays open)
+   */
+  toggleUniversalToolbar: () =>
+    set((state) => {
+      if (!state.universalToolbarVisible) {
+        // Closed → Open + focus
+        return {
+          universalToolbarVisible: true,
+          universalToolbarHasFocus: true,
+        };
+      }
+      // Open → Toggle focus location
+      return {
+        universalToolbarHasFocus: !state.universalToolbarHasFocus,
+      };
+    }),
+
+  setUniversalToolbarVisible: (visible) =>
+    set((state) => ({
+      universalToolbarVisible: visible,
+      universalToolbarHasFocus: visible ? state.universalToolbarHasFocus : false,
+      // Clear session memory when closing
+      toolbarSessionFocusIndex: visible ? state.toolbarSessionFocusIndex : -1,
+    })),
+
+  setUniversalToolbarHasFocus: (hasFocus) => set({ universalToolbarHasFocus: hasFocus }),
+  setToolbarSessionFocusIndex: (index) => set({ toolbarSessionFocusIndex: index }),
+  setToolbarDropdownOpen: (open) => set({ toolbarDropdownOpen: open }),
+
+  clearToolbarSession: () => set({
+    universalToolbarVisible: false,
+    universalToolbarHasFocus: false,
+    toolbarSessionFocusIndex: -1,
+    toolbarDropdownOpen: false,
+  }),
+
+  setDraggingFiles: (dragging) => set({ isDraggingFiles: dragging }),
+
+  toggleTerminal: () => set((state) => ({ terminalVisible: !state.terminalVisible })),
+  setTerminalHeight: (h) => set({
+    terminalHeight: Math.min(TERMINAL_MAX_HEIGHT, Math.max(TERMINAL_MIN_HEIGHT, h)),
+  }),
+  setTerminalWidth: (w) => set({
+    terminalWidth: Math.min(TERMINAL_MAX_WIDTH, Math.max(TERMINAL_MIN_WIDTH, w)),
+  }),
+  setEffectiveTerminalPosition: (pos) => set({ effectiveTerminalPosition: pos }),
+
+  setFileExplorerNodeOpen: (id, open) => {
+    const current = useUIStore.getState().fileExplorerOpenState;
+    // True no-op on unchanged value: bail out before `set` so Zustand neither
+    // publishes a new root state nor notifies listeners.
+    if (current[id] === open) return;
+    set({ fileExplorerOpenState: { ...current, [id]: open } });
+  },
+
+  setFileExplorerOpenState: (next) => set({ fileExplorerOpenState: next }),
+}));

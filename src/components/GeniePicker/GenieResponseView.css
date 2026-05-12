@@ -1,0 +1,191 @@
+/* ============================================================================
+ * GenieResponseView — Inline AI response display
+ * ============================================================================ */
+
+.genie-response-view {
+  display: flex;
+  flex-direction: column;
+  border-top: var(--border-thin) solid var(--border-color);
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+/* ---- Submitted prompt (dimmed) ---- */
+
+.genie-response-prompt {
+  padding: var(--spacing-2) var(--space-3-5) var(--spacing-1);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  color: var(--text-tertiary);
+}
+
+/* ---- Thinking indicator ---- */
+
+.genie-response-thinking {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  padding: var(--spacing-2) var(--space-3-5);
+  font-size: var(--font-size-base);
+  color: var(--primary-color);
+}
+
+.genie-response-spinner {
+  animation: genie-bounce var(--duration-slower) ease-in-out infinite;
+}
+
+@keyframes genie-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* ---- Response text ---- */
+
+.genie-response-text {
+  padding: var(--spacing-2) var(--space-3-5);
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: var(--line-height-normal);
+}
+
+/* ---- Streaming cursor ---- */
+
+.genie-response-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--primary-color);
+  margin-left: var(--space-px);
+  vertical-align: text-bottom;
+  animation: genie-cursor-blink 0.8s step-end infinite;
+}
+
+@keyframes genie-cursor-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---- Action buttons row ---- */
+
+.genie-response-actions {
+  display: flex;
+  gap: var(--space-1-5);
+  padding: var(--space-1-5) var(--space-3-5);
+  border-top: var(--border-thin) solid var(--border-color);
+}
+
+.genie-response-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: 3px var(--space-2-5);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  position: relative;
+  transition: background var(--duration-base), color var(--duration-base), border-color var(--duration-base);
+}
+
+.genie-response-btn--accept {
+  color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.genie-response-btn--accept:hover {
+  background: rgba(22, 163, 74, 0.1);
+  background: color-mix(in srgb, var(--success-color) 10%, transparent);
+}
+
+.genie-response-btn--reject {
+  color: var(--text-secondary);
+}
+
+.genie-response-btn--reject:hover {
+  color: var(--text-color);
+  background: var(--hover-bg);
+}
+
+.genie-response-btn--retry {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.genie-response-btn--retry:hover {
+  background: rgba(0, 102, 204, 0.1);
+  background: color-mix(in srgb, var(--primary-color) 10%, transparent);
+}
+
+/* Focus: U-shaped underline */
+.genie-response-btn:focus-visible {
+  outline: none;
+}
+
+.genie-response-btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
+
+/* ---- Error state ---- */
+
+.genie-response-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1-5);
+  padding: var(--spacing-2) var(--space-3-5);
+  font-size: var(--font-size-base);
+  color: var(--error-color);
+  background: var(--error-bg);
+  border-left: 3px solid var(--error-color);
+}
+
+.genie-response-error svg {
+  flex-shrink: 0;
+  margin-top: var(--space-px);
+}
+
+/* ---- Dark theme ---- */
+
+.dark-theme .genie-response-btn--accept {
+  color: var(--success-color-dark);
+  border-color: var(--success-color-dark);
+}
+
+.dark-theme .genie-response-btn--accept:hover {
+  background: rgba(74, 222, 128, 0.1);
+  background: color-mix(in srgb, var(--success-color-dark) 10%, transparent);
+}
+
+.dark-theme .genie-response-error {
+  background: rgba(207, 34, 46, 0.1);
+  background: color-mix(in srgb, var(--error-color) 10%, transparent);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .genie-response-spinner {
+    animation: none;
+  }
+
+  .genie-response-cursor {
+    animation: none;
+  }
+}

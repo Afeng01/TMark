@@ -1,0 +1,84 @@
+.title-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: var(--spacing-1);
+  z-index: var(--z-bar);
+  box-sizing: border-box;
+}
+
+.title-bar-content {
+  /* Center the content, accounting for traffic lights on macOS (~70px) */
+  margin-left: 70px;
+  margin-right: 70px;
+}
+
+.title-bar-filename {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  padding: var(--space-half) var(--space-1-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.title-bar-filename.unsaved {
+  opacity: 0.8;
+}
+
+.dirty-indicator {
+  color: var(--primary-color);
+  font-size: var(--font-size-lg);
+  line-height: 1;
+}
+
+.title-bar-filename.missing {
+  color: var(--warning-color, #f59e0b);
+}
+
+.missing-indicator {
+  color: var(--warning-color, #f59e0b);
+  font-size: var(--font-size-sm);
+  line-height: 1;
+}
+
+.title-bar-input {
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  background: transparent;
+  border: none;
+  border-bottom: var(--border-thin) solid rgba(102, 102, 102, 0.4);
+  border-bottom: var(--border-thin) solid color-mix(in srgb, var(--text-secondary) 40%, transparent);
+  border-radius: 0;
+  padding: var(--space-half) var(--space-1-5);
+  min-width: 120px;
+  max-width: 300px;
+  text-align: center;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: none;
+}
+
+/* Input focus: border-bottom highlight is the indicator */
+.title-bar-input:focus,
+.title-bar-input:focus-visible {
+  border-bottom-color: rgba(102, 102, 102, 0.6);
+  border-bottom-color: color-mix(in srgb, var(--text-secondary) 60%, transparent);
+  outline: none;
+  box-shadow: none;
+}
+
+.title-bar-input:disabled {
+  opacity: var(--opacity-subtle);
+  cursor: not-allowed;
+}

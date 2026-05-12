@@ -1,0 +1,263 @@
+.file-explorer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.file-explorer.compact {
+  height: auto;
+}
+
+.file-explorer-workspace-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--space-1-5) 18px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.file-explorer-root-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-icon-medium);
+  height: var(--size-icon-medium);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.file-explorer-root-toggle:hover {
+  background-color: var(--selection-color);
+  color: var(--text-color);
+}
+
+.file-explorer-workspace-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-explorer-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-bottom: var(--border-thin) solid var(--border-color);
+}
+
+.file-explorer-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-btn-sm);
+  height: var(--size-btn-sm);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.file-explorer-btn:hover {
+  background-color: var(--selection-color);
+  color: var(--text-color);
+}
+
+.file-explorer-btn:focus-visible {
+  outline: none;
+}
+
+.file-explorer-btn:focus-visible::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
+
+.file-explorer-tree {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-1) var(--spacing-2) var(--spacing-1) 0;
+}
+
+.file-explorer.compact .file-explorer-tree {
+  flex: 0 0 auto;
+  overflow-y: auto;
+  margin-right: var(--space-7);
+}
+
+.file-explorer-empty {
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+}
+
+/* Tree node styles */
+.file-node {
+  display: flex;
+  align-items: center;
+  padding: var(--space-half) var(--space-7);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  user-select: none;
+}
+
+.file-node:hover {
+  background-color: var(--subtle-bg);
+}
+
+.file-node.selected {
+  background-color: var(--subtle-bg-hover);
+}
+
+.file-node.active {
+  background-color: var(--hover-bg);
+}
+
+.file-node-indent {
+  width: 4px;
+  flex-shrink: 0;
+}
+
+.file-node-arrow {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.file-node-arrow:hover {
+  color: var(--text-color);
+}
+
+.file-node-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: var(--space-1-5);
+  color: var(--text-secondary);
+}
+
+.file-node-name {
+  flex: 1;
+  font-size: var(--font-size-base);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.file-node-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+  margin-left: var(--spacing-1);
+  opacity: 0;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.file-node:hover .file-node-actions,
+.file-node:focus-within .file-node-actions,
+.file-node.selected .file-node-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.file-node-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-icon-medium);
+  height: var(--size-icon-medium);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.file-node-action:hover {
+  background-color: var(--selection-color);
+  color: var(--text-color);
+}
+
+.file-node-action-danger:hover {
+  color: var(--error-color);
+}
+
+.file-node-input {
+  flex: 1;
+  font-size: var(--font-size-base);
+  padding: var(--space-px) var(--spacing-1);
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  outline: none;
+}
+
+/* Input focus: caret is the indicator (per design rules) */
+.file-node-input:focus,
+.file-node-input:focus-visible {
+  outline: none;
+  box-shadow: none;
+  /* Caret visibility indicates focus */
+}
+
+/* Drag and drop styles */
+.file-node[data-state="drop-target"] {
+  background-color: var(--primary-color);
+  opacity: 0.3;
+}
+
+/* react-arborist overrides */
+[role="tree"] {
+  outline: none;
+}
+
+[role="treeitem"] {
+  outline: none;
+}
+
+/* Drop indicator line */
+.file-explorer-tree [data-drop-position="before"]::before,
+.file-explorer-tree [data-drop-position="after"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+.file-explorer-tree [data-drop-position="before"]::before {
+  top: 0;
+}
+
+.file-explorer-tree [data-drop-position="after"]::after {
+  bottom: 0;
+}

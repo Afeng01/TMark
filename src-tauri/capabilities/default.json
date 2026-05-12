@@ -1,0 +1,129 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for document windows only. Settings and PDF-export windows have separate, restricted capability files. SECURITY NOTE: Filesystem permissions use broad path patterns because VMark is a document editor that must access user-chosen files anywhere on disk. Path traversal attacks are mitigated at the application layer via validateImagePath() in src/plugins/imageView/security.ts. Windows drive letter patterns are in a separate windows.json capability file.",
+  "windows": ["main", "doc-*"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "core:webview:allow-create-webview-window",
+    "core:webview:allow-get-all-webviews",
+    "core:webview:allow-print",
+    "core:window:allow-set-focus",
+    "core:window:allow-close",
+    "core:window:allow-set-title",
+    "opener:default",
+    "dialog:default",
+    "dialog:allow-open",
+    "clipboard-manager:default",
+    "clipboard-manager:allow-read-text",
+    "clipboard-manager:allow-write-text",
+    "clipboard-manager:allow-read-image",
+    "store:default",
+    "mcp-bridge:default",
+    "shell:allow-spawn",
+    "shell:allow-kill",
+    "updater:default",
+    "process:allow-restart",
+    "process:allow-exit",
+    "window-state:default",
+    "log:default",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        { "name": "vmark-mcp-server", "sidecar": true },
+        { "name": "vmark-mcp-server", "sidecar": true, "args": ["--health-check"] }
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-text-file",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    },
+    {
+      "identifier": "fs:allow-write-text-file",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    },
+    {
+      "identifier": "fs:allow-write-file",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    },
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    },
+    {
+      "identifier": "fs:allow-mkdir",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-dir",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    },
+    {
+      "identifier": "fs:allow-copy-file",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    },
+    {
+      "identifier": "fs:allow-read-file",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    },
+    {
+      "identifier": "fs:allow-rename",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    },
+    {
+      "identifier": "fs:allow-remove",
+      "allow": [
+        { "path": "$HOME/**" },
+        { "path": "/Volumes/**" },
+        { "path": "/mnt/**" },
+        { "path": "/media/**" }
+      ]
+    }
+  ]
+}

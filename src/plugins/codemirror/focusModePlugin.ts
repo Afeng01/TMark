@@ -1,0 +1,133 @@
+/**
+ * Focus Mode Plugin for CodeMirror (Source Mode)
+ *
+ * Purpose: Dims all lines except the current paragraph (defined as lines between
+ * blank lines) to help the user concentrate on the text they're editing.
+ *
+ * Key decisions:
+ *   - Mirrors the WYSIWYG focus mode plugin behavior for consistent cross-mode experience
+ *   - Uses line decorations with a CSS dim class, not opacity changes on the content
+ *   - IME-guarded to avoid interfering with CJK composition
+ *
+ * @coordinates-with focusMode/tiptap.ts — WYSIWYG counterpart
+ * @coordinates-with stores/editorStore.ts — reads focusMode state
+ * @module plugins/codemirror/focusModePlugin
+ */
+
+import { RangeSetBuilder } from "@codemirror/state";
+import {
+  EditorView,
+  Decoration,
+  ViewPlugin,
+  type DecorationSet,
+  type ViewUpdate,
+} from "@codemirror/view";
+import { useEditorStore } from "@/stores/editorStore";
+import { runOrQueueCodeMirrorAction } from "@/utils/imeGuard";
+
+// Decoration to mark blurred (non-focused) lines
+const blurDecoration = Decoration.line({ class: "cm-blur" });
+
+/**
+ * Find paragraph boundaries around a given line.
+ * Returns [startLine, endLine] (1-indexed).
+ */
+function findParagraphBounds(
+  doc: { lines: number; line: (n: number) => { text: string } },
+  lineNum: number
+): [number, number] {
+  const isBlank = (n: number) => /^\s*$/.test(doc.line(n).text);
+
+  // Find start (scan up to blank line or start of doc)
+  let start = lineNum;
+  while (start > 1 && !isBlank(start - 1)) {
+    /* v8 ignore next -- @preserve loop body only reached when paragraph spans multiple lines; single-line paragraphs skip this */
+    start--;
+  }
+
+  // Find end (scan down to blank line or end of doc)
+  let end = lineNum;
+  while (end < doc.lines && !isBlank(end + 1)) {
+    end++;
+  }
+
+  return [start, end];
+}
+
+/**
+ * Creates a ViewPlugin that dims non-focused paragraphs.
+ * Subscribes to editorStore.focusModeEnabled for toggle.
+ */
+export function createSourceFocusModePlugin() {
+  return ViewPlugin.fromClass(
+    class {
+      decorations: DecorationSet;
+      unsubscribe: (() => void) | null = null;
+
+      constructor(view: EditorView) {
+        this.decorations = this.buildDecorations(view);
+
+        // Subscribe to store changes to rebuild decorations
+        this.unsubscribe = useEditorStore.subscribe((state, prevState) => {
+          if (state.focusModeEnabled !== prevState.focusModeEnabled) {
+            this.decorations = this.buildDecorations(view);
+            // Force view update by dispatching empty transaction (guard IME)
+            runOrQueueCodeMirrorAction(view, () => view.dispatch({}));
+          }
+        });
+      }
+
+      update(update: ViewUpdate) {
+        // Rebuild when selection or document changes
+        if (update.selectionSet || update.docChanged) {
+          this.decorations = this.buildDecorations(update.view);
+        }
+      }
+
+      destroy() {
+        /* v8 ignore next -- @preserve else branch: unsubscribe is always set in constructor */
+        if (this.unsubscribe) {
+          this.unsubscribe();
+        }
+      }
+
+      buildDecorations(view: EditorView): DecorationSet {
+        const builder = new RangeSetBuilder<Decoration>();
+
+        // Check if focus mode is enabled
+        if (!useEditorStore.getState().focusModeEnabled) {
+          return builder.finish();
+        }
+
+        const doc = view.state.doc;
+        const totalLines = doc.lines;
+
+        /* v8 ignore next -- @preserve zero-lines guard: tests always use documents with content */
+        if (totalLines === 0) return builder.finish();
+
+        // Get current cursor line
+        const { from } = view.state.selection.main;
+        const currentLineNum = doc.lineAt(from).number;
+
+        // Find paragraph bounds
+        const [paragraphStart, paragraphEnd] = findParagraphBounds(
+          doc,
+          currentLineNum
+        );
+
+        // Mark all lines OUTSIDE the current paragraph as blurred
+        for (let i = 1; i <= totalLines; i++) {
+          if (i < paragraphStart || i > paragraphEnd) {
+            const line = doc.line(i);
+            builder.add(line.from, line.from, blurDecoration);
+          }
+        }
+
+        return builder.finish();
+      }
+    },
+    {
+      decorations: (v) => v.decorations,
+    }
+  );
+}

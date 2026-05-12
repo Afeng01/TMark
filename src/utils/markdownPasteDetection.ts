@@ -1,0 +1,110 @@
+/**
+ * Markdown Paste Detection
+ *
+ * Purpose: Heuristics to decide whether plain text clipboard content
+ * should be parsed as Markdown when pasting into WYSIWYG mode.
+ *
+ * Key decisions:
+ *   - Code fences and tables are "instant yes" — always treated as markdown
+ *   - Strong signals (headings, lists, HRs, links with URL-like targets)
+ *     need just 1 occurrence
+ *   - Weak signals (emphasis, links with non-URL-like targets) need 2+
+ *     to avoid false positives
+ *   - Single-line pastes have a higher threshold to avoid treating
+ *     normal text like "use *caution*" as markdown
+ *
+ * @coordinates-with smartPaste/tiptap.ts — calls isMarkdownPasteCandidate to decide paste behavior
+ * @coordinates-with markdownPaste/tiptap.ts — fallback paste handler
+ * @module utils/markdownPasteDetection
+ */
+
+const CODE_FENCE_RE = /^\s*(```|~~~)/;
+const HEADING_RE = /^\s*#{1,6}\s+/;
+const BLOCKQUOTE_RE = /^\s*>\s+/;
+const LIST_RE = /^\s*(?:[-*+]|\d+\.)\s+/;
+const HR_RE = /^\s*(?:-{3,}|_{3,}|\*{3,})\s*$/;
+const LINK_RE = /!?\[[^\]]+\]\([^)]+\)/;
+// A "strict" link has a URL that looks like a real URL or path: scheme,
+// leading `/`, leading `./`/`../`, `mailto:`/`tel:`, an in-page anchor `#`,
+// or a domain-like dotted token (`foo.com/...`). This avoids false positives
+// like "see [first](primary list)" while catching `[text](./path)`,
+// `[text](https://...)`, `[text](#anchor)`, etc. URLs may be wrapped in
+// angle brackets per CommonMark.
+const STRICT_LINK_RE =
+  /!?\[[^\]]+\]\(<?(?:[a-z][a-z0-9+.-]*:|\/|\.\.?\/|#|[\w-]+\.[\w.-]+\/)/i;
+const STRONG_EMPHASIS_RE = /(?:^|\s)(\*\*|__)\S[^\n]*?\S\1/;
+const EMPHASIS_RE = /(?:^|\s)(\*|_)\S[^\n]*?\S\1/;
+
+function isTableSeparator(line: string): boolean {
+  return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
+}
+
+function isTableHeader(line: string): boolean {
+  return /\|/.test(line);
+}
+
+/** Return true if plain text likely contains markdown and should be parsed on paste. */
+export function isMarkdownPasteCandidate(text: string): boolean {
+  const trimmed = text.trim();
+  if (!trimmed) return false;
+
+  const lines = trimmed.split(/\r?\n/);
+  const hasNewline = lines.length > 1;
+
+  let strongSignals = 0;
+  let weakSignals = 0;
+  let hasBlockquote = false;
+  let hasLink = false;
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    const isBlockquote = BLOCKQUOTE_RE.test(line);
+    if (isBlockquote) {
+      hasBlockquote = true;
+    }
+    const stripped = isBlockquote ? line.replace(BLOCKQUOTE_RE, "") : line;
+
+    if (CODE_FENCE_RE.test(stripped)) return true;
+
+    if (i + 1 < lines.length) {
+      const nextLine = lines[i + 1];
+      const nextStripped = BLOCKQUOTE_RE.test(nextLine)
+        ? nextLine.replace(BLOCKQUOTE_RE, "")
+        : nextLine;
+      if (isTableHeader(stripped) && isTableSeparator(nextStripped)) {
+        return true;
+      }
+    }
+
+    if (HEADING_RE.test(stripped)) strongSignals += 1;
+    if (LIST_RE.test(stripped)) strongSignals += 1;
+    if (HR_RE.test(stripped)) strongSignals += 1;
+    if (LINK_RE.test(stripped)) {
+      // A link with a URL-like target is unambiguous markdown intent —
+      // promote it to a strong signal so single-line `[text](./path)` pastes
+      // are parsed as markdown rather than escaped as plain text.
+      if (STRICT_LINK_RE.test(stripped)) {
+        strongSignals += 1;
+      } else {
+        weakSignals += 1;
+      }
+      hasLink = true;
+    }
+    if (STRONG_EMPHASIS_RE.test(stripped) || EMPHASIS_RE.test(stripped)) {
+      weakSignals += 1;
+    }
+  }
+
+  if (hasNewline) {
+    if (strongSignals > 0) return true;
+    if (weakSignals >= 2) return true;
+    if (hasLink) return true;
+    if (hasBlockquote && weakSignals > 0) return true;
+    return false;
+  }
+
+  if (strongSignals > 0) return true;
+  if (weakSignals >= 2) return true;
+
+  return false;
+}

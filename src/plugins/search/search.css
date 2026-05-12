@@ -1,0 +1,21 @@
+/**
+ * Search Highlight Styles
+ *
+ * Styles for search match highlighting in the editor.
+ */
+
+/* All matches - underline style */
+.search-match {
+  text-decoration: underline;
+  text-decoration-color: var(--search-match-color);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+/* Current match - stronger underline */
+.search-match-active {
+  text-decoration: underline;
+  text-decoration-color: var(--search-match-active-color);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}

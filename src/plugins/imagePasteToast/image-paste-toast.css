@@ -1,0 +1,112 @@
+/**
+ * Image Paste Toast Styles
+ * Compact toast with icon buttons - matches link popup style
+ */
+
+.image-paste-toast {
+  position: fixed;
+  z-index: var(--z-popup);
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+  padding: var(--spacing-1);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-color);
+  box-shadow: var(--shadow-md);
+  animation: image-paste-toast-fade-in var(--duration-fast) ease-out;
+}
+
+@keyframes image-paste-toast-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.image-paste-toast-message {
+  padding: 0 var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+/* Icon-only buttons - matches link popup */
+.image-paste-toast-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: default;
+  user-select: none;
+}
+
+.image-paste-toast-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+.image-paste-toast-btn:active {
+  opacity: 0.8;
+}
+
+/* Focus state - U-shaped underline (keyboard focus only) */
+.image-paste-toast-btn:focus-visible {
+  outline: none;
+  color: var(--accent-primary);
+}
+
+.image-paste-toast-btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  background: transparent;
+  border-bottom: var(--border-medium) solid var(--accent-primary);
+  border-radius: 0 0 4px 4px;
+}
+
+.image-paste-toast-btn svg {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* Insert button - primary color on hover */
+.image-paste-toast-btn-insert:hover {
+  color: var(--accent-primary);
+}
+
+/* Dismiss button - secondary */
+.image-paste-toast-btn-dismiss:hover {
+  color: var(--text-color);
+}
+
+/* Dark theme */
+.dark-theme .image-paste-toast-btn:hover {
+  background: var(--hover-bg-dark);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .image-paste-toast {
+    animation: none;
+  }
+}

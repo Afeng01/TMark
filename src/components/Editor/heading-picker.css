@@ -1,0 +1,126 @@
+/**
+ * Heading Picker Styles
+ *
+ * Popup for selecting document headings for bookmark links.
+ * Uses shared popup styles from popup-shared.css
+ */
+
+.heading-picker {
+  z-index: var(--z-popup);
+  background: var(--bg-color);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-lg, 8px);
+  box-shadow: var(--popup-shadow, 0 4px 12px rgba(0, 0, 0, 0.15));
+  width: 360px;
+  max-height: 280px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: heading-picker-fade-in var(--duration-fast) ease-out;
+}
+
+@keyframes heading-picker-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heading-picker-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+  padding: var(--space-1-5);
+  border-bottom: var(--border-thin) solid var(--border-color);
+}
+
+/* Filter input uses shared popup-input styles */
+.heading-picker-filter {
+  flex: 1;
+  font-size: var(--font-size-sm);
+}
+
+/* Close button uses shared popup-icon-btn styles */
+.heading-picker-close {
+  flex-shrink: 0;
+}
+
+.heading-picker-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-1) 0;
+}
+
+.heading-picker-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--space-1-5) var(--spacing-3);
+  border: none;
+  background: none;
+  cursor: default;
+  text-align: left;
+  color: var(--text-color);
+  font-size: var(--font-size-base);
+}
+
+.heading-picker-item:hover {
+  background: var(--hover-bg, rgba(0, 0, 0, 0.04));
+}
+
+.heading-picker-item.selected {
+  background: var(--accent-bg);
+}
+
+/* Focus state - background highlight (keyboard focus only) */
+.heading-picker-item:focus-visible {
+  outline: none;
+  background: var(--accent-bg);
+}
+
+.heading-picker-level {
+  flex-shrink: 0;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--accent-primary, var(--primary-color));
+  opacity: 0.9;
+  width: 20px;
+}
+
+.heading-picker-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.heading-picker-id {
+  flex-shrink: 0;
+  font-size: var(--font-size-2xs);
+  color: var(--text-secondary);
+  font-family: var(--font-mono, monospace);
+}
+
+.heading-picker-empty {
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* Dark theme */
+.dark-theme .heading-picker-item:hover {
+  background: var(--hover-bg-dark);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .heading-picker {
+    animation: none;
+  }
+}

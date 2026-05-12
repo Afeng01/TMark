@@ -1,0 +1,162 @@
+/**
+ * Shared Media Popup Styles
+ *
+ * Common styles for image and media (audio/video) editing popups.
+ * Each popup's own CSS file adds only type-specific rules.
+ *
+ * @coordinates-with plugins/mediaPopup/media-popup.css
+ */
+
+/* --- Container --- */
+.media-popup {
+  position: fixed;
+  z-index: var(--z-popup);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1);
+  border: var(--border-thin) solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-color);
+  box-shadow: var(--shadow-md);
+  animation: media-edit-popup-fade-in var(--duration-fast) ease-out;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+@keyframes media-edit-popup-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Row container --- */
+.media-popup-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+}
+
+/* --- Source URL/Path Input (monospace, borderless) --- */
+.media-popup-src {
+  width: 220px;
+  padding: var(--spacing-1) var(--spacing-2);
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-mono, monospace);
+  outline: none;
+}
+
+/* --- Text inputs (caption/alt/title) --- */
+.media-popup-alt,
+.media-popup-title {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-1) var(--spacing-2);
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+  outline: none;
+}
+
+/* --- Input focus: caret is the indicator (per design rules) --- */
+.media-popup-src:focus,
+.media-popup-src:focus-visible,
+.media-popup-alt:focus,
+.media-popup-alt:focus-visible,
+.media-popup-title:focus,
+.media-popup-title:focus-visible,
+.media-popup-poster:focus,
+.media-popup-poster:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.media-popup-src::placeholder,
+.media-popup-alt::placeholder,
+.media-popup-title::placeholder,
+.media-popup-poster::placeholder {
+  color: var(--text-secondary);
+  opacity: var(--opacity-muted);
+}
+
+/* --- Icon-only buttons --- */
+.media-popup-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: default;
+  user-select: none;
+  position: relative;
+}
+
+.media-popup-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text-color);
+}
+
+.media-popup-btn:active {
+  opacity: 0.8;
+}
+
+/* --- Focus state: U-shaped underline (keyboard only) --- */
+.media-popup-btn:focus-visible {
+  outline: none;
+  color: var(--primary-color);
+}
+
+.media-popup-btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  right: 4px;
+  height: 4px;
+  background: transparent;
+  border-bottom: var(--border-medium) solid var(--primary-color);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+/* --- Icon sizing --- */
+.media-popup-btn svg {
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* --- Delete button: danger color on hover --- */
+.media-popup-btn-delete:hover {
+  color: var(--error-color);
+}
+
+/* --- Dark theme --- */
+.dark-theme .media-popup-btn:hover {
+  background: var(--hover-bg-dark);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .media-popup {
+    animation: none;
+  }
+}

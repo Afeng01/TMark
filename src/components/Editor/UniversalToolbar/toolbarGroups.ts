@@ -1,0 +1,216 @@
+/**
+ * Toolbar Groups - Button Definitions
+ *
+ * Centralized group definitions for the UniversalToolbar.
+ * Each group renders as a single dropdown button with menu items.
+ *
+ * Groups appear in spec order:
+ * Block → Inline → List → Table → Blockquote → Insert → Expandables → Link
+ *
+ * @module components/Editor/UniversalToolbar/toolbarGroups
+ */
+import { icons } from "@/utils/icons";
+
+/** Contexts where a menu item is enabled */
+export type EnableContext =
+  | "always"       // Always enabled
+  | "selection"    // When there's a text selection
+  | "textblock"    // In any text block (paragraph, heading, etc.)
+  | "heading"      // Inside a heading
+  | "list"         // Inside a list item
+  | "table"        // Inside a table cell
+  | "blockquote"   // Inside a blockquote
+  | "codeblock"    // Inside a code block
+  | "never";       // Always disabled (not yet implemented)
+
+/** Separator item (visual divider in dropdown) */
+export interface ToolbarSeparator {
+  id: string;
+  type: "separator";
+}
+
+/** Action menu item definition */
+export interface ToolbarActionItem {
+  id: string;
+  type?: "action";       // Optional, defaults to action
+  icon: string;
+  label: string;
+  shortcut?: string;
+  action: string;        // Action identifier for adapters
+  enabledIn: EnableContext[];
+}
+
+/** Menu item can be an action or separator */
+export type ToolbarMenuItem = ToolbarActionItem | ToolbarSeparator;
+
+/** Type guard for separator items */
+export function isSeparator(item: ToolbarMenuItem): item is ToolbarSeparator {
+  return item.type === "separator";
+}
+
+/** Group definition */
+export interface ToolbarGroup {
+  id: string;
+  label: string;
+  icon: string;
+  items: ToolbarMenuItem[];
+}
+
+/** Toolbar button definition (one per group) */
+export interface ToolbarGroupButton {
+  id: string;
+  type: "dropdown";
+  icon: string;
+  label: string;
+  action: string;
+  enabledIn: EnableContext[];
+  items: ToolbarMenuItem[];
+}
+
+// --- Block Group (Heading dropdown) ---
+const BLOCK_GROUP: ToolbarGroup = {
+  id: "block",
+  label: "Heading",
+  icon: icons.heading,
+  items: [
+    // "Paragraph" here means "remove heading" - only available when in a heading
+    { id: "paragraph", icon: icons.paragraph, label: "Paragraph", shortcut: "⌘0", action: "heading:0", enabledIn: ["heading"] },
+    { id: "h1", icon: icons.heading1, label: "Heading 1", shortcut: "⌘1", action: "heading:1", enabledIn: ["textblock"] },
+    { id: "h2", icon: icons.heading2, label: "Heading 2", shortcut: "⌘2", action: "heading:2", enabledIn: ["textblock"] },
+    { id: "h3", icon: icons.heading3, label: "Heading 3", shortcut: "⌘3", action: "heading:3", enabledIn: ["textblock"] },
+    { id: "h4", icon: icons.heading4, label: "Heading 4", shortcut: "⌘4", action: "heading:4", enabledIn: ["textblock"] },
+    { id: "h5", icon: icons.heading5, label: "Heading 5", shortcut: "⌘5", action: "heading:5", enabledIn: ["textblock"] },
+    { id: "h6", icon: icons.heading6, label: "Heading 6", shortcut: "⌘6", action: "heading:6", enabledIn: ["textblock"] },
+  ],
+};
+
+// --- Inline Group (Format marks) ---
+const INLINE_GROUP: ToolbarGroup = {
+  id: "inline",
+  label: "Inline",
+  icon: icons.bold,
+  items: [
+    { id: "bold", icon: icons.bold, label: "Bold", shortcut: "⌘B", action: "bold", enabledIn: ["selection", "textblock"] },
+    { id: "italic", icon: icons.italic, label: "Italic", shortcut: "⌘I", action: "italic", enabledIn: ["selection", "textblock"] },
+    { id: "underline", icon: icons.underline, label: "Underline", shortcut: "⌘U", action: "underline", enabledIn: ["selection", "textblock"] },
+    { id: "strikethrough", icon: icons.strikethrough, label: "Strikethrough", shortcut: "⌘⇧X", action: "strikethrough", enabledIn: ["selection", "textblock"] },
+    { id: "highlight", icon: icons.highlight, label: "Highlight", shortcut: "⌘⇧M", action: "highlight", enabledIn: ["selection", "textblock"] },
+    { id: "superscript", icon: icons.superscript, label: "Superscript", action: "superscript", enabledIn: ["selection", "textblock"] },
+    { id: "subscript", icon: icons.subscript, label: "Subscript", action: "subscript", enabledIn: ["selection", "textblock"] },
+    { id: "code", icon: icons.inlineCode, label: "Inline Code", shortcut: "⌘⇧`", action: "code", enabledIn: ["selection", "textblock"] },
+    { id: "clear-formatting", icon: icons.clearFormatting, label: "Clear Formatting", shortcut: "⌘⇧0", action: "clearFormatting", enabledIn: ["selection"] },
+  ],
+};
+
+// --- List Group ---
+const LIST_GROUP: ToolbarGroup = {
+  id: "list",
+  label: "List",
+  icon: icons.unorderedList,
+  items: [
+    { id: "bullet-list", icon: icons.unorderedList, label: "Bullet List", shortcut: "⌥⌘U", action: "bulletList", enabledIn: ["textblock", "list"] },
+    { id: "ordered-list", icon: icons.orderedList, label: "Ordered List", shortcut: "⌥⌘O", action: "orderedList", enabledIn: ["textblock", "list"] },
+    { id: "task-list", icon: icons.taskList, label: "Task List", shortcut: "⌥⌘X", action: "taskList", enabledIn: ["textblock", "list"] },
+    { id: "indent", icon: icons.indent, label: "Indent", shortcut: "⌘]", action: "indent", enabledIn: ["list"] },
+    { id: "outdent", icon: icons.outdent, label: "Outdent", shortcut: "⌘[", action: "outdent", enabledIn: ["list"] },
+    { id: "remove-list", icon: icons.removeList, label: "Remove List", action: "removeList", enabledIn: ["list"] },
+  ],
+};
+
+// --- Table Group ---
+const TABLE_GROUP: ToolbarGroup = {
+  id: "table",
+  label: "Table",
+  icon: icons.table,
+  items: [
+    { id: "insert-table", icon: icons.table, label: "Insert Table", shortcut: "⌘⇧T", action: "insertTable", enabledIn: ["textblock"] },
+    { id: "add-row-above", icon: icons.rowAbove, label: "Row Above", action: "addRowAbove", enabledIn: ["table"] },
+    { id: "add-row", icon: icons.rowBelow, label: "Row Below", action: "addRow", enabledIn: ["table"] },
+    { id: "add-col-left", icon: icons.colLeft, label: "Column Left", action: "addColLeft", enabledIn: ["table"] },
+    { id: "add-col", icon: icons.colRight, label: "Column Right", action: "addCol", enabledIn: ["table"] },
+    { id: "delete-row", icon: icons.deleteRow, label: "Delete Row", action: "deleteRow", enabledIn: ["table"] },
+    { id: "delete-col", icon: icons.deleteCol, label: "Delete Column", action: "deleteCol", enabledIn: ["table"] },
+    { id: "delete-table", icon: icons.deleteTable, label: "Delete Table", action: "deleteTable", enabledIn: ["table"] },
+    { id: "align-left", icon: icons.alignLeft, label: "Align Left", action: "alignLeft", enabledIn: ["table"] },
+    { id: "align-center", icon: icons.alignCenter, label: "Align Center", action: "alignCenter", enabledIn: ["table"] },
+    { id: "align-right", icon: icons.alignRight, label: "Align Right", action: "alignRight", enabledIn: ["table"] },
+    { id: "align-all-left", icon: icons.alignAllLeft, label: "Align All Left", action: "alignAllLeft", enabledIn: ["table"] },
+    { id: "align-all-center", icon: icons.alignAllCenter, label: "Align All Center", action: "alignAllCenter", enabledIn: ["table"] },
+    { id: "align-all-right", icon: icons.alignAllRight, label: "Align All Right", action: "alignAllRight", enabledIn: ["table"] },
+    { id: "format-table", icon: icons.formatTable, label: "Format Table", action: "formatTable", enabledIn: ["table"] },
+  ],
+};
+
+// --- Blockquote Group ---
+const BLOCKQUOTE_GROUP: ToolbarGroup = {
+  id: "blockquote",
+  label: "Blockquote",
+  icon: icons.textQuote,
+  items: [
+    { id: "blockquote", icon: icons.blockquote, label: "Blockquote", shortcut: "⌥⌘Q", action: "insertBlockquote", enabledIn: ["textblock", "blockquote"] },
+    { id: "nest-blockquote", icon: icons.nestBlockquote, label: "Nest Deeper", action: "nestBlockquote", enabledIn: ["blockquote"] },
+    { id: "unnest-blockquote", icon: icons.unnestBlockquote, label: "Unnest", action: "unnestBlockquote", enabledIn: ["blockquote"] },
+  ],
+};
+
+// --- Insert Group ---
+const INSERT_GROUP: ToolbarGroup = {
+  id: "insert",
+  label: "Insert",
+  icon: icons.insert,
+  items: [
+    { id: "insert-image", icon: icons.image, label: "Image", shortcut: "⇧⌘I", action: "insertImage", enabledIn: ["textblock"] },
+    { id: "insert-video", icon: icons.video, label: "Video", action: "insertVideo", enabledIn: ["textblock"] },
+    { id: "insert-audio", icon: icons.audio, label: "Audio", action: "insertAudio", enabledIn: ["textblock"] },
+    { id: "insert-code-block", icon: icons.codeBlock, label: "Code Block", shortcut: "⌥⌘C", action: "insertCodeBlock", enabledIn: ["textblock"] },
+    { id: "insert-diagram", icon: icons.diagram, label: "Diagram", shortcut: "⇧⌥⌘D", action: "insertDiagram", enabledIn: ["textblock"] },
+    { id: "insert-mindmap", icon: icons.diagram, label: "Mindmap", shortcut: "⇧⌥⌘K", action: "insertMarkmap", enabledIn: ["textblock"] },
+    { id: "insert-math", icon: icons.math, label: "Math Block", shortcut: "⇧⌥⌘M", action: "insertMath", enabledIn: ["textblock"] },
+    { id: "insert-details", icon: icons.expand, label: "Details", action: "insertDetails", enabledIn: ["textblock"] },
+    { id: "insert-alert-note", icon: icons.alertIcon, label: "Alert Note", action: "insertAlertNote", enabledIn: ["textblock"] },
+    { id: "insert-alert-tip", icon: icons.alertIcon, label: "Alert Tip", action: "insertAlertTip", enabledIn: ["textblock"] },
+    { id: "insert-alert-important", icon: icons.alertIcon, label: "Alert Important", action: "insertAlertImportant", enabledIn: ["textblock"] },
+    { id: "insert-alert-warning", icon: icons.alertIcon, label: "Alert Warning", action: "insertAlertWarning", enabledIn: ["textblock"] },
+    { id: "insert-alert-caution", icon: icons.alertIcon, label: "Alert Caution", action: "insertAlertCaution", enabledIn: ["textblock"] },
+    { id: "insert-divider", icon: icons.divider, label: "Divider", shortcut: "⌥⌘-", action: "insertDivider", enabledIn: ["textblock"] },
+  ],
+};
+
+// --- Link Group (consolidated) ---
+const LINK_GROUP: ToolbarGroup = {
+  id: "link",
+  label: "Link",
+  icon: icons.link,
+  items: [
+    { id: "link", icon: icons.link, label: "Hyperlink", shortcut: "⌘K", action: "link", enabledIn: ["selection", "textblock"] },
+    { id: "bookmark", icon: icons.hash, label: "Bookmark", action: "link:bookmark", enabledIn: ["textblock"] },
+    { id: "wikiLink", icon: icons.fileText, label: "Wiki Link", action: "link:wiki", enabledIn: ["textblock"] },
+    { id: "footnote", icon: icons.footnote, label: "Footnote", action: "insertFootnote", enabledIn: ["textblock"] },
+  ],
+};
+
+/** All toolbar groups in spec order */
+export const TOOLBAR_GROUPS: ToolbarGroup[] = [
+  BLOCK_GROUP,
+  INLINE_GROUP,
+  LIST_GROUP,
+  TABLE_GROUP,
+  BLOCKQUOTE_GROUP,
+  LINK_GROUP,
+  INSERT_GROUP,
+];
+
+/**
+ * Get the toolbar buttons (one per group).
+ */
+export function getGroupButtons(): ToolbarGroupButton[] {
+  return TOOLBAR_GROUPS.map((group) => ({
+    id: group.id,
+    type: "dropdown",
+    icon: group.icon,
+    label: group.label,
+    action: group.id,
+    enabledIn: ["always"],
+    items: group.items,
+  }));
+}
