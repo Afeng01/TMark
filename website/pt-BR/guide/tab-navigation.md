@@ -1,6 +1,6 @@
 # Navegação Inteligente com Tab
 
-As teclas Tab e Shift+Tab do VMark são sensíveis ao contexto — elas ajudam você a navegar eficientemente por texto formatado, parênteses e links sem precisar das teclas de seta.
+As teclas Tab e Shift+Tab do TMark são sensíveis ao contexto — elas ajudam você a navegar eficientemente por texto formatado, parênteses e links sem precisar das teclas de seta.
 
 ## Visão Geral Rápida
 
@@ -131,21 +131,21 @@ This is |**bold text** here
 Tab e Shift+Tab também escapam de links:
 
 ```text
-Check out [VMark|](https://vmark.app)
+Check out [TMark|](https://github.com/Afeng01/TMark)
                ↑ cursor dentro do texto do link
 ```
 
 Pressione **Tab**:
 
 ```text
-Check out [VMark](https://vmark.app)| and...
+Check out [TMark](https://github.com/Afeng01/TMark)| and...
                                     ↑ cursor após o link
 ```
 
 Pressionar **Shift+Tab** dentro de um link move para o início:
 
 ```text
-Check out |[VMark](https://vmark.app) and...
+Check out |[TMark](https://github.com/Afeng01/TMark) and...
           ↑ cursor antes do link
 ```
 
@@ -155,7 +155,7 @@ No modo Fonte, Tab fornece navegação inteligente dentro da sintaxe de link Mar
 
 ### Parênteses Aninhados e Escapados
 
-O VMark trata corretamente a sintaxe de link complexa:
+O TMark trata corretamente a sintaxe de link complexa:
 
 ```markdown
 [text [with nested] brackets](url)     ✓ Funciona
@@ -364,7 +364,7 @@ A inserção de auto-emparelhamento também é desabilitada dentro de blocos de 
 
 1. **Memória muscular** — Uma vez que você se acostuma com o escape do Tab, você se encontrará navegando muito mais rápido sem as teclas de seta.
 
-2. **Funciona com auto-emparelhamento** — Quando você digita `(`, o VMark insere automaticamente `)`. Após digitar dentro, basta pressionar Tab para sair.
+2. **Funciona com auto-emparelhamento** — Quando você digita `(`, o TMark insere automaticamente `)`. Após digitar dentro, basta pressionar Tab para sair.
 
 3. **Estruturas aninhadas** — Tab escapa um nível por vez. Para `((aninhado))`, você precisa de dois Tabs para sair completamente.
 

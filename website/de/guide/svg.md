@@ -1,6 +1,6 @@
 # SVG-Grafiken
 
-VMark bietet erstklassige Unterstützung für SVG — Skalierbare Vektorgrafiken. Es gibt zwei Möglichkeiten, SVG in Ihren Dokumenten zu verwenden, jede für einen anderen Arbeitsablauf geeignet.
+TMark bietet erstklassige Unterstützung für SVG — Skalierbare Vektorgrafiken. Es gibt zwei Möglichkeiten, SVG in Ihren Dokumenten zu verwenden, jede für einen anderen Arbeitsablauf geeignet.
 
 | Methode | Am besten für | Bearbeitbarer Quellcode? |
 |---------|--------------|--------------------------|
@@ -37,8 +37,8 @@ Rohe SVG-Markierung in einem umzäunten Code-Block mit der `svg`-Sprachkennung e
 
 Das SVG wird inline gerendert — genau wie Mermaid-Diagramme — mit interaktiven Steuerelementen.
 
-::: tip VMark-exklusiv
-Weder Typora noch Obsidian unterstützen ` ```svg `-Code-Blöcke. Dies ist eine VMark-exklusive Funktion, entwickelt für KI-Arbeitsabläufe, bei denen Tools SVG-Visualisierungen (Diagramme, Illustrationen, Symbole) generieren, die nicht in Mermaids Grammatik passen.
+::: tip TMark-exklusiv
+Weder Typora noch Obsidian unterstützen ` ```svg `-Code-Blöcke. Dies ist eine TMark-exklusive Funktion, entwickelt für KI-Arbeitsabläufe, bei denen Tools SVG-Visualisierungen (Diagramme, Illustrationen, Symbole) generieren, die nicht in Mermaids Grammatik passen.
 :::
 
 ### Wann Code-Blöcke zu verwenden sind
@@ -103,7 +103,7 @@ Die Diagrammvorschau im Quellmodus muss aktiviert sein. Mit der **Diagrammvorsch
 
 ## SVG-Validierung
 
-VMark validiert SVG-Inhalt vor dem Rendering:
+TMark validiert SVG-Inhalt vor dem Rendering:
 
 - Der Inhalt muss mit `<svg` oder `<?xml` beginnen
 - Das XML muss wohlgeformt sein (keine Parse-Fehler)
@@ -113,7 +113,7 @@ Wenn die Validierung fehlschlägt, wird statt der gerenderten Grafik eine **Ung�
 
 ## KI-Arbeitsablauf
 
-KI-Coding-Assistenten können SVG direkt in Ihre VMark-Dokumente über MCP-Tools generieren. Die KI sendet einen Code-Block mit `language: "svg"` und dem SVG-Inhalt, der automatisch inline gerendert wird.
+KI-Coding-Assistenten können SVG direkt in Ihre TMark-Dokumente über MCP-Tools generieren. Die KI sendet einen Code-Block mit `language: "svg"` und dem SVG-Inhalt, der automatisch inline gerendert wird.
 
 **Beispiel-Prompt:**
 
@@ -137,7 +137,7 @@ Die KI generiert ein SVG-Balkendiagramm, das inline in Ihrem Dokument gerendert 
 
 ### Sicherheit
 
-VMark bereinigt SVG-Inhalt vor dem Rendering. Script-Tags und Event-Handler-Attribute (`onclick`, `onerror` usw.) werden entfernt. Dies schützt vor XSS beim Einfügen von SVG aus nicht vertrauenswürdigen Quellen.
+TMark bereinigt SVG-Inhalt vor dem Rendering. Script-Tags und Event-Handler-Attribute (`onclick`, `onerror` usw.) werden entfernt. Dies schützt vor XSS beim Einfügen von SVG aus nicht vertrauenswürdigen Quellen.
 
 ### Größenanpassung
 

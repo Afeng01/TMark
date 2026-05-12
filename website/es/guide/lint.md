@@ -1,10 +1,10 @@
 # Lint de Markdown
 
-VMark incluye un motor de lint integrado que detecta **problemas de corrección**, no preferencias de estilo. El lint se ejecuta a petición (Cmd-Shift-L o **Herramientas → Comprobar Markdown**) y muestra los resultados en línea como subrayados ondulados en el margen, con una insignia en la barra de estado y navegación con F2 entre los hallazgos.
+TMark incluye un motor de lint integrado que detecta **problemas de corrección**, no preferencias de estilo. El lint se ejecuta a petición (Cmd-Shift-L o **Herramientas → Comprobar Markdown**) y muestra los resultados en línea como subrayados ondulados en el margen, con una insignia en la barra de estado y navegación con F2 entre los hallazgos.
 
 ## Qué es y qué no es el lint
 
-El lint de VMark es un comprobador de **corrección**:
+El lint de TMark es un comprobador de **corrección**:
 
 - Referencias cruzadas rotas
 - Referencias indefinidas de enlaces / notas al pie
@@ -14,7 +14,7 @@ El lint de VMark es un comprobador de **corrección**:
 - Imágenes sin texto alternativo
 - Texto de enlace vacío o `href` vacío
 
-El lint de VMark **no** es un comprobador de estilo. No marcará:
+El lint de TMark **no** es un comprobador de estilo. No marcará:
 
 - Longitud de línea
 - Estilo de marcador de lista (`-` vs `*`)
@@ -22,7 +22,7 @@ El lint de VMark **no** es un comprobador de estilo. No marcará:
 - Estilo de encabezado (`#` vs subrayado)
 - Espacios en blanco al final
 
-Para la aplicación de estilo, usa una herramienta independiente como `prettier --check` fuera de VMark.
+Para la aplicación de estilo, usa una herramienta independiente como `prettier --check` fuera de TMark.
 
 ## Referencia de Reglas
 

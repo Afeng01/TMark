@@ -1,10 +1,10 @@
 # Integración con IA (MCP)
 
-VMark incluye un servidor MCP (Model Context Protocol) integrado que permite a los asistentes de IA como Claude interactuar directamente con tu editor.
+TMark incluye un servidor MCP (Model Context Protocol) integrado que permite a los asistentes de IA como Claude interactuar directamente con tu editor.
 
 ## ¿Qué es MCP?
 
-El [Model Context Protocol](https://modelcontextprotocol.io/) es un estándar abierto que permite a los asistentes de IA interactuar con herramientas y aplicaciones externas. El servidor MCP de VMark expone sus capacidades de editor como herramientas que los asistentes de IA pueden usar para:
+El [Model Context Protocol](https://modelcontextprotocol.io/) es un estándar abierto que permite a los asistentes de IA interactuar con herramientas y aplicaciones externas. El servidor MCP de TMark expone sus capacidades de editor como herramientas que los asistentes de IA pueden usar para:
 
 - Leer y escribir contenido de documentos
 - Aplicar formato y crear estructuras
@@ -13,18 +13,18 @@ El [Model Context Protocol](https://modelcontextprotocol.io/) es un estándar ab
 
 ## Configuración Rápida
 
-VMark facilita la conexión con asistentes de IA con instalación en un clic.
+TMark facilita la conexión con asistentes de IA con instalación en un clic.
 
 ### 1. Habilitar el Servidor MCP
 
 Abre **Configuración → Integraciones** y activa el Servidor MCP:
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-settings-server.png" alt="VMark MCP Server Settings" />
+  <img src="/screenshots/mcp-settings-server.png" alt="TMark MCP Server Settings" />
 </div>
 
 - **Habilitar Servidor MCP** — Activa para permitir conexiones de IA
-- **Iniciar al abrir** — Se inicia automáticamente cuando se abre VMark
+- **Iniciar al abrir** — Se inicia automáticamente cuando se abre TMark
 - **Auto-aprobar ediciones** — Aplica cambios de IA sin vista previa (ver más abajo)
 
 ### 2. Instalar Configuración
@@ -32,7 +32,7 @@ Abre **Configuración → Integraciones** y activa el Servidor MCP:
 Haz clic en **Instalar** para tu asistente de IA:
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-settings-install.png" alt="VMark MCP Install Configuration" />
+  <img src="/screenshots/mcp-settings-install.png" alt="TMark MCP Install Configuration" />
 </div>
 
 Asistentes de IA compatibles:
@@ -42,7 +42,7 @@ Asistentes de IA compatibles:
 - **Gemini CLI** — Asistente de IA de Google
 
 ::: info Otros Clientes Compatibles con MCP
-Otros clientes compatibles con MCP como Cursor, Windsurf y herramientas similares también pueden conectarse al servidor MCP de VMark. Configúralos manualmente apuntando a la ruta del binario del servidor MCP (ver [Configuración Manual](#configuracion-manual) más abajo).
+Otros clientes compatibles con MCP como Cursor, Windsurf y herramientas similares también pueden conectarse al servidor MCP de TMark. Configúralos manualmente apuntando a la ruta del binario del servidor MCP (ver [Configuración Manual](#configuracion-manual) más abajo).
 :::
 
 #### Iconos de Estado
@@ -52,37 +52,37 @@ Cada proveedor muestra un indicador de estado:
 | Icono | Estado | Significado |
 |-------|--------|-------------|
 | ✓ Verde | Válido | La configuración es correcta y funciona |
-| ⚠ Ámbar | Ruta no coincide | VMark fue movido — haz clic en **Reparar** |
-| ✗ Rojo | Binario no encontrado | Binario MCP no encontrado — reinstala VMark |
+| ⚠ Ámbar | Ruta no coincide | TMark fue movido — haz clic en **Reparar** |
+| ✗ Rojo | Binario no encontrado | Binario MCP no encontrado — reinstala TMark |
 | ○ Gris | No configurado | No instalado — haz clic en **Instalar** |
 
-::: tip ¿Moviste VMark?
-Si mueves VMark.app a una ubicación diferente, el estado mostrará el ámbar "Ruta no coincide". Simplemente haz clic en el botón **Reparar** para actualizar la configuración con la nueva ruta.
+::: tip ¿Moviste TMark?
+Si mueves TMark.app a una ubicación diferente, el estado mostrará el ámbar "Ruta no coincide". Simplemente haz clic en el botón **Reparar** para actualizar la configuración con la nueva ruta.
 :::
 
 ### 3. Reinicia tu Asistente de IA
 
-Después de instalar o reparar, **reinicia tu asistente de IA** completamente (ciérralo y vuelve a abrirlo) para cargar la nueva configuración. VMark mostrará un recordatorio después de cada cambio de configuración.
+Después de instalar o reparar, **reinicia tu asistente de IA** completamente (ciérralo y vuelve a abrirlo) para cargar la nueva configuración. TMark mostrará un recordatorio después de cada cambio de configuración.
 
 ### 4. Pruébalo
 
 En tu asistente de IA, prueba comandos como:
-- *"¿Qué hay en mi documento de VMark?"*
-- *"Escribe un resumen sobre computación cuántica en VMark"*
+- *"¿Qué hay en mi documento de TMark?"*
+- *"Escribe un resumen sobre computación cuántica en TMark"*
 - *"Añade una tabla de contenidos a mi documento"*
 
 ## Véalo en Acción
 
-Hazle una pregunta a Claude y pídele que escriba la respuesta directamente en tu documento de VMark:
+Hazle una pregunta a Claude y pídele que escriba la respuesta directamente en tu documento de TMark:
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-claude.png" alt="Claude Desktop using VMark MCP" />
-  <p class="screenshot-caption">Claude Desktop llama a <code>document</code> → <code>set_content</code> para escribir en VMark</p>
+  <img src="/screenshots/mcp-claude.png" alt="Claude Desktop using TMark MCP" />
+  <p class="screenshot-caption">Claude Desktop llama a <code>document</code> → <code>set_content</code> para escribir en TMark</p>
 </div>
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-result.png" alt="Content rendered in VMark" />
-  <p class="screenshot-caption">El contenido aparece instantáneamente en VMark, completamente formateado</p>
+  <img src="/screenshots/mcp-result.png" alt="Content rendered in TMark" />
+  <p class="screenshot-caption">El contenido aparece instantáneamente en TMark, completamente formateado</p>
 </div>
 
 <!-- Styles in style.css -->
@@ -98,8 +98,8 @@ Edita `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) 
 ```json
 {
   "mcpServers": {
-    "vmark": {
-      "command": "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+    "tmark": {
+      "command": "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
     }
   }
 }
@@ -112,8 +112,8 @@ Edita `~/.claude.json` o el `.mcp.json` del proyecto:
 ```json
 {
   "mcpServers": {
-    "vmark": {
-      "command": "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+    "tmark": {
+      "command": "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
     }
   }
 }
@@ -124,8 +124,8 @@ Edita `~/.claude.json` o el `.mcp.json` del proyecto:
 Edita `~/.codex/config.toml`:
 
 ```toml
-[mcp_servers.vmark]
-command = "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+[mcp_servers.tmark]
+command = "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
 ```
 
 ### Gemini CLI
@@ -135,22 +135,22 @@ Edita `~/.gemini/settings.json`:
 ```json
 {
   "mcpServers": {
-    "vmark": {
-      "command": "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+    "tmark": {
+      "command": "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
     }
   }
 }
 ```
 
 ::: tip Encontrar la Ruta del Binario
-En macOS, el binario del servidor MCP está dentro de VMark.app:
-- `VMark.app/Contents/MacOS/vmark-mcp-server`
+En macOS, el binario del servidor MCP está dentro de TMark.app:
+- `TMark.app/Contents/MacOS/tmark-mcp-server`
 
 En Windows:
-- `C:\Program Files\VMark\vmark-mcp-server.exe`
+- `C:\Program Files\TMark\tmark-mcp-server.exe`
 
 En Linux:
-- `/usr/bin/vmark-mcp-server` (o donde lo hayas instalado)
+- `/usr/bin/tmark-mcp-server` (o donde lo hayas instalado)
 
 El puerto se detecta automáticamente — no se necesitan `args`.
 :::
@@ -161,29 +161,29 @@ El binario del servidor MCP admite un pequeño conjunto de opciones para diagnó
 
 | Opción | Qué hace |
 |---|---|
-| `--version` (o `-v`) | Muestra la versión (debe coincidir con la de VMark en ejecución) y sale. |
-| `--health-check` | Ejecuta una autoprueba contra el puente de VMark en ejecución y sale. Úsalo para verificar tu instalación antes de conectar un asistente de IA. |
+| `--version` (o `-v`) | Muestra la versión (debe coincidir con la de TMark en ejecución) y sale. |
+| `--health-check` | Ejecuta una autoprueba contra el puente de TMark en ejecución y sale. Úsalo para verificar tu instalación antes de conectar un asistente de IA. |
 | `--port <número>` | Anulación manual del puerto. Omite el protocolo de autodescubrimiento y se conecta en el puerto indicado. Solo es útil para configuraciones heredadas en las que el puerto del puente está fijado externamente; se prefiere la ruta de autodescubrimiento. |
 
 Ejemplo:
 
 ```bash
-vmark-mcp-server --health-check
-vmark-mcp-server --version
-vmark-mcp-server --port 9223   # heredado / manual
+tmark-mcp-server --health-check
+tmark-mcp-server --version
+tmark-mcp-server --port 9223   # heredado / manual
 ```
 
 ## Cómo Funciona
 
 ```text
-AI Assistant <--stdio--> MCP Server <--WebSocket--> VMark Editor
+AI Assistant <--stdio--> MCP Server <--WebSocket--> TMark Editor
 ```
 
-1. **VMark inicia un puente WebSocket** en un puerto disponible al arrancarse
-2. **El servidor MCP** lee el puerto y el token de autenticación del directorio de datos de la aplicación VMark
+1. **TMark inicia un puente WebSocket** en un puerto disponible al arrancarse
+2. **El servidor MCP** lee el puerto y el token de autenticación del directorio de datos de la aplicación TMark
 3. **El servidor MCP** se conecta y autentica a través del puente WebSocket
 4. **El asistente de IA** se comunica con el servidor MCP a través de stdio
-5. **Los comandos se retransmiten** al editor de VMark a través del puente
+5. **Los comandos se retransmiten** al editor de TMark a través del puente
 
 ## Capacidades Disponibles
 
@@ -204,7 +204,7 @@ Consulta la [Referencia de Herramientas MCP](/es/guide/mcp-tools) para documenta
 
 ## Verificar el Estado de MCP
 
-VMark proporciona múltiples formas de verificar el estado del servidor MCP:
+TMark proporciona múltiples formas de verificar el estado del servidor MCP:
 
 ### Indicador en la Barra de Estado
 
@@ -244,14 +244,14 @@ En **Configuración → Integraciones**, cuando el servidor está en ejecución 
 
 ### "Conexión rechazada" o "Sin editor activo"
 
-- Asegúrate de que VMark esté en ejecución y tenga un documento abierto
+- Asegúrate de que TMark esté en ejecución y tenga un documento abierto
 - Verifica que el Servidor MCP esté habilitado en Configuración → Integraciones
 - Comprueba que el puente MCP muestre el estado "En ejecución"
-- Reinicia VMark si la conexión fue interrumpida
+- Reinicia TMark si la conexión fue interrumpida
 
-### Ruta no coincide después de mover VMark
+### Ruta no coincide después de mover TMark
 
-Si moviste VMark.app a una ubicación diferente (por ejemplo, de Descargas a Aplicaciones), la configuración apuntará a la ruta anterior:
+Si moviste TMark.app a una ubicación diferente (por ejemplo, de Descargas a Aplicaciones), la configuración apuntará a la ruta anterior:
 
 1. Abre **Configuración → Integraciones**
 2. Busca el icono de advertencia ámbar ⚠ junto a los proveedores afectados
@@ -266,13 +266,13 @@ Si moviste VMark.app a una ubicación diferente (por ejemplo, de Descargas a Apl
 
 ### Los comandos fallan con "Sin editor activo"
 
-- Asegúrate de que una pestaña de documento esté activa en VMark
+- Asegúrate de que una pestaña de documento esté activa en TMark
 - Haz clic en el área del editor para enfocarlo
 - Algunos comandos requieren que primero haya texto seleccionado
 
 ## Sistema de Sugerencias y Auto-Aprobación
 
-Por defecto, cuando los asistentes de IA modifican tu documento (insertar, reemplazar o eliminar contenido), VMark crea **sugerencias** que requieren tu aprobación:
+Por defecto, cuando los asistentes de IA modifican tu documento (insertar, reemplazar o eliminar contenido), TMark crea **sugerencias** que requieren tu aprobación:
 
 - **Insertar** — El nuevo texto aparece como vista previa de texto fantasma
 - **Reemplazar** — El texto original tiene tachado, el nuevo texto como texto fantasma

@@ -1,14 +1,14 @@
-# VMark Spanish locale
+# TMark Spanish locale
 # Keys follow the convention: menu.<section>.<item>
 # Dynamic menu items (recent files, genies) have their structural labels here too.
 
 menu:
   # === App menu (macOS only) ===
-  app: "VMark"
-  app.about: "Acerca de VMark"
+  app: "TMark"
+  app.about: "Acerca de TMark"
   app.settings: "Ajustes..."
   app.saveAllQuit: "Guardar todo y salir"
-  app.quit: "Salir de VMark"
+  app.quit: "Salir de TMark"
 
   # === File menu ===
   file: "Archivo"
@@ -184,9 +184,9 @@ menu:
 
   # === Help menu ===
   help: "Ayuda"
-  help.vmarkHelp: "Ayuda de VMark"
+  help.tmarkHelp: "Ayuda de TMark"
   help.keyboardShortcuts: "Atajos de teclado"
-  help.installCli: "Comando de shell: instalar 'vmark' en PATH..."
+  help.installCli: "Comando de shell: instalar 'tmark' en PATH..."
   help.reportIssue: "Informar de un problema..."
 
   # === Dynamic menu labels ===

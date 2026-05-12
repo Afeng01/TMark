@@ -1,7 +1,7 @@
 /**
  * Markdown Pipeline — Barrel Export
  *
- * Purpose: Remark-based markdown parsing and serialization for VMark.
+ * Purpose: Remark-based markdown parsing and serialization for TMark.
  * Uses MDAST as the intermediate representation between markdown text
  * and ProseMirror documents.
  *
@@ -12,7 +12,7 @@
  * Key decisions:
  *   - MDAST chosen as IR because remark ecosystem provides robust parsing
  *     and serialization, plus plugin support for GFM/math/frontmatter
- *   - Custom VMark extensions (wiki links, alerts, details, sub/superscript)
+ *   - Custom TMark extensions (wiki links, alerts, details, sub/superscript)
  *     are added via remark plugins in ./plugins/
  *
  * @coordinates-with tiptapExtensions.ts — registers PM schema nodes that pipeline converts to/from

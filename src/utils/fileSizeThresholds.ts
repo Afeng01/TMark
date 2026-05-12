@@ -1,7 +1,7 @@
 /**
  * File Size Thresholds
  *
- * Purpose: Centralizes the byte thresholds that decide how VMark handles a
+ * Purpose: Centralizes the byte thresholds that decide how TMark handles a
  * file at open time. Byte count is a coarse proxy for the real bottleneck
  * (ProseMirror view construction, which scales with block count), but it is
  * free to compute via `fs::metadata` while block count requires parsing.

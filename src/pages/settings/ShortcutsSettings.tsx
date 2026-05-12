@@ -77,7 +77,7 @@ export function ShortcutsSettings() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "vmark-shortcuts.json";
+    a.download = "tmark-shortcuts.json";
     a.click();
     URL.revokeObjectURL(url);
   };

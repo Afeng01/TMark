@@ -1,6 +1,6 @@
 # Link Check
 
-VMark 會驗證 markdown 中本機連結與圖片的目標是否實際存在於磁碟上。它與 [markdown lint 引擎](/zh-TW/guide/lint) 一起，於 `Cmd-Shift-L` 或 **工具 → 檢查 Markdown** 時執行。
+TMark 會驗證 markdown 中本機連結與圖片的目標是否實際存在於磁碟上。它與 [markdown lint 引擎](/zh-TW/guide/lint) 一起，於 `Cmd-Shift-L` 或 **工具 → 檢查 Markdown** 時執行。
 
 ## 它檢查什麼
 

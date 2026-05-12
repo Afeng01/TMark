@@ -1,6 +1,6 @@
 # Raccourcis clavier
 
-VMark est conçu pour les flux de travail axés sur le clavier. La plupart des raccourcis peuvent être personnalisés dans les Paramètres. Un petit nombre de primitives sont fixes&nbsp;: les sélecteurs multi-curseur `Mod+D` (Sélectionner l'occurrence suivante) et `Mod+Shift+L` (Sélectionner toutes les occurrences), ainsi que les liaisons globales Annuler/Rétablir. Les autres raccourcis multi-curseur (Ignorer l'occurrence, Annuler doux du curseur, Ajouter un curseur au-dessus/en-dessous) sont configurables. Les raccourcis marqués _(sensibles au contexte)_ sont gérés à l'intérieur de l'éditeur pour des structures spécifiques (par ex. basculement de la case à cocher de tâche) et ne sont pas exposés dans le registre de personnalisation.
+TMark est conçu pour les flux de travail axés sur le clavier. La plupart des raccourcis peuvent être personnalisés dans les Paramètres. Un petit nombre de primitives sont fixes&nbsp;: les sélecteurs multi-curseur `Mod+D` (Sélectionner l'occurrence suivante) et `Mod+Shift+L` (Sélectionner toutes les occurrences), ainsi que les liaisons globales Annuler/Rétablir. Les autres raccourcis multi-curseur (Ignorer l'occurrence, Annuler doux du curseur, Ajouter un curseur au-dessus/en-dessous) sont configurables. Les raccourcis marqués _(sensibles au contexte)_ sont gérés à l'intérieur de l'éditeur pour des structures spécifiques (par ex. basculement de la case à cocher de tâche) et ne sont pas exposés dans le registre de personnalisation.
 
 ## Notation
 
@@ -9,17 +9,17 @@ VMark est conçu pour les flux de travail axés sur le clavier. La plupart des r
 
 ## Touches de fonction sur macOS
 
-VMark utilise les touches de fonction (F4–F10) pour des basculements de mode rapides. Sur macOS, ces touches sont mappées aux fonctions système (luminosité, volume, etc.) par défaut.
+TMark utilise les touches de fonction (F4–F10) pour des basculements de mode rapides. Sur macOS, ces touches sont mappées aux fonctions système (luminosité, volume, etc.) par défaut.
 
 **Pour utiliser les touches F directement sans maintenir Fn :**
 
 1. Ouvrez **Préférences Système** → **Clavier**
 2. Activez **« Utiliser les touches F1, F2, etc. comme touches de fonction standard »**
 
-Vous pouvez également maintenir la touche **Fn** enfoncée en appuyant sur F4–F10 pour déclencher les raccourcis VMark.
+Vous pouvez également maintenir la touche **Fn** enfoncée en appuyant sur F4–F10 pour déclencher les raccourcis TMark.
 
 ::: tip
-Si vous préférez conserver les fonctions système sur les touches F, vous pouvez personnaliser les raccourcis VMark dans les Paramètres (`Mod + ,`) pour utiliser des combinaisons de touches différentes.
+Si vous préférez conserver les fonctions système sur les touches F, vous pouvez personnaliser les raccourcis TMark dans les Paramètres (`Mod + ,`) pour utiliser des combinaisons de touches différentes.
 :::
 
 ### Référence rapide des touches F

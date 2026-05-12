@@ -1,6 +1,6 @@
 # KI-Anbieter
 
-VMark's [KI-Genies](/de/guide/ai-genies) benötigen einen KI-Anbieter, um Vorschläge zu generieren. Sie können ein lokal installiertes CLI-Tool verwenden oder sich direkt mit einer REST-API verbinden.
+TMark's [KI-Genies](/de/guide/ai-genies) benötigen einen KI-Anbieter, um Vorschläge zu generieren. Sie können ein lokal installiertes CLI-Tool verwenden oder sich direkt mit einer REST-API verbinden.
 
 ## Schnelleinrichtung
 
@@ -15,7 +15,7 @@ Es kann immer nur ein Anbieter gleichzeitig aktiv sein.
 
 ## CLI-Anbieter
 
-CLI-Anbieter verwenden lokal installierte KI-Tools. VMark führt diese als Unterprozesse aus und streamt deren Ausgabe zurück in den Editor.
+CLI-Anbieter verwenden lokal installierte KI-Tools. TMark führt diese als Unterprozesse aus und streamt deren Ausgabe zurück in den Editor.
 
 | Anbieter | CLI-Befehl | Installation |
 |----------|-----------|-------------|
@@ -25,7 +25,7 @@ CLI-Anbieter verwenden lokal installierte KI-Tools. VMark führt diese als Unter
 
 ### Wie CLI-Erkennung funktioniert
 
-Klicken Sie in Einstellungen > Integrationen auf **Erkennen**. VMark durchsucht Ihren `$PATH` nach jedem CLI-Befehl und meldet die Verfügbarkeit. Wenn ein CLI gefunden wird, wird sein Optionsfeld wählbar.
+Klicken Sie in Einstellungen > Integrationen auf **Erkennen**. TMark durchsucht Ihren `$PATH` nach jedem CLI-Befehl und meldet die Verfügbarkeit. Wenn ein CLI gefunden wird, wird sein Optionsfeld wählbar.
 
 ### Vorteile
 
@@ -34,20 +34,20 @@ Klicken Sie in Einstellungen > Integrationen auf **Erkennen**. VMark durchsucht 
 - **Verwendet Ihre CLI-Konfiguration** — Modelleinstellungen, System-Prompts und Abrechnung werden vom CLI selbst verwaltet
 
 ::: tip Abonnement vs. API für Entwickler
-Wenn Sie diese Tools auch für Vibe-Coding verwenden (Claude Code, Codex CLI, Gemini CLI), deckt dasselbe Abonnement sowohl VMark's KI-Genies als auch Ihre Coding-Sitzungen ab — ohne Mehrkosten.
+Wenn Sie diese Tools auch für Vibe-Coding verwenden (Claude Code, Codex CLI, Gemini CLI), deckt dasselbe Abonnement sowohl TMark's KI-Genies als auch Ihre Coding-Sitzungen ab — ohne Mehrkosten.
 :::
 
 ### Einrichtung: Claude CLI
 
 1. Claude Code installieren: `npm install -g @anthropic-ai/claude-code`
 2. `claude` einmal im Terminal ausführen, um sich zu authentifizieren
-3. In VMark auf **Erkennen** klicken, dann **Claude** auswählen
+3. In TMark auf **Erkennen** klicken, dann **Claude** auswählen
 
 ### Einrichtung: Gemini CLI
 
 1. Gemini CLI installieren: `npm install -g @google/gemini-cli` (oder über das [offizielle Repository](https://github.com/google-gemini/gemini-cli))
 2. `gemini` einmal ausführen, um sich mit Ihrem Google-Konto zu authentifizieren
-3. In VMark auf **Erkennen** klicken, dann **Gemini** auswählen
+3. In TMark auf **Erkennen** klicken, dann **Gemini** auswählen
 
 ## REST-API-Anbieter
 
@@ -70,7 +70,7 @@ Wenn Sie einen REST-Anbieter auswählen, erscheinen drei Felder:
 
 ### Automatisches Ausfüllen von Umgebungsvariablen
 
-VMark liest beim Start standardmäßige Umgebungsvariablen. Wenn `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` oder `GEMINI_API_KEY` in Ihrem Shell-Profil gesetzt ist, wird das API-Schlüsselfeld automatisch ausgefüllt, wenn Sie diesen Anbieter auswählen.
+TMark liest beim Start standardmäßige Umgebungsvariablen. Wenn `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` oder `GEMINI_API_KEY` in Ihrem Shell-Profil gesetzt ist, wird das API-Schlüsselfeld automatisch ausgefüllt, wenn Sie diesen Anbieter auswählen.
 
 Das bedeutet, Sie können Ihren Schlüssel einmal in `~/.zshrc` oder `~/.bashrc` festlegen:
 
@@ -78,26 +78,26 @@ Das bedeutet, Sie können Ihren Schlüssel einmal in `~/.zshrc` oder `~/.bashrc`
 export ANTHROPIC_API_KEY="sk-ant-..."
 ```
 
-Dann VMark neu starten — keine manuelle Schlüsseleingabe erforderlich.
+Dann TMark neu starten — keine manuelle Schlüsseleingabe erforderlich.
 
 ### Einrichtung: Anthropic (REST)
 
 1. API-Schlüssel von [console.anthropic.com](https://console.anthropic.com) abrufen
-2. In VMark Einstellungen > Integrationen **Anthropic** auswählen
+2. In TMark Einstellungen > Integrationen **Anthropic** auswählen
 3. API-Schlüssel einfügen
 4. Modell auswählen (Standard: `claude-sonnet-4-5-20250929`)
 
 ### Einrichtung: OpenAI (REST)
 
 1. API-Schlüssel von [platform.openai.com](https://platform.openai.com) abrufen
-2. In VMark Einstellungen > Integrationen **OpenAI** auswählen
+2. In TMark Einstellungen > Integrationen **OpenAI** auswählen
 3. API-Schlüssel einfügen
 4. Modell auswählen (Standard: `gpt-4o`)
 
 ### Einrichtung: Google AI (REST)
 
 1. API-Schlüssel von [aistudio.google.com](https://aistudio.google.com) abrufen
-2. In VMark Einstellungen > Integrationen **Google AI** auswählen
+2. In TMark Einstellungen > Integrationen **Google AI** auswählen
 3. API-Schlüssel einfügen
 4. Modell auswählen (Standard: `gemini-2.0-flash`)
 
@@ -106,7 +106,7 @@ Dann VMark neu starten — keine manuelle Schlüsseleingabe erforderlich.
 Verwenden Sie dies, wenn Sie REST-ähnlichen Zugriff auf eine lokale Ollama-Instanz wünschen oder Ollama auf einem anderen Rechner in Ihrem Netzwerk läuft.
 
 1. Sicherstellen, dass Ollama läuft: `ollama serve`
-2. In VMark Einstellungen > Integrationen **Ollama (API)** auswählen
+2. In TMark Einstellungen > Integrationen **Ollama (API)** auswählen
 3. Endpunkt auf `http://localhost:11434` setzen (oder Ihren Ollama-Host)
 4. API-Schlüssel leer lassen
 5. Modell auf Ihren heruntergeladenen Modellnamen setzen (z.B. `llama3.2`)
@@ -140,20 +140,20 @@ Dies ist nützlich, um einfache Aufgaben an schnellere/günstigere Modelle zu le
 
 ## Zuverlässigkeit und Timeouts
 
-VMark sichert jeden Anbieteraufruf ab, sodass ein blockiertes CLI oder eine fehlerhafte API-Antwort den Editor niemals blockieren kann:
+TMark sichert jeden Anbieteraufruf ab, sodass ein blockiertes CLI oder eine fehlerhafte API-Antwort den Editor niemals blockieren kann:
 
-- **CLI-Unterprozess-Timeout**: Jede CLI-Anbieter-Anfrage wird unter einem Ausführungs-Timeout ausgeführt. Reagiert das CLI nicht, bricht VMark den Aufruf ab, gibt den Fehler an das Genie zurück und gibt den Worker frei — der Thread-Pool kann durch einen außer Kontrolle geratenen Unterprozess nicht blockiert werden.
-- **REST-JSON-Parse-Sicherheit**: Gibt ein REST-Anbieter eine unerwartete Antwortstruktur zurück (HTML-Fehlerseite, abgeschnittenes JSON, Schema-Drift nach einer vorgelagerten Änderung), zeigt VMark dem Frontend einen typisierten Fehler an, anstatt den KI-Listener endlos warten zu lassen. Der Fehler wird im Status-Banner des Genies mit einer Option zum erneuten Versuch angezeigt.
+- **CLI-Unterprozess-Timeout**: Jede CLI-Anbieter-Anfrage wird unter einem Ausführungs-Timeout ausgeführt. Reagiert das CLI nicht, bricht TMark den Aufruf ab, gibt den Fehler an das Genie zurück und gibt den Worker frei — der Thread-Pool kann durch einen außer Kontrolle geratenen Unterprozess nicht blockiert werden.
+- **REST-JSON-Parse-Sicherheit**: Gibt ein REST-Anbieter eine unerwartete Antwortstruktur zurück (HTML-Fehlerseite, abgeschnittenes JSON, Schema-Drift nach einer vorgelagerten Änderung), zeigt TMark dem Frontend einen typisierten Fehler an, anstatt den KI-Listener endlos warten zu lassen. Der Fehler wird im Status-Banner des Genies mit einer Option zum erneuten Versuch angezeigt.
 - **Abbruch-Token**: Lang laufende Genie- oder Workflow-Schritte können jederzeit abgebrochen werden — Abbrechen im Genie-Picker oder Schließen des Panels bricht die laufende Anfrage sauber ab.
 - **Gemeinsamer HTTP-Client**: REST-Anbieter teilen sich einen einzelnen verbindungsgepoolten `reqwest`-Client, sodass aufeinanderfolgende Genie-Aufrufe nicht jedes Mal den TCP/TLS-Handshake-Aufwand zahlen.
-- **Windows-Pfaderkennung**: Unter Windows liest VMark beim Erkennen von CLIs den vollständigen `PATH` des Benutzers (einschließlich PowerShell-exklusiver Einträge), sodass benutzerseitig installierte Tools, die im Terminal funktionieren, auch in VMark funktionieren.
+- **Windows-Pfaderkennung**: Unter Windows liest TMark beim Erkennen von CLIs den vollständigen `PATH` des Benutzers (einschließlich PowerShell-exklusiver Einträge), sodass benutzerseitig installierte Tools, die im Terminal funktionieren, auch in TMark funktionieren.
 
 ## Sicherheitshinweise
 
 - **API-Schlüssel sind flüchtig** — nur im Speicher gespeichert, nie auf Festplatte oder `localStorage`
 - **Umgebungsvariablen** werden einmalig beim Start gelesen und im Speicher zwischengespeichert
-- **CLI-Anbieter** verwenden Ihre bestehende CLI-Authentifizierung — VMark sieht Ihre Zugangsdaten nie
-- **Alle Anfragen gehen direkt** von Ihrem Rechner an den Anbieter — keine VMark-Server dazwischen
+- **CLI-Anbieter** verwenden Ihre bestehende CLI-Authentifizierung — TMark sieht Ihre Zugangsdaten nie
+- **Alle Anfragen gehen direkt** von Ihrem Rechner an den Anbieter — keine TMark-Server dazwischen
 
 ## Fehlerbehebung
 
@@ -161,13 +161,13 @@ VMark sichert jeden Anbieteraufruf ab, sodass ein blockiertes CLI oder eine fehl
 
 **CLI zeigt "Nicht gefunden"** — Das CLI ist nicht in Ihrem `$PATH`. Installieren Sie es oder überprüfen Sie Ihr Shell-Profil. Auf macOS erben GUI-Apps möglicherweise nicht den Terminal-`$PATH` — versuchen Sie, den Pfad zu `/etc/paths.d/` hinzuzufügen.
 
-**CLI hängt / keine Antwort** — VMark's Ausführungs-Timeout bricht den Aufruf automatisch ab; im Status-Banner des Genies erscheint eine Fehlermeldung. Wenn ein bestimmtes CLI den Timeout regelmäßig überschreitet, führen Sie es einmal im Terminal aus, um zu bestätigen, dass es dort funktioniert, und prüfen Sie dann, ob eine interaktive Authentifizierung erforderlich ist.
+**CLI hängt / keine Antwort** — TMark's Ausführungs-Timeout bricht den Aufruf automatisch ab; im Status-Banner des Genies erscheint eine Fehlermeldung. Wenn ein bestimmtes CLI den Timeout regelmäßig überschreitet, führen Sie es einmal im Terminal aus, um zu bestätigen, dass es dort funktioniert, und prüfen Sie dann, ob eine interaktive Authentifizierung erforderlich ist.
 
 **REST-Anbieter gibt 401 zurück** — Ihr API-Schlüssel ist ungültig oder abgelaufen. Generieren Sie einen neuen von der Konsole des Anbieters.
 
 **REST-Anbieter gibt 429 zurück** — Sie haben ein Ratenlimit überschritten. Warten Sie einen Moment und versuchen Sie es erneut, oder wechseln Sie zu einem anderen Anbieter.
 
-**REST-Anbieter gibt korrumpierten / unerwarteten JSON zurück** — VMark zeigt einen typisierten Parse-Fehler an (z. B. „list_models hat eine unerwartete Antwortstruktur zurückgegeben"). Überprüfen Sie die Endpunkt-URL und stellen Sie sicher, dass der API-Vertrag zum ausgewählten Anbietertyp passt; manche selbstgehosteten Gateways kündigen OpenAI-kompatible URLs an, liefern aber ein anderes Schema aus.
+**REST-Anbieter gibt korrumpierten / unerwarteten JSON zurück** — TMark zeigt einen typisierten Parse-Fehler an (z. B. „list_models hat eine unerwartete Antwortstruktur zurückgegeben"). Überprüfen Sie die Endpunkt-URL und stellen Sie sicher, dass der API-Vertrag zum ausgewählten Anbietertyp passt; manche selbstgehosteten Gateways kündigen OpenAI-kompatible URLs an, liefern aber ein anderes Schema aus.
 
 **Langsame Antworten** — CLI-Anbieter fügen Unterprozess-Overhead hinzu. Für schnellere Antworten verwenden Sie REST-Anbieter, die direkt verbinden. Für die schnellste lokale Option verwenden Sie Ollama mit einem kleinen Modell.
 

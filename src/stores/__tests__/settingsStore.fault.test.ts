@@ -18,7 +18,7 @@ import { deepMerge } from "@/utils/deepMerge";
 import { useSettingsStore } from "../settingsStore";
 
 describe("settingsStore — corrupted config recovery", () => {
-  const STORAGE_KEY = "vmark-settings";
+  const STORAGE_KEY = "tmark-settings";
 
   beforeEach(() => {
     // Clear localStorage before each test

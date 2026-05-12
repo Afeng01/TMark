@@ -2,7 +2,7 @@
  * Workspace Identity Logic
  *
  * Purpose: Pure helpers for generating workspace identities and managing their trust level.
- * Each workspace gets a unique UUID persisted in its .vmark/config.json file.
+ * Each workspace gets a unique UUID persisted in its .tmark/config.json file.
  *
  * Key decisions:
  *   - UUID v4 (crypto.randomUUID) for globally unique workspace identification

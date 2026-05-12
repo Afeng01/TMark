@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Throwaway spike probes for Phase 0 of the GHA Workflow Viewer plan. Not part of vmark's main package.json — these graduate into the main project at Phase 1.",
+  "description": "Throwaway spike probes for Phase 0 of the GHA Workflow Viewer plan. Not part of tmark's main package.json — these graduate into the main project at Phase 1.",
   "scripts": {
     "spike:a": "node spike-a-parser.mjs",
     "spike:d": "node spike-d-roundtrip.mjs"

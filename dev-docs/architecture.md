@@ -1,15 +1,15 @@
-# VMark System Architecture
+# TMark System Architecture
 
 > Scope: System-level orientation for developers and AI agents. Read this first
 > when joining the project or starting a new session.
 
 ## System Shape
 
-VMark is a desktop Markdown editor built on three cooperating processes:
+TMark is a desktop Markdown editor built on three cooperating processes:
 
 ```mermaid
 flowchart TB
-    subgraph Desktop["VMark Desktop App"]
+    subgraph Desktop["TMark Desktop App"]
         Shell["Tauri Shell (Rust)"]
         Webview["React Webview"]
         MCP["MCP Sidecar (Node.js)"]
@@ -33,7 +33,7 @@ flowchart TB
 | ------------- | ------------------------- | ------------------------------ | ------------------------------------------------------------------- |
 | Tauri Shell   | Rust                      | `src-tauri/src/lib.rs`         | Window management, file I/O, menus, AI provider routing, MCP bridge |
 | React Webview | Browser (WebView2/WebKit) | `src/main.tsx` → `src/App.tsx` | Editor UI, stores, plugins, keyboard shortcuts                      |
-| MCP Sidecar   | Node.js (bundled)         | `vmark-mcp-server/src/cli.ts`  | MCP protocol handler, tool registration, AI client communication    |
+| MCP Sidecar   | Node.js (bundled)         | `tmark-mcp-server/src/cli.ts`  | MCP protocol handler, tool registration, AI client communication    |
 
 ## Entry Points
 
@@ -64,7 +64,7 @@ flowchart TB
 | `utils/`           | \~77 files  | Helpers, markdown pipeline, cursor sync, hot exit                          |
 | `hooks/mcpBridge/` | (subdir)    | Frontend handlers for MCP tool calls                                       |
 
-### MCP Sidecar (`vmark-mcp-server/src/`)
+### MCP Sidecar (`tmark-mcp-server/src/`)
 
 | File / Dir  | Role                                                               |
 | ----------- | ------------------------------------------------------------------ |
@@ -143,7 +143,7 @@ User triggers Genie (Cmd+G or menu)
 | `src/lib/`              | 3 dirs | CJK formatter, GHA workflow IR + parser + save pipeline, workflow routing | stores (settings)                               |
 | `src/types/`            | \~5    | Type definitions             | plugins (format types)                          |
 | `src-tauri/src/`        | 24     | Rust backend                 | (self-contained)                                |
-| `vmark-mcp-server/src/` | \~25   | MCP sidecar                  | (self-contained)                                |
+| `tmark-mcp-server/src/` | \~25   | MCP sidecar                  | (self-contained)                                |
 
 ## Dependency Flow
 

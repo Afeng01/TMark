@@ -121,7 +121,7 @@ Extended capabilities that Claude Code loads on demand:
 | `tauri-mcp-test-runner` / `tauri-mcp-testing` | E2E testing via Tauri MCP |
 | `tauri-v2-integration` | Frontend-backend IPC bridges |
 | `tiptap-dev` / `tiptap-editor` | Rich text editor work |
-| `translate-docs` | Translate VMark docs/strings to all 9 locales |
+| `translate-docs` | Translate TMark docs/strings to all 9 locales |
 | `workflow-audit` | Audit GitHub Actions workflows |
 
 ### Agents (`agents/`)
@@ -157,5 +157,5 @@ Composite action: `.github/actions/claude-report/action.yml`
 | `AGENTS.md` | Single source of truth for all AI tool instructions |
 | `CLAUDE.md` | Claude Code entry point — `@AGENTS.md` directive |
 | `CLAUDE.local.md` | Personal instructions (gitignored) |
-| `.mcp.json` | MCP server registrations (Tauri only — **never** add Chrome DevTools; VMark is a Tauri app, see AGENTS.md) |
+| `.mcp.json` | MCP server registrations (Tauri only — **never** add Chrome DevTools; TMark is a Tauri app, see AGENTS.md) |
 | `.codex-toolkit.md` | Codex toolkit project-specific settings |

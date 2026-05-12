@@ -1,6 +1,6 @@
-# VMark WebKit Perf Scenarios
+# TMark WebKit Perf Scenarios
 
-Real-WebView performance measurement for VMark, driven by the AI assistant
+Real-WebView performance measurement for TMark, driven by the AI assistant
 through the Tauri MCP bridge. Complements `pnpm bench:editor` — that bench
 runs in jsdom (no layout/paint), this scenario runs in the actual WebKit
 WebView the user ships.
@@ -21,11 +21,11 @@ measures it directly:
 
 ## What you need
 
-1. **A debug build of VMark must be running.** The Tauri MCP bridge plugin
-   is `#[cfg(debug_assertions)]` — release builds (`/Applications/VMark.app`)
+1. **A debug build of TMark must be running.** The Tauri MCP bridge plugin
+   is `#[cfg(debug_assertions)]` — release builds (`/Applications/TMark.app`)
    don't expose it.
 2. **The debug build's MCP bridge port.** It defaults to a random port at
-   startup; find it via `lsof -iTCP -sTCP:LISTEN -P | grep vmark` after the
+   startup; find it via `lsof -iTCP -sTCP:LISTEN -P | grep tmark` after the
    app boots. (The default in `tauri-plugin-mcp-bridge` ≥0.8 is 9223 unless
    another app on the host already grabbed it — Claudepot does, in many
    dev setups.)
@@ -34,20 +34,20 @@ measures it directly:
 
 ## Run it
 
-### Step 1 — start a debug VMark
+### Step 1 — start a debug TMark
 
 ```bash
 pnpm tauri:dev
 # Wait for the window to appear, then in another shell:
-lsof -iTCP -sTCP:LISTEN -P | grep vmark | grep -v mcp-server
-# → vmark    NNNN  joker  ... TCP localhost:PORT (LISTEN)
+lsof -iTCP -sTCP:LISTEN -P | grep tmark | grep -v mcp-server
+# → tmark    NNNN  joker  ... TCP localhost:PORT (LISTEN)
 ```
 
 The bridge prints its port to the dev-server stderr too.
 
 ### Step 2 — open the perf fixture
 
-Open `dev-docs/archive/performance-test.md` in VMark (drag-drop or File →
+Open `dev-docs/archive/performance-test.md` in TMark (drag-drop or File →
 Open). This is the standard stress fixture — exercises every node type the
 production editor renders.
 
@@ -59,12 +59,12 @@ The AI assistant (or a human with MCP tools) executes it via Tauri MCP:
 ```
 1. tauri_driver_session start at the port from step 1
 2. tauri_webview_execute_js — paste the contents of measure-webview.js
-   to register window.__VMARK_PERF__
+   to register window.__TMARK_PERF__
 3. tauri_webview_execute_js — run:
       (async () => {
-        const view = window.__VMARK_DEBUG__?.editorView;
+        const view = window.__TMARK_DEBUG__?.editorView;
         if (!view) throw new Error("No active editor");
-        return await window.__VMARK_PERF__.measure(view, 100, "performance-test.md");
+        return await window.__TMARK_PERF__.measure(view, 100, "performance-test.md");
       })()
 4. The return value is a JSON PerfReport — capture and save under .perf-history/
 ```

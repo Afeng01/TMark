@@ -1,6 +1,6 @@
 # Diagrammes Mermaid
 
-VMark prend en charge les diagrammes [Mermaid](https://mermaid.js.org/) pour créer des organigrammes, des diagrammes de séquence et d'autres visualisations directement dans vos documents Markdown.
+TMark prend en charge les diagrammes [Mermaid](https://mermaid.js.org/) pour créer des organigrammes, des diagrammes de séquence et d'autres visualisations directement dans vos documents Markdown.
 
 [[toc]]
 
@@ -50,7 +50,7 @@ Le panneau de prévisualisation mémorise sa position si vous le déplacez, faci
 
 ## Types de diagrammes pris en charge
 
-VMark prend en charge tous les types de diagrammes Mermaid :
+TMark prend en charge tous les types de diagrammes Mermaid :
 
 ### Organigramme
 
@@ -245,7 +245,7 @@ Lors de la modification d'un bloc de code mermaid en mode WYSIWYG, un bouton de 
 
 ### Intégration du thème
 
-Les diagrammes Mermaid s'adaptent automatiquement au thème actuel de VMark (White, Paper, Mint, Sepia ou Night).
+Les diagrammes Mermaid s'adaptent automatiquement au thème actuel de TMark (White, Paper, Mint, Sepia ou Night).
 
 ### Exporter en PNG
 
@@ -264,7 +264,7 @@ Lors de l'exportation du document complet en HTML ou PDF, les diagrammes Mermaid
 
 ## Corriger les diagrammes générés par IA
 
-VMark utilise **Mermaid v11**, qui a un parseur plus strict (Langium) que les versions plus anciennes. Les outils IA (ChatGPT, Claude, Copilot, etc.) génèrent souvent une syntaxe qui fonctionnait dans les anciennes versions de Mermaid mais échoue en v11. Voici les problèmes les plus courants et comment les corriger.
+TMark utilise **Mermaid v11**, qui a un parseur plus strict (Langium) que les versions plus anciennes. Les outils IA (ChatGPT, Claude, Copilot, etc.) génèrent souvent une syntaxe qui fonctionnait dans les anciennes versions de Mermaid mais échoue en v11. Voici les problèmes les plus courants et comment les corriger.
 
 ### 1. Labels non cités avec des caractères spéciaux
 
@@ -483,7 +483,7 @@ Les deux outils nécessitent [Node.js](https://nodejs.org/) (v18 ou version ult�
 
 ## Apprendre la syntaxe Mermaid
 
-VMark affiche la syntaxe Mermaid standard. Pour maîtriser la création de diagrammes, référez-vous à la documentation officielle Mermaid :
+TMark affiche la syntaxe Mermaid standard. Pour maîtriser la création de diagrammes, référez-vous à la documentation officielle Mermaid :
 
 ### Documentation officielle
 
@@ -500,9 +500,9 @@ VMark affiche la syntaxe Mermaid standard. Pour maîtriser la création de diagr
 
 ### Outils pratiques
 
-- **[Éditeur en direct Mermaid](https://mermaid.live/)** — Terrain de jeu interactif pour tester et prévisualiser les diagrammes avant de les coller dans VMark
+- **[Éditeur en direct Mermaid](https://mermaid.live/)** — Terrain de jeu interactif pour tester et prévisualiser les diagrammes avant de les coller dans TMark
 - **[Documentation Mermaid](https://mermaid.js.org/)** — Référence complète avec exemples pour tous les types de diagrammes
 
 ::: tip
-L'éditeur en direct est idéal pour expérimenter avec des diagrammes complexes. Une fois que votre diagramme est correct, copiez le code dans VMark.
+L'éditeur en direct est idéal pour expérimenter avec des diagrammes complexes. Une fois que votre diagramme est correct, copiez le code dans TMark.
 :::

@@ -1,5 +1,5 @@
 /**
- * Purpose: `vmark.workspace.*` handlers — file and window lifecycle.
+ * Purpose: `tmark.workspace.*` handlers — file and window lifecycle.
  *
  *   Covers `new`, `open`, `save`, `save_as`, `close`, `switch_tab`, and
  *   `focus_window`. All operate at the file/window boundary; nothing
@@ -47,7 +47,7 @@ function getWindowLabel(args: Record<string, unknown>): string {
 }
 
 /**
- * Handle `vmark.workspace.new`. Creates a new untitled tab in the
+ * Handle `tmark.workspace.new`. Creates a new untitled tab in the
  * focused (or specified) window. Args: `{kind?, windowLabel?}`.
  */
 export async function handleWorkspaceNew(
@@ -71,7 +71,7 @@ export async function handleWorkspaceNew(
 }
 
 /**
- * Handle `vmark.workspace.open`. Reads `filePath` from disk and opens
+ * Handle `tmark.workspace.open`. Reads `filePath` from disk and opens
  * it in a new tab. Args: `{filePath: string, windowLabel?: string}`.
  */
 export async function handleWorkspaceOpen(
@@ -159,7 +159,7 @@ function resolveTabForSave(
 }
 
 /**
- * Handle `vmark.workspace.save`. Args: `{tabId?: string}`.
+ * Handle `tmark.workspace.save`. Args: `{tabId?: string}`.
  */
 export async function handleWorkspaceSave(
   id: string,
@@ -193,7 +193,7 @@ export async function handleWorkspaceSave(
 }
 
 /**
- * Handle `vmark.workspace.save_as`.
+ * Handle `tmark.workspace.save_as`.
  *
  * Args: `{tabId?: string, filePath: string}`.
  */
@@ -266,7 +266,7 @@ export async function handleWorkspaceSaveAs(
 }
 
 /**
- * Handle `vmark.workspace.close`.
+ * Handle `tmark.workspace.close`.
  *
  * Args: `{tabId, force?: boolean}`. When the tab is dirty and `force`
  * is not true, we refuse the close with `{closed: false, reason: "DIRTY"}`
@@ -321,7 +321,7 @@ export async function handleWorkspaceClose(
 }
 
 /**
- * Handle `vmark.workspace.switch_tab`. Args: `{tabId: string}`.
+ * Handle `tmark.workspace.switch_tab`. Args: `{tabId: string}`.
  */
 export async function handleWorkspaceSwitchTab(
   id: string,
@@ -359,7 +359,7 @@ export async function handleWorkspaceSwitchTab(
 }
 
 /**
- * Handle `vmark.workspace.focus_window`. Args: `{windowLabel: string}`.
+ * Handle `tmark.workspace.focus_window`. Args: `{windowLabel: string}`.
  */
 export async function handleWorkspaceFocusWindow(
   id: string,

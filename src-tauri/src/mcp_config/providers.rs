@@ -88,11 +88,11 @@ fn get_target_triple() -> &'static str {
 }
 
 pub(crate) fn get_mcp_binary_path() -> Result<String, String> {
-    let binary_name_with_target = format!("vmark-mcp-server-{}", get_target_triple());
-    let binary_name_simple = "vmark-mcp-server";
+    let binary_name_with_target = format!("tmark-mcp-server-{}", get_target_triple());
+    let binary_name_simple = "tmark-mcp-server";
 
     if cfg!(debug_assertions) {
-        // Dev: src-tauri/binaries/vmark-mcp-server-{target}
+        // Dev: src-tauri/binaries/tmark-mcp-server-{target}
         let manifest_dir = env!("CARGO_MANIFEST_DIR");
         let dev_path = PathBuf::from(manifest_dir)
             .join("binaries")
@@ -143,7 +143,7 @@ pub(crate) fn get_mcp_binary_path() -> Result<String, String> {
     }
 
     Err(format!(
-        "MCP server binary not found: {}. Please reinstall VMark.",
+        "MCP server binary not found: {}. Please reinstall TMark.",
         binary_name_simple
     ))
 }

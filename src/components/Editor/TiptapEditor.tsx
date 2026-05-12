@@ -247,7 +247,7 @@ export function TiptapEditorInner({ hidden = false, readOnly = false }: TiptapEd
   const editor = useEditor({
     editable: !readOnly,
     extensions,
-    // Tiptap re-renders the React tree on every transaction by default. VMark's
+    // Tiptap re-renders the React tree on every transaction by default. TMark's
     // editor state flows through Zustand selectors and explicit onUpdate/onSelectionUpdate
     // hooks, so the blanket re-render is wasted work — especially on large docs where
     // typing produces dozens of transactions per second.

@@ -1,7 +1,7 @@
 /**
  * CodeMirror Extensions Configuration
  *
- * Purpose: Assembles the CodeMirror extension stack for VMark's source editor —
+ * Purpose: Assembles the CodeMirror extension stack for TMark's source editor —
  * markdown language support, custom keymaps, themes, decorations (media tags), and plugins.
  *
  * Key decisions:

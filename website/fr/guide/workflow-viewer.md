@@ -1,15 +1,15 @@
 # Visualiseur de workflows GitHub Actions
 
-VMark affiche le YAML des workflows GitHub Actions sous forme de graphe orienté acyclique (DAG) interactif et vous permet de modifier les jobs, les étapes et les déclencheurs via des formulaires structurés — sans jamais perdre les commentaires, les ancres ou la mise en forme du fichier sous-jacent.
+TMark affiche le YAML des workflows GitHub Actions sous forme de graphe orienté acyclique (DAG) interactif et vous permet de modifier les jobs, les étapes et les déclencheurs via des formulaires structurés — sans jamais perdre les commentaires, les ancres ou la mise en forme du fichier sous-jacent.
 
 La fonctionnalité opère sur deux surfaces&nbsp;:
 
 1. **Fichiers `.yml` autonomes** sous `.github/workflows/` (ou tout fichier dont la structure de premier niveau correspond à celle d'un workflow)&nbsp;: vue partagée avec la source à gauche et le canevas interactif + l'éditeur de formulaires à droite.
-2. **Blocs de code Markdown**&nbsp;: lorsqu'un bloc avec triple accent grave en `yaml` ou `yml` contient un workflow reconnu, VMark le rend en ligne sous forme de DAG façon Mermaid, comme les blocs `mermaid`.
+2. **Blocs de code Markdown**&nbsp;: lorsqu'un bloc avec triple accent grave en `yaml` ou `yml` contient un workflow reconnu, TMark le rend en ligne sous forme de DAG façon Mermaid, comme les blocs `mermaid`.
 
 ## Fichiers de workflow autonomes
 
-Ouvrez n'importe quel fichier `.github/workflows/*.yml` dans VMark. Le panneau latéral droit s'ouvre automatiquement et affiche&nbsp;:
+Ouvrez n'importe quel fichier `.github/workflows/*.yml` dans TMark. Le panneau latéral droit s'ouvre automatiquement et affiche&nbsp;:
 
 - L'intégralité du workflow sous forme de canevas React Flow interactif (les jobs comme nœuds, les dépendances `needs:` comme arêtes).
 - Un panneau d'éditeur structuré sous le canevas.
@@ -53,7 +53,7 @@ Le résumé des déclencheurs (événement, branches, tags, chemins, cron, types
 
 Les modifications s'accumulent dans une liste de patchs en mémoire à mesure que vous changez les champs. Le bouton Enregistrer affiche le compteur courant (par ex. **3 non enregistrés**).
 
-Lorsque vous cliquez sur Enregistrer, VMark&nbsp;:
+Lorsque vous cliquez sur Enregistrer, TMark&nbsp;:
 
 1. Lit le YAML actuel depuis l'éditeur.
 2. Applique tous les patchs en file d'attente sur l'arbre syntaxique concret (CST) du YAML — préservant les commentaires, les ancres et la mise en forme existante.
@@ -84,11 +84,11 @@ jobs:
 ```
 ````
 
-VMark détecte la structure du workflow (`jobs:` au plus haut niveau avec `runs-on` par job) et rend le diagramme en ligne. Le diagramme est en lecture seule — modifiez la source pour changer le workflow.
+TMark détecte la structure du workflow (`jobs:` au plus haut niveau avec `runs-on` par job) et rend le diagramme en ligne. Le diagramme est en lecture seule — modifiez la source pour changer le workflow.
 
 ## Diagnostics
 
-VMark fait apparaître les diagnostics d'analyse et de lint à côté de la source&nbsp;:
+TMark fait apparaître les diagnostics d'analyse et de lint à côté de la source&nbsp;:
 
 | Préfixe de code | Signification |
 |-----------------|---------------|
@@ -105,7 +105,7 @@ Installez `actionlint` et activez **Utiliser actionlint si disponible** dans Par
 
 ## Métadonnées d'action
 
-Pour les étapes `uses:` qui référencent des GitHub Actions publiques, VMark peut récupérer le `action.yml` de chaque action pour alimenter les descriptions des entrées dans l'éditeur structuré. Cette option est facultative et mise en cache sur disque pendant 24 heures.
+Pour les étapes `uses:` qui référencent des GitHub Actions publiques, TMark peut récupérer le `action.yml` de chaque action pour alimenter les descriptions des entrées dans l'éditeur structuré. Cette option est facultative et mise en cache sur disque pendant 24 heures.
 
 Activez **Récupérer les métadonnées d'action** dans Paramètres → Avancé. Désactivez-la pour conserver toutes les références d'action en texte pur — aucune requête réseau n'est effectuée.
 
@@ -121,4 +121,4 @@ Le panneau latéral du workflow inclut trois options d'export accessibles depuis
 
 ## Ce que ce n'est pas
 
-VMark n'exécute pas les workflows GitHub Actions. C'est un visualiseur et un éditeur — l'exécution reste l'affaire de GitHub. La fonctionnalité sert uniquement à lire, relire et créer du YAML de workflow.
+TMark n'exécute pas les workflows GitHub Actions. C'est un visualiseur et un éditeur — l'exécution reste l'affaire de GitHub. La fonctionnalité sert uniquement à lire, relire et créer du YAML de workflow.

@@ -455,7 +455,7 @@ describe("settingsStore paragraphSpacing → blockSpacing migration", () => {
         fontSize: 18,
       },
     };
-    const storageKey = "vmark-settings";
+    const storageKey = "tmark-settings";
     localStorage.setItem(
       storageKey,
       JSON.stringify({ state: legacyPersistedState, version: 0 })

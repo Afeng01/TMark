@@ -1,6 +1,6 @@
-# vmark Code Examples
+# tmark Code Examples
 
-Real examples from the vmark codebase demonstrating Tiptap API patterns.
+Real examples from the tmark codebase demonstrating Tiptap API patterns.
 
 ## Block Type Commands
 

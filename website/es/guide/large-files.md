@@ -1,17 +1,17 @@
 # Archivos grandes
 
-VMark abre la mayoría de los archivos markdown al instante, pero los archivos muy grandes necesitan un cuidado adicional para mantener la respuesta. Esta página describe cómo VMark los maneja y cómo puedes ajustar su comportamiento.
+TMark abre la mayoría de los archivos markdown al instante, pero los archivos muy grandes necesitan un cuidado adicional para mantener la respuesta. Esta página describe cómo TMark los maneja y cómo puedes ajustar su comportamiento.
 
 ## Qué cuenta como "grande"
 
-VMark clasifica un archivo por tamaño antes de abrirlo:
+TMark clasifica un archivo por tamaño antes de abrirlo:
 
 | Tamaño | Categoría | Qué ocurre |
 |--------|-----------|------------|
 | < 1 MB | Pequeño | Se abre en modo WYSIWYG (texto enriquecido) al instante. |
 | 1 MB – 5 MB | Grande | Se abre en **modo Fuente** por defecto — en menos de un segundo. La barra de estado ofrece "Cambiar a WYSIWYG". |
 | 5 MB – 50 MB | Enorme | Aparece primero un diálogo de confirmación. Solo se abre en modo Fuente. |
-| ≥ 50 MB | Rechazado | VMark se niega a abrir el archivo. Usa `less`, `bat` o una herramienta similar en su lugar. |
+| ≥ 50 MB | Rechazado | TMark se niega a abrir el archivo. Usa `less`, `bat` o una herramienta similar en su lugar. |
 
 El tamaño se comprueba a través del sistema operativo sin leer el archivo, por lo que la decisión es rápida y no precarga datos.
 
@@ -43,7 +43,7 @@ El rechazo absoluto a 50 MB no es ajustable por el usuario. La webview no puede 
 
 ## Casos límite
 
-- **El archivo crece mientras está abierto.** VMark decide la categoría según el tamaño en el momento de abrirlo. Un archivo que crezca a 2 MB mientras lo editas se queda en el modo que hayas elegido.
+- **El archivo crece mientras está abierto.** TMark decide la categoría según el tamaño en el momento de abrirlo. Un archivo que crezca a 2 MB mientras lo editas se queda en el modo que hayas elegido.
 - **Enlaces simbólicos.** Los tamaños reflejan el archivo de destino, así que un symlink a un archivo de 10 MB se trata como enorme.
 - **Archivos vacíos.** Los archivos de cero bytes cuentan como pequeños y se abren en WYSIWYG.
 - **El archivo desaparece entre la comprobación de tamaño y la lectura.** Surge el error normal de "archivo no encontrado" — no se lanza ninguna advertencia adicional.

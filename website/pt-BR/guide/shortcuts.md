@@ -1,6 +1,6 @@
 # Atalhos de Teclado
 
-O VMark é projetado para fluxos de trabalho com teclado em primeiro lugar. A maioria dos atalhos pode ser personalizada nas Configurações. Algumas primitivas são fixas: os seletores de múltiplos cursores `Mod+D` (Selecionar Próxima Ocorrência) e `Mod+Shift+L` (Selecionar Todas as Ocorrências), e os bindings globais de Desfazer/Refazer. Os demais atalhos de múltiplos cursores (Pular Ocorrência, Desfazer Cursor Suave, Adicionar Cursor Acima/Abaixo) são configuráveis. Atalhos marcados como _(sensíveis ao contexto)_ são tratados dentro do editor para estruturas específicas (ex.: alternar caixa de seleção em lista de tarefas) e não aparecem no registro de personalização.
+O TMark é projetado para fluxos de trabalho com teclado em primeiro lugar. A maioria dos atalhos pode ser personalizada nas Configurações. Algumas primitivas são fixas: os seletores de múltiplos cursores `Mod+D` (Selecionar Próxima Ocorrência) e `Mod+Shift+L` (Selecionar Todas as Ocorrências), e os bindings globais de Desfazer/Refazer. Os demais atalhos de múltiplos cursores (Pular Ocorrência, Desfazer Cursor Suave, Adicionar Cursor Acima/Abaixo) são configuráveis. Atalhos marcados como _(sensíveis ao contexto)_ são tratados dentro do editor para estruturas específicas (ex.: alternar caixa de seleção em lista de tarefas) e não aparecem no registro de personalização.
 
 ## Notação
 
@@ -9,17 +9,17 @@ O VMark é projetado para fluxos de trabalho com teclado em primeiro lugar. A ma
 
 ## Teclas de Função no macOS
 
-O VMark usa teclas de função (F4–F10) para alternâncias rápidas de modo. No macOS, essas teclas são mapeadas para funções do sistema (brilho, volume, etc.) por padrão.
+O TMark usa teclas de função (F4–F10) para alternâncias rápidas de modo. No macOS, essas teclas são mapeadas para funções do sistema (brilho, volume, etc.) por padrão.
 
 **Para usar as teclas F diretamente sem segurar Fn:**
 
 1. Abra **Configurações do Sistema** → **Teclado**
 2. Habilite **"Usar teclas F1, F2, etc. como teclas de função padrão"**
 
-Alternativamente, segure a tecla **Fn** ao pressionar F4–F10 para acionar os atalhos do VMark.
+Alternativamente, segure a tecla **Fn** ao pressionar F4–F10 para acionar os atalhos do TMark.
 
 ::: tip
-Se você preferir manter as funções do sistema nas teclas F, pode personalizar os atalhos do VMark nas Configurações (`Mod + ,`) para usar combinações de teclas diferentes.
+Se você preferir manter as funções do sistema nas teclas F, pode personalizar os atalhos do TMark nas Configurações (`Mod + ,`) para usar combinações de teclas diferentes.
 :::
 
 ### Referência Rápida de Teclas F

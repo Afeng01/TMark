@@ -1,6 +1,6 @@
 # Gestione del Workspace
 
-Un workspace in VMark è una cartella aperta come radice del tuo progetto. Quando apri un workspace, la barra laterale mostra un albero dei file, Apertura Rapida indicizza ogni file markdown, il terminale si avvia nella radice del progetto e le schede aperte vengono ricordate per la prossima volta.
+Un workspace in TMark è una cartella aperta come radice del tuo progetto. Quando apri un workspace, la barra laterale mostra un albero dei file, Apertura Rapida indicizza ogni file markdown, il terminale si avvia nella radice del progetto e le schede aperte vengono ricordate per la prossima volta.
 
 Senza un workspace puoi ancora aprire singoli file, ma perdi l'esplora file, la ricerca nel progetto e il ripristino della sessione.
 
@@ -10,13 +10,13 @@ Senza un workspace puoi ancora aprire singoli file, ma perdi l'esplora file, la 
 |--------|------|
 | Menu | **File > Apri Workspace** |
 | Apertura Rapida | `Mod + O`, poi seleziona **Sfoglia...** in fondo |
-| Trascina e rilascia | Trascina un file markdown da Finder nella finestra — VMark rileva la radice del progetto e apre il workspace automaticamente |
+| Trascina e rilascia | Trascina un file markdown da Finder nella finestra — TMark rileva la radice del progetto e apre il workspace automaticamente |
 | Workspace Recenti | **File > Workspace Recenti** e scegli un progetto precedente |
 
-Quando apri un workspace, VMark mostra la barra laterale con l'esplora file. Se il workspace è stato aperto in precedenza, le schede aperte in precedenza vengono ripristinate.
+Quando apri un workspace, TMark mostra la barra laterale con l'esplora file. Se il workspace è stato aperto in precedenza, le schede aperte in precedenza vengono ripristinate.
 
 ::: tip
-Se la finestra corrente ha modifiche non salvate, VMark offre di aprire il workspace in una nuova finestra invece di sostituire il tuo lavoro.
+Se la finestra corrente ha modifiche non salvate, TMark offre di aprire il workspace in una nuova finestra invece di sostituire il tuo lavoro.
 :::
 
 ## Esplora File
@@ -90,7 +90,7 @@ Senza un workspace, Apertura Rapida funziona ancora — mostra i file recenti e 
 
 ## Ricerca nei contenuti del workspace
 
-Quando un workspace è aperto, VMark può cercare nei **contenuti dei file** (non solo nei nomi) corrispondenze nei file markdown e di testo.
+Quando un workspace è aperto, TMark può cercare nei **contenuti dei file** (non solo nei nomi) corrispondenze nei file markdown e di testo.
 
 | Azione | Scorciatoia |
 |---|---|
@@ -112,7 +112,7 @@ Questa è distinta da [Apertura Rapida](#apertura-rapida) che cerca solo i *nomi
 
 ## Workspace Recenti
 
-VMark ricorda fino a 10 workspace aperti di recente. Accedili da **File > Workspace Recenti** nella barra dei menu.
+TMark ricorda fino a 10 workspace aperti di recente. Accedili da **File > Workspace Recenti** nella barra dei menu.
 
 - I workspace sono ordinati per ora dell'ultima apertura (il più recente per primo)
 - L'elenco si sincronizza con il menu nativo ad ogni modifica
@@ -120,7 +120,7 @@ VMark ricorda fino a 10 workspace aperti di recente. Accedili da **File > Worksp
 
 ## Impostazioni del Workspace
 
-Ogni workspace ha la propria configurazione che persiste tra le sessioni. Le impostazioni vengono memorizzate nella directory dei dati dell'applicazione VMark — non all'interno della cartella del progetto — in modo che il tuo workspace rimanga pulito.
+Ogni workspace ha la propria configurazione che persiste tra le sessioni. Le impostazioni vengono memorizzate nella directory dei dati dell'applicazione TMark — non all'interno della cartella del progetto — in modo che il tuo workspace rimanga pulito.
 
 Le seguenti impostazioni vengono salvate per workspace:
 
@@ -137,7 +137,7 @@ La configurazione del workspace è legata al percorso della cartella. Aprire la 
 
 ## Ripristino della Sessione
 
-Quando chiudi una finestra che ha un workspace aperto, VMark salva l'elenco delle schede aperte nella configurazione del workspace. La prossima volta che apri lo stesso workspace, quelle schede vengono ripristinate automaticamente.
+Quando chiudi una finestra che ha un workspace aperto, TMark salva l'elenco delle schede aperte nella configurazione del workspace. La prossima volta che apri lo stesso workspace, quelle schede vengono ripristinate automaticamente.
 
 - Vengono ripristinate solo le schede con un percorso file salvato (le schede senza titolo non vengono persistite)
 - Se un file è stato spostato o eliminato dall'ultima sessione, viene saltato silenziosamente
@@ -145,13 +145,13 @@ Quando chiudi una finestra che ha un workspace aperto, VMark salva l'elenco dell
 
 ## Multi-Finestra
 
-Ogni finestra VMark può avere il proprio workspace indipendente. Questo ti consente di lavorare su più progetti contemporaneamente.
+Ogni finestra TMark può avere il proprio workspace indipendente. Questo ti consente di lavorare su più progetti contemporaneamente.
 
 - **File > Nuova Finestra** apre una finestra nuova
 - L'apertura di un workspace in una nuova finestra non influisce sulle altre finestre
 - Le dimensioni e la posizione della finestra vengono ricordate per finestra
 
-Quando trascini un file markdown da Finder e la finestra corrente ha già lavoro non salvato, VMark apre il progetto del file in una nuova finestra automaticamente.
+Quando trascini un file markdown da Finder e la finestra corrente ha già lavoro non salvato, TMark apre il progetto del file in una nuova finestra automaticamente.
 
 ### Staccare Schede in Nuove Finestre
 
@@ -165,51 +165,51 @@ Il gesto è bloccato per direzione: il movimento orizzontale avvia un riordiname
 
 ## Modifiche Esterne
 
-VMark monitora il tuo workspace per le modifiche effettuate da altri programmi (Git, editor esterni, strumenti di build, ecc.) e mantiene i documenti aperti sincronizzati.
+TMark monitora il tuo workspace per le modifiche effettuate da altri programmi (Git, editor esterni, strumenti di build, ecc.) e mantiene i documenti aperti sincronizzati.
 
 - **I file non modificati** vengono ricaricati automaticamente quando il loro contenuto cambia su disco. Una breve notifica toast conferma il ricaricamento.
 - **I file con modifiche non salvate** attivano un dialogo con tre opzioni: **Salva con nome** (salva la tua versione in una nuova posizione), **Ricarica** (scarta le tue modifiche e carica da disco) o **Mantieni** (preserva le tue modifiche e segna il file come divergente).
 - **I file eliminati** vengono segnati come mancanti nella loro scheda ma non vengono chiusi — puoi comunque salvare il contenuto in una nuova posizione.
-- Quando più file modificati cambiano contemporaneamente (ad esempio dopo un `git checkout`), VMark li raggruppa in un unico dialogo in modo che tu possa ricaricare tutto, mantenere tutto o esaminare ogni file individualmente.
-- Se il contenuto su disco di un file divergente corrisponde successivamente a ciò che hai nell'editor (ad esempio un `git checkout` ripristina lo stesso testo), VMark cancella automaticamente lo stato divergente in modo che il salvataggio automatico riprenda normalmente.
+- Quando più file modificati cambiano contemporaneamente (ad esempio dopo un `git checkout`), TMark li raggruppa in un unico dialogo in modo che tu possa ricaricare tutto, mantenere tutto o esaminare ogni file individualmente.
+- Se il contenuto su disco di un file divergente corrisponde successivamente a ciò che hai nell'editor (ad esempio un `git checkout` ripristina lo stesso testo), TMark cancella automaticamente lo stato divergente in modo che il salvataggio automatico riprenda normalmente.
 
-VMark filtra i propri salvataggi in modo che non ti venga mai chiesto per modifiche che hai effettuato all'interno dell'app.
+TMark filtra i propri salvataggi in modo che non ti venga mai chiesto per modifiche che hai effettuato all'interno dell'app.
 
 ## Documenti Recenti del Dock macOS
 
-I documenti che apri in VMark vengono registrati con macOS, quindi appaiono nel sottomenu **Apri recenti** quando fai clic destro sull'icona VMark nel Dock.
+I documenti che apri in TMark vengono registrati con macOS, quindi appaiono nel sottomenu **Apri recenti** quando fai clic destro sull'icona TMark nel Dock.
 
 ## Integrazione con il Terminale
 
 Il terminale integrato usa automaticamente la radice del workspace come directory di lavoro. Quando apri o cambi workspace, tutte le sessioni del terminale eseguono `cd` alla nuova radice.
 
-La variabile d'ambiente `VMARK_WORKSPACE` è impostata sul percorso del workspace in ogni sessione del terminale, in modo che i tuoi script possano fare riferimento alla radice del progetto.
+La variabile d'ambiente `TMARK_WORKSPACE` è impostata sul percorso del workspace in ogni sessione del terminale, in modo che i tuoi script possano fare riferimento alla radice del progetto.
 
 [Scopri di più sul terminale →](/it/guide/terminal)
 
 ## Comando CLI Shell
 
-VMark può installare un comando shell `vmark` in modo da poter aprire file e cartelle dal terminale.
+TMark può installare un comando shell `tmark` in modo da poter aprire file e cartelle dal terminale.
 
 ### Installazione
 
-Vai a **Aiuto > Installa comando 'vmark'**. VMark scrive un piccolo script di avvio in `/usr/local/bin/vmark` e chiede la tua password di amministratore (lo stesso approccio utilizzato da VS Code per il suo comando `code`).
+Vai a **Aiuto > Installa comando 'tmark'**. TMark scrive un piccolo script di avvio in `/usr/local/bin/tmark` e chiede la tua password di amministratore (lo stesso approccio utilizzato da VS Code per il suo comando `code`).
 
 ### Utilizzo
 
 ```bash
 # Apri un file
-vmark README.md
+tmark README.md
 
 # Apri una cartella come workspace
-vmark ~/projects/my-blog
+tmark ~/projects/my-blog
 
 # Apri più file
-vmark chapter1.md chapter2.md
+tmark chapter1.md chapter2.md
 ```
 
-Il comando delega a `open -b app.vmark`, quindi macOS gestisce il comportamento di singola istanza — i file si aprono nella finestra VMark esistente anziché avviare un nuovo processo.
+Il comando delega a `open -b app.tmark`, quindi macOS gestisce il comportamento di singola istanza — i file si aprono nella finestra TMark esistente anziché avviare un nuovo processo.
 
 ### Disinstallazione
 
-Vai a **Aiuto > Disinstalla comando 'vmark'** per rimuovere `/usr/local/bin/vmark`. Se il file in quel percorso non è stato installato da VMark, l'operazione viene bloccata e ti viene chiesto di rimuoverlo manualmente.
+Vai a **Aiuto > Disinstalla comando 'tmark'** per rimuovere `/usr/local/bin/tmark`. Se il file in quel percorso non è stato installato da TMark, l'operazione viene bloccata e ti viene chiesto di rimuoverlo manualmente.

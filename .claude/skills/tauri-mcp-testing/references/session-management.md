@@ -71,7 +71,7 @@ tauri_driver_session({ action: 'start', port: 9224 })
 tauri_webview_screenshot({ appIdentifier: 9223 })
 
 // Target by bundle ID
-tauri_webview_screenshot({ appIdentifier: 'com.vmark.app' })
+tauri_webview_screenshot({ appIdentifier: 'com.tmark.app' })
 ```
 
 ## Checking Session Status
@@ -85,7 +85,7 @@ tauri_driver_session({ action: 'status' })
 ```json
 {
   "connected": true,
-  "identifier": "com.vmark.app",
+  "identifier": "com.tmark.app",
   "port": 9223
 }
 ```
@@ -96,7 +96,7 @@ tauri_driver_session({ action: 'status' })
 {
   "connected": true,
   "apps": [
-    { "identifier": "com.vmark.app", "port": 9223, "isDefault": false },
+    { "identifier": "com.tmark.app", "port": 9223, "isDefault": false },
     { "identifier": "com.other.app", "port": 9224, "isDefault": true }
   ]
 }
@@ -117,7 +117,7 @@ tauri_driver_session({ action: 'stop' })
 tauri_driver_session({ action: 'stop', appIdentifier: 9223 })
 
 // Stop by bundle ID
-tauri_driver_session({ action: 'stop', appIdentifier: 'com.vmark.app' })
+tauri_driver_session({ action: 'stop', appIdentifier: 'com.tmark.app' })
 ```
 
 ## Connection Lifecycle

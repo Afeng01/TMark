@@ -1,4 +1,4 @@
-# Télécharger VMark
+# Télécharger TMark
 
 <script setup>
 import DownloadButton from '../.vitepress/components/DownloadButton.vue'
@@ -17,45 +17,45 @@ import DownloadButton from '../.vitepress/components/DownloadButton.vue'
 **Homebrew (Recommandé)**
 
 ```bash
-brew install xiaolai/tap/vmark
+brew install xiaolai/tap/tmark
 ```
 
-Cette commande installe VMark et sélectionne automatiquement la bonne version pour votre Mac (Apple Silicon ou Intel).
+Cette commande installe TMark et sélectionne automatiquement la bonne version pour votre Mac (Apple Silicon ou Intel).
 
 **Mise à jour**
 
 ```bash
-brew update && brew upgrade vmark
+brew update && brew upgrade tmark
 ```
 
 **Installation manuelle**
 
 1. Téléchargez le fichier `.dmg`
 2. Ouvrez le fichier téléchargé
-3. Faites glisser VMark dans votre dossier Applications
+3. Faites glisser TMark dans votre dossier Applications
 4. Au premier lancement, faites un clic droit sur l'application et sélectionnez « Ouvrir » pour contourner Gatekeeper
 
 ## Windows et Linux
 
-VMark est construit avec Tauri, qui prend en charge la compilation multiplateforme. Cependant, **le développement actif et les tests sont actuellement concentrés sur macOS**. La prise en charge de Windows et Linux est limitée pour le moment en raison de contraintes de ressources.
+TMark est construit avec Tauri, qui prend en charge la compilation multiplateforme. Cependant, **le développement actif et les tests sont actuellement concentrés sur macOS**. La prise en charge de Windows et Linux est limitée pour le moment en raison de contraintes de ressources.
 
-Si vous souhaitez exécuter VMark sur Windows ou Linux :
+Si vous souhaitez exécuter TMark sur Windows ou Linux :
 
-- Des **binaires pré-compilés** sont disponibles sur [GitHub Releases](https://github.com/xiaolai/vmark/releases) (fournis tels quels, sans garantie de support)
+- Des **binaires pré-compilés** sont disponibles sur [GitHub Releases](https://github.com/Afeng01/TMark/releases) (fournis tels quels, sans garantie de support)
 - **Compilez depuis les sources** en suivant les instructions ci-dessous
 
 ## Vérification des téléchargements
 
-Toutes les versions sont compilées automatiquement via GitHub Actions. Vous pouvez vérifier l'authenticité en consultant la version sur notre [page GitHub Releases](https://github.com/xiaolai/vmark/releases).
+Toutes les versions sont compilées automatiquement via GitHub Actions. Vous pouvez vérifier l'authenticité en consultant la version sur notre [page GitHub Releases](https://github.com/Afeng01/TMark/releases).
 
 ## Compilation depuis les sources
 
-Pour les développeurs qui souhaitent compiler VMark depuis les sources :
+Pour les développeurs qui souhaitent compiler TMark depuis les sources :
 
 ```bash
 # Cloner le dépôt
-git clone https://github.com/xiaolai/vmark.git
-cd vmark
+git clone https://github.com/Afeng01/TMark.git
+cd tmark
 
 # Installer les dépendances
 pnpm install
@@ -64,4 +64,4 @@ pnpm install
 pnpm tauri build
 ```
 
-Consultez le [README](https://github.com/xiaolai/vmark#readme) pour les instructions de compilation détaillées et les prérequis.
+Consultez le [README](https://github.com/Afeng01/TMark#readme) pour les instructions de compilation détaillées et les prérequis.

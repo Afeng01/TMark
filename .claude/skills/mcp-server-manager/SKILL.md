@@ -39,7 +39,7 @@ description: Discover, register, and verify MCP servers. Use when a user asks to
 - When multiple sources define the same name, confirm which to use.
 - For stdio servers using `npx`, the package downloads when the server first runs.
 
-## VMark Example
+## TMark Example
 ```json
 // .mcp.json
 {

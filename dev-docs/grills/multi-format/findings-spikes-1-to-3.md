@@ -173,7 +173,7 @@ export function makeFormatLinter(
 // const yamlLinter = makeFormatLinter(yamlValidator);
 ```
 
-**Verdict: CONFIRMED.** `@codemirror/lint` `Diagnostic` type matches our `ValidationDiagnostic` 1-to-1 modulo position conversion (offset vs line/column). `linter()` accepts both sync and async (Promise) sources. Gutter rendering is built-in (`lintGutter()` extension) and uses CSS classes that VMark can theme. The conversion is 5 lines of arithmetic — Phase 1A WI-1A.8 normalizes this in `src/lib/formats/validation.ts`.
+**Verdict: CONFIRMED.** `@codemirror/lint` `Diagnostic` type matches our `ValidationDiagnostic` 1-to-1 modulo position conversion (offset vs line/column). `linter()` accepts both sync and async (Promise) sources. Gutter rendering is built-in (`lintGutter()` extension) and uses CSS classes that TMark can theme. The conversion is 5 lines of arithmetic — Phase 1A WI-1A.8 normalizes this in `src/lib/formats/validation.ts`.
 
 **Caveat:** CodeMirror also has a `"hint"` severity level we don't use. Decision: collapse to `"info"` at the boundary; document in WI-1A.8 review.
 

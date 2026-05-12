@@ -1,6 +1,6 @@
 # Édition multi-curseur
 
-VMark prend en charge l'édition multi-curseur puissante en modes WYSIWYG et Source, vous permettant de modifier plusieurs emplacements simultanément.
+TMark prend en charge l'édition multi-curseur puissante en modes WYSIWYG et Source, vous permettant de modifier plusieurs emplacements simultanément.
 
 ## Démarrage rapide
 

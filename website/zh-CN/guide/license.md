@@ -1,6 +1,6 @@
 # 许可证
 
-VMark 以 **ISC 许可证** 发布——这是最简单、最宽容的开源许可证之一，功能上等同于 MIT。
+TMark 以 **ISC 许可证** 发布——这是最简单、最宽容的开源许可证之一，功能上等同于 MIT。
 
 ## ISC 许可证允许的内容
 
@@ -42,7 +42,7 @@ PERFORMANCE OF THIS SOFTWARE.
 
 ISC 许可证在功能上等同于 MIT 许可证，但语言更简洁。它已获得[开源倡议（OSI）](https://opensource.org/licenses/ISC)批准，是 npm 和 OpenBSD 使用的默认许可证。
 
-VMark 选择 ISC 的原因：
+TMark 选择 ISC 的原因：
 
 - **简洁**——易于阅读和理解
 - **宽容**——对软件使用方式没有限制

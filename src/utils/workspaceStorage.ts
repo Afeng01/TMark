@@ -6,8 +6,8 @@
  * multi-window state doesn't collide.
  *
  * Key decisions:
- *   - Storage keys are derived from window label: `vmark-workspace:{label}`
- *   - Legacy migration handles the old single-key `vmark-workspace` format
+ *   - Storage keys are derived from window label: `tmark-workspace:{label}`
+ *   - Legacy migration handles the old single-key `tmark-workspace` format
  *   - getCurrentWindowLabel() is cached per session for consistent key derivation
  *   - findActiveWorkspaceLabel() scans localStorage for the settings window to
  *     discover which document window has an active workspace
@@ -42,10 +42,10 @@ export function __resetQuotaWarnedKeys(): void {
 }
 
 /** Base key prefix for workspace storage */
-const STORAGE_KEY_PREFIX = "vmark-workspace";
+const STORAGE_KEY_PREFIX = "tmark-workspace";
 
 /** Legacy storage key used before window-scoped persistence */
-export const LEGACY_STORAGE_KEY = "vmark-workspace";
+export const LEGACY_STORAGE_KEY = "tmark-workspace";
 
 /**
  * Current window label. Set by WindowProvider on initialization.
@@ -57,11 +57,11 @@ let currentWindowLabel = "main";
  * Get the storage key for a specific window's workspace state.
  *
  * @param windowLabel - The window label (e.g., "main", "doc-1")
- * @returns Storage key in format "vmark-workspace:{windowLabel}"
+ * @returns Storage key in format "tmark-workspace:{windowLabel}"
  *
  * @example
- * getWorkspaceStorageKey("main") // "vmark-workspace:main"
- * getWorkspaceStorageKey("doc-1") // "vmark-workspace:doc-1"
+ * getWorkspaceStorageKey("main") // "tmark-workspace:main"
+ * getWorkspaceStorageKey("doc-1") // "tmark-workspace:doc-1"
  */
 export function getWorkspaceStorageKey(windowLabel: string): string {
   return `${STORAGE_KEY_PREFIX}:${windowLabel}`;
@@ -70,7 +70,7 @@ export function getWorkspaceStorageKey(windowLabel: string): string {
 /**
  * Migrate legacy workspace storage to window-scoped storage.
  *
- * If the legacy "vmark-workspace" key exists and "vmark-workspace:main" doesn't,
+ * If the legacy "tmark-workspace" key exists and "tmark-workspace:main" doesn't,
  * copies the data to the main window's key and removes the legacy key.
  *
  * This should be called once at app startup (in the main window).

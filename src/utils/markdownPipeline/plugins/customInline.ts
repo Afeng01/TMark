@@ -1,7 +1,7 @@
 /**
  * Custom Inline Marks — Remark Plugin
  *
- * Purpose: Adds support for VMark's custom inline syntax markers:
+ * Purpose: Adds support for TMark's custom inline syntax markers:
  *   ==highlight==, ++underline++, ^superscript^, ~subscript~
  *
  * Key decisions:

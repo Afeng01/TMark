@@ -1,12 +1,12 @@
 ---
 name: tauri-mcp-test-runner
-description: Run Tauri MCP-driven E2E checks for VMark. Use when asked to execute or update automated UI flows that must use Tauri MCP tools (not browser DevTools), or when validating behavior in a running desktop session.
+description: Run Tauri MCP-driven E2E checks for TMark. Use when asked to execute or update automated UI flows that must use Tauri MCP tools (not browser DevTools), or when validating behavior in a running desktop session.
 ---
 
 # Tauri MCP Test Runner
 
 ## Overview
-Run VMark end-to-end UI flows using the Tauri MCP tools and summarize results.
+Run TMark end-to-end UI flows using the Tauri MCP tools and summarize results.
 
 ## Workflow
 1) Confirm the desktop app is running. If not, ask the user to start it.
@@ -25,7 +25,7 @@ Run VMark end-to-end UI flows using the Tauri MCP tools and summarize results.
 - `tauri_webview_interact` - Click, focus elements
 - `tauri_webview_find_element` - Inspect DOM state
 
-### VMark MCP Tools (vmark server)
+### TMark MCP Tools (tmark server)
 - `document_insert_at_cursor` - Insert text (appears as AI suggestion)
 - `cursor_set_position` - Move cursor to position
 - `cursor_get_context` - Get surrounding text context
@@ -34,10 +34,10 @@ Run VMark end-to-end UI flows using the Tauri MCP tools and summarize results.
 
 ## Critical Pattern: AI Content Acceptance
 
-When using vmark MCP to insert content, it appears as an AI suggestion that must be **accepted with Enter** via tauri-mcp:
+When using tmark MCP to insert content, it appears as an AI suggestion that must be **accepted with Enter** via tauri-mcp:
 
 ```
-1. vmark: document_insert_at_cursor("text")
+1. tmark: document_insert_at_cursor("text")
 2. tauri: keyboard(action: "press", key: "Enter")   # Accept
 3. tauri: keyboard(action: "press", key: "Escape")  # Dismiss follow-up
 ```

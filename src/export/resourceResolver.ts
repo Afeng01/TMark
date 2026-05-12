@@ -294,7 +294,7 @@ export async function resolveResources(
 
       // Path traversal blocked — treat as missing.
       // Substitute the placeholder so the exported HTML doesn't carry the
-      // original asset://localhost URL (broken outside VMark).
+      // original asset://localhost URL (broken outside TMark).
       if (resolvedPath === null) {
         info.found = false;
         info.exportSrc = MISSING_IMAGE_PLACEHOLDER;

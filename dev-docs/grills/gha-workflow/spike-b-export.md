@@ -88,7 +88,7 @@ for clipboard, set the data URI directly.
    element must be in the DOM and have non-zero size when the export
    runs. Phase 4 acceptance test must cover this explicitly.
 4. **Font handling**: `html-to-image` embeds fonts via
-   `getComputedStyle().fontFamily`. If VMark uses a custom font that
+   `getComputedStyle().fontFamily`. If TMark uses a custom font that
    isn't system-installed, the SVG/PNG may render with a fallback. Phase
    4 should add `fontEmbedCSS` option testing.
 5. **Cache busting** flag is set in the spike (`cacheBust: true`). For
@@ -107,6 +107,6 @@ documented; native-SVG export deferred to v2 if user feedback demands.
 2. Test off-screen mount path (export from a workflow whose panel is not
    currently visible — uses a hidden `<div>` to mount + export +
    unmount).
-3. Test in VMark's actual font stack (`--font-sans`, `--font-mono`) to
+3. Test in TMark's actual font stack (`--font-sans`, `--font-mono`) to
    verify fonts render.
 4. Add `fontEmbedCSS` if a custom font isn't system-installed.

@@ -8,7 +8,7 @@
 
 ## Goal
 
-Replace the Mermaid-based inline render of GitHub Actions workflow YAML in markdown code fences with the same xyflow-based render the side panel uses, captured as a frozen SVG via `html-to-image`. **Workflows are a first-class asset in VMark** (alongside markdown), and visual parity between inline preview and side-panel canvas is structural — not aesthetic.
+Replace the Mermaid-based inline render of GitHub Actions workflow YAML in markdown code fences with the same xyflow-based render the side panel uses, captured as a frozen SVG via `html-to-image`. **Workflows are a first-class asset in TMark** (alongside markdown), and visual parity between inline preview and side-panel canvas is structural — not aesthetic.
 
 The current Mermaid pipeline strips custom node decorations (matrix badges, runner labels, conditional dots, reusable badges) that the side panel renders via `JobNode`. That divergence reads as "the inline preview looks wrong" rather than "intentionally simplified." Killing the Mermaid path puts the IR through one renderer, two surfaces.
 
@@ -62,7 +62,7 @@ The current Mermaid pipeline strips custom node decorations (matrix badges, runn
 
 ### ADR-6: AI-side snapshot tool (deferred)
 
-**Decision:** A future `vmark.workflow.snapshot({tabId})` MCP action could return the cached SVG, letting AI agents reason about the visual structure. **Not in v1 scope.** Recorded so the cache shape (workflow YAML → SVG) anticipates the use case.
+**Decision:** A future `tmark.workflow.snapshot({tabId})` MCP action could return the cached SVG, letting AI agents reason about the visual structure. **Not in v1 scope.** Recorded so the cache shape (workflow YAML → SVG) anticipates the use case.
 
 **Confidence:** Low priority. Build only if real demand surfaces.
 
@@ -119,7 +119,7 @@ The current Mermaid pipeline strips custom node decorations (matrix badges, runn
 - IntersectionObserver gating
 - Disk-persisted cache (`appDataDir/workflow-snapshot-cache/`)
 - Idle-time prefetch with `requestIdleCallback`
-- `vmark.workflow.snapshot` MCP action
+- `tmark.workflow.snapshot` MCP action
 - **Edge rendering in the captured snapshot.** The off-screen xyflow
   root contains the edge paths in `.react-flow__edges svg` (verified
   via DOM probe), but the parent `.react-flow__edges` div has a 0×0

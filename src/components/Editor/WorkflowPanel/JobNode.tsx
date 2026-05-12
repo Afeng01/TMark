@@ -5,7 +5,7 @@
  *   toggle that reveals the per-step list inline.
  *
  * Key decisions:
- *   - Uses VMark CSS tokens — see .claude/rules/31-design-tokens.md.
+ *   - Uses TMark CSS tokens — see .claude/rules/31-design-tokens.md.
  *     No hardcoded colors. Token names: --bg-color, --bg-tertiary,
  *     --border-color, --accent-bg, --accent-primary, --text-color,
  *     --text-secondary, --popup-shadow.

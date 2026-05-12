@@ -194,7 +194,7 @@ export function IntegrationsSettings() {
               <div className="flex items-center justify-between text-xs mt-1.5">
                 <span className="text-[var(--text-tertiary)]">{t("integrations.mcpInfo.toolsAvailable")}</span>
                 <a
-                  href="https://vmark.app/guide/mcp-tools"
+                  href="https://github.com/Afeng01/TMark/blob/main/website/guide/mcp-tools.md"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-[var(--primary-color)] hover:underline"

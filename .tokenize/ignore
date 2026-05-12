@@ -1,12 +1,12 @@
-# ui-tokenize ignore rules for vmark.
+# ui-tokenize ignore rules for tmark.
 # Excludes audit noise that is structurally not actionable.
 # See .claude/rules/31-design-tokens.md for the rationale.
 
 # --- Self-contained export bundle ----------------------------------------
-# vmark-reader.css/.js ship HTML rendered outside the React app; literals are
+# tmark-reader.css/.js ship HTML rendered outside the React app; literals are
 # intentional fallbacks in `var(--x, #literal)` form.
-src/export/reader/vmark-reader.css
-src/export/reader/vmark-reader.js
+src/export/reader/tmark-reader.css
+src/export/reader/tmark-reader.js
 
 # --- Token DEFINER files -------------------------------------------------
 # These files SET CSS custom properties from primitives. Their literals are

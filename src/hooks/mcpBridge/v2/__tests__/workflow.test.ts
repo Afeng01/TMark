@@ -1,4 +1,4 @@
-// WI-1.4 — vmark.workflow.{apply_patch, validate}.
+// WI-1.4 — tmark.workflow.{apply_patch, validate}.
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { useTabStore } from "@/stores/tabStore";
@@ -89,7 +89,7 @@ function parseStructuredError(s: string | undefined) {
   }
 }
 
-describe("vmark.workflow.apply_patch", () => {
+describe("tmark.workflow.apply_patch", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();
@@ -200,7 +200,7 @@ describe("vmark.workflow.apply_patch", () => {
   });
 });
 
-describe("vmark.workflow.validate", () => {
+describe("tmark.workflow.validate", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();

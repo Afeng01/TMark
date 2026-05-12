@@ -68,11 +68,11 @@ v2 reorders around: **security → reliability → accessibility → quality inf
 - **Acceptance:** (1) Bridge generates a random auth token on start. (2) Token written to port file alongside port number. (3) WebSocket handshake requires token in first message. (4) Connections without valid token are rejected. (5) MCP sidecar reads token from port file.
 - **Tests (first):**
   - `mcp_bridge/server.rs` — test: connection without token rejected, with valid token accepted
-  - `vmark-mcp-server` — test: WebSocket handshake sends token
+  - `tmark-mcp-server` — test: WebSocket handshake sends token
 - **Touched areas:**
   - `src-tauri/src/mcp_bridge/server.rs` (auth handshake)
   - `src-tauri/src/mcp_bridge/state.rs` (store token)
-  - `vmark-mcp-server/src/bridge/websocket.ts` (send token on connect)
+  - `tmark-mcp-server/src/bridge/websocket.ts` (send token on connect)
 - **Risks:** Breaking existing MCP clients
   - Mitigation: Accept unauthenticated connections for 1 release with deprecation warning
 - **Estimate:** M
@@ -224,7 +224,7 @@ v2 reorders around: **security → reliability → accessibility → quality inf
 - **Goal:** Markdown parser and MCP payload handler don't crash on malformed input
 - **Acceptance:** (1) Property tests for markdown round-trip (parse → serialize → parse = same AST). (2) MCP request handler fuzz: random payloads don't crash or hang.
 - **Tests:** Property tests with fast-check or similar
-- **Touched areas:** New test files in `src/utils/markdownPipeline/__tests__/`, `vmark-mcp-server/__tests__/`
+- **Touched areas:** New test files in `src/utils/markdownPipeline/__tests__/`, `tmark-mcp-server/__tests__/`
 - **Estimate:** M
 
 ### Phase 5: Documentation (only what's missing)

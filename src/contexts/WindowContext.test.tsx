@@ -112,7 +112,7 @@ vi.mock("../stores/workspaceStore", () => ({
 vi.mock("../utils/workspaceStorage", () => ({
   setCurrentWindowLabel: vi.fn(),
   migrateWorkspaceStorage: vi.fn(),
-  getWorkspaceStorageKey: vi.fn((label: string) => `vmark-workspace:${label}`),
+  getWorkspaceStorageKey: vi.fn((label: string) => `tmark-workspace:${label}`),
   findActiveWorkspaceLabel: vi.fn(() => null),
 }));
 
@@ -679,7 +679,7 @@ describe("WindowContext", () => {
       );
 
       await waitFor(() => {
-        expect(removeItemSpy).toHaveBeenCalledWith("vmark-workspace:doc-789");
+        expect(removeItemSpy).toHaveBeenCalledWith("tmark-workspace:doc-789");
       });
 
       removeItemSpy.mockRestore();

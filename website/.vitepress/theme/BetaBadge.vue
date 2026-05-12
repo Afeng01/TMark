@@ -1,6 +1,6 @@
 <script setup lang="ts">
-declare const __VMARK_VERSION__: string
-const version = typeof __VMARK_VERSION__ !== 'undefined' ? __VMARK_VERSION__ : ''
+declare const __TMARK_VERSION__: string
+const version = typeof __TMARK_VERSION__ !== 'undefined' ? __TMARK_VERSION__ : ''
 </script>
 
 <template>
@@ -82,18 +82,18 @@ const version = typeof __VMARK_VERSION__ !== 'undefined' ? __VMARK_VERSION__ : '
 }
 
 /* Theme adjustments */
-[data-vmark-theme="night"] .beta-badge,
+[data-tmark-theme="night"] .beta-badge,
 .dark .beta-badge {
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1);
 }
 
-[data-vmark-theme="night"] .beta-dot,
+[data-tmark-theme="night"] .beta-dot,
 .dark .beta-dot {
   background: var(--vp-c-brand-1);
 }
 
-[data-vmark-theme="night"] .beta-dot::before,
+[data-tmark-theme="night"] .beta-dot::before,
 .dark .beta-dot::before {
   background: var(--vp-c-brand-1);
 }

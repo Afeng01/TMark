@@ -2,7 +2,7 @@
  * Debug internals — shared by log/warn/error loggers.
  *
  * Purpose: Production warn/error sink that forwards to tauri-plugin-log
- * (~/Library/Logs/app.vmark/ on macOS) while always keeping a console
+ * (~/Library/Logs/app.tmark/ on macOS) while always keeping a console
  * fallback. Consumers should import named loggers from `@/utils/debug`
  * (the barrel); this module is the private plumbing.
  *

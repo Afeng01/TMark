@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-Transform VMark from a markdown editor into a natural language IDE by adding
+Transform TMark from a markdown editor into a natural language IDE by adding
 three capabilities: (1) typed Genie spec with structured I/O, (2) standalone
 `.yml` workflow files with React Flow visualization in a side panel, (3) local
 workflow execution with live status overlay. Total estimated delta: ~2,800 LOC
@@ -36,7 +36,7 @@ rendered in a side panel alongside the YAML source editor.
 - Mermaid-only: No click interaction, full re-render on change, no custom nodes
 - React Flow in ProseMirror decoration: High risk (event isolation, lifecycle),
   eliminated by scoping to standalone `.yml` files only
-- Vue Flow: VMark is React; wrong framework
+- Vue Flow: TMark is React; wrong framework
 
 ### ADR-2: WorkflowGraph as Shared Model
 
@@ -59,7 +59,7 @@ highest-risk integration point — React Flow's drag/zoom/wheel events compete
 with ProseMirror's event handling, the `Decoration.widget()` API expects passive
 HTML, and the lifecycle management (React root mount/unmount during decoration
 rebuild) is error-prone. Additionally, the `yaml workflow` language tag does not
-round-trip through VMark's code block schema, which only preserves a single
+round-trip through TMark's code block schema, which only preserves a single
 `language` string.
 
 **Consequences:**
@@ -300,7 +300,7 @@ Flow rendering (different node shapes, different layout algorithm, different
 fonts). One renderer everywhere means what you see is what you export.
 
 For GitHub READMEs where `yaml workflow` fences render as raw YAML, users can
-export from within VMark (right-click workflow preview → "Export as SVG") and
+export from within TMark (right-click workflow preview → "Export as SVG") and
 embed the image:
 ```markdown
 ![Workflow](./workflow.svg)
@@ -355,7 +355,7 @@ pnpm add -D @types/js-yaml @types/dagre
 **Spec:**
 
 1. Add `.yml` and `.yaml` to the default file filter (alongside `.md`, `.markdown`)
-2. YAML files open in VMark's editor (source mode) instead of system default app
+2. YAML files open in TMark's editor (source mode) instead of system default app
 3. File explorer shows a distinct icon for YAML files (from Lucide)
 
 **Note:** This was originally Phase 4, but the side panel (WI-2.5) requires
@@ -589,7 +589,7 @@ tooltip. This avoids the dual-execution-architecture problem (Codex finding 1.1)
 **CSS rules:**
 - All colors via CSS vars (no hardcoded values)
 - Dark theme via `.dark-theme` selector
-- React Flow's default styles overridden to match VMark design system
+- React Flow's default styles overridden to match TMark design system
 - Panel uses `var(--bg-color)` background, `var(--border-color)` left border
 
 **Acceptance criteria:**
@@ -606,7 +606,7 @@ tooltip. This avoids the dual-execution-architecture problem (Codex finding 1.1)
 - [ ] Handles empty graph gracefully (placeholder message)
 - [ ] Light and dark theme both render correctly
 - [ ] No hardcoded colors
-- [ ] React Flow controls match VMark button style
+- [ ] React Flow controls match TMark button style
 
 **Test targets:**
 - `src/stores/__tests__/workflowPreviewStore.test.ts`: store state transitions
@@ -844,7 +844,7 @@ CodeMirror completion source for workflow YAML files:
 
 ## Phase 5: Workflow Execution Engine
 
-> Local execution of workflows from within VMark. This is the most complex
+> Local execution of workflows from within TMark. This is the most complex
 > phase and should only be started after Phases 1-3 are validated.
 
 ### WI-5.1: Workflow Execution Store
@@ -1073,7 +1073,7 @@ When a workflow step has `approval: ask`, before applying changes:
 - [ ] Diff is readable (not raw git diff)
 - [ ] Accept resumes execution
 - [ ] Cancel stops the workflow gracefully
-- [ ] Dialog uses VMark design system (tokens, radius, shadow)
+- [ ] Dialog uses TMark design system (tokens, radius, shadow)
 - [ ] i18n: all strings use `t()` keys
 
 **Estimated LOC:** ~200 (store + component + CSS)

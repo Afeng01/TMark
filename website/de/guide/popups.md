@@ -1,6 +1,6 @@
 # Inline-Popups
 
-VMark bietet kontextbezogene Popups zum Bearbeiten von Links, Bildern, Medien, Mathematik, Fußnoten und mehr. Diese Popups funktionieren sowohl im WYSIWYG- als auch im Quellmodus mit einheitlicher Tastaturnavigation.
+TMark bietet kontextbezogene Popups zum Bearbeiten von Links, Bildern, Medien, Mathematik, Fußnoten und mehr. Diese Popups funktionieren sowohl im WYSIWYG- als auch im Quellmodus mit einheitlicher Tastaturnavigation.
 
 ## Gemeinsame Tastaturkürzel
 
@@ -14,7 +14,7 @@ Alle Popups teilen dieses Tastaturverhalten:
 
 ## Link-Tooltip & Popup
 
-VMark verwendet ein zweistufiges System für Links: ein Nur-Lese-Tooltip beim Hovern und ein Bearbeitungs-Popup über Tastaturkürzel.
+TMark verwendet ein zweistufiges System für Links: ein Nur-Lese-Tooltip beim Hovern und ein Bearbeitungs-Popup über Tastaturkürzel.
 
 ### Hover-Tooltip (Nur-Lese)
 

@@ -26,7 +26,7 @@ const CURRENCY_CHAR_CLASS = "[$¥€£₹]";
 /** Add spaces between CJK characters and English/numbers. */
 export function addCJKEnglishSpacing(text: string): string {
   // Korean excluded: Korean uses native word spacing and particles attach
-  // directly to preceding words (e.g., "VMark에는" not "VMark 에는").
+  // directly to preceding words (e.g., "TMark에는" not "TMark 에는").
   //
   // The pattern accepts an optional sign in two positions so all of the
   // following are treated as a single token attached to the digit run:

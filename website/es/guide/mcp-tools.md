@@ -1,8 +1,8 @@
 # Referencia de herramientas MCP
 
-VMark expone **cuatro herramientas MCP compuestas** a los asistentes de IA: `session`, `workspace`, `document` y `workflow`. En conjunto cubren **14 acciones** — la columna de lectura/escritura, además del ciclo de vida de archivos y ventanas, más las ediciones seguras a nivel de CST para YAML de GitHub Actions.
+TMark expone **cuatro herramientas MCP compuestas** a los asistentes de IA: `session`, `workspace`, `document` y `workflow`. En conjunto cubren **14 acciones** — la columna de lectura/escritura, además del ciclo de vida de archivos y ventanas, más las ediciones seguras a nivel de CST para YAML de GitHub Actions.
 
-La superficie anterior de 12 herramientas / 76 acciones se podó porque las herramientas de formato dentro del documento (negrita, encabezados, tablas, etc.) duplican un trabajo que los agentes de IA ya hacen trivialmente mediante el viaje de ida y vuelta de Markdown. Consulta [el plan de poda de MCP](https://github.com/xiaolai/vmark/blob/main/dev-docs/plans/20260504-mcp-pruning.md) para la justificación completa.
+La superficie anterior de 12 herramientas / 76 acciones se podó porque las herramientas de formato dentro del documento (negrita, encabezados, tablas, etc.) duplican un trabajo que los agentes de IA ya hacen trivialmente mediante el viaje de ida y vuelta de Markdown. Consulta [el plan de poda de MCP](https://github.com/Afeng01/TMark/blob/main/dev-docs/plans/20260504-mcp-pruning.md) para la justificación completa.
 
 ::: tip Flujo de trabajo recomendado
 1. Llama a `session.get_state` una vez para ver las ventanas abiertas, las pestañas y, por pestaña, `{filePath, dirty, revision, kind}`.
@@ -54,7 +54,7 @@ Sin argumentos.
     }
   ],
   "capabilities": {
-    "version": "<vmark-mcp-server version>",
+    "version": "<tmark-mcp-server version>",
     "supportedKinds": ["markdown", "yaml-workflow"],
     "mcpProtocol": "0.1.0"
   }
@@ -205,7 +205,7 @@ Usa `apply_patch` cuando cambies un solo campo y quieras dejar todo lo demás in
 
 ### `apply_patch`
 
-Aplica un array de objetos `IRPatch`. Los parches se despachan a través de los mutadores con conciencia de CST de VMark, que preservan los comentarios, los anclas y el orden de las claves. Un `document.write` directo a un archivo YAML los perdería.
+Aplica un array de objetos `IRPatch`. Los parches se despachan a través de los mutadores con conciencia de CST de TMark, que preservan los comentarios, los anclas y el orden de las claves. Un `document.write` directo a un archivo YAML los perdería.
 
 | Parámetro | Tipo | Requerido |
 |-----------|------|-----------|

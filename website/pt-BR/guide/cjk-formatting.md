@@ -1,6 +1,6 @@
 # Guia de Formatação CJK
 
-O VMark inclui um conjunto abrangente de regras de formatação para texto em Chinês, Japonês e Coreano. Essas ferramentas ajudam a manter uma tipografia consistente ao misturar caracteres CJK e latinos.
+O TMark inclui um conjunto abrangente de regras de formatação para texto em Chinês, Japonês e Coreano. Essas ferramentas ajudam a manter uma tipografia consistente ao misturar caracteres CJK e latinos.
 
 ## Início Rápido
 
@@ -62,7 +62,7 @@ Converte hífens duplos em travessões CJK adequados.
 
 ### 6. Conversão de Aspas Inteligentes
 
-O VMark usa um **algoritmo de emparelhamento de aspas baseado em pilha** que trata corretamente:
+O TMark usa um **algoritmo de emparelhamento de aspas baseado em pilha** que trata corretamente:
 
 - **Apóstrofos**: Contrações como `don't`, `it's`, `l'amour` são preservadas
 - **Possessivos**: `Xiaolai's` permanece inalterado
@@ -124,7 +124,7 @@ O seguinte conteúdo **não** é afetado pela formatação:
 
 ### Construtos Técnicos
 
-O **Verificador de Abrangência Latina** do VMark detecta e protege automaticamente construtos técnicos da conversão de pontuação:
+O **Verificador de Abrangência Latina** do TMark detecta e protege automaticamente construtos técnicos da conversão de pontuação:
 
 | Tipo | Exemplos | Proteção |
 |------|----------|----------|
@@ -200,7 +200,7 @@ Após cada passada de formatação CJK, o formatador executa uma verificação d
 
 ## Espaçamento entre Letras CJK
 
-O VMark inclui um recurso dedicado de espaçamento entre letras para texto CJK que melhora a legibilidade adicionando espaçamento sutil entre caracteres.
+O TMark inclui um recurso dedicado de espaçamento entre letras para texto CJK que melhora a legibilidade adicionando espaçamento sutil entre caracteres.
 
 ### Configurações
 
@@ -235,7 +235,7 @@ A diferença é sutil, mas melhora a legibilidade, especialmente em trechos mais
 
 ## Estilos de Aspas Inteligentes
 
-O VMark pode converter automaticamente aspas retas em aspas tipograficamente corretas. Esse recurso funciona durante a formatação CJK e suporta múltiplos estilos de aspas.
+O TMark pode converter automaticamente aspas retas em aspas tipograficamente corretas. Esse recurso funciona durante a formatação CJK e suporta múltiplos estilos de aspas.
 
 ### Estilos de Aspas
 
@@ -247,7 +247,7 @@ O VMark pode converter automaticamente aspas retas em aspas tipograficamente cor
 
 ### Algoritmo de Emparelhamento Baseado em Pilha
 
-O VMark usa um algoritmo sofisticado baseado em pilha para emparelhamento de aspas:
+O TMark usa um algoritmo sofisticado baseado em pilha para emparelhamento de aspas:
 
 1. **Tokenização**: Identifica todos os caracteres de aspas no texto
 2. **Classificação**: Determina se cada aspa é de abertura ou fechamento com base no contexto
@@ -327,7 +327,7 @@ A conversão de colchetes de canto é acionada quando o conteúdo entre aspas co
 
 ## Parágrafo de Teste
 
-Copie este texto não formatado no VMark e pressione `Alt + Mod + Shift + F` para formatar:
+Copie este texto não formatado no TMark e pressione `Alt + Mod + Shift + F` para formatar:
 
 ```text
 最近我在学习TypeScript和React,感觉收获很大.作为一个developer,掌握这些modern前端技术是必须的.

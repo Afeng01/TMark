@@ -53,7 +53,7 @@ describe('restartWithHotExit', () => {
   });
 
   it('captures session then relaunches', async () => {
-    mockInvoke.mockResolvedValueOnce({ windows: [{ window_label: 'main' }], vmark_version: '0.5.0' });
+    mockInvoke.mockResolvedValueOnce({ windows: [{ window_label: 'main' }], tmark_version: '0.5.0' });
     mockRelaunch.mockResolvedValueOnce(undefined);
 
     await restartWithHotExit();
@@ -86,7 +86,7 @@ describe('restartWithHotExit', () => {
 
   it('throws when relaunch itself fails', async () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    mockInvoke.mockResolvedValueOnce({ windows: [], vmark_version: '0.5.0' });
+    mockInvoke.mockResolvedValueOnce({ windows: [], tmark_version: '0.5.0' });
     mockRelaunch.mockRejectedValueOnce(new Error('relaunch failed'));
 
     await expect(restartWithHotExit()).rejects.toThrow('relaunch failed');
@@ -125,7 +125,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
       .mockResolvedValueOnce({
         version: 0, // incompatible
         timestamp: Date.now() / 1000,
-        vmark_version: '0.1.0',
+        tmark_version: '0.1.0',
         windows: [],
       })
       .mockResolvedValueOnce(undefined); // clear_session
@@ -140,7 +140,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
     const session = {
       version: 2,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.5.0',
+      tmark_version: '0.5.0',
       windows: [
         { window_label: 'main', is_main_window: true, tabs: [] },
         { window_label: 'doc-0', is_main_window: false, tabs: [] },
@@ -171,7 +171,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
     const session = {
       version: 2,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.5.0',
+      tmark_version: '0.5.0',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -219,7 +219,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
     const session = {
       version: 0, // incompatible — triggers clearSessionFile
       timestamp: Date.now() / 1000,
-      vmark_version: '0.1.0',
+      tmark_version: '0.1.0',
       windows: [],
     };
 
@@ -236,7 +236,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
     const v1Session = {
       version: 1,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.3.0',
+      tmark_version: '0.3.0',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -264,7 +264,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
     const session = {
       version: 2,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.5.0',
+      tmark_version: '0.5.0',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -293,7 +293,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
     const session = {
       version: 2,
       timestamp: 1700000000, // valid timestamp
-      vmark_version: '0.5.0',
+      tmark_version: '0.5.0',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -317,7 +317,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
     const session = {
       version: 2,
       timestamp: -1, // invalid
-      vmark_version: '0.5.0',
+      tmark_version: '0.5.0',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -341,7 +341,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
     const session = {
       version: 2,
       timestamp: NaN, // triggers !Number.isFinite check in formatTimestamp
-      vmark_version: '0.5.0',
+      tmark_version: '0.5.0',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -365,7 +365,7 @@ describe('checkAndRestoreSession — additional coverage', () => {
     const session = {
       version: 2,
       timestamp: Infinity, // triggers !Number.isFinite check
-      vmark_version: '0.5.0',
+      tmark_version: '0.5.0',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 

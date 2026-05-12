@@ -34,8 +34,8 @@ const downloads = ref<PlatformDownload[]>([])
 const userPlatform = ref<'macos' | 'windows' | 'linux' | 'unknown'>('unknown')
 
 const REPO_OWNER = 'xiaolai'
-const REPO_NAME = 'vmark'
-const CACHE_KEY = 'vmark-release-cache'
+const REPO_NAME = 'tmark'
+const CACHE_KEY = 'tmark-release-cache'
 const CACHE_TTL_MS = 5 * 60 * 1000 // 5 minutes
 
 function formatSize(bytes: number): string {

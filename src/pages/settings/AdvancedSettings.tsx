@@ -149,7 +149,7 @@ export function AdvancedSettings() {
                   );
                   if (session) {
                     toast.success(t("advanced.hotExit.captureSuccess", { count: session.windows.length }), {
-                      description: `v${session.vmark_version}`,
+                      description: `v${session.tmark_version}`,
                     });
                   }
                   setIsBusy(false);
@@ -171,7 +171,7 @@ export function AdvancedSettings() {
                   if (session) {
                     const age = Math.max(0, Math.floor((Date.now() - session.timestamp * 1000) / 1000));
                     toast.info(t("advanced.hotExit.sessionFound", { age }), {
-                      description: t("advanced.hotExit.sessionFoundDetail", { count: session.windows.length, version: session.vmark_version }),
+                      description: t("advanced.hotExit.sessionFoundDetail", { count: session.windows.length, version: session.tmark_version }),
                     });
                   } else if (session === null) {
                     toast.info(t("advanced.hotExit.noSession"));

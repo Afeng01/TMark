@@ -5,7 +5,7 @@
 # alongside the markdown genies; selecting it invokes the workflow runner.
 #
 # To customize: copy this file to your global genies directory
-# (~/Library/Application Support/com.vmark.app/genies/ on macOS) and
+# (~/Library/Application Support/com.tmark.app/genies/ on macOS) and
 # adjust steps, models, or with: parameters.
 #
 # Demonstrates:

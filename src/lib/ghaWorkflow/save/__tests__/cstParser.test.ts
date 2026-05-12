@@ -154,7 +154,7 @@ describe("identity round-trip — ADR-11 gate", () => {
       const saved = stringifyCst(parseAsCst(orig));
       if (orig === saved) identical++;
     }
-    // Spike D found 4 of 7 vmark-only fixtures byte-identical with our
+    // Spike D found 4 of 7 tmark-only fixtures byte-identical with our
     // options. Across the wider 22-fixture corpus we expect at least 5.
     expect(identical).toBeGreaterThanOrEqual(5);
   });

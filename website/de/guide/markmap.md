@@ -1,6 +1,6 @@
 # Markmap-Mindmaps
 
-VMark unterstützt [Markmap](https://markmap.js.org/) für die Erstellung interaktiver Mindmap-Bäume direkt in Ihren Markdown-Dokumenten. Im Gegensatz zu Mermaids statischem Mindmap-Diagrammtyp verwendet Markmap gewöhnliche Markdown-Überschriften als Eingabe und bietet interaktives Schwenken/Zoomen/Einklappen.
+TMark unterstützt [Markmap](https://markmap.js.org/) für die Erstellung interaktiver Mindmap-Bäume direkt in Ihren Markdown-Dokumenten. Im Gegensatz zu Mermaids statischem Mindmap-Diagrammtyp verwendet Markmap gewöhnliche Markdown-Überschriften als Eingabe und bietet interaktives Schwenken/Zoomen/Einklappen.
 
 ## Eine Mindmap einfügen
 
@@ -90,7 +90,7 @@ Listenelemente unter einer Überschrift werden zu Kindknoten dieser Überschrift
 Hier ist eine interaktive Markmap, die direkt auf dieser Seite gerendert wird — probieren Sie Schwenken, Zoomen und das Auf-/Zuklappen von Knoten aus:
 
 ```markmap
-# VMark Features
+# TMark Features
 
 ## Editor
 ### WYSIWYG Mode
@@ -129,7 +129,7 @@ Hier ist eine interaktive Markmap, die direkt auf dieser Seite gerendert wird �
 
 ## Design-Integration
 
-Markmap-Mindmaps passen sich automatisch an das aktuelle VMark-Design an (White, Paper, Mint, Sepia oder Night). Branchfarben werden für die Lesbarkeit in jedem Design angepasst.
+Markmap-Mindmaps passen sich automatisch an das aktuelle TMark-Design an (White, Paper, Mint, Sepia oder Night). Branchfarben werden für die Lesbarkeit in jedem Design angepasst.
 
 ## Als PNG exportieren
 
@@ -146,7 +146,7 @@ Die Mindmap wird als PNG mit 2-facher Auflösung über den System-Speicherdialog
 
 ### Markmap vs. Mermaid Mindmap
 
-VMark unterstützt sowohl Markmap als auch Mermaids `mindmap`-Diagrammtyp:
+TMark unterstützt sowohl Markmap als auch Mermaids `mindmap`-Diagrammtyp:
 
 | Funktion | Markmap | Mermaid Mindmap |
 |----------|---------|-----------------|

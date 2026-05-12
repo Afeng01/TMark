@@ -195,7 +195,7 @@ export const useGeniesStore = create<GeniesState & GeniesActions>()(
       },
     }),
     {
-      name: "vmark-genies",
+      name: "tmark-genies",
       storage: createJSONStorage(() => createSafeStorage()),
       partialize: (state) => ({
         recentGenieNames: state.recentGenieNames,

@@ -1,6 +1,6 @@
 # Configurações
 
-O painel de configurações do VMark permite personalizar todos os aspectos do editor. Abra-o com `Mod + ,` ou via **VMark > Configurações** na barra de menus.
+O painel de configurações do TMark permite personalizar todos os aspectos do editor. Abra-o com `Mod + ,` ou via **TMark > Configurações** na barra de menus.
 
 A janela de configurações tem uma barra lateral com seções agrupadas por tópico — as seções mais usadas aparecem primeiro, com Sobre e Avançado no final. As alterações têm efeito imediato — não há botão de salvar.
 
@@ -93,7 +93,7 @@ Configurações de comportamento ao colar, layout e renderização HTML.
 | Configuração | Descrição | Padrão | Opções |
 |-------------|-----------|--------|--------|
 | Habilitar regex na pesquisa | Mostrar um botão de alternância de regex na barra de Localizar e Substituir | Ligado | Ligado / Desligado |
-| Modo de colar | Como o VMark roteia o conteúdo da área de transferência | Smart | Smart, Plain |
+| Modo de colar | Como o TMark roteia o conteúdo da área de transferência | Smart | Smart, Plain |
 | Colar Markdown no WYSIWYG | Ao colar texto que parece Markdown no editor WYSIWYG, convertê-lo automaticamente em conteúdo rico | Auto | Auto, Desligado |
 
 ### Layout
@@ -176,7 +176,7 @@ Veja [Large Files](/guide/large-files) para a explicação completa de como arqu
 
 | Configuração | Descrição | Padrão | Opções |
 |--------------|-----------|--------|--------|
-| Frequência de verificação | Quando verificar novas versões do VMark | Na inicialização | Na inicialização, Diariamente, Semanalmente, Manual |
+| Frequência de verificação | Quando verificar novas versões do TMark | Na inicialização | Na inicialização, Diariamente, Semanalmente, Manual |
 | Baixar atualizações automaticamente | Baixar artefatos de versão em segundo plano assim que uma atualização é detectada | Desligado | Ligado / Desligado |
 | Pular uma versão | Suprime o aviso de atualização para uma versão específica (definido por atualização a partir do próprio aviso) | Nenhuma | — |
 
@@ -186,7 +186,7 @@ Habilite **Redimensionar automaticamente ao colar** se você frequentemente cola
 
 ### Ferramentas de Documento
 
-O VMark detecta o [Pandoc](https://pandoc.org) para habilitar a exportação para formatos adicionais (DOCX, EPUB, LaTeX e mais). Clique em **Detectar** para procurar o Pandoc no seu sistema. Se encontrado, sua versão e caminho são exibidos.
+O TMark detecta o [Pandoc](https://pandoc.org) para habilitar a exportação para formatos adicionais (DOCX, EPUB, LaTeX e mais). Clique em **Detectar** para procurar o Pandoc no seu sistema. Se encontrado, sua versão e caminho são exibidos.
 
 Veja [Exportar e Imprimir](/pt-BR/guide/export) para detalhes sobre todas as opções de exportação.
 
@@ -196,12 +196,12 @@ Configuração do servidor MCP e provedor de IA.
 
 ### Servidor MCP
 
-O servidor MCP (Model Context Protocol) permite que assistentes de IA externos como Claude Code e Cursor controlem o VMark programaticamente.
+O servidor MCP (Model Context Protocol) permite que assistentes de IA externos como Claude Code e Cursor controlem o TMark programaticamente.
 
 | Configuração | Descrição | Padrão |
 |-------------|-----------|--------|
 | Habilitar Servidor MCP | Iniciar ou parar o servidor MCP. Quando em execução, um emblema de status mostra a porta e os clientes conectados | Ligado (alternável) |
-| Iniciar ao abrir | Iniciar automaticamente o servidor MCP quando o VMark abrir | Ligado |
+| Iniciar ao abrir | Iniciar automaticamente o servidor MCP quando o TMark abrir | Ligado |
 | Aprovar edições automaticamente | Aplicar alterações de documentos iniciadas por IA sem mostrar uma prévia para aprovação primeiro. Use com cautela | Desligado |
 
 Quando o servidor estiver em execução, o painel também exibe:
@@ -210,7 +210,7 @@ Quando o servidor estiver em execução, o painel também exibe:
 - **Ferramentas / Recursos** — número de ferramentas e recursos MCP disponíveis
 - **Clientes Conectados** — número de clientes de IA atualmente conectados
 
-Abaixo da seção Servidor MCP, você pode instalar a configuração MCP do VMark em clientes de IA suportados (Claude Desktop, Claude Code, Codex CLI, Gemini CLI) com um único clique.
+Abaixo da seção Servidor MCP, você pode instalar a configuração MCP do TMark em clientes de IA suportados (Claude Desktop, Claude Code, Codex CLI, Gemini CLI) com um único clique.
 
 Veja [Configuração MCP](/pt-BR/guide/mcp-setup) e [Referência de Ferramentas MCP](/pt-BR/guide/mcp-tools) para detalhes completos.
 
@@ -247,11 +247,11 @@ Quando uma categoria está desativada, as extensões correspondentes recaem no f
 
 Para o botão **Abrir no editor externo** em abas de código somente leitura, escolha o editor que deve ser iniciado. Um bundle de app (ex.: `/Applications/Visual Studio Code.app`) ou um executável.
 
-A configuração da interface substitui qualquer variável de ambiente — explícito prevalece sobre implícito. Deixe vazio para usar a cadeia de fallback de variáveis de ambiente `$VMARK_EXTERNAL_EDITOR → $VISUAL → $EDITOR → padrão da plataforma`. Veja [Abrir no editor externo](/pt-BR/guide/formats#abrir-no-editor-externo) para a ordem de resolução completa e a barreira de segurança.
+A configuração da interface substitui qualquer variável de ambiente — explícito prevalece sobre implícito. Deixe vazio para usar a cadeia de fallback de variáveis de ambiente `$TMARK_EXTERNAL_EDITOR → $VISUAL → $EDITOR → padrão da plataforma`. Veja [Abrir no editor externo](/pt-BR/guide/formats#abrir-no-editor-externo) para a ordem de resolução completa e a barreira de segurança.
 
 ### Notificação única de atualização
 
-Na primeira execução após atualizar para o suporte a múltiplos formatos, o VMark exibe uma notificação não bloqueante apontando para **Configurações → Formatos**. A notificação é exibida uma única vez por instalação — após ser mostrada (ou dispensada), nunca reaparece.
+Na primeira execução após atualizar para o suporte a múltiplos formatos, o TMark exibe uma notificação não bloqueante apontando para **Configurações → Formatos**. A notificação é exibida uma única vez por instalação — após ser mostrada (ou dispensada), nunca reaparece.
 
 ## Idioma
 
@@ -356,9 +356,9 @@ Configuração para desenvolvedores e em nível de sistema.
 
 | Configuração | Descrição | Padrão |
 |-------------|-----------|--------|
-| Protocolos de link personalizados | Protocolos de URL adicionais que o VMark deve reconhecer ao inserir links. Insira cada protocolo como uma tag | `obsidian`, `vscode`, `dict`, `x-dictionary` |
+| Protocolos de link personalizados | Protocolos de URL adicionais que o TMark deve reconhecer ao inserir links. Insira cada protocolo como uma tag | `obsidian`, `vscode`, `dict`, `x-dictionary` |
 
-Isso permite criar links como `obsidian://open?vault=...` ou `vscode://file/...` que o VMark tratará como URLs válidas.
+Isso permite criar links como `obsidian://open?vault=...` ou `vscode://file/...` que o TMark tratará como URLs válidas.
 
 ### Desempenho
 
@@ -379,7 +379,7 @@ Veja [Workflow Viewer](/guide/workflow-viewer) para a superfície completa de re
 
 | Configuração | Descrição | Padrão | Plataformas |
 |--------------|-----------|--------|-------------|
-| Limpar quarentena macOS ao abrir | Ao abrir um arquivo que carrega o atributo de quarentena do macOS (`com.apple.quarantine`), removê-lo antes da leitura. Útil para arquivos baixados da web que o VMark não conseguiria abrir | Ligado | macOS |
+| Limpar quarentena macOS ao abrir | Ao abrir um arquivo que carrega o atributo de quarentena do macOS (`com.apple.quarantine`), removê-lo antes da leitura. Útil para arquivos baixados da web que o TMark não conseguiria abrir | Ligado | macOS |
 | Tecla Option do Mac como Meta (terminal) | Tratar a tecla Option do macOS como Meta no terminal integrado. Necessária para ferramentas como emacs e tmux que esperam atalhos prefixados com Alt | Desligado | macOS |
 
 ### Ferramentas de Desenvolvedor
@@ -388,7 +388,7 @@ Quando as **Ferramentas de desenvolvedor** estão ativadas, um painel **Hot Exit
 
 ## Veja Também
 
-- [Recursos](/pt-BR/guide/features) — Visão geral das capacidades do VMark
+- [Recursos](/pt-BR/guide/features) — Visão geral das capacidades do TMark
 - [Atalhos de Teclado](/pt-BR/guide/shortcuts) — Referência completa de atalhos
 - [Formatação CJK](/pt-BR/guide/cjk-formatting) — Regras detalhadas de formatação CJK
 - [Terminal Integrado](/pt-BR/guide/terminal) — Sessões de terminal e uso

@@ -1,10 +1,10 @@
-# Introduzione a VMark
+# Introduzione a TMark
 
-VMark è un editor Markdown local-first con due modalità di modifica, ricchi strumenti di formattazione e un eccellente supporto per il testo CJK (cinese/giapponese/coreano).
+TMark è un editor Markdown local-first con due modalità di modifica, ricchi strumenti di formattazione e un eccellente supporto per il testo CJK (cinese/giapponese/coreano).
 
 ## Avvio Rapido
 
-1. **Scarica e installa** VMark dalla [pagina di download](/it/download)
+1. **Scarica e installa** TMark dalla [pagina di download](/it/download)
 2. **Avvia l'app** e inizia subito a scrivere
 3. **Apri un file** con `Cmd/Ctrl + O` oppure trascina e rilascia un file `.md`
 4. **Apri una cartella** con `Cmd/Ctrl + Shift + O` per la modalità workspace
@@ -30,7 +30,7 @@ VMark è un editor Markdown local-first con due modalità di modifica, ricchi st
 
 ### Modalità di Modifica
 
-VMark supporta due modalità di modifica tra cui puoi passare:
+TMark supporta due modalità di modifica tra cui puoi passare:
 
 | Modalità | Descrizione | Scorciatoia |
 |----------|-------------|-------------|
@@ -82,11 +82,11 @@ Migliora la concentrazione nella scrittura con queste modalità di visualizzazio
 
 ### Esportazione
 
-- **Esporta HTML**: Usa **File → Esporta HTML** — include il VMark Reader interattivo
+- **Esporta HTML**: Usa **File → Esporta HTML** — include il TMark Reader interattivo
 - **Esporta PDF**: Usa Stampa (`Cmd/Ctrl + P`) e salva come PDF
 - **Copia come HTML**: `Cmd/Ctrl + Shift + C`
 
-L'HTML esportato include il VMark Reader con sommario, pannello impostazioni e altro. [Scopri di più →](/it/guide/export)
+L'HTML esportato include il TMark Reader con sommario, pannello impostazioni e altro. [Scopri di più →](/it/guide/export)
 
 ## Impostazioni
 
@@ -103,7 +103,7 @@ Apri le impostazioni con `Cmd/Ctrl + ,` per personalizzare:
 
 ## Assistenza alla Scrittura con IA
 
-VMark include Genies IA integrati — seleziona del testo e premi `Mod + Y` per rifinire, espandere, tradurre o trasformare la tua scrittura con l'IA. Configura il tuo provider preferito in **Impostazioni > Integrazioni**.
+TMark include Genies IA integrati — seleziona del testo e premi `Mod + Y` per rifinire, espandere, tradurre o trasformare la tua scrittura con l'IA. Configura il tuo provider preferito in **Impostazioni > Integrazioni**.
 
 [Scopri di più sui Genies IA →](/it/guide/ai-genies) | [Configura i provider →](/it/guide/ai-providers)
 

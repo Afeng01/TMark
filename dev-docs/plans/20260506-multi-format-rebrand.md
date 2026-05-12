@@ -8,9 +8,9 @@
 
 ## Goal
 
-Reposition VMark from "Markdown Editor" to **"the plain-text workspace where humans and AI collaborate"** by adding first-class support for the artifact formats that both humans and AI naturally read and write: markdown (already), YAML, JSON / JSONL, TOML, plain text, standalone Mermaid (`.mmd`), standalone SVG (`.svg`), HTML, and syntax-highlighted *viewing* of common code formats.
+Reposition TMark from "Markdown Editor" to **"the plain-text workspace where humans and AI collaborate"** by adding first-class support for the artifact formats that both humans and AI naturally read and write: markdown (already), YAML, JSON / JSONL, TOML, plain text, standalone Mermaid (`.mmd`), standalone SVG (`.svg`), HTML, and syntax-highlighted *viewing* of common code formats.
 
-The differentiator is not "open more file types" — every IDE does that. It is **schema-aware previews**: when the file is a known artifact (GitHub Actions workflow, `Cargo.toml`, `package.json`, OpenAPI), VMark renders the *right* view, not a generic JSON tree. The existing GitHub Actions workflow viewer is the template; this plan formalizes that pattern as the architectural norm and *validates the differentiator inside Phase 2*.
+The differentiator is not "open more file types" — every IDE does that. It is **schema-aware previews**: when the file is a known artifact (GitHub Actions workflow, `Cargo.toml`, `package.json`, OpenAPI), TMark renders the *right* view, not a generic JSON tree. The existing GitHub Actions workflow viewer is the template; this plan formalizes that pattern as the architectural norm and *validates the differentiator inside Phase 2*.
 
 ## Non-goals
 
@@ -426,7 +426,7 @@ Markdown remains the default for **untitled** files; this phase opens **existing
 - **WI-1B.8** — `closeSave.ts` markdown-only filters generalized. `MARKDOWN_FILTERS` derived per-tab from `dispatchEditor(tab.filePath).adapters.saveDialogFilters`. Hardcoded `.md` extension fallback (lines 132, 137, 259, 263, 354, 358) consults `untitledExtension` per-tab.
 - **WI-1B.9** — `useFileSave.ts:102` Save dialog default filename uses per-tab `untitledExtension` instead of hardcoded `.md`.
 - **WI-1B.10** — `newFile.ts` `createUntitledTab(windowLabel, formatId?)` accepts optional `formatId` (defaults to markdown). Internal plumbing only — UI for "New Other Format" is deferred to v1.x.
-- **WI-1B.11** — macOS `Open With VMark` document-type expansion. `src-tauri/tauri.conf.json` `bundle.macOS.fileAssociations` includes all registered extensions.
+- **WI-1B.11** — macOS `Open With TMark` document-type expansion. `src-tauri/tauri.conf.json` `bundle.macOS.fileAssociations` includes all registered extensions.
 - **WI-1B.12** — CLI argv handling. Verify Rust `lib.rs` argv parsing accepts non-markdown paths and routes through the same registry-driven open path. Existing test in `lib.rs:1052` (loop over `MARKDOWN_EXTENSIONS`) is updated to loop over `SUPPORTED_EXTENSIONS`.
 - **WI-1B.13** — `contentSearchStore.ts:147` content-search scope expansion. Scope expands to `getSupportedExtensions()` filtered by `adapters.contentSearchIndexed === true` (default true for split-pane, false for viewer per ADR-9). Settings UI gets a "Search in code files" toggle (deferred to v1.x).
 - **WI-1B.14** — `useExternalFileChanges.ts` reload behavior consults `adapters.reloadPolicy`. For markdown: existing behavior preserved; for data formats: reload + revalidate.
@@ -440,7 +440,7 @@ Markdown remains the default for **untitled** files; this phase opens **existing
 **Important:** `src/utils/yamlOpenRouting.ts` is **NOT deleted in Phase 1B**. It stays live until WI-2.6. Until then, the YAML force-source bandaid keeps working as a markdown-adapter-internal concern (the markdown adapter's mode dispatch consults it; non-markdown adapters bypass).
 
 **DoD:**
-- macOS Finder "Open With VMark" works for all registered extensions.
+- macOS Finder "Open With TMark" works for all registered extensions.
 - Drag-drop accepts all registered extensions; reject toast appears only for unrecognized types.
 - `Cmd+O` shows "All Supported" + "Markdown" filters.
 - `Save As` of a `.txt` tab defaults to `.txt`.
@@ -499,7 +499,7 @@ POC #1 (GHA) and POC #2 (Cargo.toml) shipped in Phase 2.
 
 Gated on Phase 2 shipping.
 
-- **WI-6.1** — Tagline propagation: README.md, `website/.vitepress/config/shared.ts`, `website/index.md`, `package.json` description, `src-tauri/tauri.conf.json` description, `src-tauri/Cargo.toml` description, About dialog string in `src/locales/en/*.json`, `vmark-mcp-server/package.json` description.
+- **WI-6.1** — Tagline propagation: README.md, `website/.vitepress/config/shared.ts`, `website/index.md`, `package.json` description, `src-tauri/tauri.conf.json` description, `src-tauri/Cargo.toml` description, About dialog string in `src/locales/en/*.json`, `tmark-mcp-server/package.json` description.
 - **WI-6.2** — Website restructure around multi-format + AI-collaboration narrative.
 - **WI-6.3** — `website/guide/formats.md` documenting every supported format.
 - **WI-6.4** — Launch artifact: blog post + screenshot reel (5+ formats open simultaneously).
@@ -565,9 +565,9 @@ Before Phase 6 begins:
 
 ## Appendix A — Why not just use VS Code?
 
-VMark's defaults differ from VS Code's by direction-of-gradient: VS Code is a *code editor* that opens prose; VMark is a *prose-and-artifact workspace* that opens code.
+TMark's defaults differ from VS Code's by direction-of-gradient: VS Code is a *code editor* that opens prose; TMark is a *prose-and-artifact workspace* that opens code.
 
-| Default | VS Code | VMark |
+| Default | VS Code | TMark |
 |---|---|---|
 | Markdown editing | Source mode | WYSIWYG |
 | Mermaid in markdown | Plugin (manual) | First-class render |
@@ -580,7 +580,7 @@ VMark's defaults differ from VS Code's by direction-of-gradient: VS Code is a *c
 
 ## Appendix B — Why "humans and AI" not "AI"
 
-The "and" matters. AI-first framing puts humans in the user-of-tool position. Human-and-AI framing names the artifact as the shared substrate, with both parties reading and writing it directly. Plain text is the un-mediated meeting point; VMark optimizes the experience of working in that meeting point.
+The "and" matters. AI-first framing puts humans in the user-of-tool position. Human-and-AI framing names the artifact as the shared substrate, with both parties reading and writing it directly. Plain text is the un-mediated meeting point; TMark optimizes the experience of working in that meeting point.
 
 ## Appendix C — Resolution of cross-model review findings
 

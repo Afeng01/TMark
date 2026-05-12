@@ -2,7 +2,7 @@
 
 > Created: 2026-05-04
 > Source: research synthesis (web sources, primary papers, vendor blogs, practitioner reports)
-> Purpose: capture what's emerged for keeping AI-assisted implementation honest, so VMark's governance choices have an evidentiary base. Companion to the GHA workflow viewer plan and to future plans of similar scope.
+> Purpose: capture what's emerged for keeping AI-assisted implementation honest, so TMark's governance choices have an evidentiary base. Companion to the GHA workflow viewer plan and to future plans of similar scope.
 
 ## Why this document exists
 
@@ -219,16 +219,16 @@ Boundary work is the persistent weak spot.
 
 ---
 
-## VMark-specific application
+## TMark-specific application
 
-VMark already has these pieces:
+TMark already has these pieces:
 - TDD rule (`.claude/rules/10-tdd.md`)
 - `pnpm check:all` gate (lint + tests + build + size)
 - Codex-toolkit cross-model review
 - Per-WI plan structure (`dev-docs/plans/*`)
 - Coverage thresholds in `vitest.config.ts`
 - Coding-researcher subagent
-- Skills system (`vmark-mcp`, `plan-audit`, `plan-verify`)
+- Skills system (`tmark-mcp`, `plan-audit`, `plan-verify`)
 - ui-tokenize, ui-responsive, docs-guardian, tdd-guardian plugins
 
 What's missing or weak (in priority order):

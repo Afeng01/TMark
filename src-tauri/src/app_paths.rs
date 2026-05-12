@@ -2,7 +2,7 @@
 //!
 //! Provides:
 //! - Port file path resolution for MCP bridge
-//! - Legacy ~/.vmark/ directory cleanup
+//! - Legacy ~/.tmark/ directory cleanup
 //! - Atomic file operations to prevent race conditions
 
 use std::fs::{self, File};
@@ -33,7 +33,7 @@ pub fn get_port_file_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
     Ok(app_data.join(MCP_PORT_FILE))
 }
 
-/// Best-effort cleanup of legacy ~/.vmark/ directory.
+/// Best-effort cleanup of legacy ~/.tmark/ directory.
 /// Removes obsolete files (bootstrap, port, settings) and the directory itself if empty.
 pub fn cleanup_legacy_home_dir(_app: &tauri::AppHandle) {
     let Some(legacy_dir) = get_legacy_dir() else {
@@ -56,9 +56,9 @@ pub fn cleanup_legacy_home_dir(_app: &tauri::AppHandle) {
 // Internal helpers
 // ============================================================================
 
-/// Get the legacy directory path (~/.vmark/).
+/// Get the legacy directory path (~/.tmark/).
 fn get_legacy_dir() -> Option<PathBuf> {
-    dirs::home_dir().map(|h| h.join(".vmark"))
+    dirs::home_dir().map(|h| h.join(".tmark"))
 }
 
 /// Write a file atomically using temp file + sync + rename pattern.
@@ -231,7 +231,7 @@ mod tests {
     #[test]
     fn test_cleanup_removes_bootstrap_file() {
         let dir = tempdir().unwrap();
-        let legacy_dir = dir.path().join(".vmark");
+        let legacy_dir = dir.path().join(".tmark");
         fs::create_dir_all(&legacy_dir).unwrap();
         fs::write(legacy_dir.join("app-data-path"), "/some/path").unwrap();
 

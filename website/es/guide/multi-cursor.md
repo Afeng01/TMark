@@ -1,6 +1,6 @@
 # Edición con Multicursor
 
-VMark soporta una potente edición con multicursor tanto en el modo WYSIWYG como en el modo Fuente, lo que te permite editar múltiples ubicaciones simultáneamente.
+TMark soporta una potente edición con multicursor tanto en el modo WYSIWYG como en el modo Fuente, lo que te permite editar múltiples ubicaciones simultáneamente.
 
 ## Inicio Rápido
 

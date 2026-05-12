@@ -233,7 +233,7 @@ export interface AdvancedSettingsState {
   workflowEditorPreserveYamlFormatting: boolean;
   // macOS only: clear `com.apple.quarantine` on the workspace root and its
   // direct .md children when opening a workspace. Without this, files marked
-  // by apps like Mixin Messenger fail to open in a running VMark via Finder
+  // by apps like Mixin Messenger fail to open in a running TMark via Finder
   // double-click (Launch Services routes them through CSUI which silently
   // drops the openURLs delivery). Default: true.
   clearMacQuarantineOnOpen: boolean;
@@ -250,12 +250,12 @@ export interface AdvancedSettingsState {
  * core product; YAML shipped on by default in the previous release with the
  * GHA workflow viewer — reverting it would break the contract). Every other
  * adapter is grouped here behind a category toggle so the existing user base
- * isn't surprised by VMark suddenly opening `.html` / `.toml` / `.ts` files
+ * isn't surprised by TMark suddenly opening `.html` / `.toml` / `.ts` files
  * with rich previews. Defaults are all OFF on first install AND on upgrade.
  *
  * `externalEditor` is the explicit override for the "Open in external editor"
  * button on read-only code tabs (WI-4.4). Empty string = fall back to the
- * env-var chain (`$VMARK_EXTERNAL_EDITOR` → `$VISUAL` → `$EDITOR` → platform
+ * env-var chain (`$TMARK_EXTERNAL_EDITOR` → `$VISUAL` → `$EDITOR` → platform
  * default). The GUI setting wins over env vars when both are set — explicit
  * beats implicit.
  */

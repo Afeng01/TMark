@@ -1,10 +1,12 @@
 # 隐私
 
-VMark 尊重你的隐私。以下是确切发生的——以及不会发生的。
+> TMark snapshot note: this inherited privacy page is not authoritative until TMark release infrastructure is published. The current app update endpoint points to GitHub Releases, and public stats are disabled by default.
 
-## VMark 发送的内容
+TMark 尊重你的隐私。以下是确切发生的——以及不会发生的。
 
-VMark 包含一个 **自动更新检查器**，会定期联系我们的服务器以查看是否有新版本可用。这是 VMark 发出的 **唯一** 网络请求。
+## TMark 发送的内容
+
+TMark 包含一个 **自动更新检查器**，会定期联系我们的服务器以查看是否有新版本可用。这是 TMark 发出的 **唯一** 网络请求。
 
 每次检查只发送以下字段——仅此而已：
 
@@ -19,13 +21,13 @@ VMark 包含一个 **自动更新检查器**，会定期联系我们的服务器
 完整 URL 如下：
 
 ```text
-GET https://log.vmark.app/update/latest.json?target=darwin&arch=aarch64&version=0.5.10
+GET https://github.com/Afeng01/TMark/releases/latest/download/latest.json?target=darwin&arch=aarch64&version=0.5.10
 X-Machine-Id: a3f8c2b1d4e5f6078a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1
 ```
 
-你可以自行验证——端点在 [`tauri.conf.json`](https://github.com/xiaolai/vmark/blob/main/src-tauri/tauri.conf.json) 中（搜索 `"endpoints"`），哈希生成逻辑在 [`lib.rs`](https://github.com/xiaolai/vmark/blob/main/src-tauri/src/lib.rs) 中（搜索 `machine_id_hash`）。
+你可以自行验证——端点在 [`tauri.conf.json`](https://github.com/Afeng01/TMark/blob/main/src-tauri/tauri.conf.json) 中（搜索 `"endpoints"`），哈希生成逻辑在 [`lib.rs`](https://github.com/Afeng01/TMark/blob/main/src-tauri/src/lib.rs) 中（搜索 `machine_id_hash`）。
 
-## VMark 不会发送的内容
+## TMark 不会发送的内容
 
 - 你的文档或其内容
 - 文件名或路径
@@ -48,7 +50,7 @@ X-Machine-Id: a3f8c2b1d4e5f6078a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1
 | **平台** | 每种操作系统+架构组合的请求数量 |
 | **版本** | 每个应用版本的请求数量 |
 
-这些数字在 [`log.vmark.app/api/stats`](https://log.vmark.app/api/stats) 公开发布。没有任何隐藏。
+这些数字在 [`configured stats endpoint`](https://github.com/Afeng01/TMark/releases) 公开发布。没有任何隐藏。
 
 **重要说明：**
 - 唯一 IP 数量低估了真实用户——同一路由器/VPN 后面的多人只计为一个
@@ -60,19 +62,19 @@ X-Machine-Id: a3f8c2b1d4e5f6078a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1
 - 日志以标准访问日志格式存储在我们的服务器上
 - 日志文件在 1 MB 时轮换，只保留最近 3 个文件
 - 日志不与任何人共享
-- 没有账户系统——VMark 不知道你是谁
+- 没有账户系统——TMark 不知道你是谁
 - 机器哈希不与任何账户、电子邮件或 IP 地址关联——它只是一个假名设备计数器
 - 我们不使用跟踪 Cookie、指纹识别或任何分析 SDK
 
 ## 开源透明度
 
-VMark 完全开源。你可以验证这里描述的一切：
+TMark 完全开源。你可以验证这里描述的一切：
 
-- 更新端点配置：[`src-tauri/tauri.conf.json`](https://github.com/xiaolai/vmark/blob/main/src-tauri/tauri.conf.json)
-- 机器哈希生成：[`src-tauri/src/lib.rs`](https://github.com/xiaolai/vmark/blob/main/src-tauri/src/lib.rs)——搜索 `machine_id_hash`
-- 服务端统计聚合：[`scripts/vmark-stats-json`](https://github.com/xiaolai/vmark/blob/main/scripts/vmark-stats-json)——在我们服务器上运行以生成[公开统计数据](https://log.vmark.app/api/stats)的确切脚本
+- 更新端点配置：[`src-tauri/tauri.conf.json`](https://github.com/Afeng01/TMark/blob/main/src-tauri/tauri.conf.json)
+- 机器哈希生成：[`src-tauri/src/lib.rs`](https://github.com/Afeng01/TMark/blob/main/src-tauri/src/lib.rs)——搜索 `machine_id_hash`
+- 服务端统计聚合：[`scripts/tmark-stats-json`](https://github.com/Afeng01/TMark/blob/main/scripts/tmark-stats-json)——在我们服务器上运行以生成[公开统计数据](https://github.com/Afeng01/TMark/releases)的确切脚本
 - 代码库中不存在其他网络调用——自行搜索 `fetch`、`http` 或 `reqwest`
 
 ## 禁用更新检查
 
-如果你更希望完全禁用自动更新检查，可以在网络层面屏蔽 `log.vmark.app`（防火墙、`/etc/hosts` 或 DNS）。VMark 在没有它的情况下也能正常工作——你只是不会收到更新通知。
+如果你更希望完全禁用自动更新检查，可以在网络层面屏蔽 the configured update endpoint（防火墙、`/etc/hosts` 或 DNS）。TMark 在没有它的情况下也能正常工作——你只是不会收到更新通知。

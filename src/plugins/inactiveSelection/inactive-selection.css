@@ -17,6 +17,6 @@
  * which gives a clearly-dimmer-but-same-hue look. The token system
  * already adjusts it across themes.
  */
-.vmark-inactive-selection {
+.tmark-inactive-selection {
   background-color: var(--accent-bg);
 }

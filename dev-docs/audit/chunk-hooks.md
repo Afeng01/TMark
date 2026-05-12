@@ -41,7 +41,7 @@
 | `src/hooks/mcpBridge/index.ts` | 569 |
 | `src/hooks/mcpBridge/sectionHandlers.ts` | 564 |
 | `src/hooks/mcpBridge/workspaceHandlers.ts` | 416 |
-| `src/hooks/mcpBridge/vmarkHandlers.ts` | 303 |
+| `src/hooks/mcpBridge/tmarkHandlers.ts` | 303 |
 
 - **Fix:** Split by sub-domain. `mutationHandlers.ts` handles `batch_edit`, `apply_diff`, `replace_anchored` — each could be its own file.
 

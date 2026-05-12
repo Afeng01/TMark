@@ -174,7 +174,7 @@ pub async fn render_pdf(
         .map(|d| d.as_nanos())
         .unwrap_or(0);
     let temp_html = temp_dir.join(format!(
-        "vmark-pdf-export-{}-{}.html",
+        "tmark-pdf-export-{}-{}.html",
         std::process::id(),
         unique_id
     ));
@@ -410,7 +410,7 @@ pub async fn print_document(app: AppHandle, html: String) -> Result<(), String> 
         .map(|d| d.as_nanos())
         .unwrap_or(0);
     let temp_html = temp_dir.join(format!(
-        "vmark-print-{}-{}.html",
+        "tmark-print-{}-{}.html",
         std::process::id(),
         unique_id
     ));

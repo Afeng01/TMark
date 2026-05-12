@@ -1,6 +1,6 @@
 # Mermaid Diagrams
 
-VMark supports [Mermaid](https://mermaid.js.org/) diagrams for creating flowcharts, sequence diagrams, and other visualizations directly in your Markdown documents.
+TMark supports [Mermaid](https://mermaid.js.org/) diagrams for creating flowcharts, sequence diagrams, and other visualizations directly in your Markdown documents.
 
 [[toc]]
 
@@ -50,7 +50,7 @@ The preview panel remembers its position if you move it, making it easy to arran
 
 ## Supported Diagram Types
 
-VMark supports all Mermaid diagram types:
+TMark supports all Mermaid diagram types:
 
 ### Flowchart
 
@@ -245,7 +245,7 @@ When editing a mermaid code block in WYSIWYG mode, a **copy** button appears in 
 
 ### Theme Integration
 
-Mermaid diagrams automatically adapt to VMark's current theme (White, Paper, Mint, Sepia, or Night).
+Mermaid diagrams automatically adapt to TMark's current theme (White, Paper, Mint, Sepia, or Night).
 
 ### Export as PNG
 
@@ -264,7 +264,7 @@ When exporting the full document to HTML or PDF, Mermaid diagrams are rendered a
 
 ## Fixing AI-Generated Diagrams
 
-VMark uses **Mermaid v11**, which has a stricter parser (Langium) than older versions. AI tools (ChatGPT, Claude, Copilot, etc.) often generate syntax that worked in older Mermaid versions but fails in v11. Here are the most common issues and how to fix them.
+TMark uses **Mermaid v11**, which has a stricter parser (Langium) than older versions. AI tools (ChatGPT, Claude, Copilot, etc.) often generate syntax that worked in older Mermaid versions but fails in v11. Here are the most common issues and how to fix them.
 
 ### 1. Unquoted Labels with Special Characters
 
@@ -483,7 +483,7 @@ Both tools require [Node.js](https://nodejs.org/) (v18 or later) installed on yo
 
 ## Learning Mermaid Syntax
 
-VMark renders standard Mermaid syntax. To master diagram creation, refer to the official Mermaid documentation:
+TMark renders standard Mermaid syntax. To master diagram creation, refer to the official Mermaid documentation:
 
 ### Official Documentation
 
@@ -500,9 +500,9 @@ VMark renders standard Mermaid syntax. To master diagram creation, refer to the 
 
 ### Practice Tools
 
-- **[Mermaid Live Editor](https://mermaid.live/)** — Interactive playground to test and preview diagrams before pasting into VMark
+- **[Mermaid Live Editor](https://mermaid.live/)** — Interactive playground to test and preview diagrams before pasting into TMark
 - **[Mermaid Documentation](https://mermaid.js.org/)** — Complete reference with examples for all diagram types
 
 ::: tip
-The Live Editor is great for experimenting with complex diagrams. Once your diagram looks right, copy the code into VMark.
+The Live Editor is great for experimenting with complex diagrams. Once your diagram looks right, copy the code into TMark.
 :::

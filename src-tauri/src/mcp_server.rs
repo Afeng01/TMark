@@ -4,11 +4,11 @@
 //!
 //! Architecture:
 //! - The BRIDGE is a WebSocket server that AI sidecars connect to
-//! - The SIDECAR is spawned by AI clients (Claude Code, Codex, etc.), NOT by VMark
-//! - VMark only starts the bridge; AI clients spawn their own sidecars
+//! - The SIDECAR is spawned by AI clients (Claude Code, Codex, etc.), NOT by TMark
+//! - TMark only starts the bridge; AI clients spawn their own sidecars
 //!
 //! For development/testing, mcp_server_start can spawn a local sidecar,
-//! but this should NOT be used when AI clients are configured to use VMark.
+//! but this should NOT be used when AI clients are configured to use TMark.
 
 use crate::mcp_bridge;
 use serde::{Deserialize, Serialize};
@@ -213,7 +213,7 @@ pub async fn mcp_server_start(app: AppHandle, port: u16) -> Result<McpServerStat
     // Spawn the sidecar process (no --port arg needed, it reads from file)
     let shell = app.shell();
     let sidecar = shell
-        .sidecar("vmark-mcp-server")
+        .sidecar("tmark-mcp-server")
         .map_err(|e| format!("Failed to create sidecar command: {}", e))?;
 
     let (mut rx, child) = sidecar.spawn().map_err(|e| {
@@ -338,7 +338,7 @@ pub async fn mcp_sidecar_health(app: AppHandle) -> Result<McpHealthInfo, String>
 
     // Run sidecar with --health-check flag
     let output = shell
-        .sidecar("vmark-mcp-server")
+        .sidecar("tmark-mcp-server")
         .map_err(|e| format!("Failed to create sidecar command: {}", e))?
         .args(["--health-check"])
         .output()

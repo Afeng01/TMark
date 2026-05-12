@@ -47,8 +47,8 @@ const icons: Record<string, string> = {
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">GitHub-style callouts for notes, tips, warnings, and more</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">GitHub-style callouts for notes, tips, warnings, and more</p>
 
     <div class="alerts">
       <div
@@ -70,7 +70,7 @@ const icons: Record<string, string> = {
 
     <div class="syntax">
       <div class="syntax__title">Markdown Syntax</div>
-      <pre class="vmark-code">&gt; [!NOTE]
+      <pre class="tmark-code">&gt; [!NOTE]
 &gt; Your note content here.
 
 &gt; [!TIP]
@@ -88,7 +88,7 @@ const icons: Record<string, string> = {
   </div>
 </template>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .alerts {
   display: flex;
@@ -104,7 +104,7 @@ const icons: Record<string, string> = {
   background: color-mix(in srgb, var(--alert-color) 8%, transparent);
 }
 
-[data-vmark-theme="night"] .alert {
+[data-tmark-theme="night"] .alert {
   --alert-color: var(--alert-color-dark);
   background: color-mix(in srgb, var(--alert-color-dark) 12%, transparent);
 }
@@ -122,7 +122,7 @@ const icons: Record<string, string> = {
   align-items: center;
 }
 
-[data-vmark-theme="night"] .alert__icon {
+[data-tmark-theme="night"] .alert__icon {
   color: var(--alert-color-dark);
 }
 
@@ -132,7 +132,7 @@ const icons: Record<string, string> = {
   color: var(--alert-color);
 }
 
-[data-vmark-theme="night"] .alert__title {
+[data-tmark-theme="night"] .alert__title {
   color: var(--alert-color-dark);
 }
 

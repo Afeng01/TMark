@@ -1,15 +1,15 @@
 # Visualizzatore di workflow GitHub Actions
 
-VMark visualizza i file YAML dei workflow di GitHub Actions come grafo aciclico diretto (DAG) interattivo e ti consente di modificare job, step e trigger tramite form strutturati — senza mai perdere commenti, ancore o formattazione del file sottostante.
+TMark visualizza i file YAML dei workflow di GitHub Actions come grafo aciclico diretto (DAG) interattivo e ti consente di modificare job, step e trigger tramite form strutturati — senza mai perdere commenti, ancore o formattazione del file sottostante.
 
 La funzionalità opera su due superfici:
 
 1. **File `.yml` autonomi** sotto `.github/workflows/` (o qualsiasi file la cui struttura di primo livello corrisponda a un workflow): vista divisa con il sorgente a sinistra e il canvas interattivo + l'editor a form sulla destra.
-2. **Blocchi di codice in Markdown**: quando un blocco recintato con triplo backtick `yaml` o `yml` contiene un workflow riconoscibile, VMark lo visualizza come DAG in stile Mermaid in linea, allo stesso modo dei blocchi `mermaid`.
+2. **Blocchi di codice in Markdown**: quando un blocco recintato con triplo backtick `yaml` o `yml` contiene un workflow riconoscibile, TMark lo visualizza come DAG in stile Mermaid in linea, allo stesso modo dei blocchi `mermaid`.
 
 ## File di workflow autonomi
 
-Apri un qualsiasi file `.github/workflows/*.yml` in VMark. Il pannello laterale destro si apre automaticamente e mostra:
+Apri un qualsiasi file `.github/workflows/*.yml` in TMark. Il pannello laterale destro si apre automaticamente e mostra:
 
 - L'intero workflow come canvas React Flow interattivo (i job sono nodi, le dipendenze `needs:` sono archi).
 - Un pannello editor strutturato sotto il canvas.
@@ -53,7 +53,7 @@ Il riepilogo dei trigger (evento, branch, tag, path, cron, type) è in sola lett
 
 Le modifiche si accumulano in una lista di patch in memoria mentre cambi i campi. Il pulsante Salva mostra il conteggio attuale (es. **3 non salvate**).
 
-Quando clicchi Salva, VMark:
+Quando clicchi Salva, TMark:
 
 1. Legge lo YAML attuale dall'editor.
 2. Applica ogni patch in coda al CST (concrete syntax tree) dello YAML — preservando commenti, ancore e formattazione esistente.
@@ -84,11 +84,11 @@ jobs:
 ```
 ````
 
-VMark rileva la forma del workflow (`jobs:` di primo livello con `runs-on` per ogni job) e visualizza il diagramma in linea. Il diagramma è in sola lettura — modifica il sorgente per cambiare il workflow.
+TMark rileva la forma del workflow (`jobs:` di primo livello con `runs-on` per ogni job) e visualizza il diagramma in linea. Il diagramma è in sola lettura — modifica il sorgente per cambiare il workflow.
 
 ## Diagnostica
 
-VMark mostra le diagnostiche di parse + lint accanto al sorgente:
+TMark mostra le diagnostiche di parse + lint accanto al sorgente:
 
 | Prefisso del codice | Significato |
 |---------------------|-------------|
@@ -105,7 +105,7 @@ Installa `actionlint` e attiva **Usa actionlint quando disponibile** in Impostaz
 
 ## Metadati delle azioni
 
-Per gli step `uses:` che fanno riferimento ad azioni GitHub pubbliche, VMark può recuperare il file `action.yml` di ciascuna per popolare le descrizioni degli input nell'editor strutturato. È opt-in e viene messo in cache su disco per 24 ore.
+Per gli step `uses:` che fanno riferimento ad azioni GitHub pubbliche, TMark può recuperare il file `action.yml` di ciascuna per popolare le descrizioni degli input nell'editor strutturato. È opt-in e viene messo in cache su disco per 24 ore.
 
 Attiva **Recupera metadati delle azioni** in Impostazioni → Avanzate. Disattivalo per mantenere tutti i riferimenti alle azioni come puro testo — non viene effettuata alcuna richiesta di rete.
 
@@ -121,4 +121,4 @@ Il pannello laterale del workflow include tre opzioni di esportazione accessibil
 
 ## Cosa non è
 
-VMark non esegue i workflow di GitHub Actions. È un visualizzatore ed editor — l'esecuzione resta compito di GitHub. La funzionalità serve esclusivamente per leggere, revisionare e scrivere YAML dei workflow.
+TMark non esegue i workflow di GitHub Actions. È un visualizzatore ed editor — l'esecuzione resta compito di GitHub. La funzionalità serve esclusivamente per leggere, revisionare e scrivere YAML dei workflow.

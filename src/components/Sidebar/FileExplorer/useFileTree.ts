@@ -29,7 +29,7 @@ import { shouldRefreshTree } from "@/utils/fsEventFilter";
 import {
   isMarkdownFileName,
   isSupportedFileName,
-  isVMarkFileName,
+  isTMarkFileName,
   stripSupportedExtension,
 } from "@/utils/dropPaths";
 import { isWorkflowEnabled } from "@/utils/workflowFeatureFlag";
@@ -100,7 +100,7 @@ async function loadDirectoryRecursive(
 const mdFilter = (name: string, isFolder: boolean): boolean => {
   if (isFolder) return true;
   if (isSupportedFileName(name)) return true;
-  if (isWorkflowEnabled()) return isVMarkFileName(name);
+  if (isWorkflowEnabled()) return isTMarkFileName(name);
   return isMarkdownFileName(name);
 };
 

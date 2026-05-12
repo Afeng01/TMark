@@ -5,7 +5,7 @@
  *   the editor and then focuses the built-in terminal (or any other field)
  *   loses the visual cue for what is selected — even though
  *   `state.selection` is preserved and MCP tools like
- *   `vmark.selection.{get,set}` still operate on the right range.
+ *   `tmark.selection.{get,set}` still operate on the right range.
  *
  * Key decisions:
  *   - Track focus in plugin state. Decorations are derived from

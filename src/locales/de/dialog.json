@@ -71,7 +71,7 @@
     "failedToOpen": "{{filename}} konnte nicht geöffnet werden",
     "quarantineCleared_one": "macOS-Quarantäne für 1 Markdown-Datei in diesem Arbeitsbereich entfernt.",
     "quarantineCleared_other": "macOS-Quarantäne für {{count}} Markdown-Dateien in diesem Arbeitsbereich entfernt.",
-    "quarantineClearedDesc": "macOS markiert Dateien, die von bestimmten Apps heruntergeladen wurden, mit einem Attribut, das den Finder-Doppelklick stillschweigend blockiert, während VMark läuft. VMark hat es entfernt, damit diese Dateien geöffnet werden können. Unter Einstellungen → Erweitert deaktivierbar.",
+    "quarantineClearedDesc": "macOS markiert Dateien, die von bestimmten Apps heruntergeladen wurden, mit einem Attribut, das den Finder-Doppelklick stillschweigend blockiert, während TMark läuft. TMark hat es entfernt, damit diese Dateien geöffnet werden können. Unter Einstellungen → Erweitert deaktivierbar.",
     "failedToOpenFilesInNewWindow": "Dateien konnten nicht in neuem Fenster geöffnet werden",
     "onlyMarkdownViaDropDrop": "Nur Markdown-Dateien können per Drag-and-Drop geöffnet werden",
     "restored": "Wiederhergestellt: {{filename}}",
@@ -177,7 +177,7 @@
     "exportHtmlDialogTitle": "HTML exportieren",
     "exportFormatDialogTitle": "{{name}} exportieren",
     "tabFormatChanged": "Editor switched to {{format}}.",
-    "unsupportedFileViaDropDrop": "This file type is not supported by VMark."
+    "unsupportedFileViaDropDrop": "This file type is not supported by TMark."
   },
   "saveRequired": {
     "title": "Speichern erforderlich"
@@ -192,7 +192,7 @@
     "warnOk": "Öffnen",
     "warnCancel": "Abbrechen",
     "refuseTitle": "Datei zu groß zum Öffnen",
-    "refuseBody": "„{{filename}}“ ist {{size}}. VMark kann Dateien über {{limit}} nicht sicher öffnen. Verwenden Sie ein zeilenorientiertes Werkzeug wie less, bat oder grep."
+    "refuseBody": "„{{filename}}“ ist {{size}}. TMark kann Dateien über {{limit}} nicht sicher öffnen. Verwenden Sie ein zeilenorientiertes Werkzeug wie less, bat oder grep."
   },
   "errorBoundary": {
     "title": "Etwas ist schiefgelaufen"

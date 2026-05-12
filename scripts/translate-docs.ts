@@ -117,8 +117,8 @@ function findMarkdownFiles(dir: string, base: string = dir): string[] {
 function buildSystemPrompt(lang: string): string {
   const languageName = LANGUAGES[lang] ?? lang;
   return [
-    `You are translating VMark documentation from English to ${languageName}.`,
-    `VMark is a desktop Markdown editor built with Tauri and React.`,
+    `You are translating TMark documentation from English to ${languageName}.`,
+    `TMark is a desktop Markdown editor built with Tauri and React.`,
     ``,
     `Rules:`,
     `- Translate prose text only`,
@@ -352,7 +352,7 @@ async function main(): Promise<void> {
       ? `all (${Object.keys(LANGUAGES).join(", ")})`
       : `${args.lang} — ${LANGUAGES[args.lang] ?? args.lang}`;
 
-  console.log("\nVMark Documentation Translation");
+  console.log("\nTMark Documentation Translation");
   console.log(`  Language : ${langDisplay}`);
   if (args.file) console.log(`  File     : ${args.file}`);
   console.log(`  Files    : ${jobs.length} job(s)`);

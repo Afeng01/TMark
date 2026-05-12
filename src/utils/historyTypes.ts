@@ -46,7 +46,7 @@ export const INDEX_FILE = "index.json";
 /** Maximum character length for snapshot preview text. */
 export const PREVIEW_LENGTH = 200;
 /** Custom event name dispatched when history is cleared. */
-export const HISTORY_CLEARED_EVENT = "vmark:history-cleared";
+export const HISTORY_CLEARED_EVENT = "tmark:history-cleared";
 
 /** Dispatch the history-cleared CustomEvent on the current window */
 export function emitHistoryCleared(): void {

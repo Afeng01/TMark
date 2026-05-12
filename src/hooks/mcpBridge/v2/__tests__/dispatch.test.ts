@@ -1,4 +1,4 @@
-// Routing coverage for dispatchV2 — every vmark.* action must reach its
+// Routing coverage for dispatchV2 — every tmark.* action must reach its
 // handler exactly once, and unrecognized types must fall through (return
 // false) so the top-level handleRequest can answer with "Unknown request".
 
@@ -72,77 +72,77 @@ const ROUTES: Array<{
   passesArgsObject?: boolean;
 }> = [
   {
-    type: "vmark.session.get_state",
+    type: "tmark.session.get_state",
     handler: handleSessionGetState as unknown as ReturnType<typeof vi.fn>,
     passesArgsObject: false,
   },
   {
-    type: "vmark.workspace.new",
+    type: "tmark.workspace.new",
     handler: handleWorkspaceNew as unknown as ReturnType<typeof vi.fn>,
     args: { kind: "markdown" },
   },
   {
-    type: "vmark.workspace.open",
+    type: "tmark.workspace.open",
     handler: handleWorkspaceOpen as unknown as ReturnType<typeof vi.fn>,
     args: { filePath: "/x.md" },
   },
   {
-    type: "vmark.workspace.save",
+    type: "tmark.workspace.save",
     handler: handleWorkspaceSave as unknown as ReturnType<typeof vi.fn>,
     args: {},
   },
   {
-    type: "vmark.workspace.save_as",
+    type: "tmark.workspace.save_as",
     handler: handleWorkspaceSaveAs as unknown as ReturnType<typeof vi.fn>,
     args: { filePath: "/y.md" },
   },
   {
-    type: "vmark.workspace.close",
+    type: "tmark.workspace.close",
     handler: handleWorkspaceClose as unknown as ReturnType<typeof vi.fn>,
     args: { tabId: "t" },
   },
   {
-    type: "vmark.workspace.switch_tab",
+    type: "tmark.workspace.switch_tab",
     handler: handleWorkspaceSwitchTab as unknown as ReturnType<typeof vi.fn>,
     args: { tabId: "t" },
   },
   {
-    type: "vmark.workspace.focus_window",
+    type: "tmark.workspace.focus_window",
     handler: handleWorkspaceFocusWindow as unknown as ReturnType<typeof vi.fn>,
     args: { windowLabel: "main" },
   },
   {
-    type: "vmark.document.read",
+    type: "tmark.document.read",
     handler: handleDocumentRead as unknown as ReturnType<typeof vi.fn>,
     args: {},
   },
   {
-    type: "vmark.document.write",
+    type: "tmark.document.write",
     handler: handleDocumentWrite as unknown as ReturnType<typeof vi.fn>,
     args: { content: "x" },
   },
   {
-    type: "vmark.document.transform",
+    type: "tmark.document.transform",
     handler: handleDocumentTransform as unknown as ReturnType<typeof vi.fn>,
     args: { kind: "cjk-spacing" },
   },
   {
-    type: "vmark.workflow.apply_patch",
+    type: "tmark.workflow.apply_patch",
     handler: handleWorkflowApplyPatch as unknown as ReturnType<typeof vi.fn>,
     args: { patches: [] },
   },
   {
-    type: "vmark.workflow.validate",
+    type: "tmark.workflow.validate",
     handler: handleWorkflowValidate as unknown as ReturnType<typeof vi.fn>,
     args: {},
   },
   {
-    type: "vmark.selection.get",
+    type: "tmark.selection.get",
     handler: handleSelectionGet as unknown as ReturnType<typeof vi.fn>,
     args: {},
   },
   {
-    type: "vmark.selection.set",
+    type: "tmark.selection.set",
     handler: handleSelectionSet as unknown as ReturnType<typeof vi.fn>,
     args: { content: "x" },
   },
@@ -170,7 +170,7 @@ describe("dispatchV2 — routing", () => {
   it("returns false for unrecognized request types", async () => {
     const matched = await dispatchV2({
       id: "req-unknown",
-      type: "vmark.bogus.action",
+      type: "tmark.bogus.action",
       args: {},
     });
     expect(matched).toBe(false);
@@ -184,7 +184,7 @@ describe("dispatchV2 — routing", () => {
   it("does not forward to other handlers when one matches", async () => {
     await dispatchV2({
       id: "req-iso",
-      type: "vmark.selection.get",
+      type: "tmark.selection.get",
       args: {},
     });
     expect(handleSelectionGet).toHaveBeenCalledTimes(1);
@@ -200,21 +200,21 @@ describe("dispatchV2 — routing", () => {
     const types = ROUTES.map((r) => r.type).sort();
     expect(types).toEqual(
       [
-        "vmark.document.read",
-        "vmark.document.transform",
-        "vmark.document.write",
-        "vmark.selection.get",
-        "vmark.selection.set",
-        "vmark.session.get_state",
-        "vmark.workflow.apply_patch",
-        "vmark.workflow.validate",
-        "vmark.workspace.close",
-        "vmark.workspace.focus_window",
-        "vmark.workspace.new",
-        "vmark.workspace.open",
-        "vmark.workspace.save",
-        "vmark.workspace.save_as",
-        "vmark.workspace.switch_tab",
+        "tmark.document.read",
+        "tmark.document.transform",
+        "tmark.document.write",
+        "tmark.selection.get",
+        "tmark.selection.set",
+        "tmark.session.get_state",
+        "tmark.workflow.apply_patch",
+        "tmark.workflow.validate",
+        "tmark.workspace.close",
+        "tmark.workspace.focus_window",
+        "tmark.workspace.new",
+        "tmark.workspace.open",
+        "tmark.workspace.save",
+        "tmark.workspace.save_as",
+        "tmark.workspace.switch_tab",
       ].sort(),
     );
   });

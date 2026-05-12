@@ -4,7 +4,7 @@
 
 ## Context
 
-VMark originally used Milkdown as the WYSIWYG editor framework. Milkdown wraps
+TMark originally used Milkdown as the WYSIWYG editor framework. Milkdown wraps
 ProseMirror with a "Markdown-first" plugin system — it parses Markdown via
 remark and provides its own API for custom nodes/marks. As the editor grew in
 complexity (40+ plugins, custom table UI, multi-cursor, inline previews), the
@@ -27,7 +27,7 @@ extension API.
 
 Key migration factors:
 
-- Most VMark plugins were already plain ProseMirror plugins wrapped in Milkdown
+- Most TMark plugins were already plain ProseMirror plugins wrapped in Milkdown
   glue. Migration to Tiptap `Extension.create()` was mechanical.
 - CodeMirror source mode was unaffected — it depends only on stores, not on the
   WYSIWYG framework.

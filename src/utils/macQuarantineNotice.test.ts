@@ -38,7 +38,7 @@ vi.mock("@/utils/debug", () => ({
 
 import { maybeStripMacQuarantine } from "./macQuarantineNotice";
 
-const NOTICE_FLAG_KEY = "vmark-mac-quarantine-notice-shown";
+const NOTICE_FLAG_KEY = "tmark-mac-quarantine-notice-shown";
 
 describe("maybeStripMacQuarantine", () => {
   beforeEach(() => {

@@ -264,7 +264,7 @@ mod tests {
         SessionData {
             version: SCHEMA_VERSION,
             timestamp: chrono::Utc::now().timestamp(),
-            vmark_version: "0.6.9-test".to_string(),
+            tmark_version: "0.6.9-test".to_string(),
             windows: vec![WindowState {
                 window_label: "main".to_string(),
                 is_main_window: true,
@@ -324,7 +324,7 @@ mod tests {
         assert!(result.is_ok());
         let data = result.unwrap();
         assert!(data.is_some());
-        assert_eq!(data.unwrap().vmark_version, "0.6.9-test");
+        assert_eq!(data.unwrap().tmark_version, "0.6.9-test");
     }
 
     #[tokio::test]
@@ -442,7 +442,7 @@ mod tests {
         assert!(result.is_ok());
         let data = result.unwrap();
         assert!(data.is_some(), "Should restore from backup");
-        assert_eq!(data.unwrap().vmark_version, "0.6.9-test");
+        assert_eq!(data.unwrap().tmark_version, "0.6.9-test");
     }
 
     #[tokio::test]
@@ -504,7 +504,7 @@ mod tests {
 
         // Write main with specific version
         let mut main_session = make_valid_session();
-        main_session.vmark_version = "main-version".to_string();
+        main_session.tmark_version = "main-version".to_string();
         std::fs::write(
             &session_path,
             serde_json::to_string_pretty(&main_session).unwrap(),
@@ -513,7 +513,7 @@ mod tests {
 
         // Write backup with different version
         let mut backup_session = make_valid_session();
-        backup_session.vmark_version = "backup-version".to_string();
+        backup_session.tmark_version = "backup-version".to_string();
         std::fs::write(
             &backup_path,
             serde_json::to_string_pretty(&backup_session).unwrap(),
@@ -524,7 +524,7 @@ mod tests {
         assert!(result.is_ok());
         let data = result.unwrap().unwrap();
         assert_eq!(
-            data.vmark_version, "main-version",
+            data.tmark_version, "main-version",
             "Should prefer main session over backup"
         );
     }

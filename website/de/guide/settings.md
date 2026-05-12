@@ -1,6 +1,6 @@
 # Einstellungen
 
-VMark's Einstellungsbereich ermöglicht die Anpassung aller Aspekte des Editors. Öffnen Sie ihn mit `Mod + ,` oder über **VMark > Einstellungen** in der Menüleiste.
+TMark's Einstellungsbereich ermöglicht die Anpassung aller Aspekte des Editors. Öffnen Sie ihn mit `Mod + ,` oder über **TMark > Einstellungen** in der Menüleiste.
 
 Das Einstellungsfenster hat eine Seitenleiste mit nach Themen gruppierten Abschnitten — die am häufigsten verwendeten Abschnitte stehen oben, „Über" und „Erweitert" am Ende. Änderungen werden sofort wirksam — es gibt keine Speichern-Schaltfläche.
 
@@ -93,7 +93,7 @@ Einfüge-Verhalten, Layout und HTML-Rendering-Einstellungen.
 | Einstellung | Beschreibung | Standard | Optionen |
 |-------------|-------------|---------|---------|
 | Regex in Suche aktivieren | Zeigt eine Regex-Umschalter-Schaltfläche in der Suchen & Ersetzen-Leiste | Ein | Ein / Aus |
-| Einfügemodus | Wie VMark Inhalte aus der Zwischenablage weiterleitet | Smart | Smart, Plain |
+| Einfügemodus | Wie TMark Inhalte aus der Zwischenablage weiterleitet | Smart | Smart, Plain |
 | Markdown-Einfügen in WYSIWYG | Wenn Text, der wie Markdown aussieht, in den WYSIWYG-Editor eingefügt wird, automatisch in Rich-Content konvertieren | Auto | Auto, Aus |
 
 ### Layout
@@ -176,7 +176,7 @@ Siehe [Große Dateien](/guide/large-files) für die vollständige Aufschlüsselu
 
 | Einstellung | Beschreibung | Standard | Optionen |
 |-------------|-------------|---------|---------|
-| Prüfintervall | Wann nach neuen VMark-Veröffentlichungen gesucht wird | Beim Start | Beim Start, Täglich, Wöchentlich, Manuell |
+| Prüfintervall | Wann nach neuen TMark-Veröffentlichungen gesucht wird | Beim Start | Beim Start, Täglich, Wöchentlich, Manuell |
 | Updates automatisch herunterladen | Release-Artefakte im Hintergrund herunterladen, sobald ein Update erkannt wird | Aus | Ein / Aus |
 | Version überspringen | Unterdrückt die Update-Aufforderung für eine bestimmte Version (wird pro Update aus der Aufforderung selbst gesetzt) | Keine | — |
 
@@ -186,7 +186,7 @@ Aktivieren Sie **Beim Einfügen automatisch skalieren**, wenn Sie häufig Screen
 
 ### Dokumentwerkzeuge
 
-VMark erkennt [Pandoc](https://pandoc.org), um den Export in zusätzliche Formate zu ermöglichen (DOCX, EPUB, LaTeX und mehr). Klicken Sie auf **Erkennen**, um Pandoc auf Ihrem System zu suchen. Wenn gefunden, werden Version und Pfad angezeigt.
+TMark erkennt [Pandoc](https://pandoc.org), um den Export in zusätzliche Formate zu ermöglichen (DOCX, EPUB, LaTeX und mehr). Klicken Sie auf **Erkennen**, um Pandoc auf Ihrem System zu suchen. Wenn gefunden, werden Version und Pfad angezeigt.
 
 Unter [Export & Drucken](/de/guide/export) finden Sie Details zu allen Exportoptionen.
 
@@ -196,12 +196,12 @@ MCP-Server- und KI-Anbieter-Konfiguration.
 
 ### MCP-Server
 
-Der MCP-Server (Model Context Protocol) ermöglicht externen KI-Assistenten wie Claude Code und Cursor, VMark programmatisch zu steuern.
+Der MCP-Server (Model Context Protocol) ermöglicht externen KI-Assistenten wie Claude Code und Cursor, TMark programmatisch zu steuern.
 
 | Einstellung | Beschreibung | Standard |
 |-------------|-------------|---------|
 | MCP-Server aktivieren | MCP-Server starten oder stoppen. Wenn er läuft, zeigt ein Status-Badge den Port und verbundene Clients | Ein (Umschalter) |
-| Beim Start starten | Den MCP-Server beim Öffnen von VMark automatisch starten | Ein |
+| Beim Start starten | Den MCP-Server beim Öffnen von TMark automatisch starten | Ein |
 | Bearbeitungen automatisch genehmigen | Von KI initiierte Dokumentänderungen ohne Vorschau zur Genehmigung anwenden. Mit Vorsicht verwenden | Aus |
 
 Wenn der Server läuft, zeigt der Bereich auch:
@@ -210,7 +210,7 @@ Wenn der Server läuft, zeigt der Bereich auch:
 - **Werkzeuge / Ressourcen** — Anzahl der verfügbaren MCP-Werkzeuge und Ressourcen
 - **Verbundene Clients** — Anzahl der aktuell verbundenen KI-Clients
 
-Unterhalb des MCP-Server-Abschnitts können Sie VMark's MCP-Konfiguration mit einem einzigen Klick in unterstützte KI-Clients (Claude Desktop, Claude Code, Codex CLI, Gemini CLI) installieren.
+Unterhalb des MCP-Server-Abschnitts können Sie TMark's MCP-Konfiguration mit einem einzigen Klick in unterstützte KI-Clients (Claude Desktop, Claude Code, Codex CLI, Gemini CLI) installieren.
 
 Unter [MCP-Setup](/de/guide/mcp-setup) und [MCP-Werkzeuge Referenz](/de/guide/mcp-tools) finden Sie vollständige Details.
 
@@ -247,11 +247,11 @@ Wenn eine Kategorie deaktiviert ist, fallen die zugehörigen Erweiterungen auf d
 
 Für die Schaltfläche **In externem Editor öffnen** auf schreibgeschützten Code-Tabs wählen Sie den Editor, der gestartet werden soll. Ein App-Bundle (z. B. `/Applications/Visual Studio Code.app`) oder eine ausführbare Datei.
 
-Die GUI-Einstellung überschreibt alle Umgebungsvariablen — explizit schlägt implizit. Lassen Sie das Feld leer, um die Fallback-Kette `$VMARK_EXTERNAL_EDITOR → $VISUAL → $EDITOR → Plattformstandard` zu nutzen. Unter [In externem Editor öffnen](/de/guide/formats#in-externem-editor-offnen) finden Sie die vollständige Auflösungsreihenfolge und Sicherheitsüberprüfung.
+Die GUI-Einstellung überschreibt alle Umgebungsvariablen — explizit schlägt implizit. Lassen Sie das Feld leer, um die Fallback-Kette `$TMARK_EXTERNAL_EDITOR → $VISUAL → $EDITOR → Plattformstandard` zu nutzen. Unter [In externem Editor öffnen](/de/guide/formats#in-externem-editor-offnen) finden Sie die vollständige Auflösungsreihenfolge und Sicherheitsüberprüfung.
 
 ### Einmaliger Upgrade-Hinweis
 
-Beim ersten Start nach dem Upgrade auf die Mehrformat-Unterstützung zeigt VMark einen nicht blockierenden Toast, der auf **Einstellungen → Formate** hinweist. Der Hinweis erscheint einmal pro Installation — nach dem Anzeigen (oder Verwerfen) erscheint er nie wieder.
+Beim ersten Start nach dem Upgrade auf die Mehrformat-Unterstützung zeigt TMark einen nicht blockierenden Toast, der auf **Einstellungen → Formate** hinweist. Der Hinweis erscheint einmal pro Installation — nach dem Anzeigen (oder Verwerfen) erscheint er nie wieder.
 
 ## Sprache
 
@@ -356,9 +356,9 @@ Entwickler- und systemebene Konfiguration.
 
 | Einstellung | Beschreibung | Standard |
 |-------------|-------------|---------|
-| Benutzerdefinierte Link-Protokolle | Zusätzliche URL-Protokolle, die VMark beim Einfügen von Links erkennen soll. Jedes Protokoll als Tag eingeben | `obsidian`, `vscode`, `dict`, `x-dictionary` |
+| Benutzerdefinierte Link-Protokolle | Zusätzliche URL-Protokolle, die TMark beim Einfügen von Links erkennen soll. Jedes Protokoll als Tag eingeben | `obsidian`, `vscode`, `dict`, `x-dictionary` |
 
-Damit können Sie Links wie `obsidian://open?vault=...` oder `vscode://file/...` erstellen, die VMark als gültige URLs behandelt.
+Damit können Sie Links wie `obsidian://open?vault=...` oder `vscode://file/...` erstellen, die TMark als gültige URLs behandelt.
 
 ### Leistung
 
@@ -379,7 +379,7 @@ Siehe [Workflow-Viewer](/guide/workflow-viewer) für den vollständigen Funktion
 
 | Einstellung | Beschreibung | Standard | Plattformen |
 |-------------|-------------|---------|-------------|
-| macOS-Quarantäne beim Öffnen entfernen | Beim Öffnen einer Datei mit dem macOS-Quarantäne-Attribut (`com.apple.quarantine`) dieses vor dem Lesen entfernen. Hilfreich für aus dem Web heruntergeladene Dateien, deren Öffnen VMark sonst blockiert würde | Ein | macOS |
+| macOS-Quarantäne beim Öffnen entfernen | Beim Öffnen einer Datei mit dem macOS-Quarantäne-Attribut (`com.apple.quarantine`) dieses vor dem Lesen entfernen. Hilfreich für aus dem Web heruntergeladene Dateien, deren Öffnen TMark sonst blockiert würde | Ein | macOS |
 | Mac Option als Meta (Terminal) | Die macOS-Option-Taste im integrierten Terminal als Meta behandeln. Erforderlich für Werkzeuge wie emacs und tmux, die Alt-präfigierte Tastenkürzel erwarten | Aus | macOS |
 
 ### Entwicklerwerkzeuge
@@ -388,7 +388,7 @@ Wenn **Entwicklerwerkzeuge** aktiviert ist, erscheint ein **Hot Exit Dev Tools**
 
 ## Siehe auch
 
-- [Funktionen](/de/guide/features) — Überblick über VMark's Fähigkeiten
+- [Funktionen](/de/guide/features) — Überblick über TMark's Fähigkeiten
 - [Tastaturkürzel](/de/guide/shortcuts) — Vollständige Tastaturkürzel-Referenz
 - [CJK-Formatierung](/de/guide/cjk-formatting) — Detaillierte CJK-Formatierungsregeln
 - [Integriertes Terminal](/de/guide/terminal) — Terminal-Sitzungen und Verwendung

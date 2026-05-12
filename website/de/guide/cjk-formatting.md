@@ -1,6 +1,6 @@
 # CJK-Formatierungshandbuch
 
-VMark enthält einen umfassenden Satz von Formatierungsregeln für chinesischen, japanischen und koreanischen Text. Diese Tools helfen dabei, eine konsistente Typografie beim Mischen von CJK- und lateinischen Zeichen beizubehalten.
+TMark enthält einen umfassenden Satz von Formatierungsregeln für chinesischen, japanischen und koreanischen Text. Diese Tools helfen dabei, eine konsistente Typografie beim Mischen von CJK- und lateinischen Zeichen beizubehalten.
 
 ## Schnellstart
 
@@ -62,7 +62,7 @@ Konvertiert doppelte Bindestriche zu korrekten CJK-Gedankenstrichen.
 
 ### 6. Typografische Anführungszeichenkonvertierung
 
-VMark verwendet einen **stapelbasierten Anführungszeichen-Paarungsalgorithmus**, der korrekt behandelt:
+TMark verwendet einen **stapelbasierten Anführungszeichen-Paarungsalgorithmus**, der korrekt behandelt:
 
 - **Apostrophe**: Kontraktionen wie `don't`, `it's`, `l'amour` werden beibehalten
 - **Possessiv**: `Xiaolai's` bleibt unverändert
@@ -124,7 +124,7 @@ Der folgende Inhalt wird **nicht** durch Formatierung beeinflusst:
 
 ### Technische Konstrukte
 
-VMark's **Latin Span Scanner** erkennt und schützt automatisch technische Konstrukte vor der Interpunktionskonvertierung:
+TMark's **Latin Span Scanner** erkennt und schützt automatisch technische Konstrukte vor der Interpunktionskonvertierung:
 
 | Typ | Beispiele | Schutz |
 |-----|----------|--------|
@@ -200,7 +200,7 @@ Nach jedem CJK-Formatierungsdurchlauf führt der Formatierer eine Integritätspr
 
 ## CJK-Buchstabenabstand
 
-VMark enthält eine spezielle Buchstabenabstandsfunktion für CJK-Text, die die Lesbarkeit durch subtile Abstände zwischen Zeichen verbessert.
+TMark enthält eine spezielle Buchstabenabstandsfunktion für CJK-Text, die die Lesbarkeit durch subtile Abstände zwischen Zeichen verbessert.
 
 ### Einstellungen
 
@@ -235,7 +235,7 @@ Der Unterschied ist subtil, verbessert aber die Lesbarkeit, besonders bei länge
 
 ## Typografische Anführungszeichenstile
 
-VMark kann gerade Anführungszeichen automatisch in typografisch korrekte Anführungszeichen umwandeln. Diese Funktion funktioniert während der CJK-Formatierung und unterstützt mehrere Anführungszeichenstile.
+TMark kann gerade Anführungszeichen automatisch in typografisch korrekte Anführungszeichen umwandeln. Diese Funktion funktioniert während der CJK-Formatierung und unterstützt mehrere Anführungszeichenstile.
 
 ### Anführungszeichenstile
 
@@ -247,7 +247,7 @@ VMark kann gerade Anführungszeichen automatisch in typografisch korrekte Anfüh
 
 ### Stapelbasierter Paarungsalgorithmus
 
-VMark verwendet einen ausgeklügelten stapelbasierten Algorithmus zur Anführungszeichen-Paarung:
+TMark verwendet einen ausgeklügelten stapelbasierten Algorithmus zur Anführungszeichen-Paarung:
 
 1. **Tokenisierung**: Identifiziert alle Anführungszeichen im Text
 2. **Klassifizierung**: Bestimmt, ob jedes Anführungszeichen öffnend oder schließend ist
@@ -327,7 +327,7 @@ Die Eckklammernkonvertierung wird ausgelöst, wenn der zitierte Inhalt **chinesi
 
 ## Testabsatz
 
-Kopieren Sie diesen unformatierten Text in VMark und drücken Sie `Alt + Mod + Umschalt + F` zur Formatierung:
+Kopieren Sie diesen unformatierten Text in TMark und drücken Sie `Alt + Mod + Umschalt + F` zur Formatierung:
 
 ```text
 最近我在学习TypeScript和React,感觉收获很大.作为一个developer,掌握这些modern前端技术是必须的.

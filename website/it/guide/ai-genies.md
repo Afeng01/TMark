@@ -36,7 +36,7 @@ La barra di stato mostra anche i progressi dell'IA — un'icona girevole con il 
 
 ## Genies Integrati
 
-VMark viene fornito con 13 genies in quattro categorie:
+TMark viene fornito con 13 genies in quattro categorie:
 
 ### Modifica
 
@@ -126,9 +126,9 @@ I genies sono memorizzati nella directory dei dati dell'applicazione:
 
 | Piattaforma | Percorso |
 |-------------|----------|
-| macOS | `~/Library/Application Support/app.vmark/genies/` |
-| Windows | `%APPDATA%\app.vmark\genies\` |
-| Linux | `~/.local/share/app.vmark/genies/` |
+| macOS | `~/Library/Application Support/app.tmark/genies/` |
+| Windows | `%APPDATA%\app.tmark\genies\` |
+| Linux | `~/.local/share/app.tmark/genies/` |
 
 Apri questa cartella dal menu **Strumenti > Apri cartella Genies**.
 
@@ -188,7 +188,7 @@ Il nome file `polish.md` diventa il nome visualizzato "Polish" nel selettore.
 
 ### Il Segnaposto `{{content}}`
 
-Il segnaposto `{{content}}` è il nucleo di ogni genie. Quando un genie viene eseguito, VMark:
+Il segnaposto `{{content}}` è il nucleo di ogni genie. Quando un genie viene eseguito, TMark:
 
 1. **Estrae il testo** in base all'ambito (testo selezionato, blocco corrente o intero documento)
 2. **Sostituisce** ogni `{{content}}` nel tuo template con il testo estratto
@@ -227,7 +227,7 @@ Il segnaposto `{{context}}` fornisce all'IA il testo circostante in sola lettura
 
 **Restrizioni dell'ambito** — Il contesto funziona solo con l'ambito `selection` e `block`. Per l'ambito `document`, il contenuto è già l'intero documento.
 
-**Prompt liberi** — Quando digiti un'istruzione libera nel selettore, VMark include automaticamente ±1 blocco circostante come contesto per gli ambiti `selection` e `block`. Nessuna configurazione necessaria.
+**Prompt liberi** — Quando digiti un'istruzione libera nel selettore, TMark include automaticamente ±1 blocco circostante come contesto per gli ambiti `selection` e `block`. Nessuna configurazione necessaria.
 
 **Retrocompatibile** — I genies senza `{{context}}` funzionano esattamente come prima. Se il template non contiene `{{context}}`, non viene estratto nessun testo circostante.
 
@@ -498,7 +498,7 @@ Format as a bullet list. If everything looks solid, say
 
 ## Suggerimenti IA
 
-Quando un Genie restituisce testo destinato a essere una sostituzione per la selezione (piuttosto che una risposta di chat libera), VMark lo mostra come **suggerimento** con un diff inline: barrato rosso per il testo originale, sottolineatura verde per il testo proposto. Esamini e approvi prima che qualsiasi modifica persista.
+Quando un Genie restituisce testo destinato a essere una sostituzione per la selezione (piuttosto che una risposta di chat libera), TMark lo mostra come **suggerimento** con un diff inline: barrato rosso per il testo originale, sottolineatura verde per il testo proposto. Esamini e approvi prima che qualsiasi modifica persista.
 
 | Azione | Scorciatoia |
 |---|---|

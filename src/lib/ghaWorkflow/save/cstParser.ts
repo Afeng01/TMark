@@ -10,7 +10,7 @@
  * Key decisions:
  *   - WORKFLOW_YAML_STRINGIFY_OPTIONS = { lineWidth: 0,
  *     flowCollectionPadding: false } per Spike D's empirical finding.
- *     With these options 4-5 of 7 vmark fixtures are byte-identical;
+ *     With these options 4-5 of 7 tmark fixtures are byte-identical;
  *     all 22 preserve comments + anchors + semantics.
  *   - semanticEqual() is the load-bearing equality check used by both
  *     the round-trip gate and by mutators that need to verify their

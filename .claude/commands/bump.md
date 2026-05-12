@@ -38,8 +38,8 @@ All five files must be updated — see `.claude/rules/40-version-bump.md`.
 | `package.json` | `"version"` |
 | `src-tauri/tauri.conf.json` | `"version"` |
 | `src-tauri/Cargo.toml` | `version` |
-| `vmark-mcp-server/package.json` | `"version"` |
-| `vmark-mcp-server/src/cli.ts` | `const VERSION` |
+| `tmark-mcp-server/package.json` | `"version"` |
+| `tmark-mcp-server/src/cli.ts` | `const VERSION` |
 
 Use the Edit tool for each file — not sed.
 
@@ -48,9 +48,9 @@ Use the Edit tool for each file — not sed.
 Read back all 5 files and confirm the version matches:
 
 ```bash
-grep '"version"' package.json src-tauri/tauri.conf.json vmark-mcp-server/package.json
+grep '"version"' package.json src-tauri/tauri.conf.json tmark-mcp-server/package.json
 grep '^version' src-tauri/Cargo.toml
-grep 'const VERSION' vmark-mcp-server/src/cli.ts
+grep 'const VERSION' tmark-mcp-server/src/cli.ts
 ```
 
 If any mismatch: fix before proceeding.
@@ -59,7 +59,7 @@ If any mismatch: fix before proceeding.
 
 ```bash
 git add package.json src-tauri/tauri.conf.json src-tauri/Cargo.toml \
-        vmark-mcp-server/package.json vmark-mcp-server/src/cli.ts
+        tmark-mcp-server/package.json tmark-mcp-server/src/cli.ts
 git commit -m "chore: bump version to {version}"
 git tag v{version}
 git push origin main --tags

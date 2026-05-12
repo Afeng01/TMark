@@ -1,6 +1,6 @@
 # Edição com Múltiplos Cursores
 
-O VMark suporta edição poderosa com múltiplos cursores nos modos WYSIWYG e Fonte, permitindo editar múltiplos locais simultaneamente.
+O TMark suporta edição poderosa com múltiplos cursores nos modos WYSIWYG e Fonte, permitindo editar múltiplos locais simultaneamente.
 
 ## Início Rápido
 

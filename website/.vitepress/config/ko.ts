@@ -95,8 +95,8 @@ export const ko = {
               link: "/ko/guide/users-as-developers/",
             },
             {
-              text: "VMark를 만든 이유",
-              link: "/ko/guide/users-as-developers/why-i-built-vmark",
+              text: "TMark를 만든 이유",
+              link: "/ko/guide/users-as-developers/why-i-built-tmark",
             },
             {
               text: "AI가 대체할 수 없는 5가지 기술",
@@ -137,7 +137,7 @@ export const ko = {
 
     footer: {
       copyright:
-        'Copyright © 2026 VMark · <a href="/ko/guide/license">ISC 라이선스</a>',
+        'Copyright © 2026 TMark · <a href="/ko/guide/license">ISC 라이선스</a>',
     },
 
     lastUpdated: {

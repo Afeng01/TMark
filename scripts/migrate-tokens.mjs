@@ -111,7 +111,7 @@ const PROP_MAPS = [
 // Files to skip entirely (per .tokenize/ignore + the export bundle)
 const EXCLUDED_PATHS = [
   /^src\/styles\/index\.css$/,
-  /^src\/export\/reader\/vmark-reader\.css$/,
+  /^src\/export\/reader\/tmark-reader\.css$/,
   /^src\/plugins\/codemirror\/source-syntax\.css$/,
   /^src\/plugins\/codeBlockLineNumbers\/hljs-syntax\.css$/,
   /^src\/components\/Editor\/editor\.css$/, // em-based; out of scope

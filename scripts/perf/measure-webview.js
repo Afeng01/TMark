@@ -1,7 +1,7 @@
 /**
- * VMark WebKit Performance Measurement Payload
+ * TMark WebKit Performance Measurement Payload
  *
- * Self-contained measurement script for the Tiptap editor inside VMark's
+ * Self-contained measurement script for the Tiptap editor inside TMark's
  * actual WebView. Designed to be executed via Tauri MCP's
  * `tauri_webview_execute_js` tool against a running debug build (the MCP
  * bridge is `#[cfg(debug_assertions)]` — see src-tauri/src/lib.rs:728).
@@ -21,14 +21,14 @@
  *   - longTaskTotalMs   sum of long-task durations (>50 ms blocking events)
  *
  * Usage from the AI assistant:
- *   1. Start a debug build of VMark:  pnpm tauri:dev
- *   2. Connect:                       tauri_driver_session(action: "start", port: <vmark debug port>)
- *   3. Open the fixture file in VMark: tauri_webview_execute_js(...) calling
+ *   1. Start a debug build of TMark:  pnpm tauri:dev
+ *   2. Connect:                       tauri_driver_session(action: "start", port: <tmark debug port>)
+ *   3. Open the fixture file in TMark: tauri_webview_execute_js(...) calling
  *      the helper at the bottom of this file via IIFE.
  *
  * Caveats:
  *   - Requires the active editor to be reachable via the documented hooks.
- *     VMark stores it on the global ActiveEditorStore — see helper below.
+ *     TMark stores it on the global ActiveEditorStore — see helper below.
  *   - Numbers vary 10-30% between runs in WebKit (GC, paint scheduling,
  *     macOS thermal throttling). Run 3+ times and take the median.
  *
@@ -59,10 +59,10 @@
 
 (function defineMeasurePayload() {
   /**
-   * Returns the active Tiptap EditorView from VMark's ActiveEditorStore,
+   * Returns the active Tiptap EditorView from TMark's ActiveEditorStore,
    * or null if no editor is currently mounted (e.g. settings window).
    *
-   * Uses the `useTiptapEditorStore` exposed via VMark's debug surface.
+   * Uses the `useTiptapEditorStore` exposed via TMark's debug surface.
    * If the surface isn't there (older builds), falls back to a DOM probe.
    */
   function getActiveEditorView() {
@@ -70,7 +70,7 @@
     // src/utils/debug.ts when DEBUG=true. Fall back to DOM probe.
     /** @type {any} */
     const w = window;
-    if (w.__VMARK_DEBUG__?.editorView) return w.__VMARK_DEBUG__.editorView;
+    if (w.__TMARK_DEBUG__?.editorView) return w.__TMARK_DEBUG__.editorView;
 
     // DOM probe: ProseMirror sets a `.ProseMirror` class on the editable.
     const el = document.querySelector(".ProseMirror");
@@ -276,7 +276,7 @@
   // Publish on window so MCP execute_js can reach the helpers via IIFE.
   /** @type {any} */
   const w = window;
-  w.__VMARK_PERF__ = {
+  w.__TMARK_PERF__ = {
     getActiveEditorView,
     measure,
     nextPaintMs,
@@ -285,5 +285,5 @@
     utf8ByteLength,
   };
 
-  return "vmark-perf-loaded";
+  return "tmark-perf-loaded";
 })();

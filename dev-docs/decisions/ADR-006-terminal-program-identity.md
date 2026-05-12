@@ -4,8 +4,8 @@
 
 ## Context
 
-VMark's built-in terminal (xterm.js + portable-pty) originally set
-`TERM_PROGRAM=vmark`. This caused problems with CLI tools that detect the host
+TMark's built-in terminal (xterm.js + portable-pty) originally set
+`TERM_PROGRAM=tmark`. This caused problems with CLI tools that detect the host
 terminal via environment variables and maintain an allowlist of known terminals.
 
 The immediate trigger: Claude Code's `/terminal-setup` command checks
@@ -25,14 +25,14 @@ Claude Code recognizes four terminals as having native CSI u support:
 
 ## Decision
 
-Set `TERM_PROGRAM=WezTerm` instead of `TERM_PROGRAM=vmark`.
+Set `TERM_PROGRAM=WezTerm` instead of `TERM_PROGRAM=tmark`.
 
 ## Rationale
 
 **Why impersonate rather than use the real identity:**
 
 - CLI tools with terminal allowlists will never enumerate every xterm.js-based
-  app. VMark would need upstream patches in each tool that does terminal
+  app. TMark would need upstream patches in each tool that does terminal
   detection — an endless game of whack-a-mole.
 - xterm.js is capability-equivalent to these terminals for the features that
   matter (256-color, Unicode, CSI u key encoding once configured).

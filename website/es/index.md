@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: VMark
+  name: TMark
   text: El Editor Markdown Que Lo Hace Bien
   tagline: Gratuito · Inteligente · Hermoso · Tuyo
   image:
     src: /logo.png
-    alt: VMark
+    alt: TMark
   actions:
     - theme: brand
       text: Descargar
@@ -20,7 +20,7 @@ features:
   - icon:
       src: /icons/bot.svg
     title: Amigable con la IA
-    details: Diseñado para la era de la IA. VMark habla MCP de forma nativa — Claude, Codex o Gemini pueden leer, sugerir y editar tus documentos. Sin plugins. Solo conecta y colabora.
+    details: Diseñado para la era de la IA. TMark habla MCP de forma nativa — Claude, Codex o Gemini pueden leer, sugerir y editar tus documentos. Sin plugins. Solo conecta y colabora.
 
   - icon:
       src: /icons/languages.svg
@@ -99,15 +99,15 @@ Claude Code, Claude Desktop, Codex CLI, Gemini CLI... pueden escribir directamen
 <div class="screenshots-grid">
   <div class="screenshot-card">
     <img src="/screenshots/sending-from-claude-code.png" alt="Enviando contenido desde Claude Code CLI" loading="lazy" />
-    <div class="caption">Pide a Claude Code que cree un documento directamente en VMark</div>
+    <div class="caption">Pide a Claude Code que cree un documento directamente en TMark</div>
   </div>
   <div class="screenshot-card">
     <img src="/screenshots/sending-from-claude-desktop.png" alt="Enviando contenido desde Claude Desktop" loading="lazy" />
     <div class="caption">O usa Claude Desktop con el mismo prompt</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/content-received-by-vmark.png" alt="Contenido recibido por VMark" loading="lazy" />
-    <div class="caption">El contenido aparece en VMark con formato completo</div>
+    <img src="/screenshots/content-received-by-tmark.png" alt="Contenido recibido por TMark" loading="lazy" />
+    <div class="caption">El contenido aparece en TMark con formato completo</div>
   </div>
 </div>
 </div>
@@ -133,15 +133,15 @@ Claude Code, Claude Desktop, Codex CLI, Gemini CLI... pueden escribir directamen
 <div class="screenshots-section">
 <div class="screenshots-grid">
   <div class="screenshot-card">
-    <img src="/screenshots/editor-main.png" alt="Editor de Texto Enriquecido VMark" loading="lazy" />
+    <img src="/screenshots/editor-main.png" alt="Editor de Texto Enriquecido TMark" loading="lazy" />
     <div class="caption">Modo WYSIWYG</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/source-mode.png" alt="Modo Fuente de VMark" loading="lazy" />
+    <img src="/screenshots/source-mode.png" alt="Modo Fuente de TMark" loading="lazy" />
     <div class="caption">Modo Fuente (F6)</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/dark-theme.png" alt="Tema Nocturno de VMark" loading="lazy" />
+    <img src="/screenshots/dark-theme.png" alt="Tema Nocturno de TMark" loading="lazy" />
     <div class="caption">Tema Nocturno</div>
   </div>
 </div>
@@ -190,9 +190,9 @@ Claude Code, Claude Desktop, Codex CLI, Gemini CLI... pueden escribir directamen
 
 ## Disponible para macOS
 
-VMark está optimizado para macOS con soporte nativo para Apple Silicon e Intel. Descarga la última versión y comienza a escribir hoy.
+TMark está optimizado para macOS con soporte nativo para Apple Silicon e Intel. Descarga la última versión y comienza a escribir hoy.
 
-[Obtener VMark →](/es/download)
+[Obtener TMark →](/es/download)
 
 ## Créditos
 

@@ -1,4 +1,4 @@
-name: Update Homebrew Tap
+name: Update Homebrew Tap (disabled)
 
 on:
   # Triggered by release.yml via gh workflow run — not by release event directly
@@ -14,16 +14,17 @@ permissions:
 
 jobs:
   update-tap:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
       VERSION: ${{ github.event.inputs.version }}
-      REPO: xiaolai/vmark
+      REPO: Afeng01/TMark
     steps:
       - name: Wait for DMGs to be available
         run: |
-          ARM_URL="https://github.com/${REPO}/releases/download/v${VERSION}/VMark_${VERSION}_aarch64.dmg"
-          INTEL_URL="https://github.com/${REPO}/releases/download/v${VERSION}/VMark_${VERSION}_x64.dmg"
+          ARM_URL="https://github.com/${REPO}/releases/download/v${VERSION}/TMark_${VERSION}_aarch64.dmg"
+          INTEL_URL="https://github.com/${REPO}/releases/download/v${VERSION}/TMark_${VERSION}_x64.dmg"
 
           echo "Waiting for DMGs..."
           echo "ARM: $ARM_URL"
@@ -47,27 +48,27 @@ jobs:
       - name: Download DMGs and calculate SHA256
         id: sha256
         run: |
-          ARM_URL="https://github.com/${REPO}/releases/download/v${VERSION}/VMark_${VERSION}_aarch64.dmg"
-          INTEL_URL="https://github.com/${REPO}/releases/download/v${VERSION}/VMark_${VERSION}_x64.dmg"
+          ARM_URL="https://github.com/${REPO}/releases/download/v${VERSION}/TMark_${VERSION}_aarch64.dmg"
+          INTEL_URL="https://github.com/${REPO}/releases/download/v${VERSION}/TMark_${VERSION}_x64.dmg"
 
           echo "Downloading ARM DMG..."
-          curl -L -o vmark-arm.dmg "$ARM_URL"
-          SHA256_ARM=$(sha256sum vmark-arm.dmg | cut -d ' ' -f 1)
+          curl -L -o tmark-arm.dmg "$ARM_URL"
+          SHA256_ARM=$(sha256sum tmark-arm.dmg | cut -d ' ' -f 1)
           echo "SHA256 (ARM): $SHA256_ARM"
           echo "sha256_arm=$SHA256_ARM" >> "$GITHUB_OUTPUT"
-          rm vmark-arm.dmg
+          rm tmark-arm.dmg
 
           echo "Downloading Intel DMG..."
-          curl -L -o vmark-intel.dmg "$INTEL_URL"
-          SHA256_INTEL=$(sha256sum vmark-intel.dmg | cut -d ' ' -f 1)
+          curl -L -o tmark-intel.dmg "$INTEL_URL"
+          SHA256_INTEL=$(sha256sum tmark-intel.dmg | cut -d ' ' -f 1)
           echo "SHA256 (Intel): $SHA256_INTEL"
           echo "sha256_intel=$SHA256_INTEL" >> "$GITHUB_OUTPUT"
-          rm vmark-intel.dmg
+          rm tmark-intel.dmg
 
       - name: Checkout homebrew-tap
         uses: actions/checkout@v6
         with:
-          repository: xiaolai/homebrew-tap
+          repository: Afeng01/homebrew-tap
           token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
           path: homebrew-tap
 
@@ -76,21 +77,21 @@ jobs:
           SHA256_ARM: ${{ steps.sha256.outputs.sha256_arm }}
           SHA256_INTEL: ${{ steps.sha256.outputs.sha256_intel }}
         run: |
-          cat > homebrew-tap/Casks/vmark.rb << RUBY
-          cask "vmark" do
+          cat > homebrew-tap/Casks/tmark.rb << RUBY
+          cask "tmark" do
             version "${VERSION}"
 
             on_arm do
               sha256 "${SHA256_ARM}"
-              url "https://github.com/${REPO}/releases/download/v#{version}/VMark_#{version}_aarch64.dmg"
+              url "https://github.com/${REPO}/releases/download/v#{version}/TMark_#{version}_aarch64.dmg"
             end
 
             on_intel do
               sha256 "${SHA256_INTEL}"
-              url "https://github.com/${REPO}/releases/download/v#{version}/VMark_#{version}_x64.dmg"
+              url "https://github.com/${REPO}/releases/download/v#{version}/TMark_#{version}_x64.dmg"
             end
 
-            name "VMark"
+            name "TMark"
             desc "Modern Markdown editor with WYSIWYG and source mode"
             homepage "https://github.com/${REPO}"
 
@@ -101,19 +102,19 @@ jobs:
 
             depends_on macos: ">= :catalina"
 
-            app "VMark.app"
+            app "TMark.app"
 
             zap trash: [
-              "~/Library/Application Support/app.vmark",
-              "~/Library/Caches/app.vmark",
-              "~/Library/Preferences/app.vmark.plist",
-              "~/Library/Saved Application State/app.vmark.savedState",
+              "~/Library/Application Support/app.tmark",
+              "~/Library/Caches/app.tmark",
+              "~/Library/Preferences/app.tmark.plist",
+              "~/Library/Saved Application State/app.tmark.savedState",
             ]
           end
           RUBY
 
           echo "Generated cask formula:"
-          cat homebrew-tap/Casks/vmark.rb
+          cat homebrew-tap/Casks/tmark.rb
 
       - name: Commit and push
         run: |
@@ -121,6 +122,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add Casks/vmark.rb
-          git commit -m "Update vmark to ${VERSION}"
+          git add Casks/tmark.rb
+          git commit -m "Update tmark to ${VERSION}"
           git push

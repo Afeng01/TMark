@@ -75,7 +75,7 @@ describe("packageJsonSchemaDetector", () => {
 describe("collectPackageJsonDependencies", () => {
   it("returns empty arrays for a manifest with no deps", () => {
     const result = collectPackageJsonDependencies(
-      JSON.stringify({ name: "vmark", version: "0.7.0" }),
+      JSON.stringify({ name: "tmark", version: "0.7.0" }),
     );
     expect(result.runtime).toEqual([]);
     expect(result.dev).toEqual([]);

@@ -36,7 +36,7 @@ Phase 3 DoD ticks.
    ```
 
 2. **Open `dev-docs/grills/multi-format/owasp-xss-fixtures.html`** (created
-   below — copy each payload into a new `.html` tab in VMark and verify it
+   below — copy each payload into a new `.html` tab in TMark and verify it
    does NOT execute).
 
 3. **Use the dev-tools console (`Cmd+Opt+I`) to listen for any
@@ -49,7 +49,7 @@ Phase 3 DoD ticks.
    document.cookie = "xss_canary=if-you-see-me-in-network-or-iframe-output-FAIL; Path=/";
    ```
 
-4. **For each payload below**, paste it into a new `.html` tab in VMark.
+4. **For each payload below**, paste it into a new `.html` tab in TMark.
    Expected: no script execution, no network request, no cookie read,
    no parent-window access. Tick the box only if those four conditions
    all hold.

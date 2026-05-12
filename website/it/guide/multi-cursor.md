@@ -1,6 +1,6 @@
 # Modifica Multi-Cursore
 
-VMark supporta una potente modifica multi-cursore sia in modalità WYSIWYG che Sorgente, consentendo di modificare più posizioni contemporaneamente.
+TMark supporta una potente modifica multi-cursore sia in modalità WYSIWYG che Sorgente, consentendo di modificare più posizioni contemporaneamente.
 
 ## Avvio Rapido
 

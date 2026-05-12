@@ -1,6 +1,6 @@
 # Configuración
 
-El panel de configuración de VMark te permite personalizar todos los aspectos del editor. Ábrelo con `Mod + ,` o a través de **VMark > Configuración** en la barra de menú.
+El panel de configuración de TMark te permite personalizar todos los aspectos del editor. Ábrelo con `Mod + ,` o a través de **TMark > Configuración** en la barra de menú.
 
 La ventana de configuración tiene una barra lateral con secciones agrupadas por tema — las secciones más utilizadas aparecen primero, con Acerca de y Avanzado al final. Los cambios surten efecto inmediatamente — no hay botón de guardar.
 
@@ -93,7 +93,7 @@ Comportamiento de pegado, diseño y configuración de renderizado HTML.
 | Configuración | Descripción | Predeterminado | Opciones |
 |---------------|-------------|----------------|---------|
 | Habilitar regex en la búsqueda | Muestra un botón de alternancia de regex en la barra de Buscar y Reemplazar | Activado | Activado / Desactivado |
-| Modo de pegado | Cómo VMark enruta el contenido del portapapeles | Inteligente | Inteligente, Sin formato |
+| Modo de pegado | Cómo TMark enruta el contenido del portapapeles | Inteligente | Inteligente, Sin formato |
 | Pegado Markdown en WYSIWYG | Al pegar texto que parece Markdown en el editor WYSIWYG, convertirlo automáticamente en contenido enriquecido | Auto | Auto, Desactivado |
 
 ### Diseño
@@ -176,7 +176,7 @@ Consulta [Archivos Grandes](/guide/large-files) para el desglose completo de có
 
 | Configuración | Descripción | Predeterminado | Opciones |
 |---------------|-------------|----------------|---------|
-| Frecuencia de comprobación | Cuándo comprobar nuevas versiones de VMark | Al iniciar | Al iniciar, Diario, Semanal, Manual |
+| Frecuencia de comprobación | Cuándo comprobar nuevas versiones de TMark | Al iniciar | Al iniciar, Diario, Semanal, Manual |
 | Descargar actualizaciones automáticamente | Descarga los artefactos de la versión en segundo plano una vez detectada una actualización | Desactivado | Activado / Desactivado |
 | Omitir una versión | Suprime el aviso de actualización para una versión específica (se establece por actualización desde el propio aviso) | Ninguna | — |
 
@@ -186,7 +186,7 @@ Habilita **Redimensionar automáticamente al pegar** si con frecuencia pegas cap
 
 ### Herramientas de Documentos
 
-VMark detecta [Pandoc](https://pandoc.org) para habilitar la exportación a formatos adicionales (DOCX, EPUB, LaTeX y más). Haz clic en **Detectar** para buscar Pandoc en tu sistema. Si se encuentra, se muestran su versión y ruta.
+TMark detecta [Pandoc](https://pandoc.org) para habilitar la exportación a formatos adicionales (DOCX, EPUB, LaTeX y más). Haz clic en **Detectar** para buscar Pandoc en tu sistema. Si se encuentra, se muestran su versión y ruta.
 
 Consulta [Exportar e Imprimir](/es/guide/export) para más detalles sobre todas las opciones de exportación.
 
@@ -196,12 +196,12 @@ Configuración del servidor MCP y del proveedor de IA.
 
 ### Servidor MCP
 
-El servidor MCP (Model Context Protocol) permite que los asistentes de IA externos como Claude Code y Cursor controlen VMark de forma programática.
+El servidor MCP (Model Context Protocol) permite que los asistentes de IA externos como Claude Code y Cursor controlen TMark de forma programática.
 
 | Configuración | Descripción | Predeterminado |
 |---------------|-------------|----------------|
 | Habilitar Servidor MCP | Inicia o detiene el servidor MCP. Cuando está en ejecución, una insignia de estado muestra el puerto y los clientes conectados | Activado (alternador) |
-| Iniciar al abrir | Inicia automáticamente el servidor MCP cuando se abre VMark | Activado |
+| Iniciar al abrir | Inicia automáticamente el servidor MCP cuando se abre TMark | Activado |
 | Auto-aprobar ediciones | Aplica los cambios de documentos iniciados por IA sin mostrar una vista previa para su aprobación primero. Usar con precaución | Desactivado |
 
 Cuando el servidor está en ejecución, el panel también muestra:
@@ -210,7 +210,7 @@ Cuando el servidor está en ejecución, el panel también muestra:
 - **Herramientas / Recursos** — número de herramientas y recursos MCP disponibles
 - **Clientes Conectados** — número de clientes de IA actualmente conectados
 
-Debajo de la sección del Servidor MCP, puedes instalar la configuración MCP de VMark en los clientes de IA compatibles (Claude Desktop, Claude Code, Codex CLI, Gemini CLI) con un solo clic.
+Debajo de la sección del Servidor MCP, puedes instalar la configuración MCP de TMark en los clientes de IA compatibles (Claude Desktop, Claude Code, Codex CLI, Gemini CLI) con un solo clic.
 
 Consulta [Configuración de MCP](/es/guide/mcp-setup) y [Referencia de Herramientas MCP](/es/guide/mcp-tools) para más detalles.
 
@@ -247,11 +247,11 @@ Cuando una categoría está desactivada, las extensiones correspondientes pasan 
 
 Para el botón **Abrir en editor externo** de las pestañas de código de solo lectura, elige el editor que debe lanzarse. Un paquete de aplicación (p. ej. `/Applications/Visual Studio Code.app`) o un ejecutable.
 
-La configuración de la interfaz tiene prioridad sobre cualquier variable de entorno — lo explícito supera a lo implícito. Déjalo vacío para usar la cadena de reserva de variables de entorno `$VMARK_EXTERNAL_EDITOR → $VISUAL → $EDITOR → valor predeterminado de la plataforma`. Consulta [Abrir en editor externo](/es/guide/formats#abrir-en-editor-externo) para el orden de resolución completo y la puerta de seguridad.
+La configuración de la interfaz tiene prioridad sobre cualquier variable de entorno — lo explícito supera a lo implícito. Déjalo vacío para usar la cadena de reserva de variables de entorno `$TMARK_EXTERNAL_EDITOR → $VISUAL → $EDITOR → valor predeterminado de la plataforma`. Consulta [Abrir en editor externo](/es/guide/formats#abrir-en-editor-externo) para el orden de resolución completo y la puerta de seguridad.
 
 ### Notificación puntual de actualización
 
-En el primer inicio tras actualizar a la compatibilidad con múltiples formatos, VMark muestra una notificación no bloqueante que apunta a **Configuración → Formatos**. La notificación se activa una sola vez por instalación — una vez mostrada (o descartada), no vuelve a aparecer.
+En el primer inicio tras actualizar a la compatibilidad con múltiples formatos, TMark muestra una notificación no bloqueante que apunta a **Configuración → Formatos**. La notificación se activa una sola vez por instalación — una vez mostrada (o descartada), no vuelve a aparecer.
 
 ## Idioma
 
@@ -356,9 +356,9 @@ Configuración de desarrollador y del sistema.
 
 | Configuración | Descripción | Predeterminado |
 |---------------|-------------|----------------|
-| Protocolos de enlace personalizados | Protocolos de URL adicionales que VMark debe reconocer al insertar enlaces. Introduce cada protocolo como una etiqueta | `obsidian`, `vscode`, `dict`, `x-dictionary` |
+| Protocolos de enlace personalizados | Protocolos de URL adicionales que TMark debe reconocer al insertar enlaces. Introduce cada protocolo como una etiqueta | `obsidian`, `vscode`, `dict`, `x-dictionary` |
 
-Esto te permite crear enlaces como `obsidian://open?vault=...` o `vscode://file/...` que VMark tratará como URLs válidas.
+Esto te permite crear enlaces como `obsidian://open?vault=...` o `vscode://file/...` que TMark tratará como URLs válidas.
 
 ### Rendimiento
 
@@ -379,7 +379,7 @@ Consulta [Visor de Workflow](/guide/workflow-viewer) para la superficie completa
 
 | Configuración | Descripción | Predeterminado | Plataformas |
 |---------------|-------------|----------------|-------------|
-| Limpiar la cuarentena de macOS al abrir | Cuando abres un archivo que tiene el atributo de cuarentena de macOS (`com.apple.quarantine`), elimínalo antes de leerlo. Útil para archivos descargados de la web que VMark no podría abrir de otro modo | Activado | macOS |
+| Limpiar la cuarentena de macOS al abrir | Cuando abres un archivo que tiene el atributo de cuarentena de macOS (`com.apple.quarantine`), elimínalo antes de leerlo. Útil para archivos descargados de la web que TMark no podría abrir de otro modo | Activado | macOS |
 | Tecla Option de Mac como Meta (terminal) | Trata la tecla Option de macOS como Meta en el terminal integrado. Necesario para herramientas como emacs y tmux que esperan atajos con prefijo Alt | Desactivado | macOS |
 
 ### Herramientas de Desarrollador
@@ -388,7 +388,7 @@ Cuando las **Herramientas de desarrollador** están activadas, aparece un panel 
 
 ## Ver También
 
-- [Características](/es/guide/features) — Descripción general de las capacidades de VMark
+- [Características](/es/guide/features) — Descripción general de las capacidades de TMark
 - [Atajos de Teclado](/es/guide/shortcuts) — Referencia completa de atajos
 - [Formato CJK](/es/guide/cjk-formatting) — Reglas detalladas de formato CJK
 - [Terminal Integrado](/es/guide/terminal) — Sesiones de terminal y uso

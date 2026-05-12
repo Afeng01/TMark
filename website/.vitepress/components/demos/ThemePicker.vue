@@ -75,8 +75,8 @@ const isDark = computed(() => selectedTheme.value === 'night')
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">Five hand-crafted themes for comfortable writing</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">Five hand-crafted themes for comfortable writing</p>
 
     <div class="theme-picker">
       <button
@@ -105,7 +105,7 @@ const isDark = computed(() => selectedTheme.value === 'night')
         '--preview-emphasis': currentTheme.emphasis,
       }"
     >
-      <h2 class="preview__h1">Welcome to VMark</h2>
+      <h2 class="preview__h1">Welcome to TMark</h2>
       <p class="preview__p">
         Write beautiful <strong>markdown</strong> with <em>style</em>.
       </p>
@@ -130,7 +130,7 @@ const isDark = computed(() => selectedTheme.value === 'night')
   </div>
 </template>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .theme-picker {
   display: flex;

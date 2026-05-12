@@ -4,7 +4,7 @@
 
 ## Context
 
-VMark has two editor surfaces — WYSIWYG (Tiptap/ProseMirror) and Source
+TMark has two editor surfaces — WYSIWYG (Tiptap/ProseMirror) and Source
 (CodeMirror 6). Both need a shared document representation. The question was
 whether the canonical document state should live as a ProseMirror doc tree, a
 Markdown string, or some intermediate AST.

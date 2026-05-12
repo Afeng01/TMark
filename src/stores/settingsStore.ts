@@ -301,7 +301,7 @@ export const useSettingsStore = create<SettingsState & SettingsActions>()(
       resetSettings: () => set(structuredClone(initialState)),
     }),
     {
-      name: "vmark-settings",
+      name: "tmark-settings",
       // Guard localStorage access for SSR/non-browser environments
       storage: createJSONStorage(() => createSafeStorage()),
       // Deep merge to preserve new default properties when loading old localStorage

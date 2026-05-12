@@ -17,7 +17,7 @@ import {
   getSupportedExtensionsWithDots,
   isMarkdownFileName,
   isSupportedFileName,
-  isVMarkFileName,
+  isTMarkFileName,
   isYamlFileName,
   stripSupportedExtension,
 } from "./dropPaths";
@@ -219,17 +219,17 @@ describe("isYamlFileName", () => {
   });
 });
 
-describe("isVMarkFileName (markdown OR YAML)", () => {
+describe("isTMarkFileName (markdown OR YAML)", () => {
   it("recognizes markdown files", () => {
-    expect(isVMarkFileName("readme.md")).toBe(true);
+    expect(isTMarkFileName("readme.md")).toBe(true);
   });
 
   it("recognizes YAML files", () => {
-    expect(isVMarkFileName("workflow.yml")).toBe(true);
+    expect(isTMarkFileName("workflow.yml")).toBe(true);
   });
 
   it("rejects everything else", () => {
-    expect(isVMarkFileName("data.json")).toBe(false);
-    expect(isVMarkFileName("image.png")).toBe(false);
+    expect(isTMarkFileName("data.json")).toBe(false);
+    expect(isTMarkFileName("image.png")).toBe(false);
   });
 });

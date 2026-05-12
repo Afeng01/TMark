@@ -30,7 +30,7 @@ import {
 } from "./remarkPlugins";
 
 /**
- * Unified processor configured for VMark markdown parsing.
+ * Unified processor configured for TMark markdown parsing.
  *
  * Plugins are loaded lazily based on content analysis:
  * - remark-parse: Always (base CommonMark parser)

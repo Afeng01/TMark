@@ -1,23 +1,23 @@
 ---
-title: "VMark is now the plain-text workspace where humans and AI collaborate"
+title: "TMark is now the plain-text workspace where humans and AI collaborate"
 date: 2026-05-07
 ---
 
-# VMark is now the plain-text workspace where humans and AI collaborate
+# TMark is now the plain-text workspace where humans and AI collaborate
 
-VMark started as a markdown editor. Today's release reframes that — not as a rebrand, but as the natural conclusion of where the product was heading anyway. Markdown is still the centerpiece. What's changed is that the workspace around it now opens every plain-text artifact you'd actually keep next to a markdown file: configuration, data, diagrams, web pages, source code.
+TMark started as a markdown editor. Today's release reframes that — not as a rebrand, but as the natural conclusion of where the product was heading anyway. Markdown is still the centerpiece. What's changed is that the workspace around it now opens every plain-text artifact you'd actually keep next to a markdown file: configuration, data, diagrams, web pages, source code.
 
 ![Markdown — WYSIWYG, unchanged](/screenshots/multi-format-launch/01-markdown.png)
 
 ## What "plain-text workspace" means
 
-The "and" matters. AI-first framing puts humans in the user-of-tool position. Human-and-AI framing names the artifact as the shared substrate, with both parties reading and writing it directly. Plain text is the un-mediated meeting point; VMark optimizes the experience of working in that meeting point.
+The "and" matters. AI-first framing puts humans in the user-of-tool position. Human-and-AI framing names the artifact as the shared substrate, with both parties reading and writing it directly. Plain text is the un-mediated meeting point; TMark optimizes the experience of working in that meeting point.
 
 When Claude Code, Codex, or Gemini writes a `Cargo.toml` for you via MCP, you don't want to context-switch into a separate IDE to read it. When you draft a `.github/workflows/ci.yml`, you don't want to alt-tab into a YAML linter. When `pyproject.toml` is the source of truth for your project's dependency tree, you want to see *the tree*, not a tab-indented map.
 
 ## Schema-aware previews
 
-This is the differentiator. Opening more file types is what every IDE does. VMark renders the *right* view per artifact:
+This is the differentiator. Opening more file types is what every IDE does. TMark renders the *right* view per artifact:
 
 - **`.github/workflows/ci.yml`** opens with the workflow visualization — job DAG, triggers, permissions — alongside the source.
 - **`Cargo.toml`** opens with a Rust dependency tree — runtime, dev, build — with version specs and feature flags.

@@ -92,8 +92,8 @@ export const ja = {
               link: "/ja/guide/users-as-developers/",
             },
             {
-              text: "VMark を開発した理由",
-              link: "/ja/guide/users-as-developers/why-i-built-vmark",
+              text: "TMark を開発した理由",
+              link: "/ja/guide/users-as-developers/why-i-built-tmark",
             },
             {
               text: "AI が代替できない5つのスキル",
@@ -134,7 +134,7 @@ export const ja = {
 
     footer: {
       copyright:
-        'Copyright © 2026 VMark · <a href="/ja/guide/license">ISC ライセンス</a>',
+        'Copyright © 2026 TMark · <a href="/ja/guide/license">ISC ライセンス</a>',
     },
 
     lastUpdated: {

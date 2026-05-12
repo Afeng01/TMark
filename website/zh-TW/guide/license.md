@@ -1,6 +1,6 @@
 # 授權條款
 
-VMark 以 **ISC 授權條款** 發布 — 最簡單、最寬鬆的開放原始碼授權條款之一，功能上等同於 MIT。
+TMark 以 **ISC 授權條款** 發布 — 最簡單、最寬鬆的開放原始碼授權條款之一，功能上等同於 MIT。
 
 ## ISC 授權條款允許的事項
 
@@ -42,7 +42,7 @@ PERFORMANCE OF THIS SOFTWARE.
 
 ISC 授權條款在功能上等同於 MIT 授權條款，但語言更簡單。它獲得[開放原始碼倡議（OSI）](https://opensource.org/licenses/ISC)批准，是 npm 和 OpenBSD 使用的預設授權條款。
 
-選擇它作為 VMark 的授權條款是因為：
+選擇它作為 TMark 的授權條款是因為：
 
 - **簡潔** — 易於閱讀和理解
 - **寬鬆** — 對軟體使用方式沒有限制

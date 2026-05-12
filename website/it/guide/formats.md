@@ -1,6 +1,6 @@
 # Formati Supportati
 
-VMark apre direttamente tutti i formati di file elencati di seguito. Il valore aggiunto sono le **anteprime contestuali**: quando il file è un artefatto riconoscibile, VMark mostra la vista *giusta* al posto di un albero JSON generico.
+TMark apre direttamente tutti i formati di file elencati di seguito. Il valore aggiunto sono le **anteprime contestuali**: quando il file è un artefatto riconoscibile, TMark mostra la vista *giusta* al posto di un albero JSON generico.
 
 [[toc]]
 
@@ -17,7 +17,7 @@ Markdown, testo normale e YAML/YML si aprono sempre con i loro editor completi �
 
 Quando una categoria è disattivata, le estensioni corrispondenti ricadono sul fallback in testo normale — il file si apre comunque, ma senza anteprima o vista schema. Attiva un toggle e il registro si ricostruisce in loco; le schede aperte si rimontano con l'adattatore appropriato.
 
-Al primo avvio dopo l'aggiornamento al supporto multi-formato, VMark mostra un toast una tantum che ti invita ad andare su **Impostazioni → Formati**. Se l'hai ignorato (o hai eseguito un'installazione pulita), il pannello è disponibile in **Impostazioni → Formati** in qualsiasi momento.
+Al primo avvio dopo l'aggiornamento al supporto multi-formato, TMark mostra un toast una tantum che ti invita ad andare su **Impostazioni → Formati**. Se l'hai ignorato (o hai eseguito un'installazione pulita), il pannello è disponibile in **Impostazioni → Formati** in qualsiasi momento.
 
 ## Panoramica
 
@@ -37,7 +37,7 @@ I file di codice si aprono in sola lettura con un banner che offre **Abilita mod
 
 ## Anteprime contestuali
 
-Quando il percorso o il contenuto corrisponde a uno schema noto, VMark sostituisce la vista contestuale appropriata all'albero generico.
+Quando il percorso o il contenuto corrisponde a uno schema noto, TMark sostituisce la vista contestuale appropriata all'albero generico.
 
 ### Workflow GitHub Actions (`.github/workflows/*.yml`)
 
@@ -52,7 +52,7 @@ Si apre con un albero delle dipendenze Rust — dipendenze runtime, dev e build,
 
 - Rilevamento tramite percorso: nome file `Cargo.toml` (senza distinzione maiuscole/minuscole) su percorsi POSIX o Windows.
 - Rilevamento tramite contenuto: intestazione `[package]` o `[workspace]`.
-- Nessuna chiamata di rete — VMark non risolve mai crates.io.
+- Nessuna chiamata di rete — TMark non risolve mai crates.io.
 
 ### `package.json`
 
@@ -97,14 +97,14 @@ Il validatore segnala i tag script, gli URL `javascript:` e i gestori di eventi 
 Per i file di codice, il pulsante **Apri nell'editor esterno** nel banner di sola lettura avvia l'editor a scelta. Ordine di risoluzione:
 
 1. **Impostazioni → Formati → Editor esterno** (il campo GUI — vedi [Impostazioni](/it/guide/settings#formati)). Scegli un bundle `.app` su macOS, un eseguibile su Linux/Windows, o qualsiasi cosa la tua shell risolverebbe.
-2. `$VMARK_EXTERNAL_EDITOR` (override dell'ambiente a livello di progetto)
+2. `$TMARK_EXTERNAL_EDITOR` (override dell'ambiente a livello di progetto)
 3. `$VISUAL`
 4. `$EDITOR`
 5. Predefinito di piattaforma (`open -t` su macOS, `notepad.exe` su Windows, `xdg-open` su Linux)
 
 L'impostazione GUI ha la precedenza sulle variabili d'ambiente — l'esplicito supera l'implicito. Lascia il campo vuoto per usare la catena di fallback delle variabili d'ambiente.
 
-VMark instrada tramite un PATH di shell di login in modo che i wrapper di VS Code / Cursor / JetBrains si risolvano correttamente quando avviati da un'app GUI macOS.
+TMark instrada tramite un PATH di shell di login in modo che i wrapper di VS Code / Cursor / JetBrains si risolvano correttamente quando avviati da un'app GUI macOS.
 
 ### Controllo di sicurezza
 
@@ -112,10 +112,10 @@ Il comando Tauri `open_in_external_editor` rifiuta:
 
 - percorsi inesistenti
 - directory e altri file non regolari (socket, dispositivi)
-- percorsi la cui estensione canonicalizzata non è nel set di formati registrati di VMark
+- percorsi la cui estensione canonicalizzata non è nel set di formati registrati di TMark
 - symlink il cui target canonico non supera nessuno dei controlli precedenti
 
-Una webview compromessa non può usare il pulsante per avviare l'editor esterno su file di sistema arbitrari (password, chiavi, ecc.) — solo su percorsi che VMark aprirebbe esso stesso.
+Una webview compromessa non può usare il pulsante per avviare l'editor esterno su file di sistema arbitrari (password, chiavi, ecc.) — solo su percorsi che TMark aprirebbe esso stesso.
 
 ## Cosa non è supportato
 

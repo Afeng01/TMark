@@ -1,8 +1,8 @@
 # MCP Tools Reference
 
-VMark exposes **five composite MCP tools** to AI assistants: `session`, `workspace`, `document`, `workflow`, and `selection`. Together they cover **15 actions** — the read/write spine plus the file/window lifecycle plus CST-safe edits for GitHub Actions YAML plus targeted edits on the user's current selection.
+TMark exposes **five composite MCP tools** to AI assistants: `session`, `workspace`, `document`, `workflow`, and `selection`. Together they cover **15 actions** — the read/write spine plus the file/window lifecycle plus CST-safe edits for GitHub Actions YAML plus targeted edits on the user's current selection.
 
-The previous 12-tool / 76-action surface was pruned because in-document formatting tools (bold, headings, tables, etc.) duplicate work that AI agents already do trivially via Markdown round-trip. `selection` was kept (per ADR-7 of the pruning plan) because the full-doc round-trip is uneconomical on large files — every edit pays the whole document in input tokens, the whole document in output tokens (~5× input price), and a longer write window that widens the stale-revision retry loop. See [the MCP pruning plan](https://github.com/xiaolai/vmark/blob/main/dev-docs/plans/20260504-mcp-pruning.md) for the full rationale.
+The previous 12-tool / 76-action surface was pruned because in-document formatting tools (bold, headings, tables, etc.) duplicate work that AI agents already do trivially via Markdown round-trip. `selection` was kept (per ADR-7 of the pruning plan) because the full-doc round-trip is uneconomical on large files — every edit pays the whole document in input tokens, the whole document in output tokens (~5× input price), and a longer write window that widens the stale-revision retry loop. See [the MCP pruning plan](https://github.com/Afeng01/TMark/blob/main/dev-docs/plans/20260504-mcp-pruning.md) for the full rationale.
 
 ::: tip Recommended Workflow
 1. Call `session.get_state` once to see open windows, tabs, and per-tab `{filePath, dirty, revision, kind}`.
@@ -55,7 +55,7 @@ No arguments.
     }
   ],
   "capabilities": {
-    "version": "<vmark-mcp-server version>",
+    "version": "<tmark-mcp-server version>",
     "supportedKinds": ["markdown", "yaml-workflow"],
     "mcpProtocol": "0.1.0"
   }
@@ -206,7 +206,7 @@ Use `apply_patch` when changing one field and leaving everything else untouched 
 
 ### `apply_patch`
 
-Apply an array of `IRPatch` objects. Patches are dispatched through VMark's CST-aware mutators, which preserve comments, anchors, and key order. Raw `document.write` to a YAML file would lose them.
+Apply an array of `IRPatch` objects. Patches are dispatched through TMark's CST-aware mutators, which preserve comments, anchors, and key order. Raw `document.write` to a YAML file would lose them.
 
 | Parameter | Type | Required |
 |-----------|------|----------|

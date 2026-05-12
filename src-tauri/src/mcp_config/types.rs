@@ -13,7 +13,7 @@ pub struct ProviderStatus {
     pub path: String,
     pub exists: bool,
     #[serde(rename = "hasVmark")]
-    pub has_vmark: bool,
+    pub has_tmark: bool,
 }
 
 /// Preview of config changes before installation
@@ -58,7 +58,7 @@ pub enum DiagnosticStatus {
     PathMismatch,
     /// Binary file doesn't exist on disk
     BinaryMissing,
-    /// No vmark entry in config
+    /// No tmark entry in config
     NotConfigured,
 }
 
@@ -72,7 +72,7 @@ pub struct ProviderDiagnostic {
     #[serde(rename = "configExists")]
     pub config_exists: bool,
     #[serde(rename = "hasVmark")]
-    pub has_vmark: bool,
+    pub has_tmark: bool,
     #[serde(rename = "expectedBinaryPath")]
     pub expected_binary_path: Option<String>,
     #[serde(rename = "configuredBinaryPath")]

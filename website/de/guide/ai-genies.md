@@ -36,7 +36,7 @@ Die Statusleiste zeigt ebenfalls den KI-Fortschritt an — ein drehendes Symbol 
 
 ## Integrierte Genies
 
-VMark wird mit 13 Genies in vier Kategorien geliefert:
+TMark wird mit 13 Genies in vier Kategorien geliefert:
 
 ### Bearbeiten
 
@@ -126,9 +126,9 @@ Genies werden im Anwendungsdatenverzeichnis gespeichert:
 
 | Plattform | Pfad |
 |-----------|------|
-| macOS | `~/Library/Application Support/app.vmark/genies/` |
-| Windows | `%APPDATA%\app.vmark\genies\` |
-| Linux | `~/.local/share/app.vmark/genies/` |
+| macOS | `~/Library/Application Support/app.tmark/genies/` |
+| Windows | `%APPDATA%\app.tmark\genies\` |
+| Linux | `~/.local/share/app.tmark/genies/` |
 
 Öffnen Sie diesen Ordner über das Menü **Werkzeuge > Genies-Ordner öffnen**.
 
@@ -188,7 +188,7 @@ Der Dateiname `polish.md` wird in der Auswahl als Anzeigename "Polish" verwendet
 
 ### Der `{{content}}`-Platzhalter
 
-Der `{{content}}`-Platzhalter ist das Kernstück jedes Genie. Wenn ein Genie ausgeführt wird, führt VMark folgende Schritte durch:
+Der `{{content}}`-Platzhalter ist das Kernstück jedes Genie. Wenn ein Genie ausgeführt wird, führt TMark folgende Schritte durch:
 
 1. **Text extrahieren** basierend auf dem Bereich (ausgewählter Text, aktueller Block oder gesamtes Dokument)
 2. **Ersetzen** jedes `{{content}}` in Ihrer Vorlage durch den extrahierten Text
@@ -227,7 +227,7 @@ Der `{{context}}`-Platzhalter gibt der KI schreibgeschützten Umgebungstext — 
 
 **Bereichseinschränkungen** — Kontext funktioniert nur mit den Bereichen `selection` und `block`. Beim `document`-Bereich ist der Inhalt bereits das gesamte Dokument.
 
-**Freie Prompts** — Wenn Sie eine freie Anweisung in der Auswahl eingeben, bezieht VMark automatisch ±1 benachbarten Block als Kontext für den `selection`- und `block`-Bereich ein. Keine Konfiguration erforderlich.
+**Freie Prompts** — Wenn Sie eine freie Anweisung in der Auswahl eingeben, bezieht TMark automatisch ±1 benachbarten Block als Kontext für den `selection`- und `block`-Bereich ein. Keine Konfiguration erforderlich.
 
 **Rückwärtskompatibel** — Genies ohne `{{context}}` funktionieren genau wie zuvor. Wenn die Vorlage kein `{{context}}` enthält, wird kein Umgebungstext extrahiert.
 
@@ -497,7 +497,7 @@ Formatieren Sie als Aufzählungsliste. Wenn alles solide aussieht, sagen Sie
 
 ## KI-Vorschläge
 
-Wenn ein Genie Text zurückgibt, der als Ersatz für die Auswahl gedacht ist (statt einer freien Chat-Antwort), zeigt VMark ihn als **Vorschlag** mit einem Inline-Diff an: roter durchgestrichener Text für das Original, grüne Unterstreichung für den vorgeschlagenen Text. Sie prüfen und bestätigen, bevor irgendeine Änderung dauerhaft wird.
+Wenn ein Genie Text zurückgibt, der als Ersatz für die Auswahl gedacht ist (statt einer freien Chat-Antwort), zeigt TMark ihn als **Vorschlag** mit einem Inline-Diff an: roter durchgestrichener Text für das Original, grüne Unterstreichung für den vorgeschlagenen Text. Sie prüfen und bestätigen, bevor irgendeine Änderung dauerhaft wird.
 
 | Aktion | Kürzel |
 |---|---|

@@ -36,7 +36,7 @@ A barra de status também mostra o progresso da IA — um ícone giratório com 
 
 ## Gênios Integrados
 
-O VMark vem com 13 gênios em quatro categorias:
+O TMark vem com 13 gênios em quatro categorias:
 
 ### Edição
 
@@ -126,9 +126,9 @@ Os gênios são armazenados no diretório de dados do aplicativo:
 
 | Plataforma | Caminho |
 |------------|---------|
-| macOS | `~/Library/Application Support/app.vmark/genies/` |
-| Windows | `%APPDATA%\app.vmark\genies\` |
-| Linux | `~/.local/share/app.vmark/genies/` |
+| macOS | `~/Library/Application Support/app.tmark/genies/` |
+| Windows | `%APPDATA%\app.tmark\genies\` |
+| Linux | `~/.local/share/app.tmark/genies/` |
 
 Abra esta pasta no menu **Ferramentas > Abrir Pasta de Gênios**.
 
@@ -188,7 +188,7 @@ O nome do arquivo `polish.md` se torna o nome de exibição "Polish" no seletor.
 
 ### O Placeholder `{{content}}`
 
-O placeholder `{{content}}` é o núcleo de todo gênio. Quando um gênio é executado, o VMark:
+O placeholder `{{content}}` é o núcleo de todo gênio. Quando um gênio é executado, o TMark:
 
 1. **Extrai o texto** com base no escopo (texto selecionado, bloco atual ou documento completo)
 2. **Substitui** todo `{{content}}` no seu template pelo texto extraído
@@ -227,7 +227,7 @@ O placeholder `{{context}}` fornece à IA texto ao redor somente leitura — par
 
 **Restrições de escopo** — O contexto funciona apenas com escopos `selection` e `block`. Para escopo `document`, o conteúdo já É o documento completo.
 
-**Prompts livres** — Quando você digita uma instrução livre no seletor, o VMark inclui automaticamente ±1 bloco ao redor como contexto para escopos `selection` e `block`. Sem configuração necessária.
+**Prompts livres** — Quando você digita uma instrução livre no seletor, o TMark inclui automaticamente ±1 bloco ao redor como contexto para escopos `selection` e `block`. Sem configuração necessária.
 
 **Compatível com versões anteriores** — Gênios sem `{{context}}` funcionam exatamente como antes. Se o template não contiver `{{context}}`, nenhum texto ao redor é extraído.
 
@@ -498,7 +498,7 @@ Formate como lista com marcadores. Se tudo parecer sólido, diga
 
 ## Sugestões de IA
 
-Quando um Gênio retorna um texto destinado a substituir a seleção (em vez de uma resposta de chat livre), o VMark exibe o resultado como uma **sugestão** com diff inline: tachado em vermelho para o texto original, sublinhado em verde para o texto proposto. Você revisa e aprova antes de qualquer alteração ser persistida.
+Quando um Gênio retorna um texto destinado a substituir a seleção (em vez de uma resposta de chat livre), o TMark exibe o resultado como uma **sugestão** com diff inline: tachado em vermelho para o texto original, sublinhado em verde para o texto proposto. Você revisa e aprova antes de qualquer alteração ser persistida.
 
 | Ação | Atalho |
 |------|--------|

@@ -35,8 +35,8 @@ describe("history constants", () => {
     expect(PREVIEW_LENGTH).toBe(200);
   });
 
-  it("HISTORY_CLEARED_EVENT is 'vmark:history-cleared'", () => {
-    expect(HISTORY_CLEARED_EVENT).toBe("vmark:history-cleared");
+  it("HISTORY_CLEARED_EVENT is 'tmark:history-cleared'", () => {
+    expect(HISTORY_CLEARED_EVENT).toBe("tmark:history-cleared");
   });
 });
 

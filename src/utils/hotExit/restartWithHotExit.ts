@@ -71,7 +71,7 @@ export async function restartWithHotExit(): Promise<void> {
 
     hotExitLog('Session captured and persisted:', {
       windows: session.windows.length,
-      version: session.vmark_version,
+      version: session.tmark_version,
     });
   } catch (error) {
     const captureError = error instanceof Error ? error : new Error(String(error));
@@ -142,7 +142,7 @@ export async function checkAndRestoreSession(
       windows: migratedSession.windows.length,
       hasSecondaryWindows,
       timestamp: formatTimestamp(migratedSession.timestamp),
-      version: migratedSession.vmark_version,
+      version: migratedSession.tmark_version,
       schemaVersion: migratedSession.version,
     });
 

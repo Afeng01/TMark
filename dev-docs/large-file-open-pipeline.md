@@ -129,7 +129,7 @@ The 15.5-second block is **not parse** — it is **ProseMirror ****`EditorView`*
 
 ### 4. TiptapEditor perf hardening (shipped alongside the plan in `41b311b1`)
 
-- **`shouldRerenderOnTransaction: false`** — VMark reads editor state through Zustand selectors, so Tiptap's default full-React rerender per transaction is wasted work.
+- **`shouldRerenderOnTransaction: false`** — TMark reads editor state through Zustand selectors, so Tiptap's default full-React rerender per transaction is wasted work.
 - **Deferred initial parse via `setTimeout(0)`** — the empty shell paints first; the 700 ms parse runs after layout.
 - **Adaptive debounce (100 ms – 5 s)** scales with doc size so serialization keeps pace with input on small docs but doesn't thrash on big ones.
 - **`.cv-idle` gating.** `content-visibility: auto` has an O(blocks-after-insertion) reflow cost — 378 ms per keystroke on a 2 250-block doc in Chromium. The class is stripped during typing (`onUpdate`) and re-applied after 500 ms idle so scroll and initial paint keep the optimization.

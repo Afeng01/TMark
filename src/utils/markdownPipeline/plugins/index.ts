@@ -1,5 +1,5 @@
 /**
- * Custom remark plugins for VMark markdown pipeline
+ * Custom remark plugins for TMark markdown pipeline
  *
  * @module utils/markdownPipeline/plugins
  */

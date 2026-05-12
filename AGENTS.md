@@ -2,16 +2,14 @@
 
 Shared instructions for all AI agents (Claude, Codex, etc.).
 
-- You are an AI assistant working on the VMark project.
+- You are an AI assistant working on the TMark project.
 
-- In Cherry's LyraMD work, this worktree is the VMark-based 2.0 baseline. When Cherry asks to
-  continue LyraMD 2.0, VMark adaptation, Agent panel/terminal, sidebar, file tree, tabs, layout, or
-  visual polish, work in this VMark/Tauri/React codebase. Do **not** fall back to the legacy
-  ColaMD/LyraMD 1.x Electron + Milkdown code unless Cherry explicitly asks for a 1.x hotfix.
+- TMark is a snapshot-based derivative of `xiaolai/vmark`. Preserve upstream attribution in
+  user-facing docs, but treat this repository as an independent `Afeng01/TMark` codebase.
 
 - Use English unless another language is requested.
 
-- Follow the VMark working agreement:
+- Follow the TMark working agreement:
 
   - Run `git status -sb` at session start.
 
@@ -49,7 +47,7 @@ Shared instructions for all AI agents (Claude, Codex, etc.).
 
   - No dev server; ask the user to run interactive app flows.
 
-  - For E2E, use Tauri MCP tools. **Never use Chrome DevTools MCP** — VMark is a Tauri app, not a browser app.
+  - For E2E, use Tauri MCP tools. **Never use Chrome DevTools MCP** — TMark is a Tauri app, not a browser app.
 
   - **Internationalization (i18n)**: All user-facing strings must use `t()` (React) or `t!()` (Rust).
     Never hardcode English strings in UI code. Translation keys use flat dot-separated camelCase
@@ -99,9 +97,9 @@ Shared instructions for all AI agents (Claude, Codex, etc.).
 
 - Mermaid diagrams:
 
-  - VMark uses Mermaid v11 (strict Langium parser). Always validate diagrams with the `mermaid-validator` MCP tool before outputting.
+  - TMark uses Mermaid v11 (strict Langium parser). Always validate diagrams with the `mermaid-validator` MCP tool before outputting.
 
-  - When sending content to VMark, prefer validated Mermaid diagrams over plain-text graphs whenever possible.
+  - When sending content to TMark, prefer validated Mermaid diagrams over plain-text graphs whenever possible.
 
   - Quote node labels containing special characters: `["Label (detail)"]`. No trailing semicolons. Prefer `flowchart` over `graph`.
 

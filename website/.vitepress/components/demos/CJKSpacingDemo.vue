@@ -34,8 +34,8 @@ watch(spacing, () => nextTick(() => applyWrapping()))
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">Fine-tune character spacing for CJK text</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">Fine-tune character spacing for CJK text</p>
 
     <div class="options">
       <button
@@ -63,7 +63,7 @@ watch(spacing, () => nextTick(() => applyWrapping()))
       </p>
     </div>
 
-    <div class="vmark-grid vmark-grid--2">
+    <div class="tmark-grid tmark-grid--2">
       <div class="compare">
         <div class="compare__label">Without spacing</div>
         <div class="compare__text">
@@ -80,7 +80,7 @@ watch(spacing, () => nextTick(() => applyWrapping()))
   </div>
 </template>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .options {
   display: flex;

@@ -6,7 +6,7 @@ Common issues and where to look for the fix:
 
 | Symptom | Likely cause | Where to look |
 |---|---|---|
-| MCP client can't connect | Stale port file or VMark not running | [MCP Server Connection Issues](#mcp-server-connection-issues) |
+| MCP client can't connect | Stale port file or TMark not running | [MCP Server Connection Issues](#mcp-server-connection-issues) |
 | File won't open or shows garbled text | Non-UTF-8 encoding or quarantine attribute | [File Won't Open](#file-won-t-open) |
 | AI Genie hangs or returns nothing | Provider misconfigured or CLI not on PATH | [AI Genie Not Responding](#ai-genie-not-responding) |
 | Keyboard shortcut does nothing | Reassigned in Settings or system override | [Keyboard Shortcut Not Working](#keyboard-shortcut-not-working) |
@@ -19,15 +19,15 @@ For anything not listed above, see [Reporting Bugs](#reporting-bugs).
 
 ## Log Files
 
-VMark writes log files to help diagnose issues. Logs include warnings and errors from both the Rust backend and the frontend.
+TMark writes log files to help diagnose issues. Logs include warnings and errors from both the Rust backend and the frontend.
 
 ### Log File Locations
 
 | Platform | Path |
 |----------|------|
-| macOS | `~/Library/Logs/app.vmark/` |
-| Windows | `%APPDATA%\app.vmark\logs\` |
-| Linux | `~/.local/share/app.vmark/logs/` |
+| macOS | `~/Library/Logs/app.tmark/` |
+| Windows | `%APPDATA%\app.tmark\logs\` |
+| Linux | `~/.local/share/app.tmark/logs/` |
 
 ### Log Levels
 
@@ -48,7 +48,7 @@ VMark writes log files to help diagnose issues. Logs include warnings and errors
 
 When reporting a bug, include:
 
-1. **VMark version** — shown in the navbar badge or About dialog
+1. **TMark version** — shown in the navbar badge or About dialog
 2. **Operating system** — macOS version, Windows build, or Linux distro
 3. **Steps to reproduce** — what you did before the issue occurred
 4. **Log file** — attach or paste the relevant log entries
@@ -66,14 +66,14 @@ Log entries are timestamped and tagged by module (e.g., `[HotExit]`, `[MCP Bridg
 
 ### App Launches Slowly on Windows
 
-VMark is optimized for macOS. On Windows, startup may be slower due to WebView2 initialization. Make sure:
+TMark is optimized for macOS. On Windows, startup may be slower due to WebView2 initialization. Make sure:
 
 - WebView2 Runtime is up to date
 - Antivirus software is not scanning the app data directory in real-time
 
 ### Menu Bar Shows English After Language Change
 
-If the menu bar stays in English after switching language in Settings, restart VMark. The menu rebuilds on next launch with the saved language.
+If the menu bar stays in English after switching language in Settings, restart TMark. The menu rebuilds on next launch with the saved language.
 
 ### Terminal Doesn't Accept CJK Punctuation
 
@@ -83,8 +83,8 @@ Fixed in v0.6.5+. Update to the latest version.
 
 The MCP server may fail to start or clients may not connect.
 
-- Ensure VMark is running — the MCP server only starts when the app is open.
-- Check that no other process is using the same port. The MCP server writes a port file for client discovery; stale port files from a previous session can cause conflicts. Restart VMark to regenerate it.
+- Ensure TMark is running — the MCP server only starts when the app is open.
+- Check that no other process is using the same port. The MCP server writes a port file for client discovery; stale port files from a previous session can cause conflicts. Restart TMark to regenerate it.
 - Review the log file for `[MCP Bridge]` entries to identify connection errors.
 
 ### Keyboard Shortcut Not Working
@@ -100,15 +100,15 @@ A shortcut may appear unresponsive if it conflicts with another binding or has b
 PDF export may hang or produce incomplete output.
 
 - If images are missing in the export, verify that image paths are relative to the document and that the files exist on disk. Absolute URLs and remote images should be accessible.
-- Check file permissions on the output directory — VMark needs write access to save the exported file.
+- Check file permissions on the output directory — TMark needs write access to save the exported file.
 - For large documents, export may take longer. Check the log file for `[Export]` entries if it appears stuck.
 
 ### File Won't Open
 
-VMark may refuse to open a file or show garbled content.
+TMark may refuse to open a file or show garbled content.
 
 - Verify the file has read permissions for your user account.
-- VMark expects UTF-8 encoded Markdown. Files in other encodings (e.g., GB2312, Shift-JIS) may not display correctly — convert them to UTF-8 first.
+- TMark expects UTF-8 encoded Markdown. Files in other encodings (e.g., GB2312, Shift-JIS) may not display correctly — convert them to UTF-8 first.
 - If the file is locked by another process (e.g., a sync client or backup tool), close that process and try again.
 
 ### Editor Performance

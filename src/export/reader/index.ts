@@ -1,12 +1,12 @@
 /**
- * VMark Reader Assets
+ * TMark Reader Assets
  *
  * Provides inline CSS and JS for the interactive reader in exported HTML.
  */
 
 // Import raw CSS and JS as strings
-import readerCSS from "./vmark-reader.css?raw";
-import readerJS from "./vmark-reader.js?raw";
+import readerCSS from "./tmark-reader.css?raw";
+import readerJS from "./tmark-reader.js?raw";
 
 /**
  * Get the reader CSS for embedding in exported HTML.

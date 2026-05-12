@@ -300,7 +300,7 @@ pub async fn capture_session(app: &AppHandle) -> Result<CaptureResult, String> {
     let session = SessionData {
         version: SCHEMA_VERSION,
         timestamp: chrono::Utc::now().timestamp(),
-        vmark_version: env!("CARGO_PKG_VERSION").to_string(),
+        tmark_version: env!("CARGO_PKG_VERSION").to_string(),
         windows: windows_vec,
         workspace: None, // Workspace capture not yet implemented
     };
@@ -799,7 +799,7 @@ mod tests {
         let session = SessionData {
             version: SCHEMA_VERSION,
             timestamp: chrono::Utc::now().timestamp(),
-            vmark_version: "0.4.38".to_string(),
+            tmark_version: "0.4.38".to_string(),
             windows: vec![],
             workspace: None,
         };
@@ -813,7 +813,7 @@ mod tests {
         let session = SessionData {
             version: SCHEMA_VERSION,
             timestamp: stale_timestamp,
-            vmark_version: "0.4.38".to_string(),
+            tmark_version: "0.4.38".to_string(),
             windows: vec![],
             workspace: None,
         };
@@ -828,7 +828,7 @@ mod tests {
         let session = SessionData {
             version: 999,
             timestamp: chrono::Utc::now().timestamp(),
-            vmark_version: "0.4.38".to_string(),
+            tmark_version: "0.4.38".to_string(),
             windows: vec![],
             workspace: None,
         };

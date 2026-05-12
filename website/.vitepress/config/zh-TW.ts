@@ -89,8 +89,8 @@ export const zhTW = {
               link: "/zh-TW/guide/users-as-developers/",
             },
             {
-              text: "我為什麼開發 VMark",
-              link: "/zh-TW/guide/users-as-developers/why-i-built-vmark",
+              text: "我為什麼開發 TMark",
+              link: "/zh-TW/guide/users-as-developers/why-i-built-tmark",
             },
             {
               text: "AI 無法取代的五項技能",
@@ -131,7 +131,7 @@ export const zhTW = {
 
     footer: {
       copyright:
-        'Copyright © 2026 VMark · <a href="/zh-TW/guide/license">ISC 授權條款</a>',
+        'Copyright © 2026 TMark · <a href="/zh-TW/guide/license">ISC 授權條款</a>',
     },
 
     lastUpdated: {

@@ -1,6 +1,6 @@
 # 智慧 Tab 導覽
 
-VMark 的 Tab 和 Shift+Tab 鍵具有情境感知功能 — 可幫助你在格式化文字、括號和連結之間高效導覽，無需切換到方向鍵。
+TMark 的 Tab 和 Shift+Tab 鍵具有情境感知功能 — 可幫助你在格式化文字、括號和連結之間高效導覽，無需切換到方向鍵。
 
 ## 快速概覽
 
@@ -131,21 +131,21 @@ This is |**bold text** here
 Tab 和 Shift+Tab 同樣可以跳出連結：
 
 ```text
-Check out [VMark|](https://vmark.app)
+Check out [TMark|](https://github.com/Afeng01/TMark)
                ↑ cursor inside link text
 ```
 
 按下 **Tab**：
 
 ```text
-Check out [VMark](https://vmark.app)| and...
+Check out [TMark](https://github.com/Afeng01/TMark)| and...
                                     ↑ cursor after link
 ```
 
 在連結內按下 **Shift+Tab** 可移至起始位置：
 
 ```text
-Check out |[VMark](https://vmark.app) and...
+Check out |[TMark](https://github.com/Afeng01/TMark) and...
           ↑ cursor before link
 ```
 
@@ -155,7 +155,7 @@ Check out |[VMark](https://vmark.app) and...
 
 ### 巢狀與跳脫括號
 
-VMark 可正確處理複雜的連結語法：
+TMark 可正確處理複雜的連結語法：
 
 ```markdown
 [text [with nested] brackets](url)     ✓ 支援
@@ -364,7 +364,7 @@ Tab 和 Shift+Tab 括號跳脫在 **程式碼區塊內停用** — 包括 `code_
 
 1. **肌肉記憶** — 一旦習慣 Tab 跳脫，你會發現無需方向鍵就能導覽得更快。
 
-2. **搭配自動配對** — 輸入 `(` 時，VMark 會自動插入 `)`。輸入完內容後，直接按 Tab 跳出。
+2. **搭配自動配對** — 輸入 `(` 時，TMark 會自動插入 `)`。輸入完內容後，直接按 Tab 跳出。
 
 3. **巢狀結構** — Tab 每次只跳脫一層。對於 `((nested))`，需要按兩次 Tab 才能完全跳出。
 

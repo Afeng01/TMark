@@ -12,7 +12,7 @@
  *     markdown-adapter-specific checks.
  *   - `getSupportedExtensionsWithDots()`: every registered format's
  *     extension, sourced from the format registry. Use for "is this
- *     a file VMark can open."
+ *     a file TMark can open."
  *
  * @coordinates-with src/lib/formats/registry.ts — getSupportedExtensions
  * @module utils/dropPaths
@@ -72,8 +72,8 @@ export function isYamlFileName(name: string): boolean {
   return YAML_EXTENSIONS.some((ext) => lower.endsWith(ext));
 }
 
-/** True iff `name` is markdown OR YAML — first-class VMark file types. */
-export function isVMarkFileName(name: string): boolean {
+/** True iff `name` is markdown OR YAML — first-class TMark file types. */
+export function isTMarkFileName(name: string): boolean {
   return isMarkdownFileName(name) || isYamlFileName(name);
 }
 

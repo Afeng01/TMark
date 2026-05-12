@@ -7,7 +7,7 @@ description: Expert guidance for building rich text editors with Tiptap - a head
 
 Expert guidance for building rich text editors with Tiptap - a headless, framework-agnostic editor built on ProseMirror.
 
-**See also:** `tiptap-editor` skill — VMark-specific Tiptap API patterns (commands, node traversal, selection handling). Use `tiptap-dev` for general Tiptap/ProseMirror development, and `tiptap-editor` for VMark-specific editor integration.
+**See also:** `tiptap-editor` skill — TMark-specific Tiptap API patterns (commands, node traversal, selection handling). Use `tiptap-dev` for general Tiptap/ProseMirror development, and `tiptap-editor` for TMark-specific editor integration.
 
 ## When to Use This Skill
 

@@ -7,12 +7,12 @@ const examples = [
     content: 'This is the hidden content that appears when you click. You can put any markdown content here — paragraphs, lists, code blocks, even nested details.',
   },
   {
-    summary: 'FAQ: How do I install VMark?',
-    content: 'Download the latest release from our download page, then drag VMark to your Applications folder. Launch it and start writing!',
+    summary: 'FAQ: How do I install TMark?',
+    content: 'Download the latest release from our download page, then drag TMark to your Applications folder. Launch it and start writing!',
   },
   {
     summary: 'Advanced Configuration Options',
-    content: 'VMark stores settings in ~/.vmark/settings.json. You can manually edit this file for advanced configuration, but most users won\'t need to.',
+    content: 'TMark stores settings in ~/.tmark/settings.json. You can manually edit this file for advanced configuration, but most users won\'t need to.',
   },
 ]
 
@@ -24,8 +24,8 @@ function toggle(index: number) {
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">Expandable sections for FAQs, spoilers, and optional content</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">Expandable sections for FAQs, spoilers, and optional content</p>
 
     <div class="examples">
       <details
@@ -93,7 +93,7 @@ function toggle(index: number) {
 
     <div class="syntax">
       <div class="syntax__title">Markdown Syntax</div>
-      <pre class="vmark-code">&lt;details&gt;
+      <pre class="tmark-code">&lt;details&gt;
 &lt;summary&gt;Click to expand&lt;/summary&gt;
 
 Your hidden content here.
@@ -104,7 +104,7 @@ Supports **markdown** formatting.
   </div>
 </template>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .examples {
   display: flex;

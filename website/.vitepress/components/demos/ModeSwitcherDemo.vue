@@ -5,7 +5,7 @@ const activeMode = ref<'wysiwyg' | 'peek' | 'source'>('wysiwyg')
 
 const markdownSource = `## Getting Started
 
-VMark is a **modern** Markdown editor with _three_ editing modes.
+TMark is a **modern** Markdown editor with _three_ editing modes.
 
 - WYSIWYG for visual editing
 - Source Peek for quick fixes
@@ -19,8 +19,8 @@ const modes = [
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">Click each mode to see how the same content looks</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">Click each mode to see how the same content looks</p>
 
     <div class="mode-tabs">
       <button
@@ -38,7 +38,7 @@ const modes = [
       <!-- WYSIWYG -->
       <div v-if="activeMode === 'wysiwyg'" class="editor-content">
         <h2 class="rendered-h2">Getting Started</h2>
-        <p class="rendered-p">VMark is a <strong>modern</strong> Markdown editor with <em>three</em> editing modes.</p>
+        <p class="rendered-p">TMark is a <strong>modern</strong> Markdown editor with <em>three</em> editing modes.</p>
         <ul class="rendered-list">
           <li>WYSIWYG for visual editing</li>
           <li>Source Peek for quick fixes</li>
@@ -56,10 +56,10 @@ const modes = [
           </span>
         </div>
         <div class="peek-editor">
-          <code>VMark is a **modern** Markdown editor with _three_ editing modes.</code>
+          <code>TMark is a **modern** Markdown editor with _three_ editing modes.</code>
         </div>
         <div class="peek-preview">
-          <p class="rendered-p rendered-p--dimmed">VMark is a <strong>modern</strong> Markdown editor with <em>three</em> editing modes.</p>
+          <p class="rendered-p rendered-p--dimmed">TMark is a <strong>modern</strong> Markdown editor with <em>three</em> editing modes.</p>
         </div>
       </div>
 
@@ -72,8 +72,8 @@ const modes = [
       </div>
     </div>
 
-    <div class="vmark-hint">
-      <span class="vmark-hint__icon">💡</span>
+    <div class="tmark-hint">
+      <span class="tmark-hint__icon">💡</span>
       <span>Source Peek (F5) lets you edit one block's Markdown without leaving the visual editor.</span>
     </div>
   </div>
@@ -92,7 +92,7 @@ function highlightMarkdown(line: string): string {
 export default { methods: { highlightMarkdown } }
 </script>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .mode-tabs {
   display: flex;

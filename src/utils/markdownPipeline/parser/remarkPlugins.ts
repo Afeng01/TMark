@@ -1,5 +1,5 @@
 /**
- * VMark-specific remark plugins: math validation and setext-heading disable.
+ * TMark-specific remark plugins: math validation and setext-heading disable.
  *
  * @module utils/markdownPipeline/parser/remarkPlugins
  */
@@ -60,12 +60,12 @@ function visitAndFixMath(node: Root | Parent): void {
 /**
  * Disable setext heading parsing (underline-style headings with `---` or `===`).
  *
- * VMark always serializes headings as ATX (`#`), never setext. Disabling setext
+ * TMark always serializes headings as ATX (`#`), never setext. Disabling setext
  * parsing prevents a common misparse: an empty nested list item (`  -`) being
  * interpreted as a setext heading underline for the preceding paragraph.
  *
- * This is an intentional compatibility trade-off for VMark:
- * - VMark's serializer never produces setext headings (always ATX `#`)
+ * This is an intentional compatibility trade-off for TMark:
+ * - TMark's serializer never produces setext headings (always ATX `#`)
  * - Setext input (`Heading\n---`) is rare in practice and can always be
  *   written as `## Heading` instead
  * - The misparse of `  -` as heading underline causes data corruption

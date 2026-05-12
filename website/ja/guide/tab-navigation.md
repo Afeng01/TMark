@@ -1,6 +1,6 @@
 # スマートタブナビゲーション
 
-VMark の Tab キーと Shift+Tab キーはコンテキストを認識します — 矢印キーに頼らずに書式設定されたテキスト、括弧、リンクを効率よく移動できます。
+TMark の Tab キーと Shift+Tab キーはコンテキストを認識します — 矢印キーに頼らずに書式設定されたテキスト、括弧、リンクを効率よく移動できます。
 
 ## クイック概要
 
@@ -131,21 +131,21 @@ This is |**bold text** here
 Tab と Shift+Tab はリンクからも脱出できます:
 
 ```text
-Check out [VMark|](https://vmark.app)
+Check out [TMark|](https://github.com/Afeng01/TMark)
                ↑ リンクテキストの内側にカーソル
 ```
 
 **Tab** を押す:
 
 ```text
-Check out [VMark](https://vmark.app)| and...
+Check out [TMark](https://github.com/Afeng01/TMark)| and...
                                     ↑ リンクの後にカーソル
 ```
 
 リンクの内側で **Shift+Tab** を押すと先頭に移動します:
 
 ```text
-Check out |[VMark](https://vmark.app) and...
+Check out |[TMark](https://github.com/Afeng01/TMark) and...
           ↑ リンクの前にカーソル
 ```
 
@@ -155,7 +155,7 @@ Check out |[VMark](https://vmark.app) and...
 
 ### ネストされたブラケットとエスケープされたブラケット
 
-VMark は複雑なリンク構文を正しく処理します:
+TMark は複雑なリンク構文を正しく処理します:
 
 ```markdown
 [text [with nested] brackets](url)     ✓ 動作する
@@ -364,7 +364,7 @@ This is **bold**| text
 
 1. **筋肉記憶** — タブエスケープに慣れると、矢印キーを使わずにはるかに速くナビゲートできるようになります。
 
-2. **自動ペアリングと連携** — `(`を入力すると、VMark が`)`を自動挿入します。内部で入力した後、Tab でジャンプして抜け出すだけです。
+2. **自動ペアリングと連携** — `(`を入力すると、TMark が`)`を自動挿入します。内部で入力した後、Tab でジャンプして抜け出すだけです。
 
 3. **ネストした構造** — Tab は一度に 1 レベルずつ脱出します。`((nested))`の場合、完全に抜けるには 2 回 Tab が必要です。
 

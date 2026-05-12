@@ -1,8 +1,8 @@
 # Référence des outils MCP
 
-VMark expose **quatre outils MCP composites** aux assistants IA&nbsp;: `session`, `workspace`, `document` et `workflow`. Ensemble, ils couvrent **14 actions** — la colonne vertébrale lecture/écriture plus le cycle de vie fichier/fenêtre plus les modifications sûres au CST pour le YAML GitHub Actions.
+TMark expose **quatre outils MCP composites** aux assistants IA&nbsp;: `session`, `workspace`, `document` et `workflow`. Ensemble, ils couvrent **14 actions** — la colonne vertébrale lecture/écriture plus le cycle de vie fichier/fenêtre plus les modifications sûres au CST pour le YAML GitHub Actions.
 
-La précédente surface de 12 outils / 76 actions a été élaguée parce que les outils de mise en forme intra-document (gras, titres, tableaux, etc.) dupliquent un travail que les agents IA effectuent déjà trivialement via un aller-retour Markdown. Voir [le plan d'élagage MCP](https://github.com/xiaolai/vmark/blob/main/dev-docs/plans/20260504-mcp-pruning.md) pour la justification complète.
+La précédente surface de 12 outils / 76 actions a été élaguée parce que les outils de mise en forme intra-document (gras, titres, tableaux, etc.) dupliquent un travail que les agents IA effectuent déjà trivialement via un aller-retour Markdown. Voir [le plan d'élagage MCP](https://github.com/Afeng01/TMark/blob/main/dev-docs/plans/20260504-mcp-pruning.md) pour la justification complète.
 
 ::: tip Flux de travail recommandé
 1. Appelez `session.get_state` une fois pour voir les fenêtres ouvertes, les onglets et `{filePath, dirty, revision, kind}` par onglet.
@@ -54,7 +54,7 @@ Aucun argument.
     }
   ],
   "capabilities": {
-    "version": "<vmark-mcp-server version>",
+    "version": "<tmark-mcp-server version>",
     "supportedKinds": ["markdown", "yaml-workflow"],
     "mcpProtocol": "0.1.0"
   }
@@ -205,7 +205,7 @@ Utilisez `apply_patch` lors du changement d'un champ en laissant tout le reste i
 
 ### `apply_patch`
 
-Appliquer un tableau d'objets `IRPatch`. Les patches sont distribués via les mutateurs sensibles au CST de VMark, qui préservent les commentaires, ancres et ordre des clés. Un `document.write` brut sur un fichier YAML les perdrait.
+Appliquer un tableau d'objets `IRPatch`. Les patches sont distribués via les mutateurs sensibles au CST de TMark, qui préservent les commentaires, ancres et ordre des clés. Un `document.write` brut sur un fichier YAML les perdrait.
 
 | Paramètre | Type | Requis |
 |-----------|------|--------|

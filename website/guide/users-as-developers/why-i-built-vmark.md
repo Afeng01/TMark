@@ -220,7 +220,7 @@ At first, I used the default macOS Terminal. Later, I switched to iTerm for tabs
 
 Why abandon IDEs like VSCode? Initially, because I couldn't understand complex code — and Claude Code often caused VSCode to crash. Later, I realized I didn't need to understand it. AI-written code is vastly better than what I — or even programmers I could afford to hire (OpenAI's scientists aren't people you can hire) — could write. If I don't read the code, there's no need to read diffs either.
 
-Eventually, I stopped writing documentation myself (guidance is still necessary). The entire [vmark.app](https://vmark.app) website was written by AI; I didn't touch a single character — except for reflections on vibe coding itself.
+Eventually, I stopped writing documentation myself (guidance is still necessary). The entire [vmark.app](https://github.com/xiaolai/vmark) website was written by AI; I didn't touch a single character — except for reflections on vibe coding itself.
 
 It's similar to how I invest: I *can* read financial statements, but I never do — good companies are obvious without them. What matters is the direction, not the details.
 

@@ -402,10 +402,10 @@ case "$PHASE" in
     else
       fail "package.json description not updated"
     fi
-    if grep -q "plain-text workspace where humans and AI collaborate" vmark-mcp-server/package.json; then
-      ok "vmark-mcp-server package.json description updated"
+    if grep -q "plain-text workspace where humans and AI collaborate" tmark-mcp-server/package.json; then
+      ok "tmark-mcp-server package.json description updated"
     else
-      fail "vmark-mcp-server description not updated"
+      fail "tmark-mcp-server description not updated"
     fi
     if grep -q "shortDescription" src-tauri/tauri.conf.json; then
       ok "tauri.conf.json bundle description set"

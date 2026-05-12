@@ -387,7 +387,7 @@ describe("formatter branch coverage — formatTableBlock cell regex (lines 190-1
 
 // ============================================================
 // Regression tests: segment architecture prevents Glean-class bugs
-// These document that VMark's segment extraction approach is immune
+// These document that TMark's segment extraction approach is immune
 // to classes of bugs found in placeholder-based systems (e.g., Glean).
 // ============================================================
 
@@ -527,7 +527,7 @@ describe("reference section skipping (opt-in)", () => {
 describe("segment architecture: no placeholder collision possible", () => {
   it("handles text containing placeholder-like patterns", () => {
     // In placeholder-based systems, text like ___CODE_BLOCK_0___ could collide.
-    // VMark's segment extraction never inserts placeholders, so this is safe.
+    // TMark's segment extraction never inserts placeholders, so this is safe.
     const input = "中文Python ___PLACEHOLDER_0___ and `code` block";
 
     const out = formatMarkdown(input, makeConfig());

@@ -3,9 +3,9 @@
  */
 
 /*
- * Override markmap's embedded CSS variables with VMark theme tokens.
+ * Override markmap's embedded CSS variables with TMark theme tokens.
  * Markmap ships its own palette (light: #333 text, dark via .markmap-dark).
- * VMark has 5 themes (white, paper, mint, sepia, night) — all handled
+ * TMark has 5 themes (white, paper, mint, sepia, night) — all handled
  * through CSS custom properties that adapt automatically.
  */
 .markmap-preview .markmap,

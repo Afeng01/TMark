@@ -3,7 +3,7 @@
  *
  * Purpose: Best-effort strip of `com.apple.quarantine` from a workspace root
  *   and its direct .md children. Without this, files saved by apps like
- *   Mixin Messenger fail to open in a running VMark via Finder double-click —
+ *   Mixin Messenger fail to open in a running TMark via Finder double-click —
  *   macOS Launch Services routes them through CoreServicesUIAgent, which
  *   silently drops the openURLs delivery to running Tauri apps.
  *
@@ -38,7 +38,7 @@ export interface QuarantineStripStats {
   error_count: number;
 }
 
-const NOTICE_FLAG_KEY = "vmark-mac-quarantine-notice-shown";
+const NOTICE_FLAG_KEY = "tmark-mac-quarantine-notice-shown";
 
 /** Has the one-time toast already been shown on this machine? */
 function hasShownNotice(): boolean {

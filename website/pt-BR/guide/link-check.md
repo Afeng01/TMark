@@ -1,6 +1,6 @@
 # Verificação de Links
 
-O VMark verifica se os destinos de links e imagens locais no seu markdown realmente existem no disco. A verificação roda em conjunto com o [motor de lint de markdown](/pt-BR/guide/lint) ao usar `Cmd-Shift-L` ou **Ferramentas → Verificar Markdown**.
+O TMark verifica se os destinos de links e imagens locais no seu markdown realmente existem no disco. A verificação roda em conjunto com o [motor de lint de markdown](/pt-BR/guide/lint) ao usar `Cmd-Shift-L` ou **Ferramentas → Verificar Markdown**.
 
 ## O que é verificado
 

@@ -1,6 +1,6 @@
 # Funzionalità
 
-VMark è un editor Markdown ricco di funzionalità progettato per i flussi di lavoro di scrittura moderni. Ecco cosa è incluso.
+TMark è un editor Markdown ricco di funzionalità progettato per i flussi di lavoro di scrittura moderni. Ecco cosa è incluso.
 
 [[toc]]
 
@@ -59,7 +59,7 @@ L'Anteprima Sorgente è utile per la modifica precisa del Markdown (correzione d
 
 ## Modifica Multi-Cursore
 
-Modifica più posizioni contemporaneamente — VMark supporta il multi-cursore completo sia in modalità WYSIWYG che Sorgente.
+Modifica più posizioni contemporaneamente — TMark supporta il multi-cursore completo sia in modalità WYSIWYG che Sorgente.
 
 | Azione | Scorciatoia |
 |--------|-------------|
@@ -77,7 +77,7 @@ Tutte le modifiche standard (digitazione, eliminazione, appunti, navigazione) fu
 
 ## Coppia Automatica e Tab Escape
 
-Quando digiti una parentesi aperta, una virgoletta o un apice inverso, VMark inserisce automaticamente la coppia di chiusura. Premi **Tab** per saltare oltre il carattere di chiusura invece di raggiungere il tasto freccia.
+Quando digiti una parentesi aperta, una virgoletta o un apice inverso, TMark inserisce automaticamente la coppia di chiusura. Premi **Tab** per saltare oltre il carattere di chiusura invece di raggiungere il tasto freccia.
 
 - Parentesi: `()` `[]` `{}`
 - Virgolette: `""` `''` `` ` ` ``
@@ -125,7 +125,7 @@ Cambia rapidamente le maiuscole/minuscole tramite Formato → Trasforma:
 ### Interruzioni di Riga Forzate
 
 Premi `Shift + Enter` per inserire un'interruzione di riga forzata all'interno di un paragrafo.
-VMark usa lo stile a due spazi per impostazione predefinita per la massima compatibilità.
+TMark usa lo stile a due spazi per impostazione predefinita per la massima compatibilità.
 Configurabile in **Impostazioni > Editor > Spazi bianchi**.
 
 ### Operazioni sulle Righe
@@ -270,7 +270,7 @@ Fai clic sulla freccia di espansione nella barra di ricerca per rivelare la riga
 
 ## Lint Markdown
 
-VMark include un linter Markdown integrato che verifica il documento alla ricerca di errori di sintassi comuni e problemi di accessibilità. Abilitalo in **Impostazioni > Markdown > Lint**.
+TMark include un linter Markdown integrato che verifica il documento alla ricerca di errori di sintassi comuni e problemi di accessibilità. Abilitalo in **Impostazioni > Markdown > Lint**.
 
 **Come utilizzarlo:**
 
@@ -311,7 +311,7 @@ Una barra degli strumenti di formattazione ancorata nella parte inferiore dell'e
 
 ## Opzioni di Esportazione
 
-VMark offre opzioni di esportazione flessibili per condividere i tuoi documenti.
+TMark offre opzioni di esportazione flessibili per condividere i tuoi documenti.
 
 ### Esportazione HTML
 
@@ -320,7 +320,7 @@ Esporta in HTML standalone con due modalità di confezionamento:
 - **Modalità cartella** (predefinita): Crea `Documento/index.html` con le risorse in una sottocartella
 - **Modalità file singolo**: Crea un file `.html` autonomo con immagini incorporate
 
-L'HTML esportato include il [**VMark Reader**](/it/guide/export#vmark-reader) — controlli interattivi per impostazioni, sommario, lightbox delle immagini e altro.
+L'HTML esportato include il [**TMark Reader**](/it/guide/export#tmark-reader) — controlli interattivi per impostazioni, sommario, lightbox delle immagini e altro.
 
 [Scopri di più sull'esportazione →](/it/guide/export)
 
@@ -352,7 +352,7 @@ Strumenti integrati per la formattazione di testo cinese/giapponese/coreano:
 
 ## Cronologia Documenti
 
-VMark salva automaticamente istantanee dei tuoi documenti così puoi recuperare versioni precedenti.
+TMark salva automaticamente istantanee dei tuoi documenti così puoi recuperare versioni precedenti.
 
 - **Salvataggio automatico** con intervallo configurabile cattura istantanee in background
 - **Cronologia per documento** archiviata localmente in formato JSONL
@@ -366,7 +366,7 @@ VMark salva automaticamente istantanee dei tuoi documenti così puoi recuperare 
 
 ## Recupero Sessione (Hot Exit)
 
-Quando chiudi VMark o si chiude inaspettatamente, la tua sessione viene preservata e ripristinata al prossimo avvio.
+Quando chiudi TMark o si chiude inaspettatamente, la tua sessione viene preservata e ripristinata al prossimo avvio.
 
 **Cosa viene salvato:**
 - Tutte le schede aperte e il loro contenuto (incluse le modifiche non salvate)
@@ -376,7 +376,7 @@ Quando chiudi VMark o si chiude inaspettatamente, la tua sessione viene preserva
 - Workspace attivo e impostazioni dell'esploratore file
 
 **Come funziona:**
-- Alla chiusura, VMark cattura lo stato completo della sessione di tutte le finestre
+- Alla chiusura, TMark cattura lo stato completo della sessione di tutte le finestre
 - Al riavvio, le schede vengono ripristinate esattamente come le avevi lasciate, con i documenti modificati (non salvati) contrassegnati di conseguenza
 - Il recupero da crash viene eseguito automaticamente dopo una chiusura inaspettata, ripristinando i documenti dalle istantanee di recupero periodiche
 - Le istantanee di recupero più vecchie di 7 giorni vengono eliminate automaticamente
@@ -428,7 +428,7 @@ Lo zoom cambia la dimensione del font dell'editor con incrementi di 2px (interva
 
 ## Utilità di Testo
 
-VMark include utilità per la pulizia e la formattazione del testo, disponibili nel menu Formato:
+TMark include utilità per la pulizia e la formattazione del testo, disponibili nel menu Formato:
 
 ### Pulizia del Testo (Formato → Pulizia Testo)
 
@@ -449,7 +449,7 @@ Pannello terminale integrato con sessioni multiple, copia/incolla, ricerca, perc
 
 ## Aggiornamento Automatico
 
-VMark controlla automaticamente gli aggiornamenti e può scaricarli e installarli nell'app:
+TMark controlla automaticamente gli aggiornamenti e può scaricarli e installarli nell'app:
 
 - Controllo automatico degli aggiornamenti all'avvio
 - Installazione degli aggiornamenti con un clic
@@ -504,7 +504,7 @@ Tutte le scorciatoie sono personalizzabili in Impostazioni → Scorciatoie.
 
 ## Dettagli Tecnici
 
-VMark è costruito con tecnologia moderna:
+TMark è costruito con tecnologia moderna:
 
 | Componente | Tecnologia |
 |-----------|------------|

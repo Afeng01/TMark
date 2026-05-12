@@ -380,7 +380,7 @@ export const useShortcutsStore = create<ShortcutsState & ShortcutsActions>()(
       getDefinition: (id) => shortcutMap.get(id),
     }),
     {
-      name: "vmark-shortcuts",
+      name: "tmark-shortcuts",
       storage: createJSONStorage(() => createSafeStorage()),
     }
   )

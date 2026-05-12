@@ -1,13 +1,13 @@
 [package]
-name = "vmark"
+name = "tmark"
 version = "0.7.7"
-description = "The plain-text workspace where humans and AI collaborate"
-authors = ["Xiaolai"]
+description = "A VMark-derived plain-text workspace where humans and AI collaborate"
+authors = ["Cherry Xiao"]
 license = "ISC"
 edition = "2021"
 
 [lib]
-name = "vmark_lib"
+name = "tmark_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

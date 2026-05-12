@@ -1,6 +1,6 @@
 # Mehrcursor-Bearbeitung
 
-VMark unterstützt leistungsstarke Mehrcursor-Bearbeitung sowohl im WYSIWYG- als auch im Quellmodus, sodass Sie mehrere Stellen gleichzeitig bearbeiten können.
+TMark unterstützt leistungsstarke Mehrcursor-Bearbeitung sowohl im WYSIWYG- als auch im Quellmodus, sodass Sie mehrere Stellen gleichzeitig bearbeiten können.
 
 ## Schnellstart
 

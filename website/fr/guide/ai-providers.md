@@ -1,6 +1,6 @@
 # Fournisseurs IA
 
-Les [Génies IA](/fr/guide/ai-genies) de VMark ont besoin d'un fournisseur IA pour générer des suggestions. Vous pouvez utiliser un outil CLI installé localement ou vous connecter directement à une API REST.
+Les [Génies IA](/fr/guide/ai-genies) de TMark ont besoin d'un fournisseur IA pour générer des suggestions. Vous pouvez utiliser un outil CLI installé localement ou vous connecter directement à une API REST.
 
 ## Configuration rapide
 
@@ -15,7 +15,7 @@ Un seul fournisseur peut être actif à la fois.
 
 ## Fournisseurs CLI
 
-Les fournisseurs CLI utilisent des outils IA installés localement. VMark les exécute en tant que sous-processus et diffuse leur sortie vers l'éditeur.
+Les fournisseurs CLI utilisent des outils IA installés localement. TMark les exécute en tant que sous-processus et diffuse leur sortie vers l'éditeur.
 
 | Fournisseur | Commande CLI | Installation |
 |-------------|-------------|------------|
@@ -25,7 +25,7 @@ Les fournisseurs CLI utilisent des outils IA installés localement. VMark les ex
 
 ### Comment fonctionne la détection CLI
 
-Cliquez sur **Détecter** dans Paramètres > Intégrations. VMark parcourt votre `$PATH` à la recherche de chaque commande CLI et indique leur disponibilité. Si un CLI est trouvé, son bouton radio devient sélectionnable.
+Cliquez sur **Détecter** dans Paramètres > Intégrations. TMark parcourt votre `$PATH` à la recherche de chaque commande CLI et indique leur disponibilité. Si un CLI est trouvé, son bouton radio devient sélectionnable.
 
 ### Avantages
 
@@ -34,20 +34,20 @@ Cliquez sur **Détecter** dans Paramètres > Intégrations. VMark parcourt votre
 - **Utilise votre configuration CLI** — les préférences de modèle, les prompts système et la facturation sont gérés par le CLI lui-même
 
 ::: tip Abonnement vs API pour les développeurs
-Si vous utilisez également ces outils pour le vibe-coding (Claude Code, Codex CLI, Gemini CLI), le même abonnement couvre à la fois les Génies IA de VMark et vos sessions de codage — sans coût supplémentaire.
+Si vous utilisez également ces outils pour le vibe-coding (Claude Code, Codex CLI, Gemini CLI), le même abonnement couvre à la fois les Génies IA de TMark et vos sessions de codage — sans coût supplémentaire.
 :::
 
 ### Configuration : Claude CLI
 
 1. Installez Claude Code : `npm install -g @anthropic-ai/claude-code`
 2. Exécutez `claude` une fois dans votre terminal pour vous authentifier
-3. Dans VMark, cliquez sur **Détecter**, puis sélectionnez **Claude**
+3. Dans TMark, cliquez sur **Détecter**, puis sélectionnez **Claude**
 
 ### Configuration : Gemini CLI
 
 1. Installez Gemini CLI : `npm install -g @google/gemini-cli` (ou via le [dépôt officiel](https://github.com/google-gemini/gemini-cli))
 2. Exécutez `gemini` une fois pour vous authentifier avec votre compte Google
-3. Dans VMark, cliquez sur **Détecter**, puis sélectionnez **Gemini**
+3. Dans TMark, cliquez sur **Détecter**, puis sélectionnez **Gemini**
 
 ## Fournisseurs API REST
 
@@ -70,7 +70,7 @@ Lorsque vous sélectionnez un fournisseur REST, trois champs apparaissent :
 
 ### Remplissage automatique par variable d'environnement
 
-VMark lit les variables d'environnement standard au lancement. Si `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` ou `GEMINI_API_KEY` est défini dans votre profil shell, le champ de clé API se remplit automatiquement lorsque vous sélectionnez ce fournisseur.
+TMark lit les variables d'environnement standard au lancement. Si `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` ou `GEMINI_API_KEY` est défini dans votre profil shell, le champ de clé API se remplit automatiquement lorsque vous sélectionnez ce fournisseur.
 
 Cela signifie que vous pouvez définir votre clé une fois dans `~/.zshrc` ou `~/.bashrc` :
 
@@ -78,26 +78,26 @@ Cela signifie que vous pouvez définir votre clé une fois dans `~/.zshrc` ou `~
 export ANTHROPIC_API_KEY="sk-ant-..."
 ```
 
-Puis redémarrez VMark — aucune saisie manuelle de clé n'est nécessaire.
+Puis redémarrez TMark — aucune saisie manuelle de clé n'est nécessaire.
 
 ### Configuration : Anthropic (REST)
 
 1. Obtenez une clé API sur [console.anthropic.com](https://console.anthropic.com)
-2. Dans VMark Paramètres > Intégrations, sélectionnez **Anthropic**
+2. Dans TMark Paramètres > Intégrations, sélectionnez **Anthropic**
 3. Collez votre clé API
 4. Choisissez un modèle (par défaut : `claude-sonnet-4-5-20250929`)
 
 ### Configuration : OpenAI (REST)
 
 1. Obtenez une clé API sur [platform.openai.com](https://platform.openai.com)
-2. Dans VMark Paramètres > Intégrations, sélectionnez **OpenAI**
+2. Dans TMark Paramètres > Intégrations, sélectionnez **OpenAI**
 3. Collez votre clé API
 4. Choisissez un modèle (par défaut : `gpt-4o`)
 
 ### Configuration : Google AI (REST)
 
 1. Obtenez une clé API sur [aistudio.google.com](https://aistudio.google.com)
-2. Dans VMark Paramètres > Intégrations, sélectionnez **Google AI**
+2. Dans TMark Paramètres > Intégrations, sélectionnez **Google AI**
 3. Collez votre clé API
 4. Choisissez un modèle (par défaut : `gemini-2.0-flash`)
 
@@ -106,7 +106,7 @@ Puis redémarrez VMark — aucune saisie manuelle de clé n'est nécessaire.
 Utilisez ceci lorsque vous souhaitez un accès de style REST à une instance Ollama locale, ou lorsqu'Ollama s'exécute sur une autre machine de votre réseau.
 
 1. Assurez-vous qu'Ollama est en cours d'exécution : `ollama serve`
-2. Dans VMark Paramètres > Intégrations, sélectionnez **Ollama (API)**
+2. Dans TMark Paramètres > Intégrations, sélectionnez **Ollama (API)**
 3. Définissez l'endpoint sur `http://localhost:11434` (ou votre hôte Ollama)
 4. Laissez la clé API vide
 5. Définissez le modèle sur le nom de votre modèle téléchargé (ex. `llama3.2`)
@@ -140,20 +140,20 @@ Cela est utile pour diriger les tâches simples vers des modèles plus rapides/m
 
 ## Fiabilité et délais d'attente
 
-VMark protège chaque appel au fournisseur afin qu'un CLI bloqué ou une réponse API malformée ne puisse jamais paralyser l'éditeur :
+TMark protège chaque appel au fournisseur afin qu'un CLI bloqué ou une réponse API malformée ne puisse jamais paralyser l'éditeur :
 
-- **Délai d'attente du sous-processus CLI** : chaque invocation d'un fournisseur CLI s'exécute sous un délai d'attente d'exécution. Si le CLI ne répond pas, VMark annule l'appel, renvoie l'erreur au génie et libère le processus — le pool de threads ne peut pas être bloqué par un sous-processus incontrôlé.
-- **Sécurité de parsing JSON REST** : si un fournisseur REST renvoie une réponse de forme inattendue (page d'erreur HTML, JSON tronqué, dérive de schéma après un changement en amont), VMark renvoie une erreur typée au frontend au lieu de laisser le listener IA attendre indéfiniment. Vous verrez l'erreur dans la bannière de statut du génie avec une option de réessai.
+- **Délai d'attente du sous-processus CLI** : chaque invocation d'un fournisseur CLI s'exécute sous un délai d'attente d'exécution. Si le CLI ne répond pas, TMark annule l'appel, renvoie l'erreur au génie et libère le processus — le pool de threads ne peut pas être bloqué par un sous-processus incontrôlé.
+- **Sécurité de parsing JSON REST** : si un fournisseur REST renvoie une réponse de forme inattendue (page d'erreur HTML, JSON tronqué, dérive de schéma après un changement en amont), TMark renvoie une erreur typée au frontend au lieu de laisser le listener IA attendre indéfiniment. Vous verrez l'erreur dans la bannière de statut du génie avec une option de réessai.
 - **Jetons d'annulation** : les étapes longues de génie ou de workflow peuvent être annulées à tout moment — Annuler dans le sélecteur de génie ou fermer le panneau et la requête en cours s'interrompt proprement.
 - **Client HTTP partagé** : les fournisseurs REST partagent un seul client `reqwest` avec pool de connexions, de sorte que les exécutions de génie consécutives ne payent pas à chaque fois le coût de la poignée de main TCP/TLS.
-- **Découverte du PATH sur Windows** : sur Windows, VMark lit le `PATH` complet de l'utilisateur (y compris les entrées uniquement PowerShell) lors de la détection des CLIs, de sorte que les outils installés par l'utilisateur qui fonctionnent dans un terminal fonctionnent également dans VMark.
+- **Découverte du PATH sur Windows** : sur Windows, TMark lit le `PATH` complet de l'utilisateur (y compris les entrées uniquement PowerShell) lors de la détection des CLIs, de sorte que les outils installés par l'utilisateur qui fonctionnent dans un terminal fonctionnent également dans TMark.
 
 ## Notes de sécurité
 
 - **Les clés API sont éphémères** — stockées uniquement en mémoire, jamais écrites sur le disque ou dans `localStorage`
 - **Les variables d'environnement** sont lues une fois au lancement et mises en cache en mémoire
-- **Les fournisseurs CLI** utilisent votre authentification CLI existante — VMark ne voit jamais vos identifiants
-- **Toutes les requêtes partent directement** de votre machine vers le fournisseur — aucun serveur VMark n'est intermédiaire
+- **Les fournisseurs CLI** utilisent votre authentification CLI existante — TMark ne voit jamais vos identifiants
+- **Toutes les requêtes partent directement** de votre machine vers le fournisseur — aucun serveur TMark n'est intermédiaire
 
 ## Dépannage
 
@@ -161,13 +161,13 @@ VMark protège chaque appel au fournisseur afin qu'un CLI bloqué ou une répons
 
 **Le CLI indique « Non trouvé »** — Le CLI n'est pas dans votre `$PATH`. Installez-le ou vérifiez votre profil shell. Sur macOS, les applications GUI peuvent ne pas hériter du `$PATH` du terminal — essayez d'ajouter le chemin à `/etc/paths.d/`.
 
-**Le CLI est bloqué / pas de réponse** — Le délai d'attente d'exécution de VMark annulera l'appel automatiquement ; vous verrez une erreur dans la bannière de statut du génie. Si un CLI particulier dépasse systématiquement le délai, exécutez-le d'abord depuis un terminal pour confirmer qu'il fonctionne là, puis vérifiez s'il nécessite une authentification interactive.
+**Le CLI est bloqué / pas de réponse** — Le délai d'attente d'exécution de TMark annulera l'appel automatiquement ; vous verrez une erreur dans la bannière de statut du génie. Si un CLI particulier dépasse systématiquement le délai, exécutez-le d'abord depuis un terminal pour confirmer qu'il fonctionne là, puis vérifiez s'il nécessite une authentification interactive.
 
 **Le fournisseur REST renvoie 401** — Votre clé API est invalide ou expirée. Générez-en une nouvelle depuis la console du fournisseur.
 
 **Le fournisseur REST renvoie 429** — Vous avez atteint une limite de débit. Attendez un moment et réessayez, ou passez à un autre fournisseur.
 
-**Le fournisseur REST renvoie du JSON tronqué ou inattendu** — VMark renvoie une erreur de parsing typée (ex. « list_models a retourné une réponse de forme inattendue »). Vérifiez l'URL de l'endpoint et que le contrat de l'API correspond au type de fournisseur sélectionné ; certaines passerelles auto-hébergées annoncent des URLs compatibles OpenAI mais livrent un schéma différent.
+**Le fournisseur REST renvoie du JSON tronqué ou inattendu** — TMark renvoie une erreur de parsing typée (ex. « list_models a retourné une réponse de forme inattendue »). Vérifiez l'URL de l'endpoint et que le contrat de l'API correspond au type de fournisseur sélectionné ; certaines passerelles auto-hébergées annoncent des URLs compatibles OpenAI mais livrent un schéma différent.
 
 **Réponses lentes** — Les fournisseurs CLI ajoutent une surcharge de sous-processus. Pour des réponses plus rapides, utilisez des fournisseurs REST qui se connectent directement. Pour l'option locale la plus rapide, utilisez Ollama avec un petit modèle.
 

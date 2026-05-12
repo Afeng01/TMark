@@ -1,6 +1,6 @@
 # Provider IA
 
-I [Genies IA](/it/guide/ai-genies) di VMark necessitano di un provider IA per generare suggerimenti. Puoi usare uno strumento CLI installato localmente o connetterti direttamente a un'API REST.
+I [Genies IA](/it/guide/ai-genies) di TMark necessitano di un provider IA per generare suggerimenti. Puoi usare uno strumento CLI installato localmente o connetterti direttamente a un'API REST.
 
 ## Configurazione Rapida
 
@@ -15,7 +15,7 @@ Il modo più veloce per iniziare:
 
 ## Provider CLI
 
-I provider CLI utilizzano strumenti IA installati localmente. VMark li esegue come sottoprocessi e trasmette il loro output all'editor.
+I provider CLI utilizzano strumenti IA installati localmente. TMark li esegue come sottoprocessi e trasmette il loro output all'editor.
 
 | Provider | Comando CLI | Installazione |
 |----------|-------------|---------------|
@@ -25,7 +25,7 @@ I provider CLI utilizzano strumenti IA installati localmente. VMark li esegue co
 
 ### Come Funziona il Rilevamento CLI
 
-Fai clic su **Rileva** in Impostazioni > Integrazioni. VMark cerca ogni comando CLI nel tuo `$PATH` e ne riporta la disponibilità. Se un CLI viene trovato, il suo pulsante di selezione diventa attivabile.
+Fai clic su **Rileva** in Impostazioni > Integrazioni. TMark cerca ogni comando CLI nel tuo `$PATH` e ne riporta la disponibilità. Se un CLI viene trovato, il suo pulsante di selezione diventa attivabile.
 
 ### Vantaggi
 
@@ -34,20 +34,20 @@ Fai clic su **Rileva** in Impostazioni > Integrazioni. VMark cerca ogni comando 
 - **Usa la tua configurazione CLI** — le preferenze del modello, i prompt di sistema e la fatturazione sono gestiti dal CLI stesso
 
 ::: tip Abbonamento vs API per Sviluppatori
-Se stai usando questi strumenti anche per il vibe-coding (Claude Code, Codex CLI, Gemini CLI), lo stesso abbonamento copre sia i Genies IA di VMark che le tue sessioni di codifica — senza costi aggiuntivi.
+Se stai usando questi strumenti anche per il vibe-coding (Claude Code, Codex CLI, Gemini CLI), lo stesso abbonamento copre sia i Genies IA di TMark che le tue sessioni di codifica — senza costi aggiuntivi.
 :::
 
 ### Configurazione: Claude CLI
 
 1. Installa Claude Code: `npm install -g @anthropic-ai/claude-code`
 2. Esegui `claude` una volta nel tuo terminale per autenticarti
-3. In VMark, fai clic su **Rileva**, poi seleziona **Claude**
+3. In TMark, fai clic su **Rileva**, poi seleziona **Claude**
 
 ### Configurazione: Gemini CLI
 
 1. Installa Gemini CLI: `npm install -g @google/gemini-cli` (o tramite il [repository ufficiale](https://github.com/google-gemini/gemini-cli))
 2. Esegui `gemini` una volta per autenticarti con il tuo account Google
-3. In VMark, fai clic su **Rileva**, poi seleziona **Gemini**
+3. In TMark, fai clic su **Rileva**, poi seleziona **Gemini**
 
 ## Provider API REST
 
@@ -70,7 +70,7 @@ Quando selezioni un provider REST, appaiono tre campi:
 
 ### Compilazione Automatica tramite Variabili d'Ambiente
 
-VMark legge le variabili d'ambiente standard all'avvio. Se `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` o `GEMINI_API_KEY` è impostata nel tuo profilo shell, il campo della chiave API si compila automaticamente quando selezioni quel provider.
+TMark legge le variabili d'ambiente standard all'avvio. Se `ANTHROPIC_API_KEY`, `OPENAI_API_KEY` o `GEMINI_API_KEY` è impostata nel tuo profilo shell, il campo della chiave API si compila automaticamente quando selezioni quel provider.
 
 Ciò significa che puoi impostare la tua chiave una volta in `~/.zshrc` o `~/.bashrc`:
 
@@ -78,26 +78,26 @@ Ciò significa che puoi impostare la tua chiave una volta in `~/.zshrc` o `~/.ba
 export ANTHROPIC_API_KEY="sk-ant-..."
 ```
 
-Poi riavvia VMark — nessuna inserzione manuale della chiave necessaria.
+Poi riavvia TMark — nessuna inserzione manuale della chiave necessaria.
 
 ### Configurazione: Anthropic (REST)
 
 1. Ottieni una chiave API da [console.anthropic.com](https://console.anthropic.com)
-2. In Impostazioni VMark > Integrazioni, seleziona **Anthropic**
+2. In Impostazioni TMark > Integrazioni, seleziona **Anthropic**
 3. Incolla la tua chiave API
 4. Scegli un modello (predefinito: `claude-sonnet-4-5-20250929`)
 
 ### Configurazione: OpenAI (REST)
 
 1. Ottieni una chiave API da [platform.openai.com](https://platform.openai.com)
-2. In Impostazioni VMark > Integrazioni, seleziona **OpenAI**
+2. In Impostazioni TMark > Integrazioni, seleziona **OpenAI**
 3. Incolla la tua chiave API
 4. Scegli un modello (predefinito: `gpt-4o`)
 
 ### Configurazione: Google AI (REST)
 
 1. Ottieni una chiave API da [aistudio.google.com](https://aistudio.google.com)
-2. In Impostazioni VMark > Integrazioni, seleziona **Google AI**
+2. In Impostazioni TMark > Integrazioni, seleziona **Google AI**
 3. Incolla la tua chiave API
 4. Scegli un modello (predefinito: `gemini-2.0-flash`)
 
@@ -106,7 +106,7 @@ Poi riavvia VMark — nessuna inserzione manuale della chiave necessaria.
 Usa questo quando vuoi accesso in stile REST a un'istanza Ollama locale, o quando Ollama è in esecuzione su un altro computer della tua rete.
 
 1. Assicurati che Ollama sia in esecuzione: `ollama serve`
-2. In Impostazioni VMark > Integrazioni, seleziona **Ollama (API)**
+2. In Impostazioni TMark > Integrazioni, seleziona **Ollama (API)**
 3. Imposta l'endpoint su `http://localhost:11434` (o il tuo host Ollama)
 4. Lascia vuota la chiave API
 5. Imposta il modello con il nome del tuo modello scaricato (es. `llama3.2`)
@@ -140,20 +140,20 @@ Questo è utile per indirizzare i compiti semplici verso modelli più veloci/eco
 
 ## Affidabilità e timeout
 
-VMark protegge ogni chiamata al provider in modo che un CLI bloccato o una risposta API non valida non possano mai bloccare l'editor:
+TMark protegge ogni chiamata al provider in modo che un CLI bloccato o una risposta API non valida non possano mai bloccare l'editor:
 
-- **Timeout del sottoprocesso CLI**: ogni invocazione di un provider CLI viene eseguita con un timeout di esecuzione. Se il CLI non risponde, VMark annulla la chiamata, restituisce l'errore al genie e libera il worker — il pool di thread non può essere bloccato da un sottoprocesso impazzito.
-- **Sicurezza nell'analisi JSON REST**: se un provider REST restituisce una risposta con forma inaspettata (pagina di errore HTML, JSON troncato, deriva dello schema dopo una modifica upstream), VMark segnala un errore tipizzato al frontend invece di lasciare il listener IA in attesa per sempre. Vedrai l'errore nel banner di stato del genie con la possibilità di riprovare.
+- **Timeout del sottoprocesso CLI**: ogni invocazione di un provider CLI viene eseguita con un timeout di esecuzione. Se il CLI non risponde, TMark annulla la chiamata, restituisce l'errore al genie e libera il worker — il pool di thread non può essere bloccato da un sottoprocesso impazzito.
+- **Sicurezza nell'analisi JSON REST**: se un provider REST restituisce una risposta con forma inaspettata (pagina di errore HTML, JSON troncato, deriva dello schema dopo una modifica upstream), TMark segnala un errore tipizzato al frontend invece di lasciare il listener IA in attesa per sempre. Vedrai l'errore nel banner di stato del genie con la possibilità di riprovare.
 - **Token di cancellazione**: i passaggi di genie o workflow di lunga durata possono essere cancellati in qualsiasi momento — Annulla nel selettore genie o chiudi il pannello e la richiesta in corso si interrompe in modo pulito.
 - **Client HTTP condiviso**: i provider REST condividono un singolo client `reqwest` con pool di connessioni, quindi le esecuzioni consecutive di genie non pagano il costo di handshake TCP/TLS ogni volta.
-- **Scoperta del PATH su Windows**: su Windows, VMark legge il `PATH` completo dell'utente (incluse le voci solo PowerShell) quando rileva i CLI, in modo che gli strumenti installati dall'utente che funzionano in un terminale funzionino anche dentro VMark.
+- **Scoperta del PATH su Windows**: su Windows, TMark legge il `PATH` completo dell'utente (incluse le voci solo PowerShell) quando rileva i CLI, in modo che gli strumenti installati dall'utente che funzionano in un terminale funzionino anche dentro TMark.
 
 ## Note sulla Sicurezza
 
 - **Le chiavi API sono effimere** — conservate solo in memoria, mai scritte su disco o in `localStorage`
 - **Le variabili d'ambiente** vengono lette una volta all'avvio e memorizzate nella cache in memoria
-- **I provider CLI** usano la tua autenticazione CLI esistente — VMark non vede mai le tue credenziali
-- **Tutte le richieste vanno direttamente** dalla tua macchina al provider — nessun server VMark intermedio
+- **I provider CLI** usano la tua autenticazione CLI esistente — TMark non vede mai le tue credenziali
+- **Tutte le richieste vanno direttamente** dalla tua macchina al provider — nessun server TMark intermedio
 
 ## Risoluzione dei Problemi
 
@@ -161,9 +161,9 @@ VMark protegge ogni chiamata al provider in modo che un CLI bloccato o una rispo
 
 **Il CLI mostra "Non trovato"** — Il CLI non è nel tuo `$PATH`. Installalo o controlla il tuo profilo shell. Su macOS, le app GUI potrebbero non ereditare il `$PATH` del terminale — prova ad aggiungere il percorso a `/etc/paths.d/`.
 
-**Il CLI si blocca / nessuna risposta** — Il timeout di esecuzione di VMark annullerà la chiamata automaticamente; vedrai un errore nel banner di stato del genie. Se un particolare CLI raggiunge sistematicamente il timeout, eseguilo una volta dal terminale per confermare che funzioni lì, poi verifica se richiede un'autenticazione interattiva.
+**Il CLI si blocca / nessuna risposta** — Il timeout di esecuzione di TMark annullerà la chiamata automaticamente; vedrai un errore nel banner di stato del genie. Se un particolare CLI raggiunge sistematicamente il timeout, eseguilo una volta dal terminale per confermare che funzioni lì, poi verifica se richiede un'autenticazione interattiva.
 
-**Il provider REST restituisce JSON alterato / inaspettato** — VMark segnala un errore di analisi tipizzato (es. "list_models ha restituito una forma di risposta inaspettata"). Controlla l'URL dell'endpoint e verifica che il contratto API corrisponda al tipo di provider selezionato; alcuni gateway self-hosted pubblicizzano URL compatibili con OpenAI ma hanno uno schema diverso.
+**Il provider REST restituisce JSON alterato / inaspettato** — TMark segnala un errore di analisi tipizzato (es. "list_models ha restituito una forma di risposta inaspettata"). Controlla l'URL dell'endpoint e verifica che il contratto API corrisponda al tipo di provider selezionato; alcuni gateway self-hosted pubblicizzano URL compatibili con OpenAI ma hanno uno schema diverso.
 
 **Il provider REST restituisce 401** — La tua chiave API non è valida o è scaduta. Genera una nuova dalla console del provider.
 

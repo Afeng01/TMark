@@ -1,23 +1,23 @@
 //! # CLI Install/Uninstall
 //!
-//! Purpose: Install/uninstall the `vmark` shell command at `/usr/local/bin/vmark`.
+//! Purpose: Install/uninstall the `tmark` shell command at `/usr/local/bin/tmark`.
 //! Uses `osascript` to request admin privileges (same pattern as VS Code's "Install 'code' command").
 //!
-//! The installed script simply delegates to `open -b app.vmark`, which lets macOS
+//! The installed script simply delegates to `open -b app.tmark`, which lets macOS
 //! handle single-instance behavior natively via the bundle identifier.
 
 use serde::Serialize;
 use std::path::Path;
 
-const CLI_PATH: &str = "/usr/local/bin/vmark";
+const CLI_PATH: &str = "/usr/local/bin/tmark";
 
-/// Shell script content installed to /usr/local/bin/vmark.
-/// Uses bundle ID (`-b app.vmark`) instead of app name for stable targeting
+/// Shell script content installed to /usr/local/bin/tmark.
+/// Uses bundle ID (`-b app.tmark`) instead of app name for stable targeting
 /// even when the .app is renamed or localized.
 const SCRIPT_CONTENT: &str = "#!/bin/bash\n\
-# VMark CLI launcher — installed by VMark.app\n\
-# Toggle via: VMark > Help > Install/Uninstall 'vmark' Command\n\
-open -b app.vmark \"$@\"\n";
+# TMark CLI launcher — installed by TMark.app\n\
+# Toggle via: TMark > Help > Install/Uninstall 'tmark' Command\n\
+open -b app.tmark \"$@\"\n";
 
 /// Structured error variants for CLI install operations.
 /// Avoids brittle string matching between module boundaries.
@@ -34,7 +34,7 @@ impl std::fmt::Display for CliInstallError {
             Self::Cancelled => write!(f, "Operation cancelled."),
             Self::ForeignFile => write!(
                 f,
-                "{} already exists and was not installed by VMark. \
+                "{} already exists and was not installed by TMark. \
                  Please remove it manually.",
                 CLI_PATH
             ),
@@ -49,16 +49,16 @@ impl From<CliInstallError> for String {
     }
 }
 
-/// Status of the `/usr/local/bin/vmark` shell command installation.
+/// Status of the `/usr/local/bin/tmark` shell command installation.
 #[derive(Serialize)]
 pub struct CliStatus {
     pub installed: bool,
     pub path: String,
-    /// true when the file exists but wasn't installed by VMark
+    /// true when the file exists but wasn't installed by TMark
     pub foreign: bool,
 }
 
-/// Check whether `/usr/local/bin/vmark` exists and was installed by VMark.
+/// Check whether `/usr/local/bin/tmark` exists and was installed by TMark.
 /// Uses exact content comparison (not substring match) for ownership detection.
 #[tauri::command]
 pub fn cli_install_status() -> Result<CliStatus, String> {
@@ -113,7 +113,7 @@ fn cli_parent_dir() -> &'static str {
         .unwrap_or("/usr/local/bin")
 }
 
-/// Install the `vmark` command using `osascript` for admin privileges.
+/// Install the `tmark` command using `osascript` for admin privileges.
 ///
 /// Writes script to a temp file first, then uses a single privileged shell command
 /// to create the target directory, move the file, and set permissions. This avoids
@@ -125,11 +125,11 @@ pub fn cli_install() -> Result<String, String> {
         return Err(CliInstallError::ForeignFile.into());
     }
     if status.installed {
-        return Ok(format!("'vmark' command is already installed at {}", CLI_PATH));
+        return Ok(format!("'tmark' command is already installed at {}", CLI_PATH));
     }
 
     // Write script to a temp file (no quoting needed — Rust handles the write)
-    let tmp = std::env::temp_dir().join("vmark-cli-install.tmp");
+    let tmp = std::env::temp_dir().join("tmark-cli-install.tmp");
     std::fs::write(&tmp, SCRIPT_CONTENT)
         .map_err(|e| format!("Failed to write temp file: {}", e))?;
 
@@ -156,10 +156,10 @@ pub fn cli_install() -> Result<String, String> {
         return Err(rust_i18n::t!("errors.cli.mismatch").to_string());
     }
 
-    Ok(format!("'vmark' command installed at {}", CLI_PATH))
+    Ok(format!("'tmark' command installed at {}", CLI_PATH))
 }
 
-/// Uninstall the `vmark` command using `osascript` for admin privileges.
+/// Uninstall the `tmark` command using `osascript` for admin privileges.
 #[tauri::command]
 pub fn cli_uninstall() -> Result<String, String> {
     let status = cli_install_status()?;
@@ -167,13 +167,13 @@ pub fn cli_uninstall() -> Result<String, String> {
         if status.foreign {
             return Err(CliInstallError::ForeignFile.into());
         }
-        return Ok("'vmark' command is not installed.".to_string());
+        return Ok("'tmark' command is not installed.".to_string());
     }
 
     let shell_cmd = format!("rm {}", CLI_PATH);
     run_admin_shell(&shell_cmd).map_err(String::from)?;
 
-    Ok(format!("'vmark' command removed from {}", CLI_PATH))
+    Ok(format!("'tmark' command removed from {}", CLI_PATH))
 }
 
 #[cfg(test)]
@@ -184,7 +184,7 @@ mod tests {
     fn script_content_is_valid_bash() {
         assert!(SCRIPT_CONTENT.starts_with("#!/bin/bash\n"));
         assert!(SCRIPT_CONTENT.ends_with('\n'));
-        assert!(SCRIPT_CONTENT.contains("open -b app.vmark"));
+        assert!(SCRIPT_CONTENT.contains("open -b app.tmark"));
     }
 
     #[test]
@@ -201,7 +201,7 @@ mod tests {
     fn error_display_foreign() {
         let msg = CliInstallError::ForeignFile.to_string();
         assert!(msg.contains(CLI_PATH));
-        assert!(msg.contains("not installed by VMark"));
+        assert!(msg.contains("not installed by TMark"));
     }
 
     #[test]
@@ -218,7 +218,7 @@ mod tests {
 
     #[test]
     fn status_not_installed_when_path_missing() {
-        // /usr/local/bin/vmark likely doesn't exist in CI/test environments
+        // /usr/local/bin/tmark likely doesn't exist in CI/test environments
         // This test is environment-dependent but safe to run
         let status = cli_install_status();
         assert!(status.is_ok());

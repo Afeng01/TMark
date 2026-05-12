@@ -20,7 +20,7 @@ const KATAKANA_EXT = "\u31f0-\u31ff"; // Katakana Phonetic Extensions
 // Combined ranges
 const HAN = `${HAN_BASIC}${HAN_EXT_A}`;
 // Korean excluded from spacing rules: Korean uses native word spacing and
-// particles attach directly to preceding words (e.g., "VMark에는").
+// particles attach directly to preceding words (e.g., "TMark에는").
 export const CJK_NO_KOREAN = `${HAN}${BOPOMOFO}${BOPOMOFO_EXT}${HIRAGANA}${KATAKANA}${KATAKANA_EXT}`;
 
 // CJK punctuation

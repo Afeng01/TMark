@@ -40,10 +40,10 @@ const initialState: TiptapEditorState = {
 };
 
 /** Shape of the dev-only debug surface published on window for perf tooling. */
-type VMarkDebug = { editorView: EditorView | null };
+type TMarkDebug = { editorView: EditorView | null };
 
 /**
- * Publish (or clear) the active EditorView on `window.__VMARK_DEBUG__` so
+ * Publish (or clear) the active EditorView on `window.__TMARK_DEBUG__` so
  * Tauri MCP perf scenarios (`scripts/perf/measure-webview.js`) can find the
  * live editor without ProseMirror internals. No-op in production (the
  * `import.meta.env.DEV` check makes the entire body dead code at build
@@ -51,7 +51,7 @@ type VMarkDebug = { editorView: EditorView | null };
  */
 function publishDebugEditorView(view: EditorView | null): void {
   if (!import.meta.env.DEV || typeof window === "undefined") return;
-  (window as unknown as { __VMARK_DEBUG__?: VMarkDebug }).__VMARK_DEBUG__ = {
+  (window as unknown as { __TMARK_DEBUG__?: TMarkDebug }).__TMARK_DEBUG__ = {
     editorView: view,
   };
 }

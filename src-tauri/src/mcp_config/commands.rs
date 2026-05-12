@@ -4,8 +4,8 @@
 //! installing, uninstalling, and diagnosing MCP configurations.
 
 use super::config_io::{
-    extract_vmark_binary_path, generate_backup_path, generate_config_content,
-    read_existing_config, remove_vmark_from_config,
+    extract_tmark_binary_path, generate_backup_path, generate_config_content,
+    read_existing_config, remove_tmark_from_config,
 };
 use super::providers::{get_config_path, get_mcp_binary_path, get_provider_config, PROVIDERS};
 use super::types::{
@@ -22,7 +22,7 @@ pub fn mcp_config_get_status() -> Result<Vec<ProviderStatus>, String> {
     for provider in PROVIDERS {
         let path = get_config_path(provider)?;
         let exists = path.exists();
-        let has_vmark = if exists {
+        let has_tmark = if exists {
             read_existing_config(&path, provider.id).1
         } else {
             false
@@ -33,7 +33,7 @@ pub fn mcp_config_get_status() -> Result<Vec<ProviderStatus>, String> {
             name: provider.name.to_string(),
             path: path.to_string_lossy().to_string(),
             exists,
-            has_vmark,
+            has_tmark,
         });
     }
 
@@ -52,7 +52,7 @@ pub fn mcp_config_diagnose() -> Result<Vec<ProviderDiagnostic>, String> {
     for provider in PROVIDERS {
         let path = get_config_path(provider)?;
         let config_exists = path.exists();
-        let (content, has_vmark) = if config_exists {
+        let (content, has_tmark) = if config_exists {
             read_existing_config(&path, provider.id)
         } else {
             (None, false)
@@ -61,7 +61,7 @@ pub fn mcp_config_diagnose() -> Result<Vec<ProviderDiagnostic>, String> {
         // Extract the configured binary path from the config file
         let configured_binary_path = content
             .as_ref()
-            .and_then(|c| extract_vmark_binary_path(c, provider.id));
+            .and_then(|c| extract_tmark_binary_path(c, provider.id));
 
         // Check if the configured binary exists on disk
         let binary_exists = configured_binary_path
@@ -70,12 +70,12 @@ pub fn mcp_config_diagnose() -> Result<Vec<ProviderDiagnostic>, String> {
             .unwrap_or(false);
 
         // Determine diagnostic status and message
-        let (status, message) = if !has_vmark {
+        let (status, message) = if !has_tmark {
             (DiagnosticStatus::NotConfigured, String::new())
         } else if !binary_exists {
             (
                 DiagnosticStatus::BinaryMissing,
-                "Binary not found - reinstall VMark".to_string(),
+                "Binary not found - reinstall TMark".to_string(),
             )
         } else if let (Some(ref expected), Some(ref configured)) =
             (&expected_binary_path, &configured_binary_path)
@@ -112,7 +112,7 @@ pub fn mcp_config_diagnose() -> Result<Vec<ProviderDiagnostic>, String> {
             name: provider.name.to_string(),
             config_path: path.to_string_lossy().to_string(),
             config_exists,
-            has_vmark,
+            has_tmark,
             expected_binary_path: expected_binary_path.clone(),
             configured_binary_path,
             binary_exists,
@@ -223,8 +223,8 @@ pub fn mcp_config_uninstall(provider: String) -> Result<UninstallResult, String>
     let backup = generate_backup_path(&path);
     fs::copy(&path, &backup).map_err(|e| format!("Failed to create backup: {}", e))?;
 
-    // Remove vmark entry
-    let new_content = remove_vmark_from_config(config.id, &content)?;
+    // Remove tmark entry
+    let new_content = remove_tmark_from_config(config.id, &content)?;
 
     // Atomic write (consistent with install path — prevents corruption on interrupted writes)
     crate::app_paths::atomic_write_file(&path, new_content.as_bytes())?;
@@ -232,7 +232,7 @@ pub fn mcp_config_uninstall(provider: String) -> Result<UninstallResult, String>
     Ok(UninstallResult {
         success: true,
         message: format!(
-            "Successfully removed VMark from {} configuration",
+            "Successfully removed TMark from {} configuration",
             config.name
         ),
     })

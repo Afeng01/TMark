@@ -1,14 +1,14 @@
-# VMark 简体中文语言包 — Rust 端所有可翻译字符串的源文件。
+# TMark 简体中文语言包 — Rust 端所有可翻译字符串的源文件。
 # 键名遵循约定：menu.<section>.<item>
 # 动态菜单项（最近文件、Genies）的结构标签也在此处。
 
 menu:
   # === App 菜单（仅 macOS）===
-  app: "VMark"
-  app.about: "关于 VMark"
+  app: "TMark"
+  app.about: "关于 TMark"
   app.settings: "设置..."
   app.saveAllQuit: "全部保存并退出"
-  app.quit: "退出 VMark"
+  app.quit: "退出 TMark"
 
   # === 文件菜单 ===
   file: "文件"
@@ -184,9 +184,9 @@ menu:
 
   # === 帮助菜单 ===
   help: "帮助"
-  help.vmarkHelp: "VMark 帮助"
+  help.tmarkHelp: "TMark 帮助"
   help.keyboardShortcuts: "键盘快捷键"
-  help.installCli: "Shell 命令：在 PATH 中安装 'vmark'..."
+  help.installCli: "Shell 命令：在 PATH 中安装 'tmark'..."
   help.reportIssue: "报告问题..."
 
   # === 动态菜单标签 ===

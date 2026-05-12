@@ -1,6 +1,6 @@
 # Navigazione Intelligente con Tab
 
-I tasti Tab e Shift+Tab di VMark sono sensibili al contesto — ti aiutano a navigare in modo efficiente nel testo formattato, nelle parentesi e nei collegamenti senza dover usare i tasti freccia.
+I tasti Tab e Shift+Tab di TMark sono sensibili al contesto — ti aiutano a navigare in modo efficiente nel testo formattato, nelle parentesi e nei collegamenti senza dover usare i tasti freccia.
 
 ## Panoramica Rapida
 
@@ -131,21 +131,21 @@ This is |**bold text** here
 Tab e Shift+Tab escono anche dai collegamenti:
 
 ```text
-Check out [VMark|](https://vmark.app)
+Check out [TMark|](https://github.com/Afeng01/TMark)
                ↑ cursore all'interno del testo del collegamento
 ```
 
 Premi **Tab**:
 
 ```text
-Check out [VMark](https://vmark.app)| and...
+Check out [TMark](https://github.com/Afeng01/TMark)| and...
                                     ↑ cursore dopo il collegamento
 ```
 
 Premi **Shift+Tab** all'interno di un collegamento per andare all'inizio:
 
 ```text
-Check out |[VMark](https://vmark.app) and...
+Check out |[TMark](https://github.com/Afeng01/TMark) and...
           ↑ cursore prima del collegamento
 ```
 
@@ -155,7 +155,7 @@ In modalità Sorgente, Tab fornisce una navigazione intelligente all'interno del
 
 ### Parentesi Annidate ed Escape
 
-VMark gestisce correttamente la sintassi complessa dei collegamenti:
+TMark gestisce correttamente la sintassi complessa dei collegamenti:
 
 ```markdown
 [testo [con parentesi annidate] e altro](url)     ✓ Funziona
@@ -364,7 +364,7 @@ Anche l'inserimento dell'auto-accoppiamento è disabilitato all'interno dei bloc
 
 1. **Memoria muscolare** — Una volta che ti abitui all'escape con Tab, ti ritroverai a navigare molto più velocemente senza i tasti freccia.
 
-2. **Funziona con l'auto-accoppiamento** — Quando digiti `(`, VMark inserisce automaticamente `)`. Dopo aver digitato all'interno, usa semplicemente Tab per uscire.
+2. **Funziona con l'auto-accoppiamento** — Quando digiti `(`, TMark inserisce automaticamente `)`. Dopo aver digitato all'interno, usa semplicemente Tab per uscire.
 
 3. **Strutture annidate** — Tab esce un livello alla volta. Per `((annidate))`, hai bisogno di due Tab per uscire completamente.
 

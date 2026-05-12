@@ -1,15 +1,15 @@
 # GitHub Actions Workflow Viewer
 
-VMark renders GitHub Actions workflow YAML as an interactive directed-acyclic-graph (DAG) and lets you edit jobs, steps, and triggers through structured forms — without ever losing comments, anchors, or formatting in the underlying file.
+TMark renders GitHub Actions workflow YAML as an interactive directed-acyclic-graph (DAG) and lets you edit jobs, steps, and triggers through structured forms — without ever losing comments, anchors, or formatting in the underlying file.
 
 The feature works in two surfaces:
 
 1. **Standalone `.yml` files** under `.github/workflows/` (or any file whose top-level shape matches a workflow): split view with the source on the left and the interactive canvas + forms editor on the right.
-2. **Markdown code fences**: when a triple-backtick `yaml` or `yml` fenced block contains a recognizable workflow, VMark renders it as a Mermaid-style DAG inline, the same way `mermaid` blocks are rendered.
+2. **Markdown code fences**: when a triple-backtick `yaml` or `yml` fenced block contains a recognizable workflow, TMark renders it as a Mermaid-style DAG inline, the same way `mermaid` blocks are rendered.
 
 ## Standalone workflow files
 
-Open any `.github/workflows/*.yml` file in VMark. The right-hand side panel opens automatically and shows:
+Open any `.github/workflows/*.yml` file in TMark. The right-hand side panel opens automatically and shows:
 
 - The full workflow as an interactive React Flow canvas (jobs as nodes, `needs:` dependencies as edges).
 - A structured editor panel below the canvas.
@@ -53,7 +53,7 @@ The trigger summary (event, branches, tags, paths, cron, types) is read-only in 
 
 Edits queue up in an in-memory patch list as you change fields. The Save button shows the current count (e.g., **3 unsaved**).
 
-When you click Save, VMark:
+When you click Save, TMark:
 
 1. Reads the current YAML from the editor.
 2. Applies every queued patch to the YAML's CST (concrete syntax tree) — preserving comments, anchors, and existing formatting.
@@ -84,11 +84,11 @@ jobs:
 ```text
 ````
 
-VMark detects the workflow shape (top-level `jobs:` with `runs-on` per job) and renders the diagram inline. The diagram is read-only — edit the source to change the workflow.
+TMark detects the workflow shape (top-level `jobs:` with `runs-on` per job) and renders the diagram inline. The diagram is read-only — edit the source to change the workflow.
 
 ## Diagnostics
 
-VMark surfaces parse + lint diagnostics next to the source:
+TMark surfaces parse + lint diagnostics next to the source:
 
 | Code prefix | Meaning |
 |-------------|---------|
@@ -105,7 +105,7 @@ Install `actionlint` and turn on **Use actionlint when available** in Settings �
 
 ## Action metadata
 
-For `uses:` steps that reference public GitHub Actions, VMark can fetch each action's `action.yml` to populate input descriptions in the structured editor. This is opt-in and cached on disk for 24 hours.
+For `uses:` steps that reference public GitHub Actions, TMark can fetch each action's `action.yml` to populate input descriptions in the structured editor. This is opt-in and cached on disk for 24 hours.
 
 Toggle **Fetch action metadata** in Settings → Advanced. Disable to keep all action references purely text — no network requests are made.
 
@@ -121,4 +121,4 @@ The workflow side panel includes three export options accessible from its header
 
 ## What this is not
 
-VMark does not execute GitHub Actions workflows. It is a viewer and editor — execution remains GitHub's job. The feature is purely for reading, reviewing, and authoring workflow YAML.
+TMark does not execute GitHub Actions workflows. It is a viewer and editor — execution remains GitHub's job. The feature is purely for reading, reviewing, and authoring workflow YAML.

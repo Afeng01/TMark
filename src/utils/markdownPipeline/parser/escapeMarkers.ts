@@ -1,5 +1,5 @@
 /**
- * Pre/post processors for VMark's custom escape markers.
+ * Pre/post processors for TMark's custom escape markers.
  *
  * Users can write `\==`, `\++`, `\^`, `\~` to produce literal characters.
  * Because remark strips backslash escapes before our plugins run, we

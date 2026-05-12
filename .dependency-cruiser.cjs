@@ -142,7 +142,7 @@ module.exports = {
         "node_modules",
         "dist",
         "target",
-        "vmark-mcp-server",
+        "tmark-mcp-server",
         "website",
         "coverage",
       ],

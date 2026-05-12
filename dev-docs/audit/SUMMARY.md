@@ -37,8 +37,8 @@
 | ID | File | Issue |
 |----|------|-------|
 | Plugins-MZ C1 | `mermaidPreview/MermaidPreviewView.ts:474` | **XSS: unsanitized mermaid SVG via innerHTML.** `sanitizeSvg()` is imported but not called on this path. One-line fix. |
-| MCP C1 | `vmark-mcp-server/src/cli.ts:231` | **Command injection pattern:** `execSync` with template string interpolation. Use `execFileSync` with arg array. |
-| MCP W4 | `vmark-mcp-server/src/tools/media.ts:99` | **URL scheme injection:** `insert_video`/`insert_audio` accept `javascript:` URLs. Add scheme allowlist. |
+| MCP C1 | `tmark-mcp-server/src/cli.ts:231` | **Command injection pattern:** `execSync` with template string interpolation. Use `execFileSync` with arg array. |
+| MCP W4 | `tmark-mcp-server/src/tools/media.ts:99` | **URL scheme injection:** `insert_video`/`insert_audio` accept `javascript:` URLs. Add scheme allowlist. |
 
 ### Data Integrity (3)
 
@@ -54,7 +54,7 @@
 |----|------|-------|
 | Rust C1 | `menu/custom_menu.rs:319` vs `default_menu.rs` | **Menu item missing:** `cleanup-images` absent from default menu. Inaccessible on first launch. |
 | Rust C2 | `menu/custom_menu.rs:49` | **Wrong shortcut key:** `"saveAllQuit"` (camelCase) instead of `"save-all-quit"` (kebab-case). Custom shortcuts silently ignored on macOS. |
-| MCP C2 | `vmark-mcp-server/src/tools/document.ts:75` | **Dead type guard:** `as string` cast followed by `typeof !== 'string'` check. Found in 6+ tools. |
+| MCP C2 | `tmark-mcp-server/src/tools/document.ts:75` | **Dead type guard:** `as string` cast followed by `typeof !== 'string'` check. Found in 6+ tools. |
 | Utils C3 | `src/utils/markdownPipeline/adapter.ts:69` | **Unsafe `as Error` cast.** Use ES2022 `new Error(msg, { cause })`. |
 | Hooks C1-C3 | `useFileOperations.ts`, `useMcpAutoStart.ts`, `useUpdateChecker.ts` | **Bare `console.log` in production.** 12 calls total fire unconditionally. |
 
@@ -70,7 +70,7 @@ The most pervasive issue. Files over 300 lines:
 |-------|------|
 | 1213 | `src/components/Editor/editor.css` |
 | 1062 | `src/plugins/toolbarActions/sourceAdapter.ts` |
-| 870 | `vmark-mcp-server/src/bridge/types.ts` |
+| 870 | `tmark-mcp-server/src/bridge/types.ts` |
 | 784 | `src-tauri/src/mcp_bridge.rs` |
 | 774 | `src/hooks/mcpBridge/mutationHandlers.ts` |
 | 750 | `src/hooks/mcpBridge/structureHandlers.ts` |
@@ -82,7 +82,7 @@ The most pervasive issue. Files over 300 lines:
 | 594 | `src/hooks/mcpBridge/suggestionHandlers.ts` |
 | 587 | `src-tauri/src/window_manager.rs` |
 | 578 | `src-tauri/src/genies.rs` |
-| 573 | `vmark-mcp-server/src/cli.ts` |
+| 573 | `tmark-mcp-server/src/cli.ts` |
 | 569 | `src/hooks/mcpBridge/index.ts` |
 | 564 | `src/hooks/mcpBridge/sectionHandlers.ts` |
 | 549 | `src-tauri/src/menu/custom_menu.rs` |

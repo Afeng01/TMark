@@ -1,17 +1,17 @@
 # Arquivos grandes
 
-O VMark abre a maioria dos arquivos markdown instantaneamente, mas arquivos muito grandes precisam de cuidados extras para manter a responsividade. Esta página descreve como o VMark os trata e como você pode ajustar o comportamento.
+O TMark abre a maioria dos arquivos markdown instantaneamente, mas arquivos muito grandes precisam de cuidados extras para manter a responsividade. Esta página descreve como o TMark os trata e como você pode ajustar o comportamento.
 
 ## O que conta como "grande"
 
-O VMark classifica um arquivo pelo tamanho antes de abri-lo:
+O TMark classifica um arquivo pelo tamanho antes de abri-lo:
 
 | Tamanho | Categoria | O que acontece |
 |---------|-----------|----------------|
 | < 1 MB | Pequeno | Abre em modo WYSIWYG (rich-text) instantaneamente. |
 | 1 MB – 5 MB | Grande | Abre em **modo Fonte** por padrão — em menos de um segundo. A barra de status oferece "Mudar para WYSIWYG". |
 | 5 MB – 50 MB | Enorme | Aparece primeiro um diálogo de confirmação. Abre apenas em modo Fonte. |
-| ≥ 50 MB | Recusado | O VMark se recusa a abrir o arquivo. Use `less`, `bat` ou ferramenta similar. |
+| ≥ 50 MB | Recusado | O TMark se recusa a abrir o arquivo. Use `less`, `bat` ou ferramenta similar. |
 
 O tamanho é verificado pelo sistema operacional sem ler o arquivo, então a decisão é rápida e não pré-carrega dados.
 
@@ -43,7 +43,7 @@ A recusa fixa em 50 MB não é ajustável pelo usuário. A webview não consegue
 
 ## Casos de borda
 
-- **O arquivo cresce enquanto está aberto.** O VMark decide a categoria com base no tamanho no momento da abertura. Um arquivo que cresce para 2 MB enquanto você o edita permanece no modo que você escolheu.
+- **O arquivo cresce enquanto está aberto.** O TMark decide a categoria com base no tamanho no momento da abertura. Um arquivo que cresce para 2 MB enquanto você o edita permanece no modo que você escolheu.
 - **Symlinks.** Os tamanhos refletem o arquivo de destino, então um symlink para um arquivo de 10 MB é tratado como enorme.
 - **Arquivos vazios.** Arquivos de zero bytes contam como pequenos e abrem em WYSIWYG.
 - **Arquivo desaparece entre a verificação de tamanho e a leitura.** O erro normal de "arquivo não encontrado" é exibido — nenhum aviso adicional é levantado.

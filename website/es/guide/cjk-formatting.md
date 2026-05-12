@@ -1,6 +1,6 @@
 # Guía de Formato CJK
 
-VMark incluye un conjunto completo de reglas de formato para texto en chino, japonés y coreano. Estas herramientas ayudan a mantener una tipografía coherente al mezclar caracteres CJK y latinos.
+TMark incluye un conjunto completo de reglas de formato para texto en chino, japonés y coreano. Estas herramientas ayudan a mantener una tipografía coherente al mezclar caracteres CJK y latinos.
 
 ## Inicio Rápido
 
@@ -62,7 +62,7 @@ Convierte guiones dobles en guiones largos CJK adecuados.
 
 ### 6. Conversión de Comillas Tipográficas
 
-VMark usa un **algoritmo de emparejamiento de comillas basado en pila** que gestiona correctamente:
+TMark usa un **algoritmo de emparejamiento de comillas basado en pila** que gestiona correctamente:
 
 - **Apóstrofos**: Las contracciones como `don't`, `it's`, `l'amour` se conservan
 - **Posesivos**: `Xiaolai's` permanece igual
@@ -124,7 +124,7 @@ El siguiente contenido **no** se ve afectado por el formato:
 
 ### Construcciones Técnicas
 
-El **Escáner de Segmentos Latinos** de VMark detecta y protege automáticamente las construcciones técnicas de la conversión de puntuación:
+El **Escáner de Segmentos Latinos** de TMark detecta y protege automáticamente las construcciones técnicas de la conversión de puntuación:
 
 | Tipo | Ejemplos | Protección |
 |------|----------|------------|
@@ -200,7 +200,7 @@ Después de cada pasada de formato CJK, el formateador ejecuta una comprobación
 
 ## Espaciado de Caracteres CJK
 
-VMark incluye una función dedicada de espaciado de caracteres para texto CJK que mejora la legibilidad añadiendo un espaciado sutil entre caracteres.
+TMark incluye una función dedicada de espaciado de caracteres para texto CJK que mejora la legibilidad añadiendo un espaciado sutil entre caracteres.
 
 ### Configuración
 
@@ -235,7 +235,7 @@ La diferencia es sutil pero mejora la legibilidad, especialmente en pasajes más
 
 ## Estilos de Comillas Tipográficas
 
-VMark puede convertir automáticamente las comillas rectas en comillas tipográficamente correctas. Esta función opera durante el formato CJK y admite múltiples estilos de comillas.
+TMark puede convertir automáticamente las comillas rectas en comillas tipográficamente correctas. Esta función opera durante el formato CJK y admite múltiples estilos de comillas.
 
 ### Estilos de Comillas
 
@@ -247,7 +247,7 @@ VMark puede convertir automáticamente las comillas rectas en comillas tipográf
 
 ### Algoritmo de Emparejamiento Basado en Pila
 
-VMark usa un sofisticado algoritmo basado en pila para el emparejamiento de comillas:
+TMark usa un sofisticado algoritmo basado en pila para el emparejamiento de comillas:
 
 1. **Tokenización**: Identifica todos los caracteres de comillas en el texto
 2. **Clasificación**: Determina si cada comilla es de apertura o cierre según el contexto
@@ -327,7 +327,7 @@ La conversión a corchetes angulares se activa cuando el contenido entre comilla
 
 ## Párrafo de Prueba
 
-Copia este texto sin formato en VMark y presiona `Alt + Mod + Shift + F` para formatearlo:
+Copia este texto sin formato en TMark y presiona `Alt + Mod + Shift + F` para formatearlo:
 
 ```text
 最近我在学习TypeScript和React,感觉收获很大.作为一个developer,掌握这些modern前端技术是必须的.

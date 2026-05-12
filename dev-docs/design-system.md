@@ -1,11 +1,11 @@
-# VMark Design System
+# TMark Design System
 
 > Single source of truth for UI design patterns, tokens, and component specifications.  
 > Token definitions live in `src/styles/index.css`. Dynamic overrides in `src/hooks/useTheme.ts`.
 
 ## Overview
 
-VMark uses CSS custom properties with five themes (white, paper, mint, sepia, night). Principles:
+TMark uses CSS custom properties with five themes (white, paper, mint, sepia, night). Principles:
 
 - **Token-first** — no hardcoded colors
 

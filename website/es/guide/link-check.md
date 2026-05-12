@@ -1,6 +1,6 @@
 # Comprobación de Enlaces
 
-VMark verifica que los destinos locales de enlaces e imágenes en tu markdown existan realmente en disco. Se ejecuta junto al [motor de lint de markdown](/es/guide/lint) con `Cmd-Shift-L` o **Herramientas → Comprobar Markdown**.
+TMark verifica que los destinos locales de enlaces e imágenes en tu markdown existan realmente en disco. Se ejecuta junto al [motor de lint de markdown](/es/guide/lint) con `Cmd-Shift-L` o **Herramientas → Comprobar Markdown**.
 
 ## Qué comprueba
 

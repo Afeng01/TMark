@@ -1,6 +1,6 @@
 # Supported Formats
 
-VMark opens every file format below directly. The differentiator is **schema-aware previews**: when the file is a known artifact, VMark renders the *right* view, not a generic JSON tree.
+TMark opens every file format below directly. The differentiator is **schema-aware previews**: when the file is a known artifact, TMark renders the *right* view, not a generic JSON tree.
 
 [[toc]]
 
@@ -17,7 +17,7 @@ Markdown, plain text, and YAML/YML always open in their full editors — those a
 
 When a category is off, the matching extensions fall through to the plain-text fallback so the file still opens — just without the preview / schema view. Flip a toggle and the registry rebuilds in place; open tabs remount with the proper adapter.
 
-On the first launch after upgrading to multi-format support, VMark surfaces a one-time toast nudging you to **Settings → Formats**. If you dismissed it (or installed fresh), the panel is at **Settings → Formats** any time.
+On the first launch after upgrading to multi-format support, TMark surfaces a one-time toast nudging you to **Settings → Formats**. If you dismissed it (or installed fresh), the panel is at **Settings → Formats** any time.
 
 ## At a glance
 
@@ -37,7 +37,7 @@ Code files default to read-only with a banner offering **Enable editing** or **O
 
 ## Schema-aware previews
 
-When the path or content matches a known schema, VMark substitutes the right view for the generic tree.
+When the path or content matches a known schema, TMark substitutes the right view for the generic tree.
 
 ### GitHub Actions workflow (`.github/workflows/*.yml`)
 
@@ -52,7 +52,7 @@ Opens with a Rust dependency tree — runtime, dev, and build dependencies, with
 
 - Path detection: filename `Cargo.toml` (case-insensitive) on POSIX or Windows paths.
 - Content detection: `[package]` or `[workspace]` header.
-- No network calls — VMark never resolves crates.io.
+- No network calls — TMark never resolves crates.io.
 
 ### `package.json`
 
@@ -97,14 +97,14 @@ The validator surfaces script tags, `javascript:` URLs, and inline event handler
 For code files, the read-only banner's **Open in external editor** button launches your editor of choice. Resolution order:
 
 1. **Settings → Formats → External editor** (the GUI field — see [Settings](/guide/settings#formats)). Pick an `.app` bundle on macOS, an executable on Linux/Windows, or anything your shell would resolve.
-2. `$VMARK_EXTERNAL_EDITOR` (project-level env override)
+2. `$TMARK_EXTERNAL_EDITOR` (project-level env override)
 3. `$VISUAL`
 4. `$EDITOR`
 5. Platform default (`open -t` on macOS, `notepad.exe` on Windows, `xdg-open` on Linux)
 
 The GUI setting wins over the environment variables — explicit beats implicit. Leave the field empty to use the env-var fallback chain.
 
-VMark routes through a login-shell PATH so VS Code / Cursor / JetBrains wrappers resolve correctly when launched from a macOS GUI app.
+TMark routes through a login-shell PATH so VS Code / Cursor / JetBrains wrappers resolve correctly when launched from a macOS GUI app.
 
 ### Security gate
 
@@ -112,10 +112,10 @@ The `open_in_external_editor` Tauri command rejects:
 
 - non-existent paths
 - directories and other non-regular files (sockets, devices)
-- paths whose canonicalized extension is not in VMark's registered format set
+- paths whose canonicalized extension is not in TMark's registered format set
 - symlinks whose canonical target fails any of the checks above
 
-A compromised webview cannot use the button to launch the external editor on arbitrary system files (passwords, keys, etc.) — only on paths VMark would itself open.
+A compromised webview cannot use the button to launch the external editor on arbitrary system files (passwords, keys, etc.) — only on paths TMark would itself open.
 
 ## What's not supported
 

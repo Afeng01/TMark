@@ -1,6 +1,6 @@
 # Grafica SVG
 
-VMark fornisce supporto di prima classe per SVG — Scalable Vector Graphics. Ci sono due modi per usare SVG nei tuoi documenti, ognuno adatto a un flusso di lavoro diverso.
+TMark fornisce supporto di prima classe per SVG — Scalable Vector Graphics. Ci sono due modi per usare SVG nei tuoi documenti, ognuno adatto a un flusso di lavoro diverso.
 
 | Metodo | Migliore Per | Sorgente Modificabile? |
 |--------|-------------|----------------------|
@@ -37,8 +37,8 @@ Racchiudi il markup SVG grezzo in un blocco di codice delimitato con l'identific
 
 L'SVG viene renderizzato inline — proprio come i diagrammi Mermaid — con controlli interattivi.
 
-::: tip Esclusivo di VMark
-Né Typora né Obsidian supportano i blocchi di codice ` ```svg `. Questa è una funzionalità esclusiva di VMark, progettata per i flussi di lavoro IA in cui gli strumenti generano visualizzazioni SVG (grafici, illustrazioni, icone) che non si adattano alla grammatica di Mermaid.
+::: tip Esclusivo di TMark
+Né Typora né Obsidian supportano i blocchi di codice ` ```svg `. Questa è una funzionalità esclusiva di TMark, progettata per i flussi di lavoro IA in cui gli strumenti generano visualizzazioni SVG (grafici, illustrazioni, icone) che non si adattano alla grammatica di Mermaid.
 :::
 
 ### Quando Usare i Blocchi di Codice
@@ -103,7 +103,7 @@ L'anteprima del diagramma in modalità Sorgente deve essere abilitata. Attivala 
 
 ## Validazione SVG
 
-VMark valida il contenuto SVG prima del rendering:
+TMark valida il contenuto SVG prima del rendering:
 
 - Il contenuto deve iniziare con `<svg` o `<?xml`
 - L'XML deve essere ben formato (nessun errore di analisi)
@@ -113,7 +113,7 @@ Se la validazione fallisce, viene mostrato un messaggio di errore **SVG non vali
 
 ## Flusso di Lavoro IA
 
-Gli assistenti IA di codifica possono generare SVG direttamente nei tuoi documenti VMark tramite gli strumenti MCP. L'IA invia un blocco di codice con `language: "svg"` e il contenuto SVG, che viene renderizzato inline automaticamente.
+Gli assistenti IA di codifica possono generare SVG direttamente nei tuoi documenti TMark tramite gli strumenti MCP. L'IA invia un blocco di codice con `language: "svg"` e il contenuto SVG, che viene renderizzato inline automaticamente.
 
 **Prompt di esempio:**
 
@@ -137,7 +137,7 @@ L'IA genera un grafico a barre SVG che viene renderizzato inline nel tuo documen
 
 ### Sicurezza
 
-VMark sanitizza il contenuto SVG prima del rendering. I tag script e gli attributi degli handler di eventi (`onclick`, `onerror`, ecc.) vengono rimossi. Questo protegge dagli attacchi XSS quando si incolla SVG da fonti non attendibili.
+TMark sanitizza il contenuto SVG prima del rendering. I tag script e gli attributi degli handler di eventi (`onclick`, `onerror`, ecc.) vengono rimossi. Questo protegge dagli attacchi XSS quando si incolla SVG da fonti non attendibili.
 
 ### Dimensionamento
 

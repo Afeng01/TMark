@@ -6,7 +6,7 @@
 
 ## The Problem
 
-When typing Chinese (or other CJK) text via IME in a heading node (`<h1>`–`<h6>`) in VMark's WYSIWYG editor, accepting a multi-syllable composition (e.g., typing `zbqi` to produce 周期) causes the heading to split:
+When typing Chinese (or other CJK) text via IME in a heading node (`<h1>`–`<h6>`) in TMark's WYSIWYG editor, accepting a multi-syllable composition (e.g., typing `zbqi` to produce 周期) causes the heading to split:
 
 ```
 # zb qi          ← pinyin residue stays in heading

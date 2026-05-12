@@ -369,16 +369,16 @@ mod tests {
             // Smart/media insert
             "smartInsert",
             "insertMedia",
-            // VMark-specific commands
-            "vmark.cjkFormat",
-            "vmark.cjkPunctuationConvert",
-            "vmark.cjkSpacingFix",
-            "vmark.insertMarkmap",
-            "vmark.insertMathBlock",
-            "vmark.insertMathInline",
-            "vmark.insertMermaid",
-            "vmark.insertSvg",
-            "vmark.insertWikiLink",
+            // TMark-specific commands
+            "tmark.cjkFormat",
+            "tmark.cjkPunctuationConvert",
+            "tmark.cjkSpacingFix",
+            "tmark.insertMarkmap",
+            "tmark.insertMathBlock",
+            "tmark.insertMathInline",
+            "tmark.insertMermaid",
+            "tmark.insertSvg",
+            "tmark.insertWikiLink",
         ];
         for op in &write_ops {
             assert!(

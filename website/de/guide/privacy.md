@@ -1,10 +1,12 @@
 # Datenschutz
 
-VMark respektiert Ihre Privatsphäre. Hier ist genau, was passiert — und was nicht.
+> TMark snapshot note: this inherited privacy page is not authoritative until TMark release infrastructure is published. The current app update endpoint points to GitHub Releases, and public stats are disabled by default.
 
-## Was VMark sendet
+TMark respektiert Ihre Privatsphäre. Hier ist genau, was passiert — und was nicht.
 
-VMark enthält einen **Auto-Update-Checker**, der unseren Server regelmäßig kontaktiert, um zu prüfen, ob eine neue Version verfügbar ist. Dies ist die **einzige** Netzwerkanfrage, die VMark stellt.
+## Was TMark sendet
+
+TMark enthält einen **Auto-Update-Checker**, der unseren Server regelmäßig kontaktiert, um zu prüfen, ob eine neue Version verfügbar ist. Dies ist die **einzige** Netzwerkanfrage, die TMark stellt.
 
 Jede Überprüfung sendet genau diese Felder — nicht mehr:
 
@@ -19,13 +21,13 @@ Jede Überprüfung sendet genau diese Felder — nicht mehr:
 Die vollständige URL sieht so aus:
 
 ```text
-GET https://log.vmark.app/update/latest.json?target=darwin&arch=aarch64&version=0.5.10
+GET https://github.com/Afeng01/TMark/releases/latest/download/latest.json?target=darwin&arch=aarch64&version=0.5.10
 X-Machine-Id: a3f8c2b1d4e5f6078a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1
 ```
 
-Sie können dies selbst überprüfen — der Endpunkt befindet sich in [`tauri.conf.json`](https://github.com/xiaolai/vmark/blob/main/src-tauri/tauri.conf.json) (suchen Sie nach `"endpoints"`), und der Hash befindet sich in [`lib.rs`](https://github.com/xiaolai/vmark/blob/main/src-tauri/src/lib.rs) (suchen Sie nach `machine_id_hash`).
+Sie können dies selbst überprüfen — der Endpunkt befindet sich in [`tauri.conf.json`](https://github.com/Afeng01/TMark/blob/main/src-tauri/tauri.conf.json) (suchen Sie nach `"endpoints"`), und der Hash befindet sich in [`lib.rs`](https://github.com/Afeng01/TMark/blob/main/src-tauri/src/lib.rs) (suchen Sie nach `machine_id_hash`).
 
-## Was VMark NICHT sendet
+## Was TMark NICHT sendet
 
 - Ihre Dokumente oder deren Inhalte
 - Dateinamen oder Pfade
@@ -48,7 +50,7 @@ Wir aggregieren die Update-Check-Protokolle, um die Live-Statistiken zu erstelle
 | **Plattformen** | Anzahl der Pings pro OS + Architektur-Kombination |
 | **Versionen** | Anzahl der Pings pro App-Version |
 
-Diese Zahlen werden offen unter [`log.vmark.app/api/stats`](https://log.vmark.app/api/stats) veröffentlicht. Nichts ist verborgen.
+Diese Zahlen werden offen unter [`configured stats endpoint`](https://github.com/Afeng01/TMark/releases) veröffentlicht. Nichts ist verborgen.
 
 **Wichtige Vorbehalte:**
 - Eindeutige IPs unterschätzen tatsächliche Benutzer — mehrere Personen hinter demselben Router/VPN zählen als eine
@@ -60,19 +62,19 @@ Diese Zahlen werden offen unter [`log.vmark.app/api/stats`](https://log.vmark.ap
 - Protokolle werden auf unserem Server im Standard-Zugriffsprotokollformat gespeichert
 - Protokolldateien rotieren bei 1 MB und nur die 3 neuesten Dateien werden aufbewahrt
 - Protokolle werden mit niemandem geteilt
-- Es gibt kein Kontosystem — VMark weiß nicht, wer Sie sind
+- Es gibt kein Kontosystem — TMark weiß nicht, wer Sie sind
 - Der Maschinen-Hash ist nicht mit einem Konto, einer E-Mail oder einer IP-Adresse verknüpft — er ist ausschließlich ein pseudonymer Gerätezähler
 - Wir verwenden keine Tracking-Cookies, Fingerabdrücke oder Analytics-SDKs
 
 ## Open-Source-Transparenz
 
-VMark ist vollständig Open Source. Sie können alles hier Beschriebene überprüfen:
+TMark ist vollständig Open Source. Sie können alles hier Beschriebene überprüfen:
 
-- Update-Endpunkt-Konfiguration: [`src-tauri/tauri.conf.json`](https://github.com/xiaolai/vmark/blob/main/src-tauri/tauri.conf.json)
-- Maschinen-Hash-Generierung: [`src-tauri/src/lib.rs`](https://github.com/xiaolai/vmark/blob/main/src-tauri/src/lib.rs) — nach `machine_id_hash` suchen
-- Serverseitige Statistik-Aggregation: [`scripts/vmark-stats-json`](https://github.com/xiaolai/vmark/blob/main/scripts/vmark-stats-json) — das genaue Skript, das auf unserem Server läuft, um die [öffentlichen Statistiken](https://log.vmark.app/api/stats) zu erstellen
+- Update-Endpunkt-Konfiguration: [`src-tauri/tauri.conf.json`](https://github.com/Afeng01/TMark/blob/main/src-tauri/tauri.conf.json)
+- Maschinen-Hash-Generierung: [`src-tauri/src/lib.rs`](https://github.com/Afeng01/TMark/blob/main/src-tauri/src/lib.rs) — nach `machine_id_hash` suchen
+- Serverseitige Statistik-Aggregation: [`scripts/tmark-stats-json`](https://github.com/Afeng01/TMark/blob/main/scripts/tmark-stats-json) — das genaue Skript, das auf unserem Server läuft, um die [öffentlichen Statistiken](https://github.com/Afeng01/TMark/releases) zu erstellen
 - Es gibt keine anderen Netzwerkaufrufe im Codebase — suchen Sie selbst nach `fetch`, `http` oder `reqwest`
 
 ## Update-Prüfungen deaktivieren
 
-Wenn Sie automatische Update-Prüfungen vollständig deaktivieren möchten, können Sie `log.vmark.app` auf Netzwerkebene blockieren (Firewall, `/etc/hosts` oder DNS). VMark funktioniert weiterhin normal ohne diese — Sie erhalten nur keine Update-Benachrichtigungen mehr.
+Wenn Sie automatische Update-Prüfungen vollständig deaktivieren möchten, können Sie the configured update endpoint auf Netzwerkebene blockieren (Firewall, `/etc/hosts` oder DNS). TMark funktioniert weiterhin normal ohne diese — Sie erhalten nur keine Update-Benachrichtigungen mehr.

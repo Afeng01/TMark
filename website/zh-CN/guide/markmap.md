@@ -1,6 +1,6 @@
 # Markmap 思维导图
 
-VMark 支持 [Markmap](https://markmap.js.org/)，可在 Markdown 文档中直接创建交互式思维导图树。与 Mermaid 的静态思维导图类型不同，Markmap 使用普通 Markdown 标题作为输入，并提供交互式平移/缩放/折叠功能。
+TMark 支持 [Markmap](https://markmap.js.org/)，可在 Markdown 文档中直接创建交互式思维导图树。与 Mermaid 的静态思维导图类型不同，Markmap 使用普通 Markdown 标题作为输入，并提供交互式平移/缩放/折叠功能。
 
 ## 插入思维导图
 
@@ -90,7 +90,7 @@ Markmap 使用标准 Markdown 作为输入。标题定义树的层级结构：
 以下是直接在本页渲染的交互式思维导图——试试平移、缩放和折叠节点：
 
 ```markmap
-# VMark Features
+# TMark Features
 
 ## Editor
 ### WYSIWYG Mode
@@ -129,7 +129,7 @@ Markmap 使用标准 Markdown 作为输入。标题定义树的层级结构：
 
 ## 主题集成
 
-Markmap 思维导图会自动适应 VMark 的当前主题（White、Paper、Mint、Sepia 或 Night）。分支颜色会针对每种主题的可读性进行调整。
+Markmap 思维导图会自动适应 TMark 的当前主题（White、Paper、Mint、Sepia 或 Night）。分支颜色会针对每种主题的可读性进行调整。
 
 ## 导出为 PNG
 
@@ -146,7 +146,7 @@ Markmap 思维导图会自动适应 VMark 的当前主题（White、Paper、Mint
 
 ### Markmap 与 Mermaid 思维导图
 
-VMark 同时支持 Markmap 和 Mermaid 的 `mindmap` 图表类型：
+TMark 同时支持 Markmap 和 Mermaid 的 `mindmap` 图表类型：
 
 | 功能 | Markmap | Mermaid 思维导图 |
 |------|---------|-----------------|

@@ -24,21 +24,21 @@ const otherThemeData = computed(() => {
 
 function setTheme(themeId: string) {
   currentTheme.value = themeId
-  document.documentElement.setAttribute('data-vmark-theme', themeId)
+  document.documentElement.setAttribute('data-tmark-theme', themeId)
   document.documentElement.classList.toggle('dark', themeId === 'night')
-  localStorage.setItem('vmark-preview-theme', themeId)
+  localStorage.setItem('tmark-preview-theme', themeId)
   pickRandomOther()
 }
 
 onMounted(() => {
-  const saved = localStorage.getItem('vmark-preview-theme')
+  const saved = localStorage.getItem('tmark-preview-theme')
   if (saved && themes.some(t => t.id === saved)) {
     currentTheme.value = saved
-    document.documentElement.setAttribute('data-vmark-theme', saved)
+    document.documentElement.setAttribute('data-tmark-theme', saved)
     document.documentElement.classList.toggle('dark', saved === 'night')
   } else {
     currentTheme.value = 'paper'
-    document.documentElement.setAttribute('data-vmark-theme', 'paper')
+    document.documentElement.setAttribute('data-tmark-theme', 'paper')
   }
   pickRandomOther()
 })

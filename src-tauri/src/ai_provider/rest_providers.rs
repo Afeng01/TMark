@@ -323,7 +323,7 @@ pub(super) async fn run_rest_google(
 ///   - `model` — caller-resolved.
 ///   - `prompt` — raw text (Ollama uses a flat `prompt` field rather than
 ///     a chat `messages` array).
-///   - `stream: false` — VMark always pulls the whole response and
+///   - `stream: false` — TMark always pulls the whole response and
 ///     forwards it as a single chunk; live token streaming is not wired
 ///     through the sink layer for any provider.
 ///   - `options.num_predict` — Ollama's name for `max_tokens`. Only

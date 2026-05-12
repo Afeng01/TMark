@@ -1,7 +1,7 @@
 /**
  * Tiptap Extensions Configuration
  *
- * Purpose: Assembles the Tiptap extension stack for VMark's WYSIWYG editor —
+ * Purpose: Assembles the Tiptap extension stack for TMark's WYSIWYG editor —
  * StarterKit overrides, custom marks/nodes, media extensions, and plugin registrations.
  *
  * Key decisions:

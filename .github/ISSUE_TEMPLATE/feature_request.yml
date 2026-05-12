@@ -1,5 +1,5 @@
 name: Feature Request
-description: Propose an improvement to VMark.
+description: Propose an improvement to TMark.
 title: "[Feature] "
 labels:
   - enhancement
@@ -32,7 +32,7 @@ body:
     attributes:
       label: Proposed Solution
       description: Describe your suggested behavior or UI.
-      placeholder: "VMark should ..."
+      placeholder: "TMark should ..."
     validations:
       required: true
   - type: textarea

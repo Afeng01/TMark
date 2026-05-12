@@ -1,15 +1,15 @@
 # Visor de flujos de trabajo de GitHub Actions
 
-VMark renderiza el YAML de los flujos de trabajo de GitHub Actions como un grafo acíclico dirigido (DAG) interactivo y te permite editar jobs, steps y triggers a través de formularios estructurados — sin perder nunca comentarios, anclas o formato del archivo subyacente.
+TMark renderiza el YAML de los flujos de trabajo de GitHub Actions como un grafo acíclico dirigido (DAG) interactivo y te permite editar jobs, steps y triggers a través de formularios estructurados — sin perder nunca comentarios, anclas o formato del archivo subyacente.
 
 La función opera en dos superficies:
 
 1. **Archivos `.yml` independientes** dentro de `.github/workflows/` (o cualquier archivo cuya forma de nivel superior coincida con un flujo de trabajo): vista dividida con el código fuente a la izquierda y el lienzo interactivo más el editor de formularios a la derecha.
-2. **Bloques de código en markdown**: cuando un bloque cercado por triples backticks `yaml` o `yml` contiene un flujo de trabajo reconocible, VMark lo renderiza como un DAG al estilo Mermaid en línea, igual que se renderizan los bloques `mermaid`.
+2. **Bloques de código en markdown**: cuando un bloque cercado por triples backticks `yaml` o `yml` contiene un flujo de trabajo reconocible, TMark lo renderiza como un DAG al estilo Mermaid en línea, igual que se renderizan los bloques `mermaid`.
 
 ## Archivos de flujo de trabajo independientes
 
-Abre cualquier archivo `.github/workflows/*.yml` en VMark. El panel lateral derecho se abre automáticamente y muestra:
+Abre cualquier archivo `.github/workflows/*.yml` en TMark. El panel lateral derecho se abre automáticamente y muestra:
 
 - El flujo de trabajo completo como un lienzo interactivo de React Flow (jobs como nodos, dependencias `needs:` como aristas).
 - Un panel de edición estructurada bajo el lienzo.
@@ -53,7 +53,7 @@ El resumen de triggers (event, branches, tags, paths, cron, types) es de solo le
 
 Las ediciones se acumulan en una lista de patches en memoria a medida que cambias campos. El botón Guardar muestra el contador actual (por ejemplo, **3 sin guardar**).
 
-Cuando pulsas Guardar, VMark:
+Cuando pulsas Guardar, TMark:
 
 1. Lee el YAML actual del editor.
 2. Aplica cada patch de la cola al CST (árbol de sintaxis concreta) del YAML — preservando comentarios, anclas y formato existente.
@@ -84,11 +84,11 @@ jobs:
 ```
 ````
 
-VMark detecta la forma del flujo de trabajo (`jobs:` de nivel superior con `runs-on` por job) y renderiza el diagrama en línea. El diagrama es de solo lectura — edita el código fuente para cambiar el flujo de trabajo.
+TMark detecta la forma del flujo de trabajo (`jobs:` de nivel superior con `runs-on` por job) y renderiza el diagrama en línea. El diagrama es de solo lectura — edita el código fuente para cambiar el flujo de trabajo.
 
 ## Diagnósticos
 
-VMark muestra los diagnósticos de parseo y lint junto al código fuente:
+TMark muestra los diagnósticos de parseo y lint junto al código fuente:
 
 | Prefijo del código | Significado |
 |--------------------|-------------|
@@ -105,7 +105,7 @@ Instala `actionlint` y activa **Usar actionlint cuando esté disponible** en Con
 
 ## Metadatos de actions
 
-Para los steps `uses:` que referencian actions públicas de GitHub, VMark puede recuperar el `action.yml` de cada action para rellenar las descripciones de los inputs en el editor estructurado. Es opt-in y se cachea en disco durante 24 horas.
+Para los steps `uses:` que referencian actions públicas de GitHub, TMark puede recuperar el `action.yml` de cada action para rellenar las descripciones de los inputs en el editor estructurado. Es opt-in y se cachea en disco durante 24 horas.
 
 Activa **Recuperar metadatos de actions** en Configuración → Avanzado. Desactívalo para mantener todas las referencias a actions como texto puro — no se hacen peticiones de red.
 
@@ -121,4 +121,4 @@ El panel lateral del flujo de trabajo incluye tres opciones de exportación acce
 
 ## Lo que esto no es
 
-VMark no ejecuta flujos de trabajo de GitHub Actions. Es un visor y editor — la ejecución sigue siendo trabajo de GitHub. La función está pensada puramente para leer, revisar y crear YAML de flujos de trabajo.
+TMark no ejecuta flujos de trabajo de GitHub Actions. Es un visor y editor — la ejecución sigue siendo trabajo de GitHub. La función está pensada puramente para leer, revisar y crear YAML de flujos de trabajo.

@@ -1,6 +1,6 @@
 # Features
 
-VMark is the plain-text workspace where humans and AI collaborate. Markdown is the centerpiece (with WYSIWYG, Source Peek, and Source modes), but the workspace also opens YAML, JSON, TOML, Mermaid, SVG, HTML, and 9 code-viewer formats — see [Supported Formats](/guide/formats) for the full list.
+TMark is the plain-text workspace where humans and AI collaborate. Markdown is the centerpiece (with WYSIWYG, Source Peek, and Source modes), but the workspace also opens YAML, JSON, TOML, Mermaid, SVG, HTML, and 9 code-viewer formats — see [Supported Formats](/guide/formats) for the full list.
 
 [[toc]]
 
@@ -31,7 +31,7 @@ Toggle between modes with `F6`.
 
 ### Large Files
 
-VMark auto-opens files over 1 MB in Source mode for a sub-second open, warns before touching files above 5 MB, and refuses files over 50 MB. See the [Large Files](./large-files.md) guide for thresholds and settings.
+TMark auto-opens files over 1 MB in Source mode for a sub-second open, warns before touching files above 5 MB, and refuses files over 50 MB. See the [Large Files](./large-files.md) guide for thresholds and settings.
 
 ### Source Peek
 
@@ -63,7 +63,7 @@ Source Peek is useful for precise Markdown editing (fixing table syntax, adjusti
 
 ## Multi-Cursor Editing
 
-Edit multiple locations simultaneously — VMark supports full multi-cursor in both WYSIWYG and Source modes.
+Edit multiple locations simultaneously — TMark supports full multi-cursor in both WYSIWYG and Source modes.
 
 | Action | Shortcut |
 |--------|----------|
@@ -81,7 +81,7 @@ All standard editing (typing, deletion, clipboard, navigation) works at every cu
 
 ## Auto-Pair & Tab Escape
 
-When you type an opening bracket, quote, or backtick, VMark auto-inserts the closing pair. Press **Tab** to jump past the closing character instead of reaching for the arrow key.
+When you type an opening bracket, quote, or backtick, TMark auto-inserts the closing pair. Press **Tab** to jump past the closing character instead of reaching for the arrow key.
 
 - Brackets: `()` `[]` `{}`
 - Quotes: `""` `''` `` ` ` ``
@@ -129,7 +129,7 @@ Quickly change text case via Format → Transform:
 ### Hard Line Breaks
 
 Press `Shift + Enter` to insert a hard line break within a paragraph.
-VMark uses two-space style by default for maximum compatibility.
+TMark uses two-space style by default for maximum compatibility.
 Configure in **Settings > Editor > Whitespace**.
 
 ### Line Operations
@@ -283,7 +283,7 @@ Click the expand chevron on the find bar to reveal the replace row. Type replace
 
 ## Markdown Lint
 
-VMark includes a built-in markdown linter that checks your document for common syntax mistakes and accessibility issues. Enable it in **Settings > Markdown > Lint**.
+TMark includes a built-in markdown linter that checks your document for common syntax mistakes and accessibility issues. Enable it in **Settings > Markdown > Lint**.
 
 **How to use:**
 
@@ -324,7 +324,7 @@ A formatting toolbar anchored at the bottom of the editor, providing quick acces
 
 ## Export Options
 
-VMark offers flexible export options for sharing your documents.
+TMark offers flexible export options for sharing your documents.
 
 ### HTML Export
 
@@ -333,7 +333,7 @@ Export to standalone HTML with two packaging modes:
 - **Folder mode** (default): Creates `Document/index.html` with assets in a subfolder
 - **Single file mode**: Creates a self-contained `.html` file with embedded images
 
-Exported HTML includes the [**VMark Reader**](/guide/export#vmark-reader) — interactive controls for settings, table of contents, image lightbox, and more.
+Exported HTML includes the [**TMark Reader**](/guide/export#tmark-reader) — interactive controls for settings, table of contents, image lightbox, and more.
 
 [Learn more about export →](/guide/export)
 
@@ -365,7 +365,7 @@ Built-in Chinese/Japanese/Korean text formatting:
 
 ## Document History
 
-VMark automatically saves snapshots of your documents so you can recover earlier versions.
+TMark automatically saves snapshots of your documents so you can recover earlier versions.
 
 - **Auto-save** with configurable interval captures snapshots in the background
 - **Per-document history** stored locally in JSONL format
@@ -379,7 +379,7 @@ VMark automatically saves snapshots of your documents so you can recover earlier
 
 ## Session Recovery (Hot Exit)
 
-When you quit VMark or it exits unexpectedly, your session is preserved and restored on the next launch.
+When you quit TMark or it exits unexpectedly, your session is preserved and restored on the next launch.
 
 **What's saved:**
 - All open tabs and their content (including unsaved changes)
@@ -389,7 +389,7 @@ When you quit VMark or it exits unexpectedly, your session is preserved and rest
 - Active workspace and file explorer settings
 
 **How it works:**
-- On quit, VMark captures the complete session state from all windows
+- On quit, TMark captures the complete session state from all windows
 - On relaunch, tabs are restored exactly as you left them, with dirty (unsaved) documents marked accordingly
 - Crash recovery runs automatically after an unexpected exit, restoring documents from periodic recovery snapshots
 - Recovery snapshots older than 7 days are cleaned up automatically
@@ -443,7 +443,7 @@ Zoom changes the editor font size in 2px increments (range: 12px to 32px). It mo
 
 ## Text Utilities
 
-VMark includes utilities for text cleanup and formatting, available in the Format menu:
+TMark includes utilities for text cleanup and formatting, available in the Format menu:
 
 ### Text Cleanup (Format → Text Cleanup)
 
@@ -464,7 +464,7 @@ Built-in terminal panel with multiple sessions, copy/paste, search, clickable fi
 
 ## Auto-Update
 
-VMark automatically checks for updates and can download and install them in-app:
+TMark automatically checks for updates and can download and install them in-app:
 
 - Automatic update checking on launch
 - One-click update installation
@@ -519,7 +519,7 @@ All shortcuts are customizable in Settings → Shortcuts.
 
 ## Technical Details
 
-VMark is built with modern technology:
+TMark is built with modern technology:
 
 | Component | Technology |
 |-----------|------------|

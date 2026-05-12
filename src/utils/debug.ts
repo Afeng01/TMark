@@ -7,7 +7,7 @@
  *     tauri-plugin-log file + console so users can submit log files with bug reports
  *
  * In production, warn/error calls are forwarded to @tauri-apps/plugin-log
- * which writes to ~/Library/Logs/app.vmark/ (macOS). The Tauri log plugin
+ * which writes to ~/Library/Logs/app.tmark/ (macOS). The Tauri log plugin
  * must be initialized before these fire (it is — registered first in lib.rs).
  *
  * @coordinates-with @tauri-apps/plugin-log — production warn/error sink

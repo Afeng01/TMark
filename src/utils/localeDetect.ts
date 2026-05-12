@@ -2,7 +2,7 @@
  * OS locale detection for first-run language selection.
  *
  * Reads `navigator.language` / `navigator.languages` and maps the result
- * to one of the 10 UI locales VMark ships. Used once at store init when
+ * to one of the 10 UI locales TMark ships. Used once at store init when
  * the user has no persisted language preference.
  *
  * @module utils/localeDetect

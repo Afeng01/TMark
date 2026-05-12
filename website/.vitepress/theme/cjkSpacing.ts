@@ -11,7 +11,7 @@
  * @module theme/cjkSpacing
  */
 
-// Same ranges as VMark editor's cjkLetterSpacing plugin (src/plugins/cjkLetterSpacing/index.ts)
+// Same ranges as TMark editor's cjkLetterSpacing plugin (src/plugins/cjkLetterSpacing/index.ts)
 const CJK_RE = /[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af\u3100-\u312f]+/g
 
 /** Containers to skip — rendered widgets where inserting <span> would break DOM */

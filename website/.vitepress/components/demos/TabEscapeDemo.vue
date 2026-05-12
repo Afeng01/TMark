@@ -118,8 +118,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">Type an opening bracket or quote, then press Tab to escape</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">Type an opening bracket or quote, then press Tab to escape</p>
 
     <div class="editor-frame" @click="focus">
       <div class="editor-line">
@@ -149,14 +149,14 @@ onUnmounted(() => {
       </span>
     </div>
 
-    <div class="vmark-hint">
-      <span class="vmark-hint__icon">💡</span>
+    <div class="tmark-hint">
+      <span class="tmark-hint__icon">💡</span>
       <span>Backspace inside an empty pair deletes both characters. Works for all bracket and quote types.</span>
     </div>
   </div>
 </template>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .editor-frame {
   background: var(--code-bg-color);

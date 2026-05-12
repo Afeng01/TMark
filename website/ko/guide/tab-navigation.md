@@ -1,6 +1,6 @@
 # 스마트 탭 탐색
 
-VMark의 Tab 및 Shift+Tab 키는 컨텍스트 인식적입니다 — 화살표 키를 누르지 않고도 서식화된 텍스트, 괄호, 링크를 효율적으로 탐색할 수 있습니다.
+TMark의 Tab 및 Shift+Tab 키는 컨텍스트 인식적입니다 — 화살표 키를 누르지 않고도 서식화된 텍스트, 괄호, 링크를 효율적으로 탐색할 수 있습니다.
 
 ## 빠른 개요
 
@@ -131,21 +131,21 @@ This is |**bold text** here
 Tab 및 Shift+Tab은 링크에서도 탈출합니다:
 
 ```text
-Check out [VMark|](https://vmark.app)
+Check out [TMark|](https://github.com/Afeng01/TMark)
                ↑ 링크 텍스트 안에 커서
 ```
 
 **Tab** 누르기:
 
 ```text
-Check out [VMark](https://vmark.app)| and...
+Check out [TMark](https://github.com/Afeng01/TMark)| and...
                                     ↑ 링크 후 커서
 ```
 
 링크 안에서 **Shift+Tab** 을 누르면 시작으로 이동합니다:
 
 ```text
-Check out |[VMark](https://vmark.app) and...
+Check out |[TMark](https://github.com/Afeng01/TMark) and...
           ↑ 링크 전 커서
 ```
 
@@ -155,7 +155,7 @@ Check out |[VMark](https://vmark.app) and...
 
 ### 중첩된 및 이스케이프된 괄호
 
-VMark는 복잡한 링크 구문을 올바르게 처리합니다:
+TMark는 복잡한 링크 구문을 올바르게 처리합니다:
 
 ```markdown
 [text [with nested] brackets](url)     ✓ 작동
@@ -364,7 +364,7 @@ Tab 및 Shift+Tab 괄호 건너뛰기는 **코드 블록 안에서 비활성화*
 
 1. **근육 기억** — Tab 탈출에 익숙해지면 화살표 키 없이 훨씬 빠르게 탐색할 수 있습니다.
 
-2. **자동 쌍과 함께 작동** — `(`를 입력하면 VMark가 자동으로 `)`를 삽입합니다. 안에서 입력한 후 Tab만 누르면 나갑니다.
+2. **자동 쌍과 함께 작동** — `(`를 입력하면 TMark가 자동으로 `)`를 삽입합니다. 안에서 입력한 후 Tab만 누르면 나갑니다.
 
 3. **중첩된 구조** — Tab은 한 번에 한 레벨씩 탈출합니다. `((nested))`의 경우 완전히 탈출하려면 Tab을 두 번 눌러야 합니다.
 

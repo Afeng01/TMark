@@ -1,6 +1,6 @@
 # Fenêtres contextuelles en ligne
 
-VMark fournit des fenêtres contextuelles pour modifier les liens, images, médias, maths, notes de bas de page et plus encore. Ces fenêtres fonctionnent en modes WYSIWYG et Source avec une navigation clavier cohérente.
+TMark fournit des fenêtres contextuelles pour modifier les liens, images, médias, maths, notes de bas de page et plus encore. Ces fenêtres fonctionnent en modes WYSIWYG et Source avec une navigation clavier cohérente.
 
 ## Raccourcis clavier communs
 
@@ -14,7 +14,7 @@ Toutes les fenêtres contextuelles partagent ces comportements clavier :
 
 ## Infobulle et fenêtre contextuelle de lien
 
-VMark utilise un système à deux niveaux pour les liens : une infobulle en lecture seule au survol, et une fenêtre contextuelle d'édition via raccourci clavier.
+TMark utilise un système à deux niveaux pour les liens : une infobulle en lecture seule au survol, et une fenêtre contextuelle d'édition via raccourci clavier.
 
 ### Infobulle au survol (lecture seule)
 

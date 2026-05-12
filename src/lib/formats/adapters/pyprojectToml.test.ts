@@ -31,7 +31,7 @@ describe("pyprojectTomlSchemaDetector", () => {
   it("matches PEP 621 content (filename fallback) at unrelated path", () => {
     const content = `
 [project]
-name = "vmark"
+name = "tmark"
 version = "0.7.0"
     `.trim();
     expect(
@@ -42,7 +42,7 @@ version = "0.7.0"
   it("matches Poetry content (filename fallback) at unrelated path", () => {
     const content = `
 [tool.poetry]
-name = "vmark"
+name = "tmark"
 version = "0.7.0"
     `.trim();
     expect(

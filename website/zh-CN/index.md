@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: VMark
+  name: TMark
   text: 恰到好处的 Markdown 编辑器
   tagline: 免费 · 智能 · 优雅 · 属于你
   image:
     src: /logo.png
-    alt: VMark
+    alt: TMark
   actions:
     - theme: brand
       text: 下载
@@ -20,7 +20,7 @@ features:
   - icon:
       src: /icons/bot.svg
     title: AI 友好
-    details: 为 AI 时代而生。VMark 原生支持 MCP 协议 —— Claude、Codex 或 Gemini 可以直接读取、建议并编辑你的文档。无需插件，连接即协作。
+    details: 为 AI 时代而生。TMark 原生支持 MCP 协议 —— Claude、Codex 或 Gemini 可以直接读取、建议并编辑你的文档。无需插件，连接即协作。
 
   - icon:
       src: /icons/languages.svg
@@ -99,15 +99,15 @@ Claude Code、Claude Desktop、Codex CLI、Gemini CLI…… 均可通过 MCP 集
 <div class="screenshots-grid">
   <div class="screenshot-card">
     <img src="/screenshots/sending-from-claude-code.png" alt="从 Claude Code CLI 发送内容" loading="lazy" />
-    <div class="caption">让 Claude Code 直接在 VMark 中创建文档</div>
+    <div class="caption">让 Claude Code 直接在 TMark 中创建文档</div>
   </div>
   <div class="screenshot-card">
     <img src="/screenshots/sending-from-claude-desktop.png" alt="从 Claude Desktop 发送内容" loading="lazy" />
     <div class="caption">或者用 Claude Desktop 发送相同的提示</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/content-received-by-vmark.png" alt="VMark 接收到的内容" loading="lazy" />
-    <div class="caption">内容带完整格式出现在 VMark 中</div>
+    <img src="/screenshots/content-received-by-tmark.png" alt="TMark 接收到的内容" loading="lazy" />
+    <div class="caption">内容带完整格式出现在 TMark 中</div>
   </div>
 </div>
 </div>
@@ -133,15 +133,15 @@ Claude Code、Claude Desktop、Codex CLI、Gemini CLI…… 均可通过 MCP 集
 <div class="screenshots-section">
 <div class="screenshots-grid">
   <div class="screenshot-card">
-    <img src="/screenshots/editor-main.png" alt="VMark 富文本编辑器" loading="lazy" />
+    <img src="/screenshots/editor-main.png" alt="TMark 富文本编辑器" loading="lazy" />
     <div class="caption">所见即所得模式</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/source-mode.png" alt="VMark 源码模式" loading="lazy" />
+    <img src="/screenshots/source-mode.png" alt="TMark 源码模式" loading="lazy" />
     <div class="caption">源码模式 (F6)</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/dark-theme.png" alt="VMark 夜间主题" loading="lazy" />
+    <img src="/screenshots/dark-theme.png" alt="TMark 夜间主题" loading="lazy" />
     <div class="caption">夜间主题</div>
   </div>
 </div>
@@ -190,9 +190,9 @@ Claude Code、Claude Desktop、Codex CLI、Gemini CLI…… 均可通过 MCP 集
 
 ## 适用于 macOS
 
-VMark 为 macOS 优化，原生支持 Apple Silicon 和 Intel 处理器。下载最新版本，立即开始写作。
+TMark 为 macOS 优化，原生支持 Apple Silicon 和 Intel 处理器。下载最新版本，立即开始写作。
 
-[获取 VMark →](/zh-CN/download)
+[获取 TMark →](/zh-CN/download)
 
 ## 致谢
 

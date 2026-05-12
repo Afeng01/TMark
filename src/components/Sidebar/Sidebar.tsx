@@ -48,7 +48,7 @@ import "./Sidebar.css";
 // Constants
 const TRAFFIC_LIGHTS_SPACER_PX = 28;
 const MAX_RECENT_ITEMS = 15;
-const WORKSPACE_HEIGHT_KEY = "vmark.sidebar.workspaceHeight";
+const WORKSPACE_HEIGHT_KEY = "tmark.sidebar.workspaceHeight";
 const EMPTY_TABS: Tab[] = [];
 
 function fileNameFromPath(filePath: string): string {

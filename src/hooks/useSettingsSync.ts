@@ -18,7 +18,7 @@
 import { useEffect } from "react";
 import { useSettingsStore } from "@/stores/settingsStore";
 
-const STORAGE_KEY = "vmark-settings";
+const STORAGE_KEY = "tmark-settings";
 const SYNC_GROUPS = [
   "appearance",
   "general",

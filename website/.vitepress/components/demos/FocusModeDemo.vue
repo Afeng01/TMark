@@ -6,7 +6,7 @@ const focusedIndex = ref(1)
 
 const paragraphs = [
   'Focus Mode helps you concentrate on what matters most — the current paragraph you\'re writing.',
-  'When enabled, VMark dims surrounding content while keeping your current paragraph fully visible and vibrant.',
+  'When enabled, TMark dims surrounding content while keeping your current paragraph fully visible and vibrant.',
   'This creates a natural visual hierarchy that reduces distractions and keeps your attention where it belongs.',
   'Combined with Typewriter Mode, your cursor stays centered on screen for a comfortable writing flow.',
 ]
@@ -17,12 +17,12 @@ function handleClick(index: number) {
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">Click any paragraph to focus on it</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">Click any paragraph to focus on it</p>
 
     <div class="controls">
-      <label class="vmark-toggle">
-        <input type="checkbox" v-model="focusEnabled" class="vmark-toggle__input" />
+      <label class="tmark-toggle">
+        <input type="checkbox" v-model="focusEnabled" class="tmark-toggle__input" />
         <span>Enable Focus Mode</span>
       </label>
     </div>
@@ -38,14 +38,14 @@ function handleClick(index: number) {
       </p>
     </div>
 
-    <div class="vmark-hint">
-      <span class="vmark-hint__icon">💡</span>
-      <span>In VMark, focus automatically follows your cursor as you type.</span>
+    <div class="tmark-hint">
+      <span class="tmark-hint__icon">💡</span>
+      <span>In TMark, focus automatically follows your cursor as you type.</span>
     </div>
   </div>
 </template>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .controls {
   margin-bottom: 16px;
@@ -78,12 +78,12 @@ function handleClick(index: number) {
   background: var(--hover-bg);
 }
 
-/* Focus mode styles - match VMark exactly */
+/* Focus mode styles - match TMark exactly */
 .content--focus .paragraph {
   color: #c8c8c8;
 }
 
-[data-vmark-theme="night"] .content--focus .paragraph {
+[data-tmark-theme="night"] .content--focus .paragraph {
   color: #4a4f56;
 }
 

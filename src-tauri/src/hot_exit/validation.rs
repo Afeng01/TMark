@@ -153,7 +153,7 @@ mod tests {
         SessionData {
             version: SCHEMA_VERSION,
             timestamp: chrono::Utc::now().timestamp(),
-            vmark_version: TEST_VERSION.to_string(),
+            tmark_version: TEST_VERSION.to_string(),
             windows,
             workspace: None,
         }

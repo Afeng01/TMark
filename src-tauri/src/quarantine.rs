@@ -1,7 +1,7 @@
 //! # Quarantine
 //!
 //! Purpose: Clear `com.apple.quarantine` xattr from a workspace root and its
-//! direct children with a registered VMark extension, so subsequent Finder
+//! direct children with a registered TMark extension, so subsequent Finder
 //! opens are not silently dropped by macOS Launch Services /
 //! CoreServicesUIAgent on running Tauri apps.
 //!
@@ -57,7 +57,7 @@ fn strip_one(path: &Path) -> std::io::Result<bool> {
 }
 
 /// Strip `com.apple.quarantine` from `root` and every file with a
-/// registered VMark extension (see `crate::has_supported_extension`)
+/// registered TMark extension (see `crate::has_supported_extension`)
 /// directly inside `root`. Does not recurse into subdirectories.
 ///
 /// Errors on individual entries are logged and counted, never propagated.

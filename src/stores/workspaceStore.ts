@@ -263,7 +263,7 @@ export const useWorkspaceStore = create<WorkspaceState & WorkspaceActions>()(
     }),
     {
       // Name is ignored by windowScopedStorage (uses window label instead)
-      name: "vmark-workspace",
+      name: "tmark-workspace",
       // Use window-scoped storage for per-window workspace persistence
       storage: createJSONStorage(() => windowScopedStorage),
       // Persist workspace state including config for seamless reload

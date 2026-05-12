@@ -1,6 +1,6 @@
 # Unterstützte Formate
 
-VMark öffnet jedes der unten aufgeführten Dateiformate direkt. Das Besondere sind **schemagestützte Vorschauen**: Wenn eine Datei ein bekanntes Artefakt ist, rendert VMark die *richtige* Ansicht — keinen generischen JSON-Baum.
+TMark öffnet jedes der unten aufgeführten Dateiformate direkt. Das Besondere sind **schemagestützte Vorschauen**: Wenn eine Datei ein bekanntes Artefakt ist, rendert TMark die *richtige* Ansicht — keinen generischen JSON-Baum.
 
 [[toc]]
 
@@ -17,7 +17,7 @@ Markdown, Klartext und YAML/YML öffnen sich immer in ihren vollständigen Edito
 
 Wenn eine Kategorie deaktiviert ist, fallen die zugehörigen Erweiterungen auf den Klartext-Fallback zurück, sodass die Datei trotzdem geöffnet wird — nur ohne Vorschau oder Schemaansicht. Schalten Sie einen Umschalter um, und die Registry wird sofort neu aufgebaut; geöffnete Tabs werden mit dem passenden Adapter neu gemountet.
 
-Beim ersten Start nach dem Upgrade auf die Mehrformat-Unterstützung zeigt VMark einmalig einen Toast, der Sie auf **Einstellungen → Formate** hinweist. Wenn Sie ihn verworfen haben oder VMark frisch installiert haben, finden Sie den Bereich jederzeit unter **Einstellungen → Formate**.
+Beim ersten Start nach dem Upgrade auf die Mehrformat-Unterstützung zeigt TMark einmalig einen Toast, der Sie auf **Einstellungen → Formate** hinweist. Wenn Sie ihn verworfen haben oder TMark frisch installiert haben, finden Sie den Bereich jederzeit unter **Einstellungen → Formate**.
 
 ## Auf einen Blick
 
@@ -37,7 +37,7 @@ Code-Dateien sind standardmäßig schreibgeschützt und zeigen ein Banner mit de
 
 ## Schemagestützte Vorschauen
 
-Wenn Pfad oder Inhalt einem bekannten Schema entsprechen, ersetzt VMark die generische Baumansicht durch die passende Darstellung.
+Wenn Pfad oder Inhalt einem bekannten Schema entsprechen, ersetzt TMark die generische Baumansicht durch die passende Darstellung.
 
 ### GitHub Actions Workflow (`.github/workflows/*.yml`)
 
@@ -52,7 +52,7 @@ Wenn Pfad oder Inhalt einem bekannten Schema entsprechen, ersetzt VMark die gene
 
 - Pfad-Erkennung: Dateiname `Cargo.toml` (Groß-/Kleinschreibung ignoriert) auf POSIX- oder Windows-Pfaden.
 - Inhalts-Erkennung: `[package]`- oder `[workspace]`-Header.
-- Keine Netzwerkanfragen — VMark löst crates.io niemals auf.
+- Keine Netzwerkanfragen — TMark löst crates.io niemals auf.
 
 ### `package.json`
 
@@ -97,14 +97,14 @@ Der Validator zeigt Script-Tags, `javascript:`-URLs und Inline-Ereignishandler a
 Für Code-Dateien startet die Schaltfläche **In externem Editor öffnen** im schreibgeschützten Banner Ihren bevorzugten Editor. Auflösungsreihenfolge:
 
 1. **Einstellungen → Formate → Externer Editor** (das GUI-Feld — siehe [Einstellungen](/de/guide/settings#formate)). Wählen Sie ein `.app`-Bundle auf macOS, eine ausführbare Datei auf Linux/Windows oder alles, was Ihre Shell auflösen würde.
-2. `$VMARK_EXTERNAL_EDITOR` (projektweite Umgebungsvariable als Überschreibung)
+2. `$TMARK_EXTERNAL_EDITOR` (projektweite Umgebungsvariable als Überschreibung)
 3. `$VISUAL`
 4. `$EDITOR`
 5. Plattformstandard (`open -t` auf macOS, `notepad.exe` auf Windows, `xdg-open` auf Linux)
 
 Die GUI-Einstellung hat Vorrang vor Umgebungsvariablen — explizit schlägt implizit. Lassen Sie das Feld leer, um die Fallback-Kette der Umgebungsvariablen zu nutzen.
 
-VMark leitet über einen Login-Shell-PATH weiter, sodass VS Code / Cursor / JetBrains-Wrapper korrekt aufgelöst werden, wenn sie von einer macOS-GUI-App aus gestartet werden.
+TMark leitet über einen Login-Shell-PATH weiter, sodass VS Code / Cursor / JetBrains-Wrapper korrekt aufgelöst werden, wenn sie von einer macOS-GUI-App aus gestartet werden.
 
 ### Sicherheitsüberprüfung
 
@@ -112,10 +112,10 @@ Der Tauri-Befehl `open_in_external_editor` lehnt ab:
 
 - nicht existierende Pfade
 - Verzeichnisse und andere Nicht-Regulär-Dateien (Sockets, Geräte)
-- Pfade, deren kanonisierte Erweiterung nicht in VMark's registriertem Formatsatz enthalten ist
+- Pfade, deren kanonisierte Erweiterung nicht in TMark's registriertem Formatsatz enthalten ist
 - Symlinks, deren kanonisches Ziel eine der obigen Prüfungen nicht besteht
 
-Ein kompromittiertes Webview kann die Schaltfläche nicht verwenden, um den externen Editor für beliebige Systemdateien (Passwörter, Schlüssel usw.) zu starten — nur für Pfade, die VMark selbst öffnen würde.
+Ein kompromittiertes Webview kann die Schaltfläche nicht verwenden, um den externen Editor für beliebige Systemdateien (Passwörter, Schlüssel usw.) zu starten — nur für Pfade, die TMark selbst öffnen würde.
 
 ## Was nicht unterstützt wird
 

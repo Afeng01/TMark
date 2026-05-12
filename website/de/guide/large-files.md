@@ -1,17 +1,17 @@
 # Große Dateien
 
-VMark öffnet die meisten Markdown-Dateien sofort, doch sehr große Dateien benötigen besondere Behandlung, damit der Editor reaktionsfähig bleibt. Diese Seite beschreibt, wie VMark damit umgeht und wie Sie das Verhalten anpassen können.
+TMark öffnet die meisten Markdown-Dateien sofort, doch sehr große Dateien benötigen besondere Behandlung, damit der Editor reaktionsfähig bleibt. Diese Seite beschreibt, wie TMark damit umgeht und wie Sie das Verhalten anpassen können.
 
 ## Was als „groß" gilt
 
-VMark stuft eine Datei vor dem Öffnen anhand ihrer Größe ein:
+TMark stuft eine Datei vor dem Öffnen anhand ihrer Größe ein:
 
 | Größe | Stufe | Was passiert |
 |-------|-------|--------------|
 | < 1 MB | Klein | Öffnet sich sofort im WYSIWYG-Modus (Rich-Text). |
 | 1 MB – 5 MB | Groß | Öffnet sich standardmäßig im **Quellmodus** — im Sub-Sekunden-Bereich. Die Statusleiste bietet „Zu WYSIWYG wechseln" an. |
 | 5 MB – 50 MB | Riesig | Zuerst erscheint ein Bestätigungsdialog. Öffnet sich nur im Quellmodus. |
-| ≥ 50 MB | Abgelehnt | VMark verweigert das Öffnen der Datei. Verwenden Sie stattdessen `less`, `bat` oder ein ähnliches Werkzeug. |
+| ≥ 50 MB | Abgelehnt | TMark verweigert das Öffnen der Datei. Verwenden Sie stattdessen `less`, `bat` oder ein ähnliches Werkzeug. |
 
 Die Größe wird über das Betriebssystem geprüft, ohne die Datei zu lesen, sodass die Entscheidung schnell ist und keine Daten vorab geladen werden.
 
@@ -43,7 +43,7 @@ Die harte 50-MB-Grenze ist nicht vom Benutzer einstellbar. Die Webview kann beli
 
 ## Edge Cases
 
-- **Datei wächst während des Öffnens.** VMark entscheidet die Stufe anhand der Größe zum Öffnungszeitpunkt. Eine Datei, die während der Bearbeitung auf 2 MB anwächst, bleibt in dem Modus, den Sie gewählt haben.
+- **Datei wächst während des Öffnens.** TMark entscheidet die Stufe anhand der Größe zum Öffnungszeitpunkt. Eine Datei, die während der Bearbeitung auf 2 MB anwächst, bleibt in dem Modus, den Sie gewählt haben.
 - **Symlinks.** Größenangaben beziehen sich auf die Zieldatei, ein Symlink auf eine 10-MB-Datei wird also als riesig behandelt.
 - **Leere Dateien.** Null-Byte-Dateien gelten als klein und öffnen sich in WYSIWYG.
 - **Datei verschwindet zwischen Größencheck und Lesen.** Der gewohnte „Datei nicht gefunden"-Fehler erscheint — keine zusätzliche Warnung.

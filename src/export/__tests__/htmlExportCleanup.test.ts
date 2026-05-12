@@ -96,10 +96,10 @@ describe("exportHtml partial failure cleanup", () => {
 
     // reader assets were written before index.html
     expect(removeCalls).toContain(
-      "/users/me/MyReport/assets/vmark-reader.css"
+      "/users/me/MyReport/assets/tmark-reader.css"
     );
     expect(removeCalls).toContain(
-      "/users/me/MyReport/assets/vmark-reader.js"
+      "/users/me/MyReport/assets/tmark-reader.js"
     );
 
     // standalone.html failed to write — should NOT be in cleanup list

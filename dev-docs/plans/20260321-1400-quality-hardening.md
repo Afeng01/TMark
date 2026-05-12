@@ -185,10 +185,10 @@ branch: "quality/comprehensive-hardening"
 - **Goal:** Replace unsafe `as Type` casts with proper type guards in MCP server tools
 - **Acceptance:** (1) All `args.*` accesses use typeof checks or Zod validation. (2) Invalid types return clear error responses. (3) Tests cover type mismatch scenarios.
 - **Tests (first):**
-  - File: `vmark-mcp-server/__tests__/unit/tools/document.test.ts`
+  - File: `tmark-mcp-server/__tests__/unit/tools/document.test.ts`
   - Intent: Test type validation for action, mode, operations arguments
 - **Touched areas:**
-  - File: `vmark-mcp-server/src/tools/document.ts` (lines 144, 335, 336, 401)
+  - File: `tmark-mcp-server/src/tools/document.ts` (lines 144, 335, 336, 401)
   - Symbols: `handleDocumentTool()`, argument extraction sections
 - **Dependencies:** None
 - **Risks:** Low — adding validation only rejects currently-invalid inputs

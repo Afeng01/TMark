@@ -33,7 +33,7 @@ Cold run, command: `pnpm test --run`.
 | Direct crate dependencies (cargo tree depth 1) | 42 |
 | Cargo.toml dependency lines | 50 |
 
-Note: `cargo test` cannot run without the `vmark-mcp-server-aarch64-apple-darwin` sidecar binary being built first (Tauri resource requirement). Rust test timing not captured in this baseline.
+Note: `cargo test` cannot run without the `tmark-mcp-server-aarch64-apple-darwin` sidecar binary being built first (Tauri resource requirement). Rust test timing not captured in this baseline.
 
 ## JavaScript dependencies
 

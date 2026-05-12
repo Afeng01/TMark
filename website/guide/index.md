@@ -1,12 +1,12 @@
-# Getting Started with VMark
+# Getting Started with TMark
 
-VMark is the plain-text workspace where humans and AI collaborate. Both parties read and write the same artifacts directly — markdown, YAML, JSON, TOML, Mermaid, SVG, HTML, code — with no translation layer in between. Where the file is a known artifact (a GitHub Actions workflow, `Cargo.toml`, `package.json`, `pyproject.toml`), VMark renders the *right* view, not a generic JSON tree.
+TMark is the plain-text workspace where humans and AI collaborate. Both parties read and write the same artifacts directly — markdown, YAML, JSON, TOML, Mermaid, SVG, HTML, code — with no translation layer in between. Where the file is a known artifact (a GitHub Actions workflow, `Cargo.toml`, `package.json`, `pyproject.toml`), TMark renders the *right* view, not a generic JSON tree.
 
 The differentiator isn't "open more file types" — every IDE does that. It's **schema-aware previews**: the structured view per artifact, paired with a live source pane.
 
 ## Quick Start
 
-1. **Download and install** VMark from the [download page](/download)
+1. **Download and install** TMark from the [download page](/download)
 2. **Launch the app** and start writing immediately
 3. **Open a file** with `Cmd/Ctrl + O` or drag & drop any [supported format](/guide/formats)
 4. **Open a folder** with `Cmd/Ctrl + Shift + O` for workspace mode
@@ -32,7 +32,7 @@ The differentiator isn't "open more file types" — every IDE does that. It's **
 
 ### Editing Modes
 
-VMark supports two editing modes that you can switch between:
+TMark supports two editing modes that you can switch between:
 
 | Mode | Description | Shortcut |
 |------|-------------|----------|
@@ -84,11 +84,11 @@ Enhance your writing focus with these view modes:
 
 ### Exporting
 
-- **Export HTML**: Use **File → Export HTML** — includes interactive VMark Reader
+- **Export HTML**: Use **File → Export HTML** — includes interactive TMark Reader
 - **Export PDF**: Use Print (`Cmd/Ctrl + P`) and save as PDF
 - **Copy as HTML**: `Cmd/Ctrl + Shift + C`
 
-Exported HTML includes the VMark Reader with table of contents, settings panel, and more. [Learn more →](/guide/export)
+Exported HTML includes the TMark Reader with table of contents, settings panel, and more. [Learn more →](/guide/export)
 
 ## Settings
 
@@ -105,7 +105,7 @@ Open settings with `Cmd/Ctrl + ,` to customize:
 
 ## AI Writing Assistance
 
-VMark includes built-in AI Genies — select text and press `Mod + Y` to polish, expand, translate, or transform your writing with AI. Configure your preferred provider in **Settings > Integrations**.
+TMark includes built-in AI Genies — select text and press `Mod + Y` to polish, expand, translate, or transform your writing with AI. Configure your preferred provider in **Settings > Integrations**.
 
 [Learn more about AI Genies →](/guide/ai-genies) | [Configure providers →](/guide/ai-providers)
 

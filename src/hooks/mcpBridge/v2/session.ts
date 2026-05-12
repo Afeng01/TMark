@@ -1,5 +1,5 @@
 /**
- * Purpose: `vmark.session.get_state` — one-shot orientation for AI agents.
+ * Purpose: `tmark.session.get_state` — one-shot orientation for AI agents.
  *   Replaces five legacy discovery tools (get_capabilities,
  *   get_document_revision, tabs.list, workspace.get_focused,
  *   workspace.list_windows) with a single call that returns every window,
@@ -95,7 +95,7 @@ export function buildSessionState(appVersion: string): SessionState {
 }
 
 /**
- * Handle `vmark.session.get_state` requests.
+ * Handle `tmark.session.get_state` requests.
  *
  * No args. Returns the full session state — orientation in one round-trip.
  */

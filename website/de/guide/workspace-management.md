@@ -1,6 +1,6 @@
 # Arbeitsbereichsverwaltung
 
-Ein Arbeitsbereich in VMark ist ein Ordner, der als Stammverzeichnis Ihres Projekts geöffnet wird. Wenn Sie einen Arbeitsbereich öffnen, zeigt die Seitenleiste eine Dateistruktur, Quick Open indiziert jede Markdown-Datei, das Terminal startet im Projektstammverzeichnis und Ihre geöffneten Tabs werden für das nächste Mal gespeichert.
+Ein Arbeitsbereich in TMark ist ein Ordner, der als Stammverzeichnis Ihres Projekts geöffnet wird. Wenn Sie einen Arbeitsbereich öffnen, zeigt die Seitenleiste eine Dateistruktur, Quick Open indiziert jede Markdown-Datei, das Terminal startet im Projektstammverzeichnis und Ihre geöffneten Tabs werden für das nächste Mal gespeichert.
 
 Ohne einen Arbeitsbereich können Sie weiterhin einzelne Dateien öffnen, verlieren aber den Datei-Explorer, die projekteigene Suche und die Sitzungswiederherstellung.
 
@@ -10,13 +10,13 @@ Ohne einen Arbeitsbereich können Sie weiterhin einzelne Dateien öffnen, verlie
 |---------|-----|
 | Menü | **Datei > Arbeitsbereich öffnen** |
 | Quick Open | `Mod + O`, dann unten **Durchsuchen...** auswählen |
-| Drag-and-Drop | Eine Markdown-Datei aus dem Finder in das Fenster ziehen — VMark erkennt das Projektstammverzeichnis und öffnet den Arbeitsbereich automatisch |
+| Drag-and-Drop | Eine Markdown-Datei aus dem Finder in das Fenster ziehen — TMark erkennt das Projektstammverzeichnis und öffnet den Arbeitsbereich automatisch |
 | Zuletzt geöffnete Arbeitsbereiche | **Datei > Zuletzt geöffnete Arbeitsbereiche** und ein früheres Projekt auswählen |
 
-Wenn Sie einen Arbeitsbereich öffnen, zeigt VMark die Seitenleiste mit dem Datei-Explorer. Wenn der Arbeitsbereich zuvor geöffnet war, werden die vorherigen Tabs wiederhergestellt.
+Wenn Sie einen Arbeitsbereich öffnen, zeigt TMark die Seitenleiste mit dem Datei-Explorer. Wenn der Arbeitsbereich zuvor geöffnet war, werden die vorherigen Tabs wiederhergestellt.
 
 ::: tip
-Wenn das aktuelle Fenster nicht gespeicherte Änderungen hat, bietet VMark an, den Arbeitsbereich in einem neuen Fenster zu öffnen, anstatt Ihre Arbeit zu ersetzen.
+Wenn das aktuelle Fenster nicht gespeicherte Änderungen hat, bietet TMark an, den Arbeitsbereich in einem neuen Fenster zu öffnen, anstatt Ihre Arbeit zu ersetzen.
 :::
 
 ## Datei-Explorer
@@ -90,7 +90,7 @@ Ohne einen Arbeitsbereich funktioniert Quick Open weiterhin — es zeigt zuletzt
 
 ## Inhaltssuche im Arbeitsbereich
 
-Wenn ein Arbeitsbereich geöffnet ist, kann VMark **Dateiinhalte** (nicht nur Dateinamen) nach Übereinstimmungen in Markdown- und Textdateien durchsuchen.
+Wenn ein Arbeitsbereich geöffnet ist, kann TMark **Dateiinhalte** (nicht nur Dateinamen) nach Übereinstimmungen in Markdown- und Textdateien durchsuchen.
 
 | Aktion | Kürzel |
 |---|---|
@@ -112,7 +112,7 @@ Dies unterscheidet sich von [Quick Open](#quick-open), das nur *Dateinamen* durc
 
 ## Zuletzt geöffnete Arbeitsbereiche
 
-VMark merkt sich bis zu 10 zuletzt geöffnete Arbeitsbereiche. Diese sind über **Datei > Zuletzt geöffnete Arbeitsbereiche** in der Menüleiste zugänglich.
+TMark merkt sich bis zu 10 zuletzt geöffnete Arbeitsbereiche. Diese sind über **Datei > Zuletzt geöffnete Arbeitsbereiche** in der Menüleiste zugänglich.
 
 - Arbeitsbereiche werden nach zuletzt geöffneter Zeit sortiert (neueste zuerst)
 - Die Liste wird bei jeder Änderung mit dem nativen Menü synchronisiert
@@ -120,7 +120,7 @@ VMark merkt sich bis zu 10 zuletzt geöffnete Arbeitsbereiche. Diese sind über 
 
 ## Arbeitsbereichseinstellungen
 
-Jeder Arbeitsbereich hat seine eigene Konfiguration, die zwischen Sitzungen erhalten bleibt. Einstellungen werden im VMark-Anwendungsdatenverzeichnis gespeichert — nicht im Projektordner — damit Ihr Arbeitsbereich sauber bleibt.
+Jeder Arbeitsbereich hat seine eigene Konfiguration, die zwischen Sitzungen erhalten bleibt. Einstellungen werden im TMark-Anwendungsdatenverzeichnis gespeichert — nicht im Projektordner — damit Ihr Arbeitsbereich sauber bleibt.
 
 Die folgenden Einstellungen werden pro Arbeitsbereich gespeichert:
 
@@ -137,7 +137,7 @@ Die Arbeitsbereichskonfiguration ist an den Ordnerpfad gebunden. Das Öffnen des
 
 ## Sitzungswiederherstellung
 
-Wenn Sie ein Fenster schließen, das einen geöffneten Arbeitsbereich hat, speichert VMark die Liste der geöffneten Tabs in der Arbeitsbereichskonfiguration. Wenn Sie denselben Arbeitsbereich das nächste Mal öffnen, werden diese Tabs automatisch wiederhergestellt.
+Wenn Sie ein Fenster schließen, das einen geöffneten Arbeitsbereich hat, speichert TMark die Liste der geöffneten Tabs in der Arbeitsbereichskonfiguration. Wenn Sie denselben Arbeitsbereich das nächste Mal öffnen, werden diese Tabs automatisch wiederhergestellt.
 
 - Nur Tabs mit einem gespeicherten Dateipfad werden wiederhergestellt (unbenannte Tabs werden nicht gespeichert)
 - Wenn eine Datei seit der letzten Sitzung verschoben oder gelöscht wurde, wird sie lautlos übersprungen
@@ -145,13 +145,13 @@ Wenn Sie ein Fenster schließen, das einen geöffneten Arbeitsbereich hat, speic
 
 ## Mehrfachfenster
 
-Jedes VMark-Fenster kann seinen eigenen unabhängigen Arbeitsbereich haben. So können Sie gleichzeitig an mehreren Projekten arbeiten.
+Jedes TMark-Fenster kann seinen eigenen unabhängigen Arbeitsbereich haben. So können Sie gleichzeitig an mehreren Projekten arbeiten.
 
 - **Datei > Neues Fenster** öffnet ein frisches Fenster
 - Das Öffnen eines Arbeitsbereichs in einem neuen Fenster beeinflusst andere Fenster nicht
 - Fenstergröße und -position werden pro Fenster gespeichert
 
-Wenn Sie eine Markdown-Datei aus dem Finder ziehen und das aktuelle Fenster nicht gespeicherte Arbeit hat, öffnet VMark das Projekt der Datei automatisch in einem neuen Fenster.
+Wenn Sie eine Markdown-Datei aus dem Finder ziehen und das aktuelle Fenster nicht gespeicherte Arbeit hat, öffnet TMark das Projekt der Datei automatisch in einem neuen Fenster.
 
 ### Tabs in neue Fenster ablösen
 
@@ -165,51 +165,51 @@ Die Geste ist richtungsgebunden: Horizontale Bewegung startet eine Neuanordnung,
 
 ## Externe Änderungen
 
-VMark überwacht Ihren Arbeitsbereich auf Änderungen, die von anderen Programmen vorgenommen werden (Git, externe Editoren, Build-Tools usw.) und hält geöffnete Dokumente synchron.
+TMark überwacht Ihren Arbeitsbereich auf Änderungen, die von anderen Programmen vorgenommen werden (Git, externe Editoren, Build-Tools usw.) und hält geöffnete Dokumente synchron.
 
 - **Unveränderte Dateien** werden automatisch neu geladen, wenn sich ihr Inhalt auf der Festplatte ändert. Eine kurze Toast-Benachrichtigung bestätigt das Neuladen.
 - **Dateien mit nicht gespeicherten Änderungen** lösen einen Dialog mit drei Optionen aus: **Speichern unter** (Ihre Version an einem neuen Speicherort speichern), **Neu laden** (Ihre Änderungen verwerfen und von der Festplatte laden) oder **Behalten** (Ihre Bearbeitungen beibehalten und die Datei als abweichend markieren).
 - **Gelöschte Dateien** werden in ihrem Tab als fehlend markiert, aber nicht geschlossen — Sie können den Inhalt weiterhin an einem neuen Speicherort speichern.
-- Wenn mehrere geänderte Dateien gleichzeitig auf der Festplatte geändert werden (z. B. nach einem `git checkout`), fasst VMark sie in einen einzigen Dialog zusammen, damit Sie alle neu laden, alle behalten oder jede Datei einzeln überprüfen können.
-- Wenn der Festplatteninhalt einer abweichenden Datei später mit dem übereinstimmt, was Sie im Editor haben (z. B. ein `git checkout` stellt denselben Text wieder her), löscht VMark automatisch den abweichenden Status, sodass das normale automatische Speichern wieder aufgenommen wird.
+- Wenn mehrere geänderte Dateien gleichzeitig auf der Festplatte geändert werden (z. B. nach einem `git checkout`), fasst TMark sie in einen einzigen Dialog zusammen, damit Sie alle neu laden, alle behalten oder jede Datei einzeln überprüfen können.
+- Wenn der Festplatteninhalt einer abweichenden Datei später mit dem übereinstimmt, was Sie im Editor haben (z. B. ein `git checkout` stellt denselben Text wieder her), löscht TMark automatisch den abweichenden Status, sodass das normale automatische Speichern wieder aufgenommen wird.
 
-VMark filtert seine eigenen Speichervorgänge heraus, sodass Sie nie durch Änderungen aufgefordert werden, die Sie innerhalb der App vorgenommen haben.
+TMark filtert seine eigenen Speichervorgänge heraus, sodass Sie nie durch Änderungen aufgefordert werden, die Sie innerhalb der App vorgenommen haben.
 
 ## macOS Dock — Letzte Dokumente
 
-Dokumente, die Sie in VMark öffnen, werden bei macOS registriert, sodass sie im Untermenü **Zuletzt benutzte Objekte** erscheinen, wenn Sie mit der rechten Maustaste auf das VMark-Symbol im Dock klicken.
+Dokumente, die Sie in TMark öffnen, werden bei macOS registriert, sodass sie im Untermenü **Zuletzt benutzte Objekte** erscheinen, wenn Sie mit der rechten Maustaste auf das TMark-Symbol im Dock klicken.
 
 ## Terminal-Integration
 
 Das integrierte Terminal verwendet automatisch das Arbeitsbereichsstammverzeichnis als Arbeitsverzeichnis. Wenn Sie Arbeitsbereiche öffnen oder wechseln, wechseln alle Terminal-Sitzungen per `cd` zum neuen Stammverzeichnis.
 
-Die Umgebungsvariable `VMARK_WORKSPACE` wird in jeder Terminal-Sitzung auf den Arbeitsbereichspfad gesetzt, damit Ihre Skripte das Projektstammverzeichnis referenzieren können.
+Die Umgebungsvariable `TMARK_WORKSPACE` wird in jeder Terminal-Sitzung auf den Arbeitsbereichspfad gesetzt, damit Ihre Skripte das Projektstammverzeichnis referenzieren können.
 
 [Mehr über das Terminal erfahren →](/de/guide/terminal)
 
 ## Shell-CLI-Befehl
 
-VMark kann einen `vmark`-Shell-Befehl installieren, damit Sie Dateien und Ordner vom Terminal aus öffnen können.
+TMark kann einen `tmark`-Shell-Befehl installieren, damit Sie Dateien und Ordner vom Terminal aus öffnen können.
 
 ### Installation
 
-Gehen Sie zu **Hilfe > Befehl 'vmark' installieren**. VMark schreibt ein kleines Startskript nach `/usr/local/bin/vmark` und fragt nach Ihrem Administratorkennwort (derselbe Ansatz, den VS Code für seinen `code`-Befehl verwendet).
+Gehen Sie zu **Hilfe > Befehl 'tmark' installieren**. TMark schreibt ein kleines Startskript nach `/usr/local/bin/tmark` und fragt nach Ihrem Administratorkennwort (derselbe Ansatz, den VS Code für seinen `code`-Befehl verwendet).
 
 ### Verwendung
 
 ```bash
 # Eine Datei öffnen
-vmark README.md
+tmark README.md
 
 # Einen Ordner als Arbeitsbereich öffnen
-vmark ~/projects/my-blog
+tmark ~/projects/my-blog
 
 # Mehrere Dateien öffnen
-vmark chapter1.md chapter2.md
+tmark chapter1.md chapter2.md
 ```
 
-Der Befehl delegiert an `open -b app.vmark`, sodass macOS das Einzelinstanz-Verhalten handhabt — Dateien werden in Ihrem bestehenden VMark-Fenster geöffnet, anstatt einen neuen Prozess zu starten.
+Der Befehl delegiert an `open -b app.tmark`, sodass macOS das Einzelinstanz-Verhalten handhabt — Dateien werden in Ihrem bestehenden TMark-Fenster geöffnet, anstatt einen neuen Prozess zu starten.
 
 ### Deinstallation
 
-Gehen Sie zu **Hilfe > Befehl 'vmark' deinstallieren**, um `/usr/local/bin/vmark` zu entfernen. Wenn die Datei an diesem Pfad nicht von VMark installiert wurde, wird der Vorgang blockiert und Sie werden aufgefordert, sie manuell zu entfernen.
+Gehen Sie zu **Hilfe > Befehl 'tmark' deinstallieren**, um `/usr/local/bin/tmark` zu entfernen. Wenn die Datei an diesem Pfad nicht von TMark installiert wurde, wird der Vorgang blockiert und Sie werden aufgefordert, sie manuell zu entfernen.

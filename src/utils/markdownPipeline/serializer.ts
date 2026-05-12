@@ -2,7 +2,7 @@
  * Markdown Serializer (remark-stringify based)
  *
  * Purpose: Serializes MDAST back to markdown text with consistent formatting.
- * The serializer configuration determines VMark's canonical markdown style.
+ * The serializer configuration determines TMark's canonical markdown style.
  *
  * Key decisions:
  *   - Bullet: `-` (not `*`), emphasis: `*`, strong: `**`, fence: backtick
@@ -89,7 +89,7 @@ function handleLink(
 }
 
 /**
- * Unified processor configured for VMark markdown serialization.
+ * Unified processor configured for TMark markdown serialization.
  *
  * Plugins (must match parser configuration):
  * - remark-stringify: Base CommonMark serializer

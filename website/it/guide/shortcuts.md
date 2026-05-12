@@ -1,6 +1,6 @@
 # Scorciatoie da Tastiera
 
-VMark è progettato per flussi di lavoro da tastiera. La maggior parte delle scorciatoie può essere personalizzata nelle Impostazioni. Un piccolo numero di primitive è fisso: i selettori multi-cursore `Mod+D` (Seleziona occorrenza successiva) e `Mod+Shift+L` (Seleziona tutte le occorrenze) e le associazioni globali Annulla/Ripristina. Le altre scorciatoie multi-cursore (Salta occorrenza, Annulla cursore soft, Aggiungi cursore sopra/sotto) sono configurabili. Le scorciatoie contrassegnate _(contestuali)_ sono gestite all'interno dell'editor per strutture specifiche (ad es. attivazione casella elenco di attività) e non sono esposte nel registro di personalizzazione.
+TMark è progettato per flussi di lavoro da tastiera. La maggior parte delle scorciatoie può essere personalizzata nelle Impostazioni. Un piccolo numero di primitive è fisso: i selettori multi-cursore `Mod+D` (Seleziona occorrenza successiva) e `Mod+Shift+L` (Seleziona tutte le occorrenze) e le associazioni globali Annulla/Ripristina. Le altre scorciatoie multi-cursore (Salta occorrenza, Annulla cursore soft, Aggiungi cursore sopra/sotto) sono configurabili. Le scorciatoie contrassegnate _(contestuali)_ sono gestite all'interno dell'editor per strutture specifiche (ad es. attivazione casella elenco di attività) e non sono esposte nel registro di personalizzazione.
 
 ## Notazione
 
@@ -9,17 +9,17 @@ VMark è progettato per flussi di lavoro da tastiera. La maggior parte delle sco
 
 ## Tasti Funzione su macOS
 
-VMark usa i tasti funzione (F4–F10) per attivazioni rapide della modalità. Su macOS, questi tasti sono mappati alle funzioni di sistema (luminosità, volume, ecc.) per impostazione predefinita.
+TMark usa i tasti funzione (F4–F10) per attivazioni rapide della modalità. Su macOS, questi tasti sono mappati alle funzioni di sistema (luminosità, volume, ecc.) per impostazione predefinita.
 
 **Per usare i tasti F direttamente senza tenere premuto Fn:**
 
 1. Apri **Impostazioni di Sistema** → **Tastiera**
 2. Abilita **"Usa i tasti F1, F2, ecc. come tasti funzione standard"**
 
-In alternativa, tieni premuto il tasto **Fn** quando premi F4–F10 per attivare le scorciatoie VMark.
+In alternativa, tieni premuto il tasto **Fn** quando premi F4–F10 per attivare le scorciatoie TMark.
 
 ::: tip
-Se preferisci mantenere le funzioni di sistema sui tasti F, puoi personalizzare le scorciatoie VMark nelle Impostazioni (`Mod + ,`) per usare combinazioni di tasti diverse.
+Se preferisci mantenere le funzioni di sistema sui tasti F, puoi personalizzare le scorciatoie TMark nelle Impostazioni (`Mod + ,`) per usare combinazioni di tasti diverse.
 :::
 
 ### Riferimento Rapido Tasti F

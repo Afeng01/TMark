@@ -261,7 +261,7 @@ Icon SVG sizes (conventions, not tokens):
 
 ## Two layers: semantic tokens above primitives
 
-VMark's token system has **two layers**, both defined in `src/styles/index.css`:
+TMark's token system has **two layers**, both defined in `src/styles/index.css`:
 
 1. **Semantic tokens** — named for their role (`--popup-padding`, `--icon-size-lg`, `--radius-sm`, `--spacing-2`, `--accent-bg`). **Always prefer these when one fits.**
 2. **Primitives** — named for their value position on a scale (`--space-1-5: 6px`, `--font-size-sm: 12px`, `--duration-fast: 0.1s`, `--opacity-disabled: 0.4`, `--z-popup: 9999`). Reach for these **only when no semantic token covers the case**.
@@ -318,7 +318,7 @@ The `.tokenize/ignore` file in the project root encodes the structural exclusion
 
 After CSS changes, verify rendering with the reference document:
 
-1. Open `dev-docs/css-reference.md` in VMark
+1. Open `dev-docs/css-reference.md` in TMark
 2. Check both light and dark themes
 3. Compare against baseline screenshots in `dev-docs/archive/screenshots/` (gitignored)
 

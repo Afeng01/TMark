@@ -10,7 +10,7 @@ const ROOT = resolve(import.meta.dirname, "..");
 
 const EXCLUDED = [
   /^src\/styles\/index\.css$/,
-  /^src\/export\/reader\/vmark-reader\.css$/,
+  /^src\/export\/reader\/tmark-reader\.css$/,
   /^src\/plugins\/codemirror\/source-syntax\.css$/,
   /^src\/plugins\/codeBlockLineNumbers\/hljs-syntax\.css$/,
   /^src\/components\/Editor\/editor\.css$/,

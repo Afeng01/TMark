@@ -1,13 +1,13 @@
 ---
 name: tiptap-editor
-description: Tiptap editor API patterns for vmark WYSIWYG development. Use when working with editor commands, node traversal, selection handling, or format operations.
+description: Tiptap editor API patterns for tmark WYSIWYG development. Use when working with editor commands, node traversal, selection handling, or format operations.
 ---
 
 # Tiptap Editor API Patterns
 
 ## Overview
 
-This skill documents proper Tiptap API usage patterns for vmark development. It helps distinguish when to use Tiptap's high-level API vs direct ProseMirror access.
+This skill documents proper Tiptap API usage patterns for tmark development. It helps distinguish when to use Tiptap's high-level API vs direct ProseMirror access.
 
 ## When to Use Tiptap API
 
@@ -45,7 +45,7 @@ editor.getAttributes("link")
 - Low-level transaction manipulation
 - Schema-level operations
 
-## Known Issues in vmark
+## Known Issues in tmark
 
 ### 1. cursorHandlers.ts Block Boundary Issue
 `src/hooks/mcpBridge/cursorHandlers.ts` uses `doc.textContent` which flattens the document and loses block boundaries. The correct approach is to use `$pos` helpers:
@@ -70,7 +70,7 @@ const blockEnd = $pos.after($pos.depth);
 ## References
 
 - `references/patterns.md` - Detailed API patterns and $pos usage
-- `references/examples.md` - Real code examples from vmark codebase
+- `references/examples.md` - Real code examples from tmark codebase
 
 ## Workflow
 

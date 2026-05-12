@@ -1,10 +1,12 @@
 # 隱私政策
 
-VMark 尊重你的隱私。以下是確切發生的事情 — 以及不會發生的事情。
+> TMark snapshot note: this inherited privacy page is not authoritative until TMark release infrastructure is published. The current app update endpoint points to GitHub Releases, and public stats are disabled by default.
 
-## VMark 發送的資料
+TMark 尊重你的隱私。以下是確切發生的事情 — 以及不會發生的事情。
 
-VMark 包含一個 **自動更新檢查器**，會定期聯絡我們的伺服器以確認是否有新版本可用。這是 VMark **唯一** 的網路請求。
+## TMark 發送的資料
+
+TMark 包含一個 **自動更新檢查器**，會定期聯絡我們的伺服器以確認是否有新版本可用。這是 TMark **唯一** 的網路請求。
 
 每次檢查只發送以下欄位 — 不多不少：
 
@@ -19,13 +21,13 @@ VMark 包含一個 **自動更新檢查器**，會定期聯絡我們的伺服器
 完整的 URL 如下所示：
 
 ```text
-GET https://log.vmark.app/update/latest.json?target=darwin&arch=aarch64&version=0.5.10
+GET https://github.com/Afeng01/TMark/releases/latest/download/latest.json?target=darwin&arch=aarch64&version=0.5.10
 X-Machine-Id: a3f8c2b1d4e5f6078a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1
 ```
 
-你可以自行驗證 — 端點位於 [`tauri.conf.json`](https://github.com/xiaolai/vmark/blob/main/src-tauri/tauri.conf.json)（搜尋 `"endpoints"`），雜湊位於 [`lib.rs`](https://github.com/xiaolai/vmark/blob/main/src-tauri/src/lib.rs)（搜尋 `machine_id_hash`）。
+你可以自行驗證 — 端點位於 [`tauri.conf.json`](https://github.com/Afeng01/TMark/blob/main/src-tauri/tauri.conf.json)（搜尋 `"endpoints"`），雜湊位於 [`lib.rs`](https://github.com/Afeng01/TMark/blob/main/src-tauri/src/lib.rs)（搜尋 `machine_id_hash`）。
 
-## VMark 不發送的資料
+## TMark 不發送的資料
 
 - 你的文件或其內容
 - 檔案名稱或路徑
@@ -48,7 +50,7 @@ X-Machine-Id: a3f8c2b1d4e5f6078a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1
 | **平台** | 每個作業系統 + 架構組合的請求數量 |
 | **版本** | 每個應用程式版本的請求數量 |
 
-這些數字公開發布在 [`log.vmark.app/api/stats`](https://log.vmark.app/api/stats)。沒有任何隱藏。
+這些數字公開發布在 [`configured stats endpoint`](https://github.com/Afeng01/TMark/releases)。沒有任何隱藏。
 
 **重要注意事項：**
 - 唯一 IP 低估了實際使用者 — 同一路由器/VPN 後面的多人計算為一個
@@ -60,19 +62,19 @@ X-Machine-Id: a3f8c2b1d4e5f6078a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1
 - 日誌以標準存取日誌格式儲存在我們的伺服器上
 - 日誌檔案達到 1 MB 時輪換，僅保留最近 3 個檔案
 - 日誌不與任何人分享
-- 沒有帳戶系統 — VMark 不知道你是誰
+- 沒有帳戶系統 — TMark 不知道你是誰
 - 機器雜湊不與任何帳戶、電子郵件或 IP 位址關聯 — 它僅是一個匿名裝置計數器
 - 我們不使用追蹤 Cookie、指紋識別或任何分析 SDK
 
 ## 開放原始碼透明度
 
-VMark 完全開放原始碼。你可以驗證此處描述的一切：
+TMark 完全開放原始碼。你可以驗證此處描述的一切：
 
-- 更新端點設定：[`src-tauri/tauri.conf.json`](https://github.com/xiaolai/vmark/blob/main/src-tauri/tauri.conf.json)
-- 機器雜湊生成：[`src-tauri/src/lib.rs`](https://github.com/xiaolai/vmark/blob/main/src-tauri/src/lib.rs) — 搜尋 `machine_id_hash`
-- 伺服器端統計彙總：[`scripts/vmark-stats-json`](https://github.com/xiaolai/vmark/blob/main/scripts/vmark-stats-json) — 在我們伺服器上執行以生成[公開統計數據](https://log.vmark.app/api/stats)的確切腳本
+- 更新端點設定：[`src-tauri/tauri.conf.json`](https://github.com/Afeng01/TMark/blob/main/src-tauri/tauri.conf.json)
+- 機器雜湊生成：[`src-tauri/src/lib.rs`](https://github.com/Afeng01/TMark/blob/main/src-tauri/src/lib.rs) — 搜尋 `machine_id_hash`
+- 伺服器端統計彙總：[`scripts/tmark-stats-json`](https://github.com/Afeng01/TMark/blob/main/scripts/tmark-stats-json) — 在我們伺服器上執行以生成[公開統計數據](https://github.com/Afeng01/TMark/releases)的確切腳本
 - 程式碼庫中沒有其他網路呼叫 — 自行搜尋 `fetch`、`http` 或 `reqwest`
 
 ## 停用更新檢查
 
-若你偏好完全停用自動更新檢查，可以在網路層面封鎖 `log.vmark.app`（防火牆、`/etc/hosts` 或 DNS）。VMark 在沒有它的情況下仍然可以正常運作 — 你只是不會收到更新通知。
+若你偏好完全停用自動更新檢查，可以在網路層面封鎖 the configured update endpoint（防火牆、`/etc/hosts` 或 DNS）。TMark 在沒有它的情況下仍然可以正常運作 — 你只是不會收到更新通知。

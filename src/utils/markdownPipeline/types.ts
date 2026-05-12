@@ -1,7 +1,7 @@
 /**
  * Types for the markdown pipeline
  *
- * Re-exports MDAST types and defines custom types for VMark extensions.
+ * Re-exports MDAST types and defines custom types for TMark extensions.
  *
  * @module utils/markdownPipeline/types
  */
@@ -56,7 +56,7 @@ export interface Yaml {
   position?: UnistPosition;
 }
 
-// Custom inline types for VMark
+// Custom inline types for TMark
 export interface Subscript {
   type: "subscript";
   children: PhrasingContent[];
@@ -137,7 +137,7 @@ export type BlockContent =
   | Details
   | Toc;
 
-// Augment MDAST module for custom VMark types
+// Augment MDAST module for custom TMark types
 // Note: math and inlineMath are already augmented by mdast-util-math
 declare module "mdast" {
   interface BlockContentMap {

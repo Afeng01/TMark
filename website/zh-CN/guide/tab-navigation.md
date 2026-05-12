@@ -1,6 +1,6 @@
 # 智能 Tab 导航
 
-VMark 的 Tab 和 Shift+Tab 键具有上下文感知能力——可帮助你高效地在格式化文本、括号和链接之间导航，无需使用方向键。
+TMark 的 Tab 和 Shift+Tab 键具有上下文感知能力——可帮助你高效地在格式化文本、括号和链接之间导航，无需使用方向键。
 
 ## 快速概览
 
@@ -131,21 +131,21 @@ This is |**bold text** here
 Tab 和 Shift+Tab 也可以从链接中跳出：
 
 ```text
-Check out [VMark|](https://vmark.app)
+Check out [TMark|](https://github.com/Afeng01/TMark)
                ↑ cursor inside link text
 ```
 
 按 **Tab**：
 
 ```text
-Check out [VMark](https://vmark.app)| and...
+Check out [TMark](https://github.com/Afeng01/TMark)| and...
                                     ↑ cursor after link
 ```
 
 在链接内按 **Shift+Tab** 移动到开始处：
 
 ```text
-Check out |[VMark](https://vmark.app) and...
+Check out |[TMark](https://github.com/Afeng01/TMark) and...
           ↑ cursor before link
 ```
 
@@ -155,7 +155,7 @@ Check out |[VMark](https://vmark.app) and...
 
 ### 嵌套与转义括号
 
-VMark 能正确处理复杂的链接语法：
+TMark 能正确处理复杂的链接语法：
 
 ```markdown
 [text [with nested] brackets](url)     ✓ Works
@@ -364,7 +364,7 @@ Tab 跳出支持多光标——每个光标独立处理。
 
 1. **建立肌肉记忆**——一旦习惯了 Tab 跳出，你会发现无需使用方向键就能快速导航。
 
-2. **与自动配对协作**——当你输入 `(` 时，VMark 会自动插入 `)`。在括号内输入后，只需按 Tab 跳出。
+2. **与自动配对协作**——当你输入 `(` 时，TMark 会自动插入 `)`。在括号内输入后，只需按 Tab 跳出。
 
 3. **嵌套结构**——Tab 每次只跳出一层。对于 `((nested))`，需要按两次 Tab 才能完全退出。
 

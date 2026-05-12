@@ -57,7 +57,7 @@ describe("useWorkspaceSync", () => {
     renderHook(() => useWorkspaceSync());
 
     const event = new StorageEvent("storage", {
-      key: "vmark-workspace:main",
+      key: "tmark-workspace:main",
       newValue: JSON.stringify({ state: { config: { showHiddenFiles: true } } }),
     });
     window.dispatchEvent(event);
@@ -69,7 +69,7 @@ describe("useWorkspaceSync", () => {
     renderHook(() => useWorkspaceSync());
 
     const event = new StorageEvent("storage", {
-      key: "vmark-settings",
+      key: "tmark-settings",
       newValue: "{}",
     });
     window.dispatchEvent(event);
@@ -81,7 +81,7 @@ describe("useWorkspaceSync", () => {
     renderHook(() => useWorkspaceSync());
 
     const event = new StorageEvent("storage", {
-      key: "vmark-workspace:doc-1",
+      key: "tmark-workspace:doc-1",
       newValue: "{}",
     });
     window.dispatchEvent(event);
@@ -95,7 +95,7 @@ describe("useWorkspaceSync", () => {
 
     // Event for doc-2 should trigger rehydrate
     const event = new StorageEvent("storage", {
-      key: "vmark-workspace:doc-2",
+      key: "tmark-workspace:doc-2",
       newValue: "{}",
     });
     window.dispatchEvent(event);
@@ -111,7 +111,7 @@ describe("useWorkspaceSync", () => {
     renderHook(() => useWorkspaceSync());
 
     const event = new StorageEvent("storage", {
-      key: "vmark-workspace:main",
+      key: "tmark-workspace:main",
       newValue: "{}",
     });
 

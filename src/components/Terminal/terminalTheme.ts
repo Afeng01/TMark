@@ -1,7 +1,7 @@
 /**
  * Terminal ANSI color palettes per app theme.
  *
- * Purpose: Provides a complete xterm.js ITheme for each VMark theme,
+ * Purpose: Provides a complete xterm.js ITheme for each TMark theme,
  * including the 16 ANSI colors tuned to harmonize with the theme's
  * background/foreground while preserving semantic meaning
  * (red=error, green=success, yellow=warning, blue=info).

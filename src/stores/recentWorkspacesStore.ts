@@ -84,7 +84,7 @@ export const useRecentWorkspacesStore = create<RecentWorkspacesState>()(
       },
     }),
     {
-      name: "vmark-recent-workspaces",
+      name: "tmark-recent-workspaces",
       storage: createJSONStorage(() => createSafeStorage()),
     }
   )

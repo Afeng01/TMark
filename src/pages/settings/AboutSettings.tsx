@@ -26,8 +26,8 @@ import {
 } from "lucide-react";
 import appIcon from "@/assets/app-icon.png";
 
-const WEBSITE_URL = "https://vmark.app";
-const GITHUB_URL = "https://github.com/xiaolai/vmark";
+const WEBSITE_URL = "https://github.com/Afeng01/TMark#readme";
+const GITHUB_URL = "https://github.com/Afeng01/TMark";
 
 function VersionInfo() {
   const { t } = useTranslation(["settings", "common"]);
@@ -39,9 +39,9 @@ function VersionInfo() {
 
   return (
     <div className="flex items-center gap-3">
-      <img src={appIcon} alt="VMark" className="w-12 h-12" />
+      <img src={appIcon} alt="TMark" className="w-12 h-12" />
       <div>
-        <div className="text-lg font-semibold text-[var(--text-primary)]">VMark</div>
+        <div className="text-lg font-semibold text-[var(--text-primary)]">TMark</div>
         <div className="text-sm text-[var(--text-secondary)]">{t("about.version", { version })}</div>
       </div>
     </div>

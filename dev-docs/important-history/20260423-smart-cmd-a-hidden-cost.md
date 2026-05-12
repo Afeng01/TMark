@@ -1,7 +1,7 @@
 # Smart Cmd+A: The Hidden Cost of Replacing a Universal Convention
 
 **Date**: 2026-04-23
-**Context**: Issue [#816](https://github.com/xiaolai/vmark/issues/816) — "[Bug] 全选文本不能取消"
+**Context**: Issue [#816](https://github.com/xiaolai/tmark/issues/816) — "[Bug] 全选文本不能取消"
 **Fix commit**: `85a67bd3`
 **Related**: `src/plugins/smartSelectAll/`, `src/plugins/editorPlugins/keymapUtils.ts`
 

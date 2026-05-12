@@ -1,6 +1,6 @@
 # Intelligente Tab-Navigation
 
-VMark's Tab- und Umschalt+Tab-Tasten sind kontextbewusst — sie helfen Ihnen, effizient durch formatierten Text, Klammern und Links zu navigieren, ohne die Pfeiltasten verwenden zu müssen.
+TMark's Tab- und Umschalt+Tab-Tasten sind kontextbewusst — sie helfen Ihnen, effizient durch formatierten Text, Klammern und Links zu navigieren, ohne die Pfeiltasten verwenden zu müssen.
 
 ## Kurzübersicht
 
@@ -131,21 +131,21 @@ This is |**bold text** here
 Tab und Umschalt+Tab verlassen auch Links:
 
 ```text
-Check out [VMark|](https://vmark.app)
+Check out [TMark|](https://github.com/Afeng01/TMark)
                ↑ Cursor im Link-Text
 ```
 
 **Tab** drücken:
 
 ```text
-Check out [VMark](https://vmark.app)| and...
+Check out [TMark](https://github.com/Afeng01/TMark)| and...
                                     ↑ Cursor nach Link
 ```
 
 **Umschalt+Tab** innerhalb eines Links springt zum Anfang:
 
 ```text
-Check out |[VMark](https://vmark.app) and...
+Check out |[TMark](https://github.com/Afeng01/TMark) and...
           ↑ Cursor vor Link
 ```
 
@@ -155,7 +155,7 @@ Im Quellmodus bietet Tab eine intelligente Navigation innerhalb der Markdown-Lin
 
 ### Verschachtelte und maskierte Klammern
 
-VMark verarbeitet komplexe Link-Syntax korrekt:
+TMark verarbeitet komplexe Link-Syntax korrekt:
 
 ```markdown
 [text [with nested] brackets](url)     ✓ Funktioniert
@@ -364,7 +364,7 @@ Die Auto-Paar-Einfügung ist auch innerhalb von Code-Blöcken für WYSIWYG- und 
 
 1. **Muskelgedächtnis** — Sobald Sie sich an Tab-Escape gewöhnt haben, werden Sie viel schneller navigieren, ohne Pfeiltasten zu verwenden.
 
-2. **Funktioniert mit Auto-Paarung** — Wenn Sie `(` eingeben, fügt VMark `)` automatisch ein. Nachdem Sie darin getippt haben, springt Tab einfach heraus.
+2. **Funktioniert mit Auto-Paarung** — Wenn Sie `(` eingeben, fügt TMark `)` automatisch ein. Nachdem Sie darin getippt haben, springt Tab einfach heraus.
 
 3. **Verschachtelte Strukturen** — Tab springt eine Ebene nach der anderen heraus. Bei `((verschachtelt))` benötigen Sie zwei Tabs, um vollständig herauszuspringen.
 

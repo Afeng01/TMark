@@ -1,5 +1,5 @@
 /**
- * Purpose: `vmark.workflow.{apply_patch, validate}` handlers — the
+ * Purpose: `tmark.workflow.{apply_patch, validate}` handlers — the
  *   only structural mutators that survive the MCP prune.
  *
  *   `apply_patch` accepts an array of IRPatch objects (the existing
@@ -167,7 +167,7 @@ function resolveWorkflowTab(
 }
 
 /**
- * Handle `vmark.workflow.apply_patch`.
+ * Handle `tmark.workflow.apply_patch`.
  *
  * Args: `{tabId?, patches: IRPatch[], expected_revision?}`.
  */
@@ -269,7 +269,7 @@ export async function handleWorkflowApplyPatch(
 }
 
 /**
- * Handle `vmark.workflow.validate`. Args: `{tabId?: string}`.
+ * Handle `tmark.workflow.validate`. Args: `{tabId?: string}`.
  *
  * Runs actionlint over the workflow YAML and returns diagnostics.
  * Markdown tabs return `NOT_WORKFLOW`.

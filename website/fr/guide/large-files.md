@@ -1,17 +1,17 @@
 # Fichiers volumineux
 
-VMark ouvre la plupart des fichiers markdown instantanément, mais les fichiers très volumineux nécessitent une attention particulière pour rester réactifs. Cette page décrit comment VMark les gère et comment vous pouvez ajuster son comportement.
+TMark ouvre la plupart des fichiers markdown instantanément, mais les fichiers très volumineux nécessitent une attention particulière pour rester réactifs. Cette page décrit comment TMark les gère et comment vous pouvez ajuster son comportement.
 
 ## Ce qui compte comme «&nbsp;volumineux&nbsp;»
 
-VMark classe un fichier selon sa taille avant de l'ouvrir&nbsp;:
+TMark classe un fichier selon sa taille avant de l'ouvrir&nbsp;:
 
 | Taille | Catégorie | Comportement |
 |--------|-----------|--------------|
 | < 1 Mo | Petit | S'ouvre instantanément en mode WYSIWYG (texte enrichi). |
 | 1 Mo – 5 Mo | Volumineux | S'ouvre en **mode Source** par défaut — sous la seconde. La barre d'état propose «&nbsp;Basculer en WYSIWYG&nbsp;». |
 | 5 Mo – 50 Mo | Énorme | Une boîte de dialogue de confirmation apparaît d'abord. S'ouvre uniquement en mode Source. |
-| ≥ 50 Mo | Refusé | VMark refuse d'ouvrir le fichier. Utilisez `less`, `bat` ou un outil similaire à la place. |
+| ≥ 50 Mo | Refusé | TMark refuse d'ouvrir le fichier. Utilisez `less`, `bat` ou un outil similaire à la place. |
 
 La taille est vérifiée via le système d'exploitation sans lire le fichier&nbsp;; la décision est donc rapide et ne précharge aucune donnée.
 
@@ -43,7 +43,7 @@ Le refus strict à 50 Mo n'est pas modifiable par l'utilisateur. La webview ne p
 
 ## Cas particuliers
 
-- **Le fichier grossit pendant qu'il est ouvert.** VMark décide de la catégorie selon la taille au moment de l'ouverture. Un fichier qui passe à 2 Mo pendant que vous l'éditez reste dans le mode que vous avez choisi.
+- **Le fichier grossit pendant qu'il est ouvert.** TMark décide de la catégorie selon la taille au moment de l'ouverture. Un fichier qui passe à 2 Mo pendant que vous l'éditez reste dans le mode que vous avez choisi.
 - **Liens symboliques.** Les tailles reflètent celles du fichier cible&nbsp;; un lien symbolique vers un fichier de 10 Mo est donc traité comme énorme.
 - **Fichiers vides.** Les fichiers de zéro octet sont considérés comme petits et s'ouvrent en WYSIWYG.
 - **Le fichier disparaît entre la vérification de taille et la lecture.** L'erreur classique «&nbsp;fichier introuvable&nbsp;» apparaît — aucun avertissement supplémentaire n'est émis.

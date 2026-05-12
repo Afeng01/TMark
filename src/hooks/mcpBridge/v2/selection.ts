@@ -1,5 +1,5 @@
 /**
- * Purpose: `vmark.selection.{get, set}` handlers — targeted edits on the
+ * Purpose: `tmark.selection.{get, set}` handlers — targeted edits on the
  *   user's current editor selection without paying the full-doc round-trip
  *   that `document.{read, write}` requires on large files.
  *
@@ -248,7 +248,7 @@ function describeSelectionSet(before: string, after: string): string {
 }
 
 // ---------------------------------------------------------------------------
-// vmark.selection.get
+// tmark.selection.get
 // ---------------------------------------------------------------------------
 
 export async function handleSelectionGet(
@@ -330,7 +330,7 @@ export async function handleSelectionGet(
 }
 
 // ---------------------------------------------------------------------------
-// vmark.selection.set
+// tmark.selection.set
 // ---------------------------------------------------------------------------
 
 export async function handleSelectionSet(

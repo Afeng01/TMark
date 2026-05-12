@@ -76,7 +76,7 @@ tauri_read_logs({ source: 'system', filter: 'tauri', lines: 50 })
 tauri_read_logs({ source: 'android', lines: 100 })
 
 // Filter by app
-tauri_read_logs({ source: 'android', filter: 'com.vmark', lines: 100 })
+tauri_read_logs({ source: 'android', filter: 'com.tmark', lines: 100 })
 ```
 
 ### iOS Simulator Logs
@@ -225,7 +225,7 @@ tauri_manage_window({ action: 'list' })
   "windows": [
     {
       "label": "main",
-      "title": "vmark - Untitled",
+      "title": "tmark - Untitled",
       "url": "tauri://localhost/",
       "focused": true,
       "visible": true,

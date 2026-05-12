@@ -77,7 +77,7 @@ mod tests {
 
     #[tokio::test]
     async fn missing_file_returns_err() {
-        let result = get_file_size_bytes("/nonexistent/path/vmark-test.md".to_string()).await;
+        let result = get_file_size_bytes("/nonexistent/path/tmark-test.md".to_string()).await;
         assert!(result.is_err(), "expected err for missing path");
     }
 
@@ -122,7 +122,7 @@ mod tests {
     async fn broken_symlink_returns_err() {
         let dir = tempfile::tempdir().expect("tempdir");
         let link_path = dir.path().join("broken.md");
-        std::os::unix::fs::symlink("/nonexistent/target/vmark-test", &link_path)
+        std::os::unix::fs::symlink("/nonexistent/target/tmark-test", &link_path)
             .expect("symlink");
 
         let result = get_file_size_bytes(link_path.to_string_lossy().into_owned()).await;

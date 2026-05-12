@@ -1,6 +1,6 @@
 # Medienunterstützung
 
-VMark unterstützt Video-, Audio- und YouTube-Einbettungen in Ihren Markdown-Dokumenten mit Standard-HTML5-Tags.
+TMark unterstützt Video-, Audio- und YouTube-Einbettungen in Ihren Markdown-Dokumenten mit Standard-HTML5-Tags.
 
 ## Unterstützte Formate
 
@@ -68,7 +68,7 @@ Vimeo-Player-iFrames verwenden:
 <iframe src="https://player.vimeo.com/video/VIDEO_ID" width="560" height="315" frameborder="0" allowfullscreen></iframe>
 ```
 
-Sie können auch eine Vimeo-URL direkt einfügen (z.B. `https://vimeo.com/123456789`) und VMark konvertiert sie automatisch in eine Einbettung.
+Sie können auch eine Vimeo-URL direkt einfügen (z.B. `https://vimeo.com/123456789`) und TMark konvertiert sie automatisch in eine Einbettung.
 
 ### Bilibili-Einbettungen
 
@@ -78,11 +78,11 @@ Den Bilibili-Player-iFrame mit einer BV-ID verwenden:
 <iframe src="https://player.bilibili.com/player.html?bvid=BV1xxxxxxxxx" width="560" height="350" frameborder="0" allowfullscreen></iframe>
 ```
 
-Fügen Sie eine Bilibili-Video-URL ein (z.B. `https://bilibili.com/video/BV1xxxxxxxxx`) und VMark konvertiert sie automatisch in eine Einbettung. Beachten Sie, dass Kurz-URLs (`b23.tv`) nicht unterstützt werden, da sie eine Weiterleitungsauflösung erfordern.
+Fügen Sie eine Bilibili-Video-URL ein (z.B. `https://bilibili.com/video/BV1xxxxxxxxx`) und TMark konvertiert sie automatisch in eine Einbettung. Beachten Sie, dass Kurz-URLs (`b23.tv`) nicht unterstützt werden, da sie eine Weiterleitungsauflösung erfordern.
 
 ### Bildsyntax-Fallback
 
-Sie können auch Bildsyntax mit Mediendateiendungen verwenden — VMark befördert diese automatisch zum korrekten Medientyp:
+Sie können auch Bildsyntax mit Mediendateiendungen verwenden — TMark befördert diese automatisch zum korrekten Medientyp:
 
 ```markdown
 ![](video.mp4)
@@ -98,11 +98,11 @@ Das Einfügen-Menü in der Symbolleiste verwenden:
 - **Video** — öffnet eine Dateiauswahl für Videodateien, kopiert in `.assets/`, fügt einen `<video>`-Tag ein
 - **Audio** — öffnet eine Dateiauswahl für Audiodateien, kopiert in `.assets/`, fügt einen `<audio>`-Tag ein
 - **YouTube** — liest eine YouTube-URL aus der Zwischenablage und fügt eine datenschutzverbesserte Einbettung ein
-- **Vimeo** und **Bilibili** — fügen Sie eine Video-URL direkt in den Editor ein und VMark erkennt den Anbieter automatisch
+- **Vimeo** und **Bilibili** — fügen Sie eine Video-URL direkt in den Editor ein und TMark erkennt den Anbieter automatisch
 
 ### Drag & Drop
 
-Video- oder Audiodateien aus Ihrem Dateisystem direkt in den Editor ziehen. VMark wird:
+Video- oder Audiodateien aus Ihrem Dateisystem direkt in den Editor ziehen. TMark wird:
 
 1. Die Datei in den `.assets/`-Ordner des Dokuments kopieren
 2. Den entsprechenden Medienknoten mit einem relativen Pfad einfügen
@@ -130,7 +130,7 @@ Doppelklicken Sie auf ein beliebiges Medienelement im WYSIWYG-Modus, um das Medi
 
 ## Pfadauflösung
 
-VMark unterstützt drei Arten von Medienpfaden:
+TMark unterstützt drei Arten von Medienpfaden:
 
 | Pfadtyp | Beispiel | Verhalten |
 |---------|---------|-----------|

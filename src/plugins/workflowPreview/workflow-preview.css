@@ -1,6 +1,6 @@
 /**
  * Workflow Preview Styles
- * Overrides React Flow defaults to match VMark design system.
+ * Overrides React Flow defaults to match TMark design system.
  */
 
 .workflow-preview-canvas {
@@ -13,7 +13,7 @@
   fill: var(--border-color);
 }
 
-/* Override React Flow controls to match VMark style */
+/* Override React Flow controls to match TMark style */
 .workflow-preview-canvas .react-flow__controls {
   box-shadow: var(--shadow-sm);
   border-radius: var(--radius-sm);

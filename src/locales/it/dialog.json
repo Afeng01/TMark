@@ -71,7 +71,7 @@
     "failedToOpen": "Apertura di {{filename}} fallita",
     "quarantineCleared_one": "Rimossa la quarantena di macOS da 1 file Markdown in questo spazio di lavoro.",
     "quarantineCleared_other": "Rimossa la quarantena di macOS da {{count}} file Markdown in questo spazio di lavoro.",
-    "quarantineClearedDesc": "macOS contrassegna i file scaricati da alcune app con un attributo che blocca silenziosamente il doppio clic dal Finder mentre VMark è in esecuzione. VMark lo ha rimosso per consentire l'apertura di quei file. Disattivabile in Impostazioni → Avanzate.",
+    "quarantineClearedDesc": "macOS contrassegna i file scaricati da alcune app con un attributo che blocca silenziosamente il doppio clic dal Finder mentre TMark è in esecuzione. TMark lo ha rimosso per consentire l'apertura di quei file. Disattivabile in Impostazioni → Avanzate.",
     "failedToOpenFilesInNewWindow": "Apertura dei file in una nuova finestra fallita",
     "onlyMarkdownViaDropDrop": "Solo i file markdown possono essere aperti tramite trascinamento",
     "restored": "Ripristinato: {{filename}}",
@@ -177,7 +177,7 @@
     "exportHtmlDialogTitle": "Esporta HTML",
     "exportFormatDialogTitle": "Esporta {{name}}",
     "tabFormatChanged": "Editor switched to {{format}}.",
-    "unsupportedFileViaDropDrop": "This file type is not supported by VMark."
+    "unsupportedFileViaDropDrop": "This file type is not supported by TMark."
   },
   "saveRequired": {
     "title": "Salvataggio richiesto"
@@ -192,7 +192,7 @@
     "warnOk": "Apri",
     "warnCancel": "Annulla",
     "refuseTitle": "File troppo grande per essere aperto",
-    "refuseBody": "«{{filename}}» è di {{size}}. VMark non può aprire file oltre {{limit}} in sicurezza. Usa uno strumento orientato alle righe come less, bat o grep."
+    "refuseBody": "«{{filename}}» è di {{size}}. TMark non può aprire file oltre {{limit}} in sicurezza. Usa uno strumento orientato alle righe come less, bat o grep."
   },
   "errorBoundary": {
     "title": "Qualcosa è andato storto"

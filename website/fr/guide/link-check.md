@@ -1,6 +1,6 @@
 # Vérification des liens
 
-VMark vérifie que les cibles locales de liens et d'images dans votre markdown existent réellement sur le disque. S'exécute aux côtés du [moteur de lint markdown](/fr/guide/lint) sur `Cmd-Shift-L` ou **Outils → Vérifier le Markdown**.
+TMark vérifie que les cibles locales de liens et d'images dans votre markdown existent réellement sur le disque. S'exécute aux côtés du [moteur de lint markdown](/fr/guide/lint) sur `Cmd-Shift-L` ou **Outils → Vérifier le Markdown**.
 
 ## Ce qui est vérifié
 

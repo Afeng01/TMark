@@ -838,7 +838,7 @@ describe("resolveResources", () => {
 
   it("substitutes placeholder for traversal-blocked asset:// images in exported HTML", async () => {
     // asset://localhost URLs that resolve outside baseDir must not survive into
-    // exported HTML — they have no meaning outside VMark and render broken.
+    // exported HTML — they have no meaning outside TMark and render broken.
     const evilSrc = `asset://localhost/${encodeURIComponent("/etc/passwd")}`;
     const html = `<img src="${evilSrc}">`;
 

@@ -53,7 +53,7 @@ import { useTabStore, type Tab } from "@/stores/tabStore";
 import {
   isMarkdownFileName,
   isSupportedFileName,
-  isVMarkFileName,
+  isTMarkFileName,
 } from "@/utils/dropPaths";
 import { isWorkflowEnabled } from "@/utils/workflowFeatureFlag";
 import type { FileNode as FileNodeType } from "./types";
@@ -202,17 +202,17 @@ export const FileExplorer = forwardRef<FileExplorerHandle, FileExplorerProps>(
     []
   );
 
-  // Shared: open supported files in VMark, others with system default app
+  // Shared: open supported files in TMark, others with system default app
   const openFileByType = useCallback(
     (path: string) => {
       const fileName = getFileName(path);
-      // Phase 1B: any registered format opens in VMark. The workflow-
+      // Phase 1B: any registered format opens in TMark. The workflow-
       // engine / markdown-only fallback covers the pre-bootstrap edge.
       const isSupported =
         fileName &&
         (isSupportedFileName(fileName) ||
           (isWorkflowEnabled()
-            ? isVMarkFileName(fileName)
+            ? isTMarkFileName(fileName)
             : isMarkdownFileName(fileName)));
       if (isSupported) {
         openFile(path);
@@ -230,7 +230,7 @@ export const FileExplorer = forwardRef<FileExplorerHandle, FileExplorerProps>(
         fileName &&
         (isSupportedFileName(fileName) ||
           (isWorkflowEnabled()
-            ? isVMarkFileName(fileName)
+            ? isTMarkFileName(fileName)
             : isMarkdownFileName(fileName)));
       if (!isSupported) return;
 

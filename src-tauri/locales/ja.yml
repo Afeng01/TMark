@@ -1,14 +1,14 @@
-# VMark 日本語ロケール
+# TMark 日本語ロケール
 # キーの規則: menu.<section>.<item>
 # 動的メニュー項目（最近のファイル、ジーニーなど）の構造ラベルもここに含まれます。
 
 menu:
   # === アプリメニュー（macOSのみ）===
-  app: "VMark"
-  app.about: "VMark について"
+  app: "TMark"
+  app.about: "TMark について"
   app.settings: "設定..."
   app.saveAllQuit: "すべて保存して終了"
-  app.quit: "VMark を終了"
+  app.quit: "TMark を終了"
 
   # === ファイルメニュー ===
   file: "ファイル"
@@ -184,9 +184,9 @@ menu:
 
   # === ヘルプメニュー ===
   help: "ヘルプ"
-  help.vmarkHelp: "VMark ヘルプ"
+  help.tmarkHelp: "TMark ヘルプ"
   help.keyboardShortcuts: "キーボードショートカット"
-  help.installCli: "シェルコマンド: 'vmark' をPATHにインストール..."
+  help.installCli: "シェルコマンド: 'tmark' をPATHにインストール..."
   help.reportIssue: "問題を報告..."
 
   # === 動的メニューラベル ===

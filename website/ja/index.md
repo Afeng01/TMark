@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: VMark
+  name: TMark
   text: 正しく作られたMarkdownエディタ
   tagline: 無料 · スマート · 美しい · あなたのもの
   image:
     src: /logo.png
-    alt: VMark
+    alt: TMark
   actions:
     - theme: brand
       text: ダウンロード
@@ -20,7 +20,7 @@ features:
   - icon:
       src: /icons/bot.svg
     title: AIフレンドリー
-    details: AIの時代のために構築されました。VMarkはMCPをネイティブに話します — Claude、Codex、またはGeminiがドキュメントを読み取り、提案し、編集できます。プラグイン不要。接続するだけで協力できます。
+    details: AIの時代のために構築されました。TMarkはMCPをネイティブに話します — Claude、Codex、またはGeminiがドキュメントを読み取り、提案し、編集できます。プラグイン不要。接続するだけで協力できます。
 
   - icon:
       src: /icons/languages.svg
@@ -99,15 +99,15 @@ Claude Code、Claude Desktop、Codex CLI、Gemini CLI... は MCP 連携を通じ
 <div class="screenshots-grid">
   <div class="screenshot-card">
     <img src="/screenshots/sending-from-claude-code.png" alt="Claude Code CLIからコンテンツを送信" loading="lazy" />
-    <div class="caption">Claude CodeにVMark内でドキュメントを直接作成させる</div>
+    <div class="caption">Claude CodeにTMark内でドキュメントを直接作成させる</div>
   </div>
   <div class="screenshot-card">
     <img src="/screenshots/sending-from-claude-desktop.png" alt="Claude Desktopからコンテンツを送信" loading="lazy" />
     <div class="caption">または同じプロンプトでClaude Desktopを使用する</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/content-received-by-vmark.png" alt="VMarkが受信したコンテンツ" loading="lazy" />
-    <div class="caption">コンテンツがVMarkに完全な書式付きで表示される</div>
+    <img src="/screenshots/content-received-by-tmark.png" alt="TMarkが受信したコンテンツ" loading="lazy" />
+    <div class="caption">コンテンツがTMarkに完全な書式付きで表示される</div>
   </div>
 </div>
 </div>
@@ -133,15 +133,15 @@ Claude Code、Claude Desktop、Codex CLI、Gemini CLI... は MCP 連携を通じ
 <div class="screenshots-section">
 <div class="screenshots-grid">
   <div class="screenshot-card">
-    <img src="/screenshots/editor-main.png" alt="VMark リッチテキストエディタ" loading="lazy" />
+    <img src="/screenshots/editor-main.png" alt="TMark リッチテキストエディタ" loading="lazy" />
     <div class="caption">WYSIWYGモード</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/source-mode.png" alt="VMark ソースモード" loading="lazy" />
+    <img src="/screenshots/source-mode.png" alt="TMark ソースモード" loading="lazy" />
     <div class="caption">ソースモード (F6)</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/dark-theme.png" alt="VMark ナイトテーマ" loading="lazy" />
+    <img src="/screenshots/dark-theme.png" alt="TMark ナイトテーマ" loading="lazy" />
     <div class="caption">ナイトテーマ</div>
   </div>
 </div>
@@ -190,9 +190,9 @@ Claude Code、Claude Desktop、Codex CLI、Gemini CLI... は MCP 連携を通じ
 
 ## macOS 向けに提供
 
-VMark は macOS 向けに最適化されており、Apple Silicon と Intel の両方をネイティブサポートしています。最新バージョンをダウンロードして今すぐ執筆を始めましょう。
+TMark は macOS 向けに最適化されており、Apple Silicon と Intel の両方をネイティブサポートしています。最新バージョンをダウンロードして今すぐ執筆を始めましょう。
 
-[VMark を入手する →](/ja/download)
+[TMark を入手する →](/ja/download)
 
 ## クレジット
 

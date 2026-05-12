@@ -69,7 +69,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.get-version.outputs.version }}
-          name: VMark ${{ steps.get-version.outputs.version }}
+          name: TMark ${{ steps.get-version.outputs.version }}
           draft: true
           prerelease: false
           generate_release_notes: true
@@ -161,7 +161,7 @@ jobs:
       # NOTE: pkg binaries cannot be combined with lipo, so we build arch-specific binaries
       - name: Build MCP server sidecar (macOS)
         if: matrix.platform == 'macos-latest'
-        working-directory: vmark-mcp-server
+        working-directory: tmark-mcp-server
         env:
           SIDECAR_TARGET: ${{ matrix.sidecar_target }}
         run: |
@@ -175,9 +175,9 @@ jobs:
           SIDECAR_TARGET: ${{ matrix.sidecar_target }}
         run: |
           if [ "$SIDECAR_TARGET" = "darwin-arm64" ]; then
-            SIDECAR_NAME="vmark-mcp-server-aarch64-apple-darwin"
+            SIDECAR_NAME="tmark-mcp-server-aarch64-apple-darwin"
           else
-            SIDECAR_NAME="vmark-mcp-server-x86_64-apple-darwin"
+            SIDECAR_NAME="tmark-mcp-server-x86_64-apple-darwin"
           fi
           SIDECAR_PATH="src-tauri/binaries/$SIDECAR_NAME"
 
@@ -206,9 +206,9 @@ jobs:
         run: |
           # Determine sidecar filename based on target
           if [ "$SIDECAR_TARGET" = "darwin-arm64" ]; then
-            SIDECAR_NAME="vmark-mcp-server-aarch64-apple-darwin"
+            SIDECAR_NAME="tmark-mcp-server-aarch64-apple-darwin"
           else
-            SIDECAR_NAME="vmark-mcp-server-x86_64-apple-darwin"
+            SIDECAR_NAME="tmark-mcp-server-x86_64-apple-darwin"
           fi
           SIDECAR_PATH="src-tauri/binaries/$SIDECAR_NAME"
 
@@ -230,7 +230,7 @@ jobs:
 
       - name: Build MCP server sidecar (Windows)
         if: matrix.platform == 'windows-latest'
-        working-directory: vmark-mcp-server
+        working-directory: tmark-mcp-server
         run: |
           pnpm install
           pnpm build
@@ -240,7 +240,7 @@ jobs:
         if: matrix.platform == 'windows-latest'
         shell: pwsh
         run: |
-          $SIDECAR_PATH = "src-tauri/binaries/vmark-mcp-server-x86_64-pc-windows-msvc.exe"
+          $SIDECAR_PATH = "src-tauri/binaries/tmark-mcp-server-x86_64-pc-windows-msvc.exe"
 
           Write-Host "Running health check on: $SIDECAR_PATH"
 
@@ -256,7 +256,7 @@ jobs:
 
       - name: Build MCP server sidecar (Linux)
         if: matrix.platform == 'ubuntu-22.04'
-        working-directory: vmark-mcp-server
+        working-directory: tmark-mcp-server
         run: |
           pnpm install
           pnpm build
@@ -265,7 +265,7 @@ jobs:
       - name: Health check MCP sidecar (Linux)
         if: matrix.platform == 'ubuntu-22.04'
         run: |
-          SIDECAR_PATH="src-tauri/binaries/vmark-mcp-server-x86_64-unknown-linux-gnu"
+          SIDECAR_PATH="src-tauri/binaries/tmark-mcp-server-x86_64-unknown-linux-gnu"
 
           echo "Running health check on: $SIDECAR_PATH"
 
@@ -322,20 +322,20 @@ jobs:
           WINDOWS_MSI_SIG=""
           WINDOWS_EXE_SIG=""
 
-          if [ -f "sigs/VMark_aarch64.app.tar.gz.sig" ]; then
-            MACOS_AARCH64_SIG=$(cat "sigs/VMark_aarch64.app.tar.gz.sig")
+          if [ -f "sigs/TMark_aarch64.app.tar.gz.sig" ]; then
+            MACOS_AARCH64_SIG=$(cat "sigs/TMark_aarch64.app.tar.gz.sig")
           fi
-          if [ -f "sigs/VMark_x64.app.tar.gz.sig" ]; then
-            MACOS_X64_SIG=$(cat "sigs/VMark_x64.app.tar.gz.sig")
+          if [ -f "sigs/TMark_x64.app.tar.gz.sig" ]; then
+            MACOS_X64_SIG=$(cat "sigs/TMark_x64.app.tar.gz.sig")
           fi
-          if [ -f "sigs/VMark_${VERSION#v}_amd64.AppImage.sig" ]; then
-            LINUX_SIG=$(cat "sigs/VMark_${VERSION#v}_amd64.AppImage.sig")
+          if [ -f "sigs/TMark_${VERSION#v}_amd64.AppImage.sig" ]; then
+            LINUX_SIG=$(cat "sigs/TMark_${VERSION#v}_amd64.AppImage.sig")
           fi
-          if [ -f "sigs/VMark_${VERSION#v}_x64_en-US.msi.sig" ]; then
-            WINDOWS_MSI_SIG=$(cat "sigs/VMark_${VERSION#v}_x64_en-US.msi.sig")
+          if [ -f "sigs/TMark_${VERSION#v}_x64_en-US.msi.sig" ]; then
+            WINDOWS_MSI_SIG=$(cat "sigs/TMark_${VERSION#v}_x64_en-US.msi.sig")
           fi
-          if [ -f "sigs/VMark_${VERSION#v}_x64-setup.exe.sig" ]; then
-            WINDOWS_EXE_SIG=$(cat "sigs/VMark_${VERSION#v}_x64-setup.exe.sig")
+          if [ -f "sigs/TMark_${VERSION#v}_x64-setup.exe.sig" ]; then
+            WINDOWS_EXE_SIG=$(cat "sigs/TMark_${VERSION#v}_x64-setup.exe.sig")
           fi
 
           # Get current timestamp
@@ -357,19 +357,19 @@ jobs:
             "platforms": {
               "darwin-aarch64": {
                 "signature": "$MACOS_AARCH64_SIG",
-                "url": "$BASE_URL/VMark_aarch64.app.tar.gz"
+                "url": "$BASE_URL/TMark_aarch64.app.tar.gz"
               },
               "darwin-x86_64": {
                 "signature": "$MACOS_X64_SIG",
-                "url": "$BASE_URL/VMark_x64.app.tar.gz"
+                "url": "$BASE_URL/TMark_x64.app.tar.gz"
               },
               "linux-x86_64": {
                 "signature": "$LINUX_SIG",
-                "url": "$BASE_URL/VMark_${VERSION#v}_amd64.AppImage"
+                "url": "$BASE_URL/TMark_${VERSION#v}_amd64.AppImage"
               },
               "windows-x86_64": {
                 "signature": "$WINDOWS_MSI_SIG",
-                "url": "$BASE_URL/VMark_${VERSION#v}_x64_en-US.msi"
+                "url": "$BASE_URL/TMark_${VERSION#v}_x64_en-US.msi"
               }
             }
           }
@@ -416,20 +416,6 @@ jobs:
             --draft=false \
             --repo "${{ github.repository }}"
           echo "✅ Published release ${{ needs.create-release.outputs.version }}"
-
-      - name: Trigger Homebrew tap update
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ needs.create-release.outputs.version }}
-          REPO: ${{ github.repository }}
-        run: |
-          VERSION_NUM="${VERSION#v}"
-
-          gh workflow run update-homebrew.yml \
-            --repo "$REPO" \
-            -f version="$VERSION_NUM"
-          echo "✅ Triggered Homebrew tap update for $VERSION_NUM"
 
       - name: Clean up old releases (keep latest 2)
         continue-on-error: true

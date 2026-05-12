@@ -71,7 +71,7 @@
     "failedToOpen": "Error al abrir {{filename}}",
     "quarantineCleared_one": "Se eliminó la cuarentena de macOS de 1 archivo Markdown en este espacio de trabajo.",
     "quarantineCleared_other": "Se eliminó la cuarentena de macOS de {{count}} archivos Markdown en este espacio de trabajo.",
-    "quarantineClearedDesc": "macOS marca los archivos descargados por algunas aplicaciones con un atributo que bloquea silenciosamente el doble clic del Finder mientras VMark se está ejecutando. VMark lo eliminó para que esos archivos se abran. Desactivar en Ajustes → Avanzado.",
+    "quarantineClearedDesc": "macOS marca los archivos descargados por algunas aplicaciones con un atributo que bloquea silenciosamente el doble clic del Finder mientras TMark se está ejecutando. TMark lo eliminó para que esos archivos se abran. Desactivar en Ajustes → Avanzado.",
     "failedToOpenFilesInNewWindow": "Error al abrir archivos en una nueva ventana",
     "onlyMarkdownViaDropDrop": "Solo se pueden abrir archivos markdown mediante arrastrar y soltar",
     "restored": "Restaurado: {{filename}}",
@@ -177,7 +177,7 @@
     "exportHtmlDialogTitle": "Exportar HTML",
     "exportFormatDialogTitle": "Exportar {{name}}",
     "tabFormatChanged": "Editor switched to {{format}}.",
-    "unsupportedFileViaDropDrop": "This file type is not supported by VMark."
+    "unsupportedFileViaDropDrop": "This file type is not supported by TMark."
   },
   "saveRequired": {
     "title": "Guardado requerido"
@@ -192,7 +192,7 @@
     "warnOk": "Abrir",
     "warnCancel": "Cancelar",
     "refuseTitle": "Archivo demasiado grande para abrirse",
-    "refuseBody": "«{{filename}}» pesa {{size}}. VMark no puede abrir archivos de más de {{limit}} con seguridad. Usa una herramienta orientada a líneas como less, bat o grep."
+    "refuseBody": "«{{filename}}» pesa {{size}}. TMark no puede abrir archivos de más de {{limit}} con seguridad. Usa una herramienta orientada a líneas como less, bat o grep."
   },
   "errorBoundary": {
     "title": "Algo salió mal"

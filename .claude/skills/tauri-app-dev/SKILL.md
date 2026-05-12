@@ -624,6 +624,6 @@ pnpm check:all
 
 ## Related Skills
 
-- **`tauri-v2-integration`** — VMark-specific Tauri IPC patterns (invoke/emit bridges, menu accelerators)
+- **`tauri-v2-integration`** — TMark-specific Tauri IPC patterns (invoke/emit bridges, menu accelerators)
 - **`tauri-mcp-testing`** — E2E testing of the running Tauri app via MCP tools
-- **`rust-tauri-backend`** — VMark Rust backend (commands, menu items, filesystem)
+- **`rust-tauri-backend`** — TMark Rust backend (commands, menu items, filesystem)

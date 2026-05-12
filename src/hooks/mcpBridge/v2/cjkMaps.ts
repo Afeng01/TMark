@@ -1,6 +1,6 @@
 /**
  * Purpose: Half-width ↔ full-width punctuation tables used by
- *   `vmark.document.transform({kind: "cjk-punctuation"})`.
+ *   `tmark.document.transform({kind: "cjk-punctuation"})`.
  *
  *   Extracted out of the legacy `cjkHandlers.ts` so the v2 surface has
  *   no dependency on the deleted handler file.

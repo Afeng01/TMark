@@ -5,7 +5,7 @@ import { handleSettingsStorageEvent } from "./useSettingsSync";
 // Helper to create a storage event with settings
 function createStorageEvent(newSettings: Record<string, unknown>): StorageEvent {
   return new StorageEvent("storage", {
-    key: "vmark-settings",
+    key: "tmark-settings",
     newValue: JSON.stringify({ state: newSettings }),
   });
 }
@@ -118,7 +118,7 @@ describe("useSettingsSync cross-window sync", () => {
       const initialTheme = useSettingsStore.getState().appearance.theme;
 
       const event = new StorageEvent("storage", {
-        key: "vmark-settings",
+        key: "tmark-settings",
         newValue: "not valid json",
       });
       handleSettingsStorageEvent(event);
@@ -130,7 +130,7 @@ describe("useSettingsSync cross-window sync", () => {
       const initialTheme = useSettingsStore.getState().appearance.theme;
 
       const event = new StorageEvent("storage", {
-        key: "vmark-settings",
+        key: "tmark-settings",
         newValue: null,
       });
       handleSettingsStorageEvent(event);
@@ -142,7 +142,7 @@ describe("useSettingsSync cross-window sync", () => {
       const initialTheme = useSettingsStore.getState().appearance.theme;
 
       const event = new StorageEvent("storage", {
-        key: "vmark-settings",
+        key: "tmark-settings",
         newValue: JSON.stringify({ appearance: { theme: "night" } }), // No state wrapper
       });
       handleSettingsStorageEvent(event);

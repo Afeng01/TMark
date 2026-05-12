@@ -1,6 +1,6 @@
 # Workspace Management
 
-A workspace in VMark is a folder opened as the root of your project. When you open a workspace, the sidebar shows a file tree, Quick Open indexes every markdown file, the terminal starts in the project root, and your open tabs are remembered for next time.
+A workspace in TMark is a folder opened as the root of your project. When you open a workspace, the sidebar shows a file tree, Quick Open indexes every markdown file, the terminal starts in the project root, and your open tabs are remembered for next time.
 
 Without a workspace you can still open individual files, but you lose the file explorer, in-project search, and session restore.
 
@@ -10,13 +10,13 @@ Without a workspace you can still open individual files, but you lose the file e
 |--------|-----|
 | Menu | **File > Open Workspace** |
 | Quick Open | `Mod + O`, then select **Browse...** at the bottom |
-| Drag and drop | Drag a markdown file from Finder into the window — VMark detects its project root and opens the workspace automatically |
+| Drag and drop | Drag a markdown file from Finder into the window — TMark detects its project root and opens the workspace automatically |
 | Recent Workspaces | **File > Recent Workspaces** and pick a previous project |
 
-When you open a workspace, VMark shows the sidebar with the file explorer. If the workspace was opened before, previously open tabs are restored.
+When you open a workspace, TMark shows the sidebar with the file explorer. If the workspace was opened before, previously open tabs are restored.
 
 ::: tip
-If the current window has unsaved changes, VMark offers to open the workspace in a new window instead of replacing your work.
+If the current window has unsaved changes, TMark offers to open the workspace in a new window instead of replacing your work.
 :::
 
 ## File Explorer
@@ -98,7 +98,7 @@ Without a workspace, Quick Open still works — it shows recent files and open t
 
 ## Workspace Content Search
 
-When a workspace is open, VMark can search across **file contents** (not just filenames) for matches in markdown and text files.
+When a workspace is open, TMark can search across **file contents** (not just filenames) for matches in markdown and text files.
 
 | Action | Shortcut |
 |---|---|
@@ -120,7 +120,7 @@ This is distinct from [Quick Open](#quick-open) which searches *filenames* only 
 
 ## Recent Workspaces
 
-VMark remembers up to 10 recently opened workspaces. Access them from **File > Recent Workspaces** in the menu bar.
+TMark remembers up to 10 recently opened workspaces. Access them from **File > Recent Workspaces** in the menu bar.
 
 - Workspaces are sorted by last-opened time (most recent first)
 - The list syncs to the native menu on every change
@@ -128,7 +128,7 @@ VMark remembers up to 10 recently opened workspaces. Access them from **File > R
 
 ## Workspace Settings
 
-Each workspace has its own configuration that persists between sessions. Settings are stored in the VMark application data directory — not inside the project folder — so your workspace stays clean.
+Each workspace has its own configuration that persists between sessions. Settings are stored in the TMark application data directory — not inside the project folder — so your workspace stays clean.
 
 The following settings are saved per workspace:
 
@@ -145,7 +145,7 @@ Workspace configuration is tied to the folder path. Opening the same folder on t
 
 ## Session Restore
 
-When you close a window that has a workspace open, VMark saves the list of open tabs to the workspace config. The next time you open the same workspace, those tabs are restored automatically.
+When you close a window that has a workspace open, TMark saves the list of open tabs to the workspace config. The next time you open the same workspace, those tabs are restored automatically.
 
 - Only tabs with a saved file path are restored (untitled tabs are not persisted)
 - If a file has been moved or deleted since the last session, it is silently skipped
@@ -153,13 +153,13 @@ When you close a window that has a workspace open, VMark saves the list of open 
 
 ## Multi-Window
 
-Each VMark window can have its own independent workspace. This lets you work on multiple projects simultaneously.
+Each TMark window can have its own independent workspace. This lets you work on multiple projects simultaneously.
 
 - **File > New Window** opens a fresh window
 - Opening a workspace in a new window does not affect other windows
 - Window size and position are remembered per window
 
-When you drag a markdown file from Finder and the current window already has unsaved work, VMark opens the file's project in a new window automatically.
+When you drag a markdown file from Finder and the current window already has unsaved work, TMark opens the file's project in a new window automatically.
 
 ### Detaching Tabs into New Windows
 
@@ -173,51 +173,51 @@ The gesture is direction-locked: horizontal movement starts a reorder, while ver
 
 ## External Changes
 
-VMark watches your workspace for changes made by other programs (Git, external editors, build tools, etc.) and keeps open documents in sync.
+TMark watches your workspace for changes made by other programs (Git, external editors, build tools, etc.) and keeps open documents in sync.
 
 - **Unmodified files** are reloaded automatically when their contents change on disk. A brief toast notification confirms the reload.
 - **Files with unsaved changes** trigger a prompt dialog with three options: **Save As** (save your version to a new location), **Reload** (discard your changes and load from disk), or **Keep** (preserve your edits and mark the file as divergent).
 - **Deleted files** are marked as missing in their tab but not closed — you can still save the content to a new location.
-- When multiple dirty files change at once (e.g., after a `git checkout`), VMark batches them into a single dialog so you can reload all, keep all, or review each file individually.
-- If a divergent file's disk content later matches what you have in the editor (e.g., a `git checkout` restores the same text), VMark auto-clears the divergent state so normal auto-save resumes.
+- When multiple dirty files change at once (e.g., after a `git checkout`), TMark batches them into a single dialog so you can reload all, keep all, or review each file individually.
+- If a divergent file's disk content later matches what you have in the editor (e.g., a `git checkout` restores the same text), TMark auto-clears the divergent state so normal auto-save resumes.
 
-VMark filters out its own saves so you are never prompted by changes you made within the app.
+TMark filters out its own saves so you are never prompted by changes you made within the app.
 
 ## macOS Dock Recent Documents
 
-Documents you open in VMark are registered with macOS, so they appear in the **Open Recent** submenu when you right-click the VMark icon in the Dock.
+Documents you open in TMark are registered with macOS, so they appear in the **Open Recent** submenu when you right-click the TMark icon in the Dock.
 
 ## Terminal Integration
 
 The integrated terminal automatically uses the workspace root as its working directory. When you open or switch workspaces, all terminal sessions `cd` to the new root.
 
-The `VMARK_WORKSPACE` environment variable is set to the workspace path in every terminal session, so your scripts can reference the project root.
+The `TMARK_WORKSPACE` environment variable is set to the workspace path in every terminal session, so your scripts can reference the project root.
 
 [Learn more about the terminal →](/guide/terminal)
 
 ## Shell CLI Command
 
-VMark can install a `vmark` shell command so you can open files and folders from the terminal.
+TMark can install a `tmark` shell command so you can open files and folders from the terminal.
 
 ### Installing
 
-Go to **Help > Install 'vmark' Command**. VMark writes a small launcher script to `/usr/local/bin/vmark` and asks for your administrator password (the same approach VS Code uses for its `code` command).
+Go to **Help > Install 'tmark' Command**. TMark writes a small launcher script to `/usr/local/bin/tmark` and asks for your administrator password (the same approach VS Code uses for its `code` command).
 
 ### Usage
 
 ```bash
 # Open a file
-vmark README.md
+tmark README.md
 
 # Open a folder as a workspace
-vmark ~/projects/my-blog
+tmark ~/projects/my-blog
 
 # Open multiple files
-vmark chapter1.md chapter2.md
+tmark chapter1.md chapter2.md
 ```
 
-The command delegates to `open -b app.vmark`, so macOS handles single-instance behavior — files open in your existing VMark window rather than spawning a new process.
+The command delegates to `open -b app.tmark`, so macOS handles single-instance behavior — files open in your existing TMark window rather than spawning a new process.
 
 ### Uninstalling
 
-Go to **Help > Uninstall 'vmark' Command** to remove `/usr/local/bin/vmark`. If the file at that path was not installed by VMark, the operation is blocked and you are asked to remove it manually.
+Go to **Help > Uninstall 'tmark' Command** to remove `/usr/local/bin/tmark`. If the file at that path was not installed by TMark, the operation is blocked and you are asked to remove it manually.

@@ -1,5 +1,5 @@
 /**
- * Purpose: `vmark.document.{read, write, transform}` handlers — the
+ * Purpose: `tmark.document.{read, write, transform}` handlers — the
  *   read/write spine of the pruned MCP surface.
  *
  *   `read` returns full content + a revision token. `write` replaces
@@ -184,7 +184,7 @@ function writeContent(
 }
 
 /**
- * Handle `vmark.document.read`. Args: `{tabId?: string}`.
+ * Handle `tmark.document.read`. Args: `{tabId?: string}`.
  */
 export async function handleDocumentRead(
   id: string,
@@ -223,7 +223,7 @@ export async function handleDocumentRead(
 }
 
 /**
- * Handle `vmark.document.write`.
+ * Handle `tmark.document.write`.
  *
  * Args: `{tabId?, content: string, expected_revision?: string}`.
  */
@@ -357,7 +357,7 @@ function applyTransform(kind: TransformKind, content: string): string {
 }
 
 /**
- * Handle `vmark.document.transform`.
+ * Handle `tmark.document.transform`.
  *
  * Args: `{tabId?, kind: "cjk-format" | "cjk-spacing" | "cjk-punctuation",
  * expected_revision?}`.

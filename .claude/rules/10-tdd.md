@@ -1,6 +1,6 @@
 # 10 - TDD Workflow
 
-Test-Driven Development is structurally enforced in VMark. Coverage thresholds in `vitest.config.ts` make `pnpm check:all` fail if coverage drops — writing code without tests breaks the gate.
+Test-Driven Development is structurally enforced in TMark. Coverage thresholds in `vitest.config.ts` make `pnpm check:all` fail if coverage drops — writing code without tests breaks the gate.
 
 ## Core Discipline: RED → GREEN → REFACTOR
 
@@ -29,7 +29,7 @@ Never skip RED. If you write code first, you don't know your test actually catch
 
 ## Pattern Catalog
 
-Five patterns covering the most common test types in VMark. Use these as templates.
+Five patterns covering the most common test types in TMark. Use these as templates.
 
 ### 1. Store Tests — `src/stores/__tests__/revisionStore.test.ts`
 

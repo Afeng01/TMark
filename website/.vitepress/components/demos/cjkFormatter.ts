@@ -1,6 +1,6 @@
 /**
  * CJK Text Formatting Rules (Standalone for VitePress demo)
- * Simplified version of VMark's CJK formatter
+ * Simplified version of TMark's CJK formatter
  *
  * Features:
  * - Stack-based quote pairing with apostrophe/prime detection

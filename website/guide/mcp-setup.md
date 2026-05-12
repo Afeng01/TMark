@@ -1,10 +1,10 @@
 # AI Integration (MCP)
 
-VMark includes a built-in MCP (Model Context Protocol) server that allows AI assistants like Claude to interact directly with your editor.
+TMark includes a built-in MCP (Model Context Protocol) server that allows AI assistants like Claude to interact directly with your editor.
 
 ## What is MCP?
 
-The [Model Context Protocol](https://modelcontextprotocol.io/) is an open standard that enables AI assistants to interact with external tools and applications. VMark's MCP server exposes its editor capabilities as tools that AI assistants can use to:
+The [Model Context Protocol](https://modelcontextprotocol.io/) is an open standard that enables AI assistants to interact with external tools and applications. TMark's MCP server exposes its editor capabilities as tools that AI assistants can use to:
 
 - Read and write document content
 - Apply formatting and create structures
@@ -13,18 +13,18 @@ The [Model Context Protocol](https://modelcontextprotocol.io/) is an open standa
 
 ## Quick Setup
 
-VMark makes it easy to connect AI assistants with one-click installation.
+TMark makes it easy to connect AI assistants with one-click installation.
 
 ### 1. Enable MCP Server
 
 Open **Settings → Integrations** and enable the MCP Server:
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-settings-server.png" alt="VMark MCP Server Settings" />
+  <img src="/screenshots/mcp-settings-server.png" alt="TMark MCP Server Settings" />
 </div>
 
 - **Enable MCP Server** - Turn on to allow AI connections
-- **Start on launch** - Auto-start when VMark opens
+- **Start on launch** - Auto-start when TMark opens
 - **Auto-approve edits** - Apply AI changes without preview (see below)
 
 ### 2. Install Configuration
@@ -32,7 +32,7 @@ Open **Settings → Integrations** and enable the MCP Server:
 Click **Install** for your AI assistant:
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-settings-install.png" alt="VMark MCP Install Configuration" />
+  <img src="/screenshots/mcp-settings-install.png" alt="TMark MCP Install Configuration" />
 </div>
 
 Supported AI assistants:
@@ -42,7 +42,7 @@ Supported AI assistants:
 - **Gemini CLI** - Google's AI assistant
 
 ::: info Other MCP-Compatible Clients
-Other MCP-compatible clients such as Cursor, Windsurf, and similar tools can also connect to VMark's MCP server. Configure them manually by pointing to the MCP server binary path (see [Manual Configuration](#manual-configuration) below).
+Other MCP-compatible clients such as Cursor, Windsurf, and similar tools can also connect to TMark's MCP server. Configure them manually by pointing to the MCP server binary path (see [Manual Configuration](#manual-configuration) below).
 :::
 
 #### Status Icons
@@ -52,37 +52,37 @@ Each provider shows a status indicator:
 | Icon | Status | Meaning |
 |------|--------|---------|
 | ✓ Green | Valid | Configuration is correct and working |
-| ⚠ Amber | Path Mismatch | VMark was moved — click **Repair** |
-| ✗ Red | Binary Missing | MCP binary not found — reinstall VMark |
+| ⚠ Amber | Path Mismatch | TMark was moved — click **Repair** |
+| ✗ Red | Binary Missing | MCP binary not found — reinstall TMark |
 | ○ Gray | Not Configured | Not installed — click **Install** |
 
-::: tip VMark Moved?
-If you move VMark.app to a different location, the status will show amber "Path Mismatch". Simply click the **Repair** button to update the configuration with the new path.
+::: tip TMark Moved?
+If you move TMark.app to a different location, the status will show amber "Path Mismatch". Simply click the **Repair** button to update the configuration with the new path.
 :::
 
 ### 3. Restart Your AI Assistant
 
-After installing or repairing, **restart your AI assistant** completely (quit and reopen) to load the new configuration. VMark will show a reminder after each configuration change.
+After installing or repairing, **restart your AI assistant** completely (quit and reopen) to load the new configuration. TMark will show a reminder after each configuration change.
 
 ### 4. Try It Out
 
 In your AI assistant, try commands like:
-- *"What's in my VMark document?"*
-- *"Write a summary of quantum computing to VMark"*
+- *"What's in my TMark document?"*
+- *"Write a summary of quantum computing to TMark"*
 - *"Add a table of contents to my document"*
 
 ## See It in Action
 
-Ask Claude a question and have it write the answer directly to your VMark document:
+Ask Claude a question and have it write the answer directly to your TMark document:
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-claude.png" alt="Claude Desktop using VMark MCP" />
-  <p class="screenshot-caption">Claude Desktop calls <code>document</code> → <code>set_content</code> to write to VMark</p>
+  <img src="/screenshots/mcp-claude.png" alt="Claude Desktop using TMark MCP" />
+  <p class="screenshot-caption">Claude Desktop calls <code>document</code> → <code>set_content</code> to write to TMark</p>
 </div>
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-result.png" alt="Content rendered in VMark" />
-  <p class="screenshot-caption">The content appears instantly in VMark, fully formatted</p>
+  <img src="/screenshots/mcp-result.png" alt="Content rendered in TMark" />
+  <p class="screenshot-caption">The content appears instantly in TMark, fully formatted</p>
 </div>
 
 <!-- Styles in style.css -->
@@ -98,8 +98,8 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) o
 ```json
 {
   "mcpServers": {
-    "vmark": {
-      "command": "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+    "tmark": {
+      "command": "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
     }
   }
 }
@@ -112,8 +112,8 @@ Edit `~/.claude.json` or project `.mcp.json`:
 ```json
 {
   "mcpServers": {
-    "vmark": {
-      "command": "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+    "tmark": {
+      "command": "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
     }
   }
 }
@@ -124,8 +124,8 @@ Edit `~/.claude.json` or project `.mcp.json`:
 Edit `~/.codex/config.toml`:
 
 ```toml
-[mcp_servers.vmark]
-command = "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+[mcp_servers.tmark]
+command = "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
 ```
 
 ### Gemini CLI
@@ -135,22 +135,22 @@ Edit `~/.gemini/settings.json`:
 ```json
 {
   "mcpServers": {
-    "vmark": {
-      "command": "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+    "tmark": {
+      "command": "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
     }
   }
 }
 ```
 
 ::: tip Finding the Binary Path
-On macOS, the MCP server binary is inside VMark.app:
-- `VMark.app/Contents/MacOS/vmark-mcp-server`
+On macOS, the MCP server binary is inside TMark.app:
+- `TMark.app/Contents/MacOS/tmark-mcp-server`
 
 On Windows:
-- `C:\Program Files\VMark\vmark-mcp-server.exe`
+- `C:\Program Files\TMark\tmark-mcp-server.exe`
 
 On Linux:
-- `/usr/bin/vmark-mcp-server` (or where you installed it)
+- `/usr/bin/tmark-mcp-server` (or where you installed it)
 
 The port is auto-discovered — no `args` needed.
 :::
@@ -161,29 +161,29 @@ The MCP server binary supports a small set of flags for diagnostics and legacy s
 
 | Flag | What it does |
 |---|---|
-| `--version` (or `-v`) | Print the version (must match the running VMark) and exit. |
-| `--health-check` | Run a self-test against the running VMark bridge and exit. Use this to verify your install before wiring an AI assistant. |
+| `--version` (or `-v`) | Print the version (must match the running TMark) and exit. |
+| `--health-check` | Run a self-test against the running TMark bridge and exit. Use this to verify your install before wiring an AI assistant. |
 | `--port <number>` | Manual port override. Skip the auto-discovery handshake and connect on the given port. Only useful for legacy setups where the bridge port is fixed externally; the auto-discovery path is preferred. |
 
 Example:
 
 ```bash
-vmark-mcp-server --health-check
-vmark-mcp-server --version
-vmark-mcp-server --port 9223   # legacy / manual
+tmark-mcp-server --health-check
+tmark-mcp-server --version
+tmark-mcp-server --port 9223   # legacy / manual
 ```
 
 ## How It Works
 
 ```text
-AI Assistant <--stdio--> MCP Server <--WebSocket--> VMark Editor
+AI Assistant <--stdio--> MCP Server <--WebSocket--> TMark Editor
 ```
 
-1. **VMark starts a WebSocket bridge** on an available port when launched
-2. **The MCP server** reads the port and auth token from VMark's app data directory
+1. **TMark starts a WebSocket bridge** on an available port when launched
+2. **The MCP server** reads the port and auth token from TMark's app data directory
 3. **The MCP server** connects and authenticates via the WebSocket bridge
 4. **AI assistant** communicates with the MCP server via stdio
-5. **Commands are relayed** to VMark's editor through the bridge
+5. **Commands are relayed** to TMark's editor through the bridge
 
 ## Available Capabilities
 
@@ -204,7 +204,7 @@ See the [MCP Tools Reference](/guide/mcp-tools) for complete documentation.
 
 ## Checking MCP Status
 
-VMark provides multiple ways to check the MCP server status:
+TMark provides multiple ways to check the MCP server status:
 
 ### Status Bar Indicator
 
@@ -244,14 +244,14 @@ In **Settings → Integrations**, when the server is running you'll see:
 
 ### "Connection refused" or "No active editor"
 
-- Ensure VMark is running and has a document open
+- Ensure TMark is running and has a document open
 - Check that the MCP Server is enabled in Settings → Integrations
 - Verify the MCP bridge shows "Running" status
-- Restart VMark if the connection was interrupted
+- Restart TMark if the connection was interrupted
 
-### Path mismatch after moving VMark
+### Path mismatch after moving TMark
 
-If you moved VMark.app to a different location (e.g., from Downloads to Applications), the configuration will point to the old path:
+If you moved TMark.app to a different location (e.g., from Downloads to Applications), the configuration will point to the old path:
 
 1. Open **Settings → Integrations**
 2. Look for the amber ⚠ warning icon next to affected providers
@@ -266,15 +266,15 @@ If you moved VMark.app to a different location (e.g., from Downloads to Applicat
 
 ### Commands fail with "No active editor"
 
-- Make sure a document tab is active in VMark
+- Make sure a document tab is active in TMark
 - Click in the editor area to focus it
 - Some commands require text to be selected first
 
 ## How Edits Work
 
-The pruned MCP surface follows the read-write spine: AI assistants call `document.read` to get the current content + a revision token, reason about it, then call `document.write` with the new full content. The revision token guards against silent overwrites: if you typed in VMark while the AI was thinking, the write returns `STALE` and the AI re-reads.
+The pruned MCP surface follows the read-write spine: AI assistants call `document.read` to get the current content + a revision token, reason about it, then call `document.write` with the new full content. The revision token guards against silent overwrites: if you typed in TMark while the AI was thinking, the write returns `STALE` and the AI re-reads.
 
-For GitHub Actions workflow YAML files, the AI uses `workflow.apply_patch` instead — VMark's CST-aware mutators preserve comments, anchors, and key order that a raw text rewrite would lose.
+For GitHub Actions workflow YAML files, the AI uses `workflow.apply_patch` instead — TMark's CST-aware mutators preserve comments, anchors, and key order that a raw text rewrite would lose.
 
 There is no preview/approval step in the new surface. If you want to review every change, run an external git workflow (work on a branch, review the diff, commit when satisfied) — this gives you the same control with industry-standard tools.
 

@@ -1,6 +1,6 @@
 # Link Check
 
-VMark verifies that local link and image targets in your markdown actually exist on disk. Runs alongside the [markdown lint engine](/guide/lint) on `Cmd-Shift-L` or **Tools → Check Markdown**.
+TMark verifies that local link and image targets in your markdown actually exist on disk. Runs alongside the [markdown lint engine](/guide/lint) on `Cmd-Shift-L` or **Tools → Check Markdown**.
 
 ## What it checks
 

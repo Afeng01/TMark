@@ -9,12 +9,12 @@ const pkg = JSON.parse(
 );
 
 export const shared: UserConfig = {
-  title: "VMark",
+  title: "TMark",
   description: "The plain-text workspace where humans and AI collaborate",
 
   vite: {
     define: {
-      __VMARK_VERSION__: JSON.stringify(pkg.version),
+      __TMARK_VERSION__: JSON.stringify(pkg.version),
     },
   },
   lastUpdated: true,

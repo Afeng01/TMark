@@ -24,9 +24,9 @@ import {
 
 describe("getWorkspaceStorageKey", () => {
   it("returns key with window label suffix", () => {
-    expect(getWorkspaceStorageKey("main")).toBe("vmark-workspace:main");
-    expect(getWorkspaceStorageKey("doc-1")).toBe("vmark-workspace:doc-1");
-    expect(getWorkspaceStorageKey("doc-abc")).toBe("vmark-workspace:doc-abc");
+    expect(getWorkspaceStorageKey("main")).toBe("tmark-workspace:main");
+    expect(getWorkspaceStorageKey("doc-1")).toBe("tmark-workspace:doc-1");
+    expect(getWorkspaceStorageKey("doc-abc")).toBe("tmark-workspace:doc-abc");
   });
 });
 
@@ -38,20 +38,20 @@ describe("migrateWorkspaceStorage", () => {
   it("does nothing when no legacy key exists", () => {
     migrateWorkspaceStorage();
 
-    expect(localStorage.getItem("vmark-workspace:main")).toBeNull();
+    expect(localStorage.getItem("tmark-workspace:main")).toBeNull();
     expect(localStorage.getItem(LEGACY_STORAGE_KEY)).toBeNull();
   });
 
   it("does nothing when main key already exists", () => {
     const mainData = JSON.stringify({ state: { rootPath: "/new" } });
     const legacyData = JSON.stringify({ state: { rootPath: "/old" } });
-    localStorage.setItem("vmark-workspace:main", mainData);
+    localStorage.setItem("tmark-workspace:main", mainData);
     localStorage.setItem(LEGACY_STORAGE_KEY, legacyData);
 
     migrateWorkspaceStorage();
 
     // Main key should remain unchanged, legacy key should remain (not deleted)
-    expect(localStorage.getItem("vmark-workspace:main")).toBe(mainData);
+    expect(localStorage.getItem("tmark-workspace:main")).toBe(mainData);
   });
 
   it("migrates legacy key to main when main key does not exist", () => {
@@ -61,7 +61,7 @@ describe("migrateWorkspaceStorage", () => {
     migrateWorkspaceStorage();
 
     // Legacy data should be copied to main key
-    expect(localStorage.getItem("vmark-workspace:main")).toBe(legacyData);
+    expect(localStorage.getItem("tmark-workspace:main")).toBe(legacyData);
     // Legacy key should be removed after migration
     expect(localStorage.getItem(LEGACY_STORAGE_KEY)).toBeNull();
   });
@@ -72,7 +72,7 @@ describe("migrateWorkspaceStorage", () => {
     migrateWorkspaceStorage();
 
     // Should not throw and should not set empty value to main
-    expect(localStorage.getItem("vmark-workspace:main")).toBeNull();
+    expect(localStorage.getItem("tmark-workspace:main")).toBeNull();
     expect(localStorage.getItem(LEGACY_STORAGE_KEY)).toBeNull();
   });
 });
@@ -111,8 +111,8 @@ describe("windowScopedStorage", () => {
   });
 
   it("reads from window-specific key", () => {
-    localStorage.setItem("vmark-workspace:main", '{"state":"main-data"}');
-    localStorage.setItem("vmark-workspace:doc-1", '{"state":"doc1-data"}');
+    localStorage.setItem("tmark-workspace:main", '{"state":"main-data"}');
+    localStorage.setItem("tmark-workspace:doc-1", '{"state":"doc1-data"}');
 
     // Read from main
     expect(windowScopedStorage.getItem("ignored")).toBe('{"state":"main-data"}');
@@ -124,20 +124,20 @@ describe("windowScopedStorage", () => {
 
   it("writes to window-specific key", () => {
     windowScopedStorage.setItem("ignored", '{"data":"for-main"}');
-    expect(localStorage.getItem("vmark-workspace:main")).toBe('{"data":"for-main"}');
+    expect(localStorage.getItem("tmark-workspace:main")).toBe('{"data":"for-main"}');
 
     setCurrentWindowLabel("doc-2");
     windowScopedStorage.setItem("ignored", '{"data":"for-doc2"}');
-    expect(localStorage.getItem("vmark-workspace:doc-2")).toBe('{"data":"for-doc2"}');
+    expect(localStorage.getItem("tmark-workspace:doc-2")).toBe('{"data":"for-doc2"}');
   });
 
   it("removes from window-specific key", () => {
-    localStorage.setItem("vmark-workspace:main", "data");
-    localStorage.setItem("vmark-workspace:doc-1", "data");
+    localStorage.setItem("tmark-workspace:main", "data");
+    localStorage.setItem("tmark-workspace:doc-1", "data");
 
     windowScopedStorage.removeItem("ignored");
-    expect(localStorage.getItem("vmark-workspace:main")).toBeNull();
-    expect(localStorage.getItem("vmark-workspace:doc-1")).toBe("data");
+    expect(localStorage.getItem("tmark-workspace:main")).toBeNull();
+    expect(localStorage.getItem("tmark-workspace:doc-1")).toBe("data");
   });
 
   it("returns null for non-existent key", () => {
@@ -266,7 +266,7 @@ describe("findActiveWorkspaceLabel", () => {
 
   it("returns null when workspace keys exist but none are active", () => {
     localStorage.setItem(
-      "vmark-workspace:main",
+      "tmark-workspace:main",
       JSON.stringify({ state: { isWorkspaceMode: false, rootPath: null, config: null } })
     );
     expect(findActiveWorkspaceLabel()).toBeNull();
@@ -274,7 +274,7 @@ describe("findActiveWorkspaceLabel", () => {
 
   it("returns label of active workspace window", () => {
     localStorage.setItem(
-      "vmark-workspace:main",
+      "tmark-workspace:main",
       JSON.stringify({ state: { isWorkspaceMode: true, rootPath: "/workspace", config: {} } })
     );
     expect(findActiveWorkspaceLabel()).toBe("main");
@@ -282,11 +282,11 @@ describe("findActiveWorkspaceLabel", () => {
 
   it("returns label of active doc window when main is not active", () => {
     localStorage.setItem(
-      "vmark-workspace:main",
+      "tmark-workspace:main",
       JSON.stringify({ state: { isWorkspaceMode: false, rootPath: null, config: null } })
     );
     localStorage.setItem(
-      "vmark-workspace:doc-1",
+      "tmark-workspace:doc-1",
       JSON.stringify({ state: { isWorkspaceMode: true, rootPath: "/other", config: {} } })
     );
     expect(findActiveWorkspaceLabel()).toBe("doc-1");
@@ -294,11 +294,11 @@ describe("findActiveWorkspaceLabel", () => {
 
   it("prefers main over other windows when both are active", () => {
     localStorage.setItem(
-      "vmark-workspace:doc-1",
+      "tmark-workspace:doc-1",
       JSON.stringify({ state: { isWorkspaceMode: true, rootPath: "/a", config: {} } })
     );
     localStorage.setItem(
-      "vmark-workspace:main",
+      "tmark-workspace:main",
       JSON.stringify({ state: { isWorkspaceMode: true, rootPath: "/b", config: {} } })
     );
     expect(findActiveWorkspaceLabel()).toBe("main");
@@ -306,24 +306,24 @@ describe("findActiveWorkspaceLabel", () => {
 
   it("skips non-document window keys (settings, unknown labels)", () => {
     localStorage.setItem(
-      "vmark-workspace:settings",
+      "tmark-workspace:settings",
       JSON.stringify({ state: { isWorkspaceMode: true, rootPath: "/x", config: {} } })
     );
     localStorage.setItem(
-      "vmark-workspace:transfer-1",
+      "tmark-workspace:transfer-1",
       JSON.stringify({ state: { isWorkspaceMode: true, rootPath: "/y", config: {} } })
     );
     expect(findActiveWorkspaceLabel()).toBeNull();
   });
 
   it("skips keys with invalid JSON", () => {
-    localStorage.setItem("vmark-workspace:main", "not-json");
+    localStorage.setItem("tmark-workspace:main", "not-json");
     expect(findActiveWorkspaceLabel()).toBeNull();
   });
 
   it("skips keys without rootPath", () => {
     localStorage.setItem(
-      "vmark-workspace:main",
+      "tmark-workspace:main",
       JSON.stringify({ state: { isWorkspaceMode: true, rootPath: null, config: {} } })
     );
     expect(findActiveWorkspaceLabel()).toBeNull();
@@ -338,7 +338,7 @@ describe("findActiveWorkspaceLabel — additional branch coverage", () => {
   it("skips null keys returned by localStorage.key(i) (line 123 !key branch)", () => {
     // Add a valid workspace entry to ensure iteration happens
     localStorage.setItem(
-      "vmark-workspace:main",
+      "tmark-workspace:main",
       JSON.stringify({ state: { isWorkspaceMode: true, rootPath: "/ws", config: {} } })
     );
 
@@ -359,7 +359,7 @@ describe("findActiveWorkspaceLabel — additional branch coverage", () => {
 
   it("skips entries where getItem returns empty string (line 130 !raw branch)", () => {
     // Set up a key that matches the prefix/label filter but has empty value
-    localStorage.setItem("vmark-workspace:main", "");
+    localStorage.setItem("tmark-workspace:main", "");
 
     // Should not throw — empty raw value is skipped
     const result = findActiveWorkspaceLabel();
@@ -379,13 +379,13 @@ describe("findActiveWorkspaceLabel — additional branch coverage", () => {
     Storage.prototype.getItem = originalGetItem;
 
     localStorage.setItem(
-      "vmark-workspace:doc-1",
+      "tmark-workspace:doc-1",
       JSON.stringify({ state: { isWorkspaceMode: true, rootPath: "/ws", config: {} } })
     );
 
     const patchedGetItem = Storage.prototype.getItem;
     Storage.prototype.getItem = function (key: string) {
-      if (key === "vmark-workspace:doc-1") return null;
+      if (key === "tmark-workspace:doc-1") return null;
       return patchedGetItem.call(this, key);
     };
 

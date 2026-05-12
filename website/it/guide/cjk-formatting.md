@@ -1,6 +1,6 @@
 # Guida alla Formattazione CJK
 
-VMark include un insieme completo di regole di formattazione per testo cinese, giapponese e coreano. Questi strumenti aiutano a mantenere una tipografia coerente quando si mischiano caratteri CJK e latini.
+TMark include un insieme completo di regole di formattazione per testo cinese, giapponese e coreano. Questi strumenti aiutano a mantenere una tipografia coerente quando si mischiano caratteri CJK e latini.
 
 ## Avvio Rapido
 
@@ -62,7 +62,7 @@ Converte i doppi trattini in trattini CJK corretti.
 
 ### 6. Conversione Virgolette Tipografiche
 
-VMark usa un **algoritmo di abbinamento virgolette basato su stack** che gestisce correttamente:
+TMark usa un **algoritmo di abbinamento virgolette basato su stack** che gestisce correttamente:
 
 - **Apostrofi**: Le contrazioni come `don't`, `it's`, `l'amour` vengono preservate
 - **Possessivi**: `Xiaolai's` rimane invariato
@@ -124,7 +124,7 @@ Il seguente contenuto **non** è interessato dalla formattazione:
 
 ### Costrutti Tecnici
 
-Lo **Scanner di Sequenze Latine** di VMark rileva e protegge automaticamente i costrutti tecnici dalla conversione della punteggiatura:
+Lo **Scanner di Sequenze Latine** di TMark rileva e protegge automaticamente i costrutti tecnici dalla conversione della punteggiatura:
 
 | Tipo | Esempi | Protezione |
 |------|--------|------------|
@@ -200,7 +200,7 @@ Dopo ogni passaggio di formattazione CJK, il formattatore esegue un controllo di
 
 ## Spaziatura tra Lettere CJK
 
-VMark include una funzione dedicata di spaziatura tra lettere per il testo CJK che migliora la leggibilità aggiungendo una spaziatura sottile tra i caratteri.
+TMark include una funzione dedicata di spaziatura tra lettere per il testo CJK che migliora la leggibilità aggiungendo una spaziatura sottile tra i caratteri.
 
 ### Impostazioni
 
@@ -235,7 +235,7 @@ La differenza è sottile ma migliora la leggibilità, specialmente per i passagg
 
 ## Stili di Virgolette Tipografiche
 
-VMark può convertire automaticamente le virgolette dritte in virgolette tipograficamente corrette. Questa funzione funziona durante la formattazione CJK e supporta più stili di virgolette.
+TMark può convertire automaticamente le virgolette dritte in virgolette tipograficamente corrette. Questa funzione funziona durante la formattazione CJK e supporta più stili di virgolette.
 
 ### Stili di Virgolette
 
@@ -247,7 +247,7 @@ VMark può convertire automaticamente le virgolette dritte in virgolette tipogra
 
 ### Algoritmo di Abbinamento Basato su Stack
 
-VMark usa un sofisticato algoritmo basato su stack per l'abbinamento delle virgolette:
+TMark usa un sofisticato algoritmo basato su stack per l'abbinamento delle virgolette:
 
 1. **Tokenizzazione**: Identifica tutti i caratteri virgoletta nel testo
 2. **Classificazione**: Determina se ogni virgoletta è di apertura o di chiusura in base al contesto
@@ -327,7 +327,7 @@ La conversione delle parentesi a forcella si attiva quando il contenuto citato c
 
 ## Paragrafo di Test
 
-Copia questo testo non formattato in VMark e premi `Alt + Mod + Shift + F` per formattare:
+Copia questo testo non formattato in TMark e premi `Alt + Mod + Shift + F` per formattare:
 
 ```text
 最近我在学习TypeScript和React,感觉收获很大.作为一个developer,掌握这些modern前端技术是必须的.

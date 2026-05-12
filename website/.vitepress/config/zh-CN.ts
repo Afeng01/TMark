@@ -86,8 +86,8 @@ export const zhCN = {
               link: "/zh-CN/guide/users-as-developers/",
             },
             {
-              text: "我为什么开发 VMark",
-              link: "/zh-CN/guide/users-as-developers/why-i-built-vmark",
+              text: "我为什么开发 TMark",
+              link: "/zh-CN/guide/users-as-developers/why-i-built-tmark",
             },
             {
               text: "AI 无法替代的五项技能",
@@ -128,7 +128,7 @@ export const zhCN = {
 
     footer: {
       copyright:
-        'Copyright © 2026 VMark · <a href="/zh-CN/guide/license">ISC 许可证</a>',
+        'Copyright © 2026 TMark · <a href="/zh-CN/guide/license">ISC 许可证</a>',
     },
 
     lastUpdated: {

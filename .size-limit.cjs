@@ -1,5 +1,5 @@
 /**
- * Bundle size budget for VMark.
+ * Bundle size budget for TMark.
  *
  * Each entry pins the maximum byte size of a built chunk. Limits sit ~5%
  * above current sizes so day-to-day bumps pass while accidental regressions

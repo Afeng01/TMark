@@ -1,8 +1,8 @@
 # Riferimento Strumenti MCP
 
-VMark espone **quattro strumenti MCP compositi** agli assistenti IA: `session`, `workspace`, `document` e `workflow`. Insieme coprono **14 azioni** — la spina dorsale lettura/scrittura più il ciclo di vita di file/finestre più le modifiche CST-safe per lo YAML di GitHub Actions.
+TMark espone **quattro strumenti MCP compositi** agli assistenti IA: `session`, `workspace`, `document` e `workflow`. Insieme coprono **14 azioni** — la spina dorsale lettura/scrittura più il ciclo di vita di file/finestre più le modifiche CST-safe per lo YAML di GitHub Actions.
 
-La precedente superficie di 12 strumenti / 76 azioni è stata ridotta perché gli strumenti di formattazione interni al documento (grassetto, intestazioni, tabelle, ecc.) duplicano un lavoro che gli agenti IA fanno già banalmente tramite il round-trip Markdown. Vedi [il piano di riduzione MCP](https://github.com/xiaolai/vmark/blob/main/dev-docs/plans/20260504-mcp-pruning.md) per la motivazione completa.
+La precedente superficie di 12 strumenti / 76 azioni è stata ridotta perché gli strumenti di formattazione interni al documento (grassetto, intestazioni, tabelle, ecc.) duplicano un lavoro che gli agenti IA fanno già banalmente tramite il round-trip Markdown. Vedi [il piano di riduzione MCP](https://github.com/Afeng01/TMark/blob/main/dev-docs/plans/20260504-mcp-pruning.md) per la motivazione completa.
 
 ::: tip Flusso di Lavoro Consigliato
 1. Chiama `session.get_state` una volta per vedere finestre aperte, schede e per ogni scheda `{filePath, dirty, revision, kind}`.
@@ -54,7 +54,7 @@ Nessun argomento.
     }
   ],
   "capabilities": {
-    "version": "<vmark-mcp-server version>",
+    "version": "<tmark-mcp-server version>",
     "supportedKinds": ["markdown", "yaml-workflow"],
     "mcpProtocol": "0.1.0"
   }
@@ -205,7 +205,7 @@ Usa `apply_patch` quando cambi un campo lasciando tutto il resto intatto (il ser
 
 ### `apply_patch`
 
-Applica un array di oggetti `IRPatch`. Le patch sono inviate attraverso i mutatori CST-aware di VMark, che preservano commenti, ancore e ordine delle chiavi. Un `document.write` grezzo su un file YAML li perderebbe.
+Applica un array di oggetti `IRPatch`. Le patch sono inviate attraverso i mutatori CST-aware di TMark, che preservano commenti, ancore e ordine delle chiavi. Un `document.write` grezzo su un file YAML li perderebbe.
 
 | Parametro | Tipo | Richiesto |
 |-----------|------|-----------|

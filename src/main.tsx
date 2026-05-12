@@ -15,7 +15,7 @@ import "./styles/katexFixes.css";
 // Pre-load secure storage cache BEFORE importing App.
 // App → aiProviderStore → Zustand persist() hydrates at module evaluation time.
 // If App is imported statically, hydration reads an empty cache.
-const SECURE_KEYS = ["vmark-ai-providers"];
+const SECURE_KEYS = ["tmark-ai-providers"];
 
 async function bootstrap() {
   await initSecureStorage(SECURE_KEYS);

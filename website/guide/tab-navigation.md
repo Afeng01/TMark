@@ -1,6 +1,6 @@
 # Smart Tab Navigation
 
-VMark's Tab and Shift+Tab keys are context-aware — they help you navigate efficiently through formatted text, brackets, and links without reaching for arrow keys.
+TMark's Tab and Shift+Tab keys are context-aware — they help you navigate efficiently through formatted text, brackets, and links without reaching for arrow keys.
 
 ## Quick Overview
 
@@ -131,21 +131,21 @@ This is |**bold text** here
 Tab and Shift+Tab also escape from links:
 
 ```text
-Check out [VMark|](https://vmark.app)
+Check out [TMark|](https://github.com/Afeng01/TMark)
                ↑ cursor inside link text
 ```
 
 Press **Tab**:
 
 ```text
-Check out [VMark](https://vmark.app)| and...
+Check out [TMark](https://github.com/Afeng01/TMark)| and...
                                     ↑ cursor after link
 ```
 
 Press **Shift+Tab** inside a link moves to the start:
 
 ```text
-Check out |[VMark](https://vmark.app) and...
+Check out |[TMark](https://github.com/Afeng01/TMark) and...
           ↑ cursor before link
 ```
 
@@ -155,7 +155,7 @@ In Source mode, Tab provides smart navigation within Markdown link syntax.
 
 ### Nested and Escaped Brackets
 
-VMark handles complex link syntax correctly:
+TMark handles complex link syntax correctly:
 
 ```markdown
 [text [with nested] brackets](url)     ✓ Works
@@ -364,7 +364,7 @@ Auto-pair insertion is also disabled inside code blocks for both WYSIWYG and Sou
 
 1. **Muscle memory** — Once you get used to Tab escape, you'll find yourself navigating much faster without arrow keys.
 
-2. **Works with auto-pair** — When you type `(`, VMark auto-inserts `)`. After typing inside, just Tab to jump out.
+2. **Works with auto-pair** — When you type `(`, TMark auto-inserts `)`. After typing inside, just Tab to jump out.
 
 3. **Nested structures** — Tab escapes one level at a time. For `((nested))`, you need two Tabs to fully exit.
 

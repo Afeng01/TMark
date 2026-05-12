@@ -1,4 +1,4 @@
-//! # VMark Main
+//! # TMark Main
 //!
 //! Purpose: Binary entry point — delegates immediately to `lib.rs::run()`.
 //! The `windows_subsystem` attribute hides the console window on Windows release builds.
@@ -7,5 +7,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    vmark_lib::run()
+    tmark_lib::run()
 }

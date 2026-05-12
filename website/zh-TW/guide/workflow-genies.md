@@ -7,7 +7,7 @@
 
 # 工作流程精靈
 
-VMark 的精靈（Genies）有兩種型態：
+TMark 的精靈（Genies）有兩種型態：
 
 - **Markdown 精靈**（`.md`）—— 單次提示詞範本，也是最初的精靈格式。詳見 [AI 精靈](/zh-TW/guide/ai-genies)。
 - **工作流程精靈**（`.yml` / `.yaml`）—— 多步驟流程，將多個 Markdown 精靈以明確的資料流串接起來。
@@ -94,7 +94,7 @@ VMark 的精靈（Genies）有兩種型態：
 
 ## 範例
 
-VMark 隨附一份範例工作流程，位於內建精靈中的 `outline-and-polish.yml`。將它複製到您的使用者精靈目錄即可自訂：
+TMark 隨附一份範例工作流程，位於內建精靈中的 `outline-and-polish.yml`。將它複製到您的使用者精靈目錄即可自訂：
 
 ```yaml
 name: Outline and Polish

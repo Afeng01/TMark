@@ -1,6 +1,6 @@
 // WI-2.5 — Cargo.toml schema detector + dependency-tree renderer.
 //
-// The "differentiator validation" — VMark's claim that being a
+// The "differentiator validation" — TMark's claim that being a
 // plain-text workspace means rendering the right view per artifact,
 // not just opening any file. Cargo.toml is the second schema POC
 // (after WI-2.4 GHA workflows).
@@ -84,7 +84,7 @@ describe("collectCargoDependencies", () => {
   it("returns empty arrays for a manifest with no dep tables", () => {
     const result = collectCargoDependencies(`
 [package]
-name = "vmark"
+name = "tmark"
 version = "0.7.0"
     `.trim());
     expect(result.runtime).toEqual([]);

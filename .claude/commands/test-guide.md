@@ -1,6 +1,6 @@
 # Manual Testing Guide
 
-Open the comprehensive testing guide and help the user test VMark features.
+Open the comprehensive testing guide and help the user test TMark features.
 
 ## Instructions
 

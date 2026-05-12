@@ -6,11 +6,11 @@
 
 ## What We Did
 
-Added structured documentation comments to ~400 source files across the entire VMark codebase so that AI coding agents can efficiently understand purpose, find bugs, and spot improvement opportunities — without reading entire files.
+Added structured documentation comments to ~400 source files across the entire TMark codebase so that AI coding agents can efficiently understand purpose, find bugs, and spot improvement opportunities — without reading entire files.
 
 ## Why
 
-VMark had ~1000 source files. About 20% were well-documented, ~30% had partial comments, and ~50% had minimal or no documentation. AI agents waste significant context reading files just to understand what they do. Structured headers with `Purpose:`, `Pipeline:`, `Key decisions:`, and `@coordinates-with` markers let agents grep for exactly what they need.
+TMark had ~1000 source files. About 20% were well-documented, ~30% had partial comments, and ~50% had minimal or no documentation. AI agents waste significant context reading files just to understand what they do. Structured headers with `Purpose:`, `Pipeline:`, `Key decisions:`, and `@coordinates-with` markers let agents grep for exactly what they need.
 
 ## The Plan: 8-Phase Layer-by-Layer Approach
 
@@ -22,7 +22,7 @@ VMark had ~1000 source files. About 20% were well-documented, ~30% had partial c
 | 4 | Utils (`src/utils/`, `src/lib/`) | ~130 files — pure functions |
 | 5 | Components (`src/components/`, `src/contexts/`) | ~67 files — UI layer |
 | 6 | Rust Backend (`src-tauri/src/`) | ~24 files — native layer |
-| 7 | MCP Server (`vmark-mcp-server/src/`) | ~26 files — external tool interface |
+| 7 | MCP Server (`tmark-mcp-server/src/`) | ~26 files — external tool interface |
 | 8 | Other (`src/export/`) | ~20 files |
 
 ### Documentation Template
@@ -77,12 +77,12 @@ Phase 3 was attempted with parallel subagents, but all subagents ran out of cont
 The solution was to use **git worktrees** for true parallel execution with isolated file systems:
 
 ```
-vmark-p3a/   ← plugins first half (34 dirs)
-vmark-p3b/   ← plugins second half (34 dirs)
-vmark-p4a/   ← utils first half (~50 files)
-vmark-p4b/   ← utils second half (~65 files) + lib
-vmark-p5/    ← components (~67 files) + contexts
-vmark-p678/  ← Rust + MCP + export (~70 files)
+tmark-p3a/   ← plugins first half (34 dirs)
+tmark-p3b/   ← plugins second half (34 dirs)
+tmark-p4a/   ← utils first half (~50 files)
+tmark-p4b/   ← utils second half (~65 files) + lib
+tmark-p5/    ← components (~67 files) + contexts
+tmark-p678/  ← Rust + MCP + export (~70 files)
 ```
 
 Each worktree was created from the same HEAD (`450474f`), branching into its own temporary branch. Six background agents were launched in parallel, each working in its own worktree with `max_turns: 150`.

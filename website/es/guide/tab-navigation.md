@@ -1,6 +1,6 @@
 # Navegación Inteligente con Tab
 
-Las teclas Tab y Shift+Tab de VMark son conscientes del contexto — te ayudan a navegar eficientemente por texto formateado, corchetes y enlaces sin necesidad de usar las teclas de flecha.
+Las teclas Tab y Shift+Tab de TMark son conscientes del contexto — te ayudan a navegar eficientemente por texto formateado, corchetes y enlaces sin necesidad de usar las teclas de flecha.
 
 ## Resumen Rápido
 
@@ -131,21 +131,21 @@ This is |**bold text** here
 Tab y Shift+Tab también escapan de los enlaces:
 
 ```text
-Check out [VMark|](https://vmark.app)
+Check out [TMark|](https://github.com/Afeng01/TMark)
                ↑ cursor dentro del texto del enlace
 ```
 
 Presiona **Tab**:
 
 ```text
-Check out [VMark](https://vmark.app)| and...
+Check out [TMark](https://github.com/Afeng01/TMark)| and...
                                     ↑ cursor después del enlace
 ```
 
 Presionar **Shift+Tab** dentro de un enlace mueve al inicio:
 
 ```text
-Check out |[VMark](https://vmark.app) and...
+Check out |[TMark](https://github.com/Afeng01/TMark) and...
           ↑ cursor antes del enlace
 ```
 
@@ -155,7 +155,7 @@ En el modo Fuente, Tab proporciona navegación inteligente dentro de la sintaxis
 
 ### Corchetes Anidados y Escapados
 
-VMark gestiona correctamente la sintaxis de enlace compleja:
+TMark gestiona correctamente la sintaxis de enlace compleja:
 
 ```markdown
 [text [with nested] brackets](url)     ✓ Funciona
@@ -364,7 +364,7 @@ La inserción de auto-emparejamiento también está deshabilitada dentro de los 
 
 1. **Memoria muscular** — Una vez que te acostumbras al escape con Tab, navegarás mucho más rápido sin necesidad de las teclas de flecha.
 
-2. **Funciona con auto-emparejamiento** — Cuando escribes `(`, VMark auto-inserta `)`. Después de escribir dentro, simplemente presiona Tab para saltar afuera.
+2. **Funciona con auto-emparejamiento** — Cuando escribes `(`, TMark auto-inserta `)`. Después de escribir dentro, simplemente presiona Tab para saltar afuera.
 
 3. **Estructuras anidadas** — Tab escapa un nivel a la vez. Para `((anidado))`, necesitas dos Tabs para salir completamente.
 

@@ -89,7 +89,7 @@ function SnapshotCanvas({ payload }: SnapshotCanvasProps): ReactElement | null {
       raf2 = requestAnimationFrame(() => {
         raf3 = requestAnimationFrame(() => {
           const reactFlowEl = document.querySelector(
-            "#vmark-workflow-snapshot-root .react-flow",
+            "#tmark-workflow-snapshot-root .react-flow",
           ) as HTMLElement | null;
           if (!reactFlowEl) {
             if (!cancelled) payload.resolve(null);

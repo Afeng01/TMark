@@ -1,6 +1,6 @@
 # Link-Prüfung
 
-VMark verifiziert, dass lokale Link- und Bildziele in Ihrem Markdown tatsächlich auf der Festplatte existieren. Läuft zusammen mit der [Markdown-Lint-Engine](/de/guide/lint) bei `Cmd-Shift-L` oder **Werkzeuge → Markdown prüfen**.
+TMark verifiziert, dass lokale Link- und Bildziele in Ihrem Markdown tatsächlich auf der Festplatte existieren. Läuft zusammen mit der [Markdown-Lint-Engine](/de/guide/lint) bei `Cmd-Shift-L` oder **Werkzeuge → Markdown prüfen**.
 
 ## Was geprüft wird
 

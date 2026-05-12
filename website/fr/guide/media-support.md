@@ -1,6 +1,6 @@
 # Prise en charge des médias
 
-VMark prend en charge la vidéo, l'audio et les embeds YouTube dans vos documents Markdown en utilisant des balises HTML5 standard.
+TMark prend en charge la vidéo, l'audio et les embeds YouTube dans vos documents Markdown en utilisant des balises HTML5 standard.
 
 ## Formats pris en charge
 
@@ -68,7 +68,7 @@ Utilisez des iframes du lecteur Vimeo :
 <iframe src="https://player.vimeo.com/video/VIDEO_ID" width="560" height="315" frameborder="0" allowfullscreen></iframe>
 ```
 
-Vous pouvez également coller directement une URL Vimeo (par ex. `https://vimeo.com/123456789`) et VMark la convertira automatiquement en embed.
+Vous pouvez également coller directement une URL Vimeo (par ex. `https://vimeo.com/123456789`) et TMark la convertira automatiquement en embed.
 
 ### Embeds Bilibili
 
@@ -78,11 +78,11 @@ Utilisez l'iframe du lecteur Bilibili avec un identifiant BV :
 <iframe src="https://player.bilibili.com/player.html?bvid=BV1xxxxxxxxx" width="560" height="350" frameborder="0" allowfullscreen></iframe>
 ```
 
-Collez une URL de vidéo Bilibili (par ex. `https://bilibili.com/video/BV1xxxxxxxxx`) et VMark la convertira automatiquement en embed. Notez que les URL courtes (`b23.tv`) ne sont pas prises en charge car elles nécessitent une résolution de redirection.
+Collez une URL de vidéo Bilibili (par ex. `https://bilibili.com/video/BV1xxxxxxxxx`) et TMark la convertira automatiquement en embed. Notez que les URL courtes (`b23.tv`) ne sont pas prises en charge car elles nécessitent une résolution de redirection.
 
 ### Syntaxe d'image de secours
 
-Vous pouvez également utiliser la syntaxe d'image avec des extensions de fichiers médias — VMark les promeut automatiquement vers le type de média correct :
+Vous pouvez également utiliser la syntaxe d'image avec des extensions de fichiers médias — TMark les promeut automatiquement vers le type de média correct :
 
 ```markdown
 ![](video.mp4)
@@ -98,11 +98,11 @@ Utilisez le menu Insérer dans la barre d'outils :
 - **Vidéo** — ouvre un sélecteur de fichiers pour les fichiers vidéo, copie dans `.assets/`, insère une balise `<video>`
 - **Audio** — ouvre un sélecteur de fichiers pour les fichiers audio, copie dans `.assets/`, insère une balise `<audio>`
 - **YouTube** — lit une URL YouTube depuis le presse-papiers et insère un embed respectueux de la vie privée
-- **Vimeo** et **Bilibili** — collez une URL de vidéo directement dans l'éditeur et VMark détecte automatiquement le fournisseur
+- **Vimeo** et **Bilibili** — collez une URL de vidéo directement dans l'éditeur et TMark détecte automatiquement le fournisseur
 
 ### Glisser-déposer
 
-Glissez des fichiers vidéo ou audio depuis votre système de fichiers directement dans l'éditeur. VMark va :
+Glissez des fichiers vidéo ou audio depuis votre système de fichiers directement dans l'éditeur. TMark va :
 
 1. Copier le fichier dans le dossier `.assets/` du document
 2. Insérer le nœud de média approprié avec un chemin relatif
@@ -130,7 +130,7 @@ Appuyez sur `Échap` pour fermer la fenêtre contextuelle et revenir à l'édite
 
 ## Résolution des chemins
 
-VMark prend en charge trois types de chemins médias :
+TMark prend en charge trois types de chemins médias :
 
 | Type de chemin | Exemple | Comportement |
 |----------------|---------|-------------|

@@ -1,6 +1,6 @@
 # 导出与打印
 
-VMark 提供多种方式导出和分享你的文档。
+TMark 提供多种方式导出和分享你的文档。
 
 ## 导出模式
 
@@ -49,7 +49,7 @@ MyDocument.html
 
 ### 导出为其他格式
 
-VMark 集成了 [Pandoc](https://pandoc.org/) —— 一款通用文档转换工具 —— 可将 Markdown 导出为其他格式。直接从菜单选择格式：
+TMark 集成了 [Pandoc](https://pandoc.org/) —— 一款通用文档转换工具 —— 可将 Markdown 导出为其他格式。直接从菜单选择格式：
 
 **文件 → 导出 → 其他格式 →**
 
@@ -68,7 +68,7 @@ VMark 集成了 [Pandoc](https://pandoc.org/) —— 一款通用文档转换工
    - macOS：`brew install pandoc`
    - Windows：`winget install pandoc`
    - Linux：`apt install pandoc`
-2. 重启 VMark（或进入 **设置 → 文件与图片 → 文档工具** 并点击 **检测**）
+2. 重启 TMark（或进入 **设置 → 文件与图片 → 文档工具** 并点击 **检测**）
 3. 使用 **文件 → 导出 → 其他格式 → [格式]** 进行导出
 
 如果未安装 Pandoc，菜单会在"其他格式"子菜单底部显示一个 **"需要 Pandoc — pandoc.org"** 链接。
@@ -79,9 +79,9 @@ VMark 集成了 [Pandoc](https://pandoc.org/) —— 一款通用文档转换工
 
 按 `Cmd/Ctrl + Shift + C` 将渲染后的 HTML 复制到剪贴板，以便粘贴到其他应用程序。
 
-## VMark 阅读器
+## TMark 阅读器
 
-当你导出为 HTML 时，你的文档包含 **VMark 阅读器** —— 一种具有强大功能的交互式阅读体验。
+当你导出为 HTML 时，你的文档包含 **TMark 阅读器** —— 一种具有强大功能的交互式阅读体验。
 
 ### 设置面板
 

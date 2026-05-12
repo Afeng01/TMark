@@ -248,7 +248,7 @@ tauri_read_logs({
 tauri_read_logs({ source: 'system', lines: 100 })
 
 // Android logcat
-tauri_read_logs({ source: 'android', filter: 'vmark', lines: 100 })
+tauri_read_logs({ source: 'android', filter: 'tmark', lines: 100 })
 
 // iOS simulator logs
 tauri_read_logs({ source: 'ios', lines: 100 })
@@ -380,5 +380,5 @@ tauri_webview_screenshot({ filePath: 'dev-docs/archive/test-screenshots/desktop.
 
 ## Related Skills
 - **`tauri-app-dev`** — General Tauri 2.0 patterns (commands, state, plugins, security)
-- **`tauri-v2-integration`** — VMark-specific IPC patterns (invoke/emit bridges, menu accelerators)
-- **`rust-tauri-backend`** — VMark Rust backend implementation
+- **`tauri-v2-integration`** — TMark-specific IPC patterns (invoke/emit bridges, menu accelerators)
+- **`rust-tauri-backend`** — TMark Rust backend implementation

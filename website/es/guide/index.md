@@ -1,10 +1,10 @@
-# Primeros Pasos con VMark
+# Primeros Pasos con TMark
 
-VMark es un editor Markdown que prioriza el almacenamiento local, con dos modos de edición, herramientas de formato avanzadas y excelente soporte CJK (chino/japonés/coreano).
+TMark es un editor Markdown que prioriza el almacenamiento local, con dos modos de edición, herramientas de formato avanzadas y excelente soporte CJK (chino/japonés/coreano).
 
 ## Inicio Rápido
 
-1. **Descarga e instala** VMark desde la [página de descarga](/es/download)
+1. **Descarga e instala** TMark desde la [página de descarga](/es/download)
 2. **Inicia la aplicación** y comienza a escribir de inmediato
 3. **Abre un archivo** con `Cmd/Ctrl + O` o arrastra y suelta un archivo `.md`
 4. **Abre una carpeta** con `Cmd/Ctrl + Shift + O` para el modo de espacio de trabajo
@@ -30,7 +30,7 @@ VMark es un editor Markdown que prioriza el almacenamiento local, con dos modos 
 
 ### Modos de Edición
 
-VMark soporta dos modos de edición entre los que puedes alternar:
+TMark soporta dos modos de edición entre los que puedes alternar:
 
 | Modo | Descripción | Atajo |
 |------|-------------|-------|
@@ -82,11 +82,11 @@ Mejora tu concentración al escribir con estos modos de vista:
 
 ### Exportar
 
-- **Exportar HTML**: Usa **Archivo → Exportar HTML** — incluye VMark Reader interactivo
+- **Exportar HTML**: Usa **Archivo → Exportar HTML** — incluye TMark Reader interactivo
 - **Exportar PDF**: Usa Imprimir (`Cmd/Ctrl + P`) y guarda como PDF
 - **Copiar como HTML**: `Cmd/Ctrl + Shift + C`
 
-El HTML exportado incluye VMark Reader con tabla de contenidos, panel de configuración y más. [Más información →](/es/guide/export)
+El HTML exportado incluye TMark Reader con tabla de contenidos, panel de configuración y más. [Más información →](/es/guide/export)
 
 ## Configuración
 
@@ -103,7 +103,7 @@ Abre la configuración con `Cmd/Ctrl + ,` para personalizar:
 
 ## Asistencia de Escritura con IA
 
-VMark incluye Genios de IA integrados — selecciona texto y pulsa `Mod + Y` para pulir, expandir, traducir o transformar tu escritura con IA. Configura tu proveedor preferido en **Configuración > Integraciones**.
+TMark incluye Genios de IA integrados — selecciona texto y pulsa `Mod + Y` para pulir, expandir, traducir o transformar tu escritura con IA. Configura tu proveedor preferido en **Configuración > Integraciones**.
 
 [Más información sobre los Genios de IA →](/es/guide/ai-genies) | [Configurar proveedores →](/es/guide/ai-providers)
 

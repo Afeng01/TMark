@@ -10,7 +10,7 @@ branch: "quality/industry-best-hardening"
 ## Outcomes
 
 - **Desired behavior:**
-  - VMark achieves provable quality guarantees across all engineering dimensions
+  - TMark achieves provable quality guarantees across all engineering dimensions
   - Every critical user path has E2E test coverage via Tauri MCP
   - Automated accessibility testing catches WCAG 2.1 AA regressions
   - Performance benchmarks detect latency/memory regressions before release
@@ -130,7 +130,7 @@ branch: "quality/industry-best-hardening"
   - Rationale: Rust backend has lowest coverage; cargo-mutants is lightweight and focused
 
 - **D5: API key storage**
-  - Options: (a) System keychain, (b) Encrypted file in ~/.vmark, (c) Keep localStorage
+  - Options: (a) System keychain, (b) Encrypted file in ~/.tmark, (c) Keep localStorage
   - Decision: (b) Encrypted file via Tauri's safe storage plugin
   - Rationale: Cross-platform, no external dependency; tauri-plugin-store already available
 
@@ -186,7 +186,7 @@ branch: "quality/industry-best-hardening"
 #### WI-004: Install vitest-axe and create a11y test helpers
 
 - **Goal:** Automated a11y regression testing infrastructure
-- **Acceptance:** (1) `vitest-axe` installed. (2) `src/test/a11yHelpers.ts` exports `expectNoA11yViolations(container)`. (3) Helper configured with VMark-specific rules.
+- **Acceptance:** (1) `vitest-axe` installed. (2) `src/test/a11yHelpers.ts` exports `expectNoA11yViolations(container)`. (3) Helper configured with TMark-specific rules.
 - **Tests:** Self-testing: helper catches a known violation
 - **Touched areas:** `package.json`, `src/test/a11yHelpers.ts`
 - **Dependencies:** None
@@ -284,7 +284,7 @@ branch: "quality/industry-best-hardening"
 - **Goal:** MCP clients can discover tool versions and deprecated features
 - **Acceptance:** (1) `get_capabilities` response includes `tools` map with version per tool. (2) PROTOCOL_VERSION bumped to 1.1.0. (3) Tests verify capabilities response structure.
 - **Tests:** Update `protocol.test.ts` to assert tool versions in capabilities
-- **Touched areas:** `vmark-mcp-server/src/tools/protocol.ts`, `bridge/protocol-types.ts`
+- **Touched areas:** `tmark-mcp-server/src/tools/protocol.ts`, `bridge/protocol-types.ts`
 - **Dependencies:** None
 - **Estimate:** S
 
@@ -293,14 +293,14 @@ branch: "quality/industry-best-hardening"
 - **Goal:** Deprecated MCP actions log warnings and suggest replacements
 - **Acceptance:** (1) `ACTION_MIGRATIONS` map supports old→new action aliasing. (2) Deprecated actions emit warning in response metadata. (3) Tests verify aliasing works.
 - **Tests:** Unit test: call deprecated action name → succeeds with warning
-- **Touched areas:** `vmark-mcp-server/src/server.ts`, tool handler files
+- **Touched areas:** `tmark-mcp-server/src/server.ts`, tool handler files
 - **Dependencies:** WI-014
 - **Estimate:** S
 
 #### WI-016: MCP API changelog
 
 - **Goal:** Clients can discover what changed between versions
-- **Acceptance:** (1) `vmark-mcp-server/CHANGELOG.md` documents all tool changes by version. (2) `get_capabilities` includes `changelogUrl` field.
+- **Acceptance:** (1) `tmark-mcp-server/CHANGELOG.md` documents all tool changes by version. (2) `get_capabilities` includes `changelogUrl` field.
 - **Tests:** None (documentation)
 - **Touched areas:** New CHANGELOG.md, protocol.ts
 - **Dependencies:** WI-014

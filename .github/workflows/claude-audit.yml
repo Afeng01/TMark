@@ -1,11 +1,7 @@
 name: Claude Periodic Audit
 
 on:
-  schedule:
-    # Once daily at 9am UTC
-    - cron: "0 9 * * *"
-
-  # Allow manual trigger from Actions tab
+  # Manual only until TMark's public automation budget and secrets are reviewed.
   workflow_dispatch:
 
 permissions:
@@ -35,7 +31,7 @@ jobs:
           claude_args: "--model opus --max-turns 120 --allowedTools Bash,Read,Glob,Grep,WebSearch,WebFetch"
 
           prompt: |
-            You are a codebase auditor for **VMark** — a Tauri v2 + React 19 + Zustand v5
+            You are a codebase auditor for **TMark** — a Tauri v2 + React 19 + Zustand v5
             desktop Markdown editor with a ProseMirror/Tiptap WYSIWYG mode, a CodeMirror
             source mode, and a Node.js MCP sidecar. The entire codebase is written by AI.
 
@@ -81,7 +77,7 @@ jobs:
             Check `batchOpHandlers.ts` (660 LoC) and `sectionHandlers.ts` (564 LoC) especially.
 
             ### 5. MCP sidecar reliability
-            `vmark-mcp-server/src/`. Check for:
+            `tmark-mcp-server/src/`. Check for:
             - WebSocket reconnection handling in `bridge/websocket.ts` (648 LoC)
             - Unhandled promise rejections in tool handlers
             - Message protocol type mismatches between `protocol-types.ts` and Rust bridge
@@ -277,4 +273,3 @@ jobs:
 
             **GOOD:** `[audit] accessibility: ModelComboBox missing aria-label on icon button`
             → One component, one attribute, verifiable.
-

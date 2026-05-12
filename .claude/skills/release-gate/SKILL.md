@@ -1,12 +1,12 @@
 ---
 name: release-gate
-description: Run VMark release gates and summarize results. Use when asked to run full quality gates (lint/test/build), verify readiness, or produce a gate report.
+description: Run TMark release gates and summarize results. Use when asked to run full quality gates (lint/test/build), verify readiness, or produce a gate report.
 ---
 
 # Release Gate
 
 ## Overview
-Run the full VMark gate (`pnpm check:all`) and summarize outcomes.
+Run the full TMark gate (`pnpm check:all`) and summarize outcomes.
 
 ## Workflow
 1) Confirm current branch and dirty state (`git status -sb`).

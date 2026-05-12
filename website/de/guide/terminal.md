@@ -1,6 +1,6 @@
 # Integriertes Terminal
 
-VMark enthält ein integriertes Terminal-Panel, sodass Sie Befehle ausführen können, ohne den Editor zu verlassen.
+TMark enthält ein integriertes Terminal-Panel, sodass Sie Befehle ausführen können, ohne den Editor zu verlassen.
 
 Drücken Sie `` Strg + ` ``, um das Terminal-Panel umzuschalten.
 
@@ -61,13 +61,13 @@ Das Terminal erkennt zwei Arten von Links in der Befehlsausgabe:
 
 ## Shell-Umgebung
 
-VMark setzt diese Umgebungsvariablen in jeder Terminal-Sitzung:
+TMark setzt diese Umgebungsvariablen in jeder Terminal-Sitzung:
 
 | Variable | Wert |
 |----------|------|
-| `TERM_PROGRAM` | `vmark` |
-| `EDITOR` | `vmark` |
-| `VMARK_WORKSPACE` | Arbeitsbereichsstammverzeichnis (wenn ein Ordner geöffnet ist) |
+| `TERM_PROGRAM` | `tmark` |
+| `EDITOR` | `tmark` |
+| `TMARK_WORKSPACE` | Arbeitsbereichsstammverzeichnis (wenn ein Ordner geöffnet ist) |
 | `PATH` | Vollständiger Login-Shell-PATH (wie in Ihrem System-Terminal) |
 
 Das integrierte Terminal erbt den `PATH` Ihrer Login-Shell, sodass CLI-Tools wie `node`, `claude` und andere vom Benutzer installierte Binärdateien auffindbar sind — genau wie in einem regulären Terminal-Fenster.
@@ -80,7 +80,7 @@ Wenn Sie einen Arbeitsbereich oder eine Datei öffnen, nachdem das Terminal bere
 
 ## Pausieren / Fortsetzen
 
-Bei lang laufenden Prozessen mit umfangreicher Ausgabe können Sie den zugrunde liegenden Shell-Prozess aus VMark heraus aussetzen, um CPU freizugeben, ohne die Sitzung zu beenden. Beim Fortsetzen läuft der Prozess dort weiter, wo er aufgehört hat.
+Bei lang laufenden Prozessen mit umfangreicher Ausgabe können Sie den zugrunde liegenden Shell-Prozess aus TMark heraus aussetzen, um CPU freizugeben, ohne die Sitzung zu beenden. Beim Fortsetzen läuft der Prozess dort weiter, wo er aufgehört hat.
 
 | Aktion | Wie |
 |---|---|

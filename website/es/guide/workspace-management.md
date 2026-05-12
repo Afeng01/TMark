@@ -1,6 +1,6 @@
 # Gestión del Espacio de Trabajo
 
-Un espacio de trabajo en VMark es una carpeta abierta como raíz de tu proyecto. Cuando abres un espacio de trabajo, la barra lateral muestra un árbol de archivos, Apertura Rápida indexa cada archivo markdown, el terminal se inicia en la raíz del proyecto y tus pestañas abiertas se recuerdan para la próxima vez.
+Un espacio de trabajo en TMark es una carpeta abierta como raíz de tu proyecto. Cuando abres un espacio de trabajo, la barra lateral muestra un árbol de archivos, Apertura Rápida indexa cada archivo markdown, el terminal se inicia en la raíz del proyecto y tus pestañas abiertas se recuerdan para la próxima vez.
 
 Sin un espacio de trabajo, aún puedes abrir archivos individuales, pero pierdes el explorador de archivos, la búsqueda dentro del proyecto y la restauración de sesiones.
 
@@ -10,13 +10,13 @@ Sin un espacio de trabajo, aún puedes abrir archivos individuales, pero pierdes
 |--------|------|
 | Menú | **Archivo > Abrir Espacio de Trabajo** |
 | Apertura Rápida | `Mod + O`, luego selecciona **Examinar...** al final |
-| Arrastrar y soltar | Arrastra un archivo markdown desde el Finder a la ventana — VMark detecta su raíz de proyecto y abre el espacio de trabajo automáticamente |
+| Arrastrar y soltar | Arrastra un archivo markdown desde el Finder a la ventana — TMark detecta su raíz de proyecto y abre el espacio de trabajo automáticamente |
 | Espacios de Trabajo Recientes | **Archivo > Espacios de Trabajo Recientes** y elige un proyecto anterior |
 
-Cuando abres un espacio de trabajo, VMark muestra la barra lateral con el explorador de archivos. Si el espacio de trabajo fue abierto anteriormente, las pestañas abiertas previamente se restauran.
+Cuando abres un espacio de trabajo, TMark muestra la barra lateral con el explorador de archivos. Si el espacio de trabajo fue abierto anteriormente, las pestañas abiertas previamente se restauran.
 
 ::: tip
-Si la ventana actual tiene cambios sin guardar, VMark ofrece abrir el espacio de trabajo en una nueva ventana en lugar de reemplazar tu trabajo.
+Si la ventana actual tiene cambios sin guardar, TMark ofrece abrir el espacio de trabajo en una nueva ventana en lugar de reemplazar tu trabajo.
 :::
 
 ## Explorador de Archivos
@@ -90,7 +90,7 @@ Sin un espacio de trabajo, la Apertura Rápida sigue funcionando — muestra los
 
 ## Búsqueda de Contenido en el Espacio de Trabajo
 
-Cuando hay un espacio de trabajo abierto, VMark puede buscar a través del **contenido de los archivos** (no solo nombres de archivo) coincidencias en archivos markdown y de texto.
+Cuando hay un espacio de trabajo abierto, TMark puede buscar a través del **contenido de los archivos** (no solo nombres de archivo) coincidencias en archivos markdown y de texto.
 
 | Acción | Atajo |
 |---|---|
@@ -112,7 +112,7 @@ Esto es distinto de [Apertura Rápida](#apertura-rapida), que busca solo *nombre
 
 ## Espacios de Trabajo Recientes
 
-VMark recuerda hasta 10 espacios de trabajo abiertos recientemente. Accede a ellos desde **Archivo > Espacios de Trabajo Recientes** en la barra de menú.
+TMark recuerda hasta 10 espacios de trabajo abiertos recientemente. Accede a ellos desde **Archivo > Espacios de Trabajo Recientes** en la barra de menú.
 
 - Los espacios de trabajo están ordenados por la hora de la última apertura (el más reciente primero)
 - La lista se sincroniza con el menú nativo en cada cambio
@@ -120,7 +120,7 @@ VMark recuerda hasta 10 espacios de trabajo abiertos recientemente. Accede a ell
 
 ## Configuración del Espacio de Trabajo
 
-Cada espacio de trabajo tiene su propia configuración que persiste entre sesiones. La configuración se almacena en el directorio de datos de la aplicación VMark — no dentro de la carpeta del proyecto — para mantener tu espacio de trabajo limpio.
+Cada espacio de trabajo tiene su propia configuración que persiste entre sesiones. La configuración se almacena en el directorio de datos de la aplicación TMark — no dentro de la carpeta del proyecto — para mantener tu espacio de trabajo limpio.
 
 Las siguientes configuraciones se guardan por espacio de trabajo:
 
@@ -137,7 +137,7 @@ La configuración del espacio de trabajo está vinculada a la ruta de la carpeta
 
 ## Restauración de Sesión
 
-Cuando cierras una ventana que tiene un espacio de trabajo abierto, VMark guarda la lista de pestañas abiertas en la configuración del espacio de trabajo. La próxima vez que abras el mismo espacio de trabajo, esas pestañas se restauran automáticamente.
+Cuando cierras una ventana que tiene un espacio de trabajo abierto, TMark guarda la lista de pestañas abiertas en la configuración del espacio de trabajo. La próxima vez que abras el mismo espacio de trabajo, esas pestañas se restauran automáticamente.
 
 - Solo se restauran las pestañas con una ruta de archivo guardada (las pestañas sin título no se persisten)
 - Si un archivo fue movido o eliminado desde la última sesión, se omite silenciosamente
@@ -145,13 +145,13 @@ Cuando cierras una ventana que tiene un espacio de trabajo abierto, VMark guarda
 
 ## Múltiples Ventanas
 
-Cada ventana de VMark puede tener su propio espacio de trabajo independiente. Esto te permite trabajar en múltiples proyectos simultáneamente.
+Cada ventana de TMark puede tener su propio espacio de trabajo independiente. Esto te permite trabajar en múltiples proyectos simultáneamente.
 
 - **Archivo > Nueva Ventana** abre una ventana nueva
 - Abrir un espacio de trabajo en una nueva ventana no afecta a otras ventanas
 - El tamaño y la posición de la ventana se recuerdan por ventana
 
-Cuando arrastras un archivo markdown desde el Finder y la ventana actual ya tiene trabajo sin guardar, VMark abre el proyecto del archivo en una nueva ventana automáticamente.
+Cuando arrastras un archivo markdown desde el Finder y la ventana actual ya tiene trabajo sin guardar, TMark abre el proyecto del archivo en una nueva ventana automáticamente.
 
 ### Separar Pestañas en Nuevas Ventanas
 
@@ -165,51 +165,51 @@ El gesto está bloqueado por dirección: el movimiento horizontal inicia un reor
 
 ## Cambios Externos
 
-VMark monitorea tu espacio de trabajo en busca de cambios realizados por otros programas (Git, editores externos, herramientas de compilación, etc.) y mantiene los documentos abiertos sincronizados.
+TMark monitorea tu espacio de trabajo en busca de cambios realizados por otros programas (Git, editores externos, herramientas de compilación, etc.) y mantiene los documentos abiertos sincronizados.
 
 - **Los archivos sin modificar** se recargan automáticamente cuando su contenido cambia en disco. Una breve notificación toast confirma la recarga.
 - **Los archivos con cambios sin guardar** activan un cuadro de diálogo con tres opciones: **Guardar como** (guardar tu versión en una nueva ubicación), **Recargar** (descartar tus cambios y cargar desde disco) o **Mantener** (preservar tus ediciones y marcar el archivo como divergente).
 - **Los archivos eliminados** se marcan como faltantes en su pestaña pero no se cierran — puedes guardar el contenido en una nueva ubicación.
-- Cuando múltiples archivos modificados cambian a la vez (por ejemplo, después de un `git checkout`), VMark los agrupa en un único diálogo para que puedas recargar todos, mantener todos o revisar cada archivo individualmente.
-- Si el contenido en disco de un archivo divergente luego coincide con lo que tienes en el editor (por ejemplo, un `git checkout` restaura el mismo texto), VMark limpia automáticamente el estado divergente para que el autoguardado normal se reanude.
+- Cuando múltiples archivos modificados cambian a la vez (por ejemplo, después de un `git checkout`), TMark los agrupa en un único diálogo para que puedas recargar todos, mantener todos o revisar cada archivo individualmente.
+- Si el contenido en disco de un archivo divergente luego coincide con lo que tienes en el editor (por ejemplo, un `git checkout` restaura el mismo texto), TMark limpia automáticamente el estado divergente para que el autoguardado normal se reanude.
 
-VMark filtra sus propios guardados para que nunca se te solicite por cambios que hiciste dentro de la aplicación.
+TMark filtra sus propios guardados para que nunca se te solicite por cambios que hiciste dentro de la aplicación.
 
 ## Documentos Recientes del Dock de macOS
 
-Los documentos que abres en VMark se registran con macOS, así que aparecen en el submenú **Abrir recientes** cuando haces clic derecho en el icono de VMark en el Dock.
+Los documentos que abres en TMark se registran con macOS, así que aparecen en el submenú **Abrir recientes** cuando haces clic derecho en el icono de TMark en el Dock.
 
 ## Integración con el Terminal
 
 El terminal integrado usa automáticamente la raíz del espacio de trabajo como su directorio de trabajo. Cuando abres o cambias de espacio de trabajo, todas las sesiones del terminal ejecutan `cd` a la nueva raíz.
 
-La variable de entorno `VMARK_WORKSPACE` se establece con la ruta del espacio de trabajo en cada sesión del terminal, para que tus scripts puedan referenciar la raíz del proyecto.
+La variable de entorno `TMARK_WORKSPACE` se establece con la ruta del espacio de trabajo en cada sesión del terminal, para que tus scripts puedan referenciar la raíz del proyecto.
 
 [Más información sobre el terminal →](/es/guide/terminal)
 
 ## Comando CLI de Shell
 
-VMark puede instalar un comando de shell `vmark` para que puedas abrir archivos y carpetas desde el terminal.
+TMark puede instalar un comando de shell `tmark` para que puedas abrir archivos y carpetas desde el terminal.
 
 ### Instalación
 
-Ve a **Ayuda > Instalar comando 'vmark'**. VMark escribe un pequeño script lanzador en `/usr/local/bin/vmark` y pide tu contraseña de administrador (el mismo enfoque que usa VS Code para su comando `code`).
+Ve a **Ayuda > Instalar comando 'tmark'**. TMark escribe un pequeño script lanzador en `/usr/local/bin/tmark` y pide tu contraseña de administrador (el mismo enfoque que usa VS Code para su comando `code`).
 
 ### Uso
 
 ```bash
 # Abrir un archivo
-vmark README.md
+tmark README.md
 
 # Abrir una carpeta como espacio de trabajo
-vmark ~/projects/my-blog
+tmark ~/projects/my-blog
 
 # Abrir múltiples archivos
-vmark chapter1.md chapter2.md
+tmark chapter1.md chapter2.md
 ```
 
-El comando delega a `open -b app.vmark`, así que macOS maneja el comportamiento de instancia única — los archivos se abren en tu ventana existente de VMark en lugar de iniciar un nuevo proceso.
+El comando delega a `open -b app.tmark`, así que macOS maneja el comportamiento de instancia única — los archivos se abren en tu ventana existente de TMark en lugar de iniciar un nuevo proceso.
 
 ### Desinstalación
 
-Ve a **Ayuda > Desinstalar comando 'vmark'** para eliminar `/usr/local/bin/vmark`. Si el archivo en esa ruta no fue instalado por VMark, la operación se bloquea y se te pide que lo elimines manualmente.
+Ve a **Ayuda > Desinstalar comando 'tmark'** para eliminar `/usr/local/bin/tmark`. Si el archivo en esa ruta no fue instalado por TMark, la operación se bloquea y se te pide que lo elimines manualmente.

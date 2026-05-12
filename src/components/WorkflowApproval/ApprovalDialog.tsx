@@ -6,7 +6,7 @@
  * The user clicks Approve or Deny; the verdict goes back through
  * `respond_workflow_approval` and dismisses the dialog.
  *
- * Esc = Deny (consistent with VMark's other dialogs).
+ * Esc = Deny (consistent with TMark's other dialogs).
  *
  * @coordinates-with workflowApprovalStore.ts — reads `pending`
  * @coordinates-with useWorkflowExecution.ts — calls `respondApproval`

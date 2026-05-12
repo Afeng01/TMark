@@ -227,7 +227,7 @@ export const useAiProviderStore = create<AiProviderState & AiProviderActions>()(
       },
     }),
     {
-      name: "vmark-ai-providers",
+      name: "tmark-ai-providers",
       version: 2,
       storage: createJSONStorage(() => createSecureStorage()),
       partialize: (state) => ({

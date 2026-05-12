@@ -1,7 +1,7 @@
 /**
  * MCP Bridge Control Hook
  *
- * Purpose: React state and controls for the VMark MCP bridge (WebSocket server) —
+ * Purpose: React state and controls for the TMark MCP bridge (WebSocket server) —
  *   start/stop/restart the bridge, track running state and port, listen for
  *   status change events from Rust.
  *
@@ -43,10 +43,10 @@ interface UseMcpServerResult {
 }
 
 /**
- * Hook to control the VMark MCP bridge.
+ * Hook to control the TMark MCP bridge.
  *
  * The bridge is a WebSocket server that AI client sidecars connect to.
- * VMark only starts the bridge; AI clients spawn their own sidecars.
+ * TMark only starts the bridge; AI clients spawn their own sidecars.
  *
  * The port is automatically assigned by the OS and written to the app data
  * directory (mcp-port file) for sidecar discovery. Users don't need to configure it.

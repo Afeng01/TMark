@@ -70,7 +70,7 @@ describe('checkAndRestoreSession', () => {
     const mockSession = {
       version: 1,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.3.24',
+      tmark_version: '0.3.24',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -115,7 +115,7 @@ describe('checkAndRestoreSession', () => {
     const mockSession = {
       version: 1,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.3.24',
+      tmark_version: '0.3.24',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -151,7 +151,7 @@ describe('checkAndRestoreSession', () => {
     const mockSession = {
       version: 1,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.3.24',
+      tmark_version: '0.3.24',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -181,7 +181,7 @@ describe('checkAndRestoreSession', () => {
     const mockSession = {
       version: 1,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.3.24',
+      tmark_version: '0.3.24',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -219,7 +219,7 @@ describe('checkAndRestoreSession', () => {
     const mockSession = {
       version: 2,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.3.30',
+      tmark_version: '0.3.30',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 
@@ -250,7 +250,7 @@ describe('checkAndRestoreSession', () => {
     const mockSession = {
       version: 2,
       timestamp: Date.now() / 1000,
-      vmark_version: '0.3.30',
+      tmark_version: '0.3.30',
       windows: [{ window_label: 'main', is_main_window: true, tabs: [] }],
     };
 

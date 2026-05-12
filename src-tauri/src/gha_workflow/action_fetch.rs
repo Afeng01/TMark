@@ -242,7 +242,7 @@ const MAX_ACTION_YML_BYTES: u64 = 1_048_576;
 pub async fn fetch_action_yml(action: &ActionRef) -> Result<String, FetchResult> {
     let client = reqwest::Client::builder()
         .timeout(Duration::from_secs(10))
-        .user_agent("vmark-gha-workflow-viewer/0.1")
+        .user_agent("tmark-gha-workflow-viewer/0.1")
         .build()
         .map_err(|e| FetchResult::NetworkError {
             message: format!("client build: {}", e),
@@ -503,7 +503,7 @@ mod tests {
     #[test]
     fn cache_roundtrip_within_ttl() {
         let p = std::env::temp_dir().join(format!(
-            "vmark-gha-cache-test-{}.json",
+            "tmark-gha-cache-test-{}.json",
             std::process::id()
         ));
         let _ = std::fs::remove_file(&p);
@@ -525,7 +525,7 @@ mod tests {
     #[test]
     fn cache_returns_none_when_expired() {
         let p = std::env::temp_dir().join(format!(
-            "vmark-gha-cache-expired-{}.json",
+            "tmark-gha-cache-expired-{}.json",
             std::process::id()
         ));
         let _ = std::fs::remove_file(&p);

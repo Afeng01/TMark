@@ -132,8 +132,8 @@ jobs:
           claude_args: "--model opus --max-turns 50 --allowedTools Bash Read Write Edit Glob Grep MultiEdit"
           show_full_output: true
           prompt: |
-            You are fixing a single audit finding in the VMark codebase.
-            VMark is a Tauri v2 + React 19 + Zustand v5 desktop Markdown editor.
+            You are fixing a single audit finding in the TMark codebase.
+            TMark is a Tauri v2 + React 19 + Zustand v5 desktop Markdown editor.
 
             ## Step 1: Understand the issue
 

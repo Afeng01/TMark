@@ -119,7 +119,7 @@ Focus:
 4. Duplicate code — copy-paste patterns, repeated logic that should be unified
 5. Dead code — unused imports, unreachable branches, orphaned functions left behind
 6. Shortcuts & patches — workarounds, TODO markers, band-aids, flags to bypass broken logic
-7. VMark compliance — Zustand selectors (no destructuring), CSS tokens (no hardcoded colors), file size <300 lines
+7. TMark compliance — Zustand selectors (no destructuring), CSS tokens (no hardcoded colors), file size <300 lines
 8. Cross-platform paths — if changes touch path parsing, file operations, or Command::new(), flag any hardcoded `/` separators, missing Windows `\` handling, or platform-specific assumptions. Paths must work on macOS, Windows, and Linux. See AGENTS.md cross-platform policy.
     Report as: file:line | severity (Critical/High/Medium/Low) | issue | fix
 ```
@@ -235,7 +235,7 @@ gh issue view {N} --json number,title,body,labels,state
 
 For each issue, create an isolated git worktree:
 ```bash
-git worktree add ../vmark-worktree-{N} -b fix/issue-{N}-{slug} main
+git worktree add ../tmark-worktree-{N} -b fix/issue-{N}-{slug} main
 ```
 
 ### M3: Parallel Execution
@@ -259,7 +259,7 @@ After all agents complete, display a summary table:
 
 ```bash
 # Remove successful worktrees
-git worktree remove ../vmark-worktree-{N}
+git worktree remove ../tmark-worktree-{N}
 
 # Keep failed ones for investigation
 ```

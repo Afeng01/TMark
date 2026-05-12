@@ -1,4 +1,4 @@
-//! # VMark Tauri Application
+//! # TMark Tauri Application
 //!
 //! Purpose: Entry point for the Tauri backend — wires together all modules,
 //! registers commands, configures plugins, and handles app-level events.
@@ -162,7 +162,7 @@ pub(crate) fn has_supported_extension(path: &std::path::Path) -> bool {
 ///
 /// Single gate used by every "open this path" entry point (CLI args,
 /// Finder `RunEvent::Opened`, `open_*_in_new_window` commands) so they
-/// all agree on which paths VMark will accept.
+/// all agree on which paths TMark will accept.
 pub(crate) fn is_openable_supported(path: &std::path::Path) -> bool {
     path.is_file() && has_supported_extension(path)
 }
@@ -216,7 +216,7 @@ fn write_temp_html(app: tauri::AppHandle, html: String) -> Result<String, String
 
     // Use tempfile for kernel-guaranteed unique filename (no PID+time guessability)
     let mut temp = tempfile::Builder::new()
-        .prefix("vmark-export-")
+        .prefix("tmark-export-")
         .suffix(".html")
         .tempfile_in(&dir)
         .map_err(|e| format!("Failed to create temp file: {}", e))?;
@@ -235,7 +235,7 @@ fn cleanup_stale_temp_files(dir: &std::path::Path) {
     for entry in entries.flatten() {
         let path = entry.path();
         let name = path.file_name().and_then(|n| n.to_str()).unwrap_or("");
-        if !name.starts_with("vmark-export-") && !name.starts_with("print-") {
+        if !name.starts_with("tmark-export-") && !name.starts_with("print-") {
             continue;
         }
         if !name.ends_with(".html") {
@@ -278,7 +278,7 @@ fn atomic_write_file_sync(target: &std::path::Path, content: &str) -> Result<(),
     // Surface a structured error when the parent directory is gone (e.g.,
     // renamed or deleted externally while the file was open). Without this
     // explicit check, NamedTempFile leaks a raw "No such file or directory
-    // (os error 2)" with a tempfile name, which looks like VMark dropped
+    // (os error 2)" with a tempfile name, which looks like TMark dropped
     // a temp file. The frontend matches the `PARENT_MISSING:` prefix to
     // route the user into the Save As flow.
     if !dir.is_dir() {
@@ -534,7 +534,7 @@ fn register_dock_recent(path: String) {
 
 /// Compute a stable, anonymous machine identifier hash.
 ///
-/// Input: `"vmark-machine-id-v1:" + hostname + ":" + OS + ":" + ARCH`
+/// Input: `"tmark-machine-id-v1:" + hostname + ":" + OS + ":" + ARCH`
 /// Output: 64-char lowercase hex SHA-256 digest.
 ///
 /// The hash is stable across restarts, updates, and user accounts on the
@@ -545,7 +545,7 @@ fn machine_id_hash() -> String {
         .to_string_lossy()
         .into_owned();
     let input = format!(
-        "vmark-machine-id-v1:{}:{}:{}",
+        "tmark-machine-id-v1:{}:{}:{}",
         hostname,
         std::env::consts::OS,
         std::env::consts::ARCH,
@@ -722,7 +722,7 @@ pub fn run() {
             #[cfg(target_os = "macos")]
             macos_menu::apply_menu_fixes(app.handle());
 
-            // Best-effort cleanup of legacy ~/.vmark/ directory
+            // Best-effort cleanup of legacy ~/.tmark/ directory
             app_paths::cleanup_legacy_home_dir(app.handle());
 
             // Install default AI genies (no-op if already present)
@@ -1066,7 +1066,7 @@ mod tests {
 
     #[test]
     fn rejects_missing_path() {
-        let missing = PathBuf::from("/definitely/does/not/exist-vmark-test.md");
+        let missing = PathBuf::from("/definitely/does/not/exist-tmark-test.md");
         assert!(!is_openable_supported(&missing));
     }
 

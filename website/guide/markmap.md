@@ -1,6 +1,6 @@
 # Markmap Mindmaps
 
-VMark supports [Markmap](https://markmap.js.org/) for creating interactive mindmap trees directly in your Markdown documents. Unlike Mermaid's static mindmap diagram type, Markmap uses plain Markdown headings as input and provides interactive pan/zoom/collapse.
+TMark supports [Markmap](https://markmap.js.org/) for creating interactive mindmap trees directly in your Markdown documents. Unlike Mermaid's static mindmap diagram type, Markmap uses plain Markdown headings as input and provides interactive pan/zoom/collapse.
 
 ## Inserting a Mindmap
 
@@ -90,7 +90,7 @@ List items under a heading become child nodes of that heading.
 Here is an interactive markmap rendered directly on this page — try panning, zooming, and collapsing nodes:
 
 ```markmap
-# VMark Features
+# TMark Features
 
 ## Editor
 ### WYSIWYG Mode
@@ -129,7 +129,7 @@ Here is an interactive markmap rendered directly on this page — try panning, z
 
 ## Theme Integration
 
-Markmap mindmaps automatically adapt to VMark's current theme (White, Paper, Mint, Sepia, or Night). Branch colors adjust for readability in every theme.
+Markmap mindmaps automatically adapt to TMark's current theme (White, Paper, Mint, Sepia, or Night). Branch colors adjust for readability in every theme.
 
 ## Export as PNG
 
@@ -146,7 +146,7 @@ The mindmap is exported as a 2x resolution PNG via the system save dialog.
 
 ### Markmap vs Mermaid Mindmap
 
-VMark supports both Markmap and Mermaid's `mindmap` diagram type:
+TMark supports both Markmap and Mermaid's `mindmap` diagram type:
 
 | Feature | Markmap | Mermaid Mindmap |
 |---------|---------|-----------------|

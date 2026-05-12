@@ -19,7 +19,7 @@ const cjkFonts = [
   { value: '"Source Han Sans SC", sans-serif', label: 'Source Han Sans' },
 ]
 
-// Match VMark's Settings dialog options exactly
+// Match TMark's Settings dialog options exactly
 const fontSizeOptions = [
   { value: '14', label: '14px' },
   { value: '16', label: '16px' },
@@ -75,80 +75,80 @@ const blockMargin = computed(() => {
   return `${lh * (bs - 1) + 1}em`
 })
 
-// CJK letter-spacing CSS variable (matches VMark's algorithm)
+// CJK letter-spacing CSS variable (matches TMark's algorithm)
 const cjkSpacingStyle = computed(() => {
   return cjkLetterSpacing.value === '0' ? '0' : `${cjkLetterSpacing.value}em`
 })
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">Fine-tune fonts, sizes, and spacing for perfect readability</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">Fine-tune fonts, sizes, and spacing for perfect readability</p>
 
-    <div class="vmark-controls">
-      <div class="vmark-control">
-        <label class="vmark-label">Latin Font</label>
-        <select v-model="latinFont" class="vmark-select">
+    <div class="tmark-controls">
+      <div class="tmark-control">
+        <label class="tmark-label">Latin Font</label>
+        <select v-model="latinFont" class="tmark-select">
           <option v-for="font in latinFonts" :key="font.value" :value="font.value">
             {{ font.label }}
           </option>
         </select>
       </div>
 
-      <div class="vmark-control">
-        <label class="vmark-label">CJK Font</label>
-        <select v-model="cjkFont" class="vmark-select">
+      <div class="tmark-control">
+        <label class="tmark-label">CJK Font</label>
+        <select v-model="cjkFont" class="tmark-select">
           <option v-for="font in cjkFonts" :key="font.value" :value="font.value">
             {{ font.label }}
           </option>
         </select>
       </div>
 
-      <div class="vmark-control">
-        <label class="vmark-label">Font Size</label>
-        <select v-model="fontSize" class="vmark-select">
+      <div class="tmark-control">
+        <label class="tmark-label">Font Size</label>
+        <select v-model="fontSize" class="tmark-select">
           <option v-for="opt in fontSizeOptions" :key="opt.value" :value="opt.value">
             {{ opt.label }}
           </option>
         </select>
       </div>
 
-      <div class="vmark-control">
-        <label class="vmark-label">Line Height</label>
-        <select v-model="lineHeight" class="vmark-select">
+      <div class="tmark-control">
+        <label class="tmark-label">Line Height</label>
+        <select v-model="lineHeight" class="tmark-select">
           <option v-for="opt in lineHeightOptions" :key="opt.value" :value="opt.value">
             {{ opt.label }}
           </option>
         </select>
       </div>
 
-      <div class="vmark-control">
-        <label class="vmark-label">Block Spacing</label>
-        <select v-model="blockSpacing" class="vmark-select">
+      <div class="tmark-control">
+        <label class="tmark-label">Block Spacing</label>
+        <select v-model="blockSpacing" class="tmark-select">
           <option v-for="opt in blockSpacingOptions" :key="opt.value" :value="opt.value">
             {{ opt.label }}
           </option>
         </select>
       </div>
 
-      <div class="vmark-control">
-        <label class="vmark-label">CJK Letter Spacing</label>
-        <select v-model="cjkLetterSpacing" class="vmark-select">
+      <div class="tmark-control">
+        <label class="tmark-label">CJK Letter Spacing</label>
+        <select v-model="cjkLetterSpacing" class="tmark-select">
           <option v-for="opt in cjkLetterSpacingOptions" :key="opt.value" :value="opt.value">
             {{ opt.label }}
           </option>
         </select>
       </div>
 
-      <div class="vmark-control vmark-control--toggle">
-        <label class="vmark-toggle">
-          <input type="checkbox" v-model="coloredEmphasis" class="vmark-toggle__input" />
+      <div class="tmark-control tmark-control--toggle">
+        <label class="tmark-toggle">
+          <input type="checkbox" v-model="coloredEmphasis" class="tmark-toggle__input" />
           <span>Color bold/italic</span>
         </label>
       </div>
     </div>
 
-    <!-- CSS variable controls CJK-only spacing (matches VMark's algorithm) -->
+    <!-- CSS variable controls CJK-only spacing (matches TMark's algorithm) -->
     <div
       :class="['preview', { 'preview--colored': coloredEmphasis }]"
       :style="{
@@ -170,13 +170,13 @@ const cjkSpacingStyle = computed(() => {
       </p>
       <!-- Mixed paragraph: only CJK runs get spacing, Latin stays normal -->
       <p class="preview__p">
-        VMark supports <strong>mixed CJK and Latin</strong> text with automatic spacing. Whether you write in English, <span class="cjk">中文</span>, <span class="cjk">日本語</span>, or <span class="cjk">한국어</span> — typography <em>just works</em>.
+        TMark supports <strong>mixed CJK and Latin</strong> text with automatic spacing. Whether you write in English, <span class="cjk">中文</span>, <span class="cjk">日本語</span>, or <span class="cjk">한국어</span> — typography <em>just works</em>.
       </p>
     </div>
   </div>
 </template>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .preview {
   background: var(--bg-primary);
@@ -201,7 +201,7 @@ const cjkSpacingStyle = computed(() => {
   margin-bottom: 0;
 }
 
-/* CJK letter-spacing: only CJK characters, not Latin (matches VMark's algorithm) */
+/* CJK letter-spacing: only CJK characters, not Latin (matches TMark's algorithm) */
 .preview .cjk {
   letter-spacing: var(--cjk-spacing, 0);
 }
@@ -223,7 +223,7 @@ const cjkSpacingStyle = computed(() => {
 }
 
 /* Toggle alignment */
-.vmark-control--toggle {
+.tmark-control--toggle {
   display: flex;
   align-items: flex-end;
   padding-bottom: 4px;

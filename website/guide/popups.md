@@ -1,6 +1,6 @@
 # Inline Popups
 
-VMark provides contextual popups for editing links, images, media, math, footnotes, and more. These popups work in both WYSIWYG and Source modes with consistent keyboard navigation.
+TMark provides contextual popups for editing links, images, media, math, footnotes, and more. These popups work in both WYSIWYG and Source modes with consistent keyboard navigation.
 
 ## Common Keyboard Shortcuts
 
@@ -14,7 +14,7 @@ All popups share these keyboard behaviors:
 
 ## Link Tooltip & Popup
 
-VMark uses a two-tier system for links: a read-only tooltip on hover, and an edit popup via keyboard shortcut.
+TMark uses a two-tier system for links: a read-only tooltip on hover, and an edit popup via keyboard shortcut.
 
 ### Hover Tooltip (Read-Only)
 

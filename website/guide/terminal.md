@@ -1,6 +1,6 @@
 # Integrated Terminal
 
-VMark includes a built-in terminal panel so you can run commands without leaving the editor.
+TMark includes a built-in terminal panel so you can run commands without leaving the editor.
 
 Press `` Ctrl + ` `` to toggle the terminal panel.
 
@@ -62,13 +62,13 @@ The terminal detects two kinds of links in command output:
 
 ## Shell Environment
 
-VMark sets these environment variables in every terminal session:
+TMark sets these environment variables in every terminal session:
 
 | Variable | Value |
 |----------|-------|
-| `TERM_PROGRAM` | `vmark` |
-| `EDITOR` | `vmark` |
-| `VMARK_WORKSPACE` | Workspace root path (when a folder is open) |
+| `TERM_PROGRAM` | `tmark` |
+| `EDITOR` | `tmark` |
+| `TMARK_WORKSPACE` | Workspace root path (when a folder is open) |
 | `PATH` | Full login shell PATH (same as your system terminal) |
 
 The integrated terminal inherits your login shell's `PATH`, so CLI tools like `node`, `claude`, and other user-installed binaries are discoverable — just as they would be in a regular terminal window.
@@ -81,7 +81,7 @@ When you open a workspace or file after the terminal is already running, all ses
 
 ## Pause / Resume
 
-For long-running processes producing verbose output, you can suspend the underlying shell process from VMark to free CPU without killing the session. Resuming continues the process from where it left off.
+For long-running processes producing verbose output, you can suspend the underlying shell process from TMark to free CPU without killing the session. Resuming continues the process from where it left off.
 
 | Action | How |
 |---|---|

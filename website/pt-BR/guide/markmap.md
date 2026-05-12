@@ -1,6 +1,6 @@
 # Mapas Mentais Markmap
 
-O VMark suporta [Markmap](https://markmap.js.org/) para criar árvores de mapas mentais interativos diretamente nos seus documentos Markdown. Ao contrário do tipo de diagrama mindmap estático do Mermaid, o Markmap usa títulos Markdown simples como entrada e oferece pan/zoom/colapso interativos.
+O TMark suporta [Markmap](https://markmap.js.org/) para criar árvores de mapas mentais interativos diretamente nos seus documentos Markdown. Ao contrário do tipo de diagrama mindmap estático do Mermaid, o Markmap usa títulos Markdown simples como entrada e oferece pan/zoom/colapso interativos.
 
 ## Inserindo um Mapa Mental
 
@@ -90,7 +90,7 @@ Itens de lista sob um título se tornam nós filhos desse título.
 Aqui está um markmap interativo renderizado diretamente nesta página — experimente fazer panorâmica, zoom e recolher nós:
 
 ```markmap
-# VMark Features
+# TMark Features
 
 ## Editor
 ### WYSIWYG Mode
@@ -129,7 +129,7 @@ Aqui está um markmap interativo renderizado diretamente nesta página — exper
 
 ## Integração de Tema
 
-Os mapas mentais Markmap se adaptam automaticamente ao tema atual do VMark (White, Paper, Mint, Sepia ou Night). As cores dos ramos se ajustam para legibilidade em todos os temas.
+Os mapas mentais Markmap se adaptam automaticamente ao tema atual do TMark (White, Paper, Mint, Sepia ou Night). As cores dos ramos se ajustam para legibilidade em todos os temas.
 
 ## Exportar como PNG
 
@@ -146,7 +146,7 @@ O mapa mental é exportado como um PNG de resolução 2x via diálogo de salvame
 
 ### Markmap vs Mermaid Mindmap
 
-O VMark suporta tanto o Markmap quanto o tipo de diagrama `mindmap` do Mermaid:
+O TMark suporta tanto o Markmap quanto o tipo de diagrama `mindmap` do Mermaid:
 
 | Recurso | Markmap | Mermaid Mindmap |
 |---------|---------|-----------------|

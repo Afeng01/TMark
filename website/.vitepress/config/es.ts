@@ -101,8 +101,8 @@ export const es = {
               link: "/es/guide/users-as-developers/",
             },
             {
-              text: "Por qué creé VMark",
-              link: "/es/guide/users-as-developers/why-i-built-vmark",
+              text: "Por qué creé TMark",
+              link: "/es/guide/users-as-developers/why-i-built-tmark",
             },
             {
               text: "Cinco habilidades que la IA no puede reemplazar",
@@ -143,7 +143,7 @@ export const es = {
 
     footer: {
       copyright:
-        'Copyright © 2026 VMark · <a href="/es/guide/license">Licencia ISC</a>',
+        'Copyright © 2026 TMark · <a href="/es/guide/license">Licencia ISC</a>',
     },
 
     lastUpdated: {

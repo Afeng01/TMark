@@ -1,10 +1,10 @@
 # KI-Integration (MCP)
 
-VMark enthält einen integrierten MCP-Server (Model Context Protocol), der es KI-Assistenten wie Claude ermöglicht, direkt mit Ihrem Editor zu interagieren.
+TMark enthält einen integrierten MCP-Server (Model Context Protocol), der es KI-Assistenten wie Claude ermöglicht, direkt mit Ihrem Editor zu interagieren.
 
 ## Was ist MCP?
 
-Das [Model Context Protocol](https://modelcontextprotocol.io/) ist ein offener Standard, der es KI-Assistenten ermöglicht, mit externen Tools und Anwendungen zu interagieren. VMark's MCP-Server macht seine Editor-Fähigkeiten als Tools zugänglich, die KI-Assistenten verwenden können, um:
+Das [Model Context Protocol](https://modelcontextprotocol.io/) ist ein offener Standard, der es KI-Assistenten ermöglicht, mit externen Tools und Anwendungen zu interagieren. TMark's MCP-Server macht seine Editor-Fähigkeiten als Tools zugänglich, die KI-Assistenten verwenden können, um:
 
 - Dokumentinhalte zu lesen und zu schreiben
 - Formatierung anzuwenden und Strukturen zu erstellen
@@ -13,18 +13,18 @@ Das [Model Context Protocol](https://modelcontextprotocol.io/) ist ein offener S
 
 ## Schnelleinrichtung
 
-VMark macht es einfach, KI-Assistenten mit einem Klick zu verbinden.
+TMark macht es einfach, KI-Assistenten mit einem Klick zu verbinden.
 
 ### 1. MCP-Server aktivieren
 
 Öffnen Sie **Einstellungen → Integrationen** und aktivieren Sie den MCP-Server:
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-settings-server.png" alt="VMark MCP-Server-Einstellungen" />
+  <img src="/screenshots/mcp-settings-server.png" alt="TMark MCP-Server-Einstellungen" />
 </div>
 
 - **MCP-Server aktivieren** - Einschalten, um KI-Verbindungen zu erlauben
-- **Beim Start starten** - Automatisch starten, wenn VMark geöffnet wird
+- **Beim Start starten** - Automatisch starten, wenn TMark geöffnet wird
 - **Bearbeitungen automatisch genehmigen** - KI-Änderungen ohne Vorschau anwenden (siehe unten)
 
 ### 2. Konfiguration installieren
@@ -32,7 +32,7 @@ VMark macht es einfach, KI-Assistenten mit einem Klick zu verbinden.
 Klicken Sie für Ihren KI-Assistenten auf **Installieren**:
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-settings-install.png" alt="VMark MCP-Installationskonfiguration" />
+  <img src="/screenshots/mcp-settings-install.png" alt="TMark MCP-Installationskonfiguration" />
 </div>
 
 Unterstützte KI-Assistenten:
@@ -42,7 +42,7 @@ Unterstützte KI-Assistenten:
 - **Gemini CLI** - Google's KI-Assistent
 
 ::: info Andere MCP-kompatible Clients
-Andere MCP-kompatible Clients wie Cursor, Windsurf und ähnliche Tools können sich ebenfalls mit dem MCP-Server von VMark verbinden. Konfigurieren Sie sie manuell, indem Sie auf den Pfad des MCP-Server-Binaries verweisen (siehe [Manuelle Konfiguration](#manuelle-konfiguration) unten).
+Andere MCP-kompatible Clients wie Cursor, Windsurf und ähnliche Tools können sich ebenfalls mit dem MCP-Server von TMark verbinden. Konfigurieren Sie sie manuell, indem Sie auf den Pfad des MCP-Server-Binaries verweisen (siehe [Manuelle Konfiguration](#manuelle-konfiguration) unten).
 :::
 
 #### Statussymbole
@@ -52,37 +52,37 @@ Jeder Anbieter zeigt einen Status-Indikator:
 | Symbol | Status | Bedeutung |
 |--------|--------|-----------|
 | ✓ Grün | Gültig | Konfiguration ist korrekt und funktioniert |
-| ⚠ Amber | Pfad-Diskrepanz | VMark wurde verschoben — klicken Sie auf **Reparieren** |
-| ✗ Rot | Binary fehlt | MCP-Binary nicht gefunden — VMark neu installieren |
+| ⚠ Amber | Pfad-Diskrepanz | TMark wurde verschoben — klicken Sie auf **Reparieren** |
+| ✗ Rot | Binary fehlt | MCP-Binary nicht gefunden — TMark neu installieren |
 | ○ Grau | Nicht konfiguriert | Nicht installiert — klicken Sie auf **Installieren** |
 
-::: tip VMark verschoben?
-Wenn Sie VMark.app an einen anderen Ort verschoben haben, zeigt der Status amber "Pfad-Diskrepanz". Klicken Sie einfach auf die Schaltfläche **Reparieren**, um die Konfiguration mit dem neuen Pfad zu aktualisieren.
+::: tip TMark verschoben?
+Wenn Sie TMark.app an einen anderen Ort verschoben haben, zeigt der Status amber "Pfad-Diskrepanz". Klicken Sie einfach auf die Schaltfläche **Reparieren**, um die Konfiguration mit dem neuen Pfad zu aktualisieren.
 :::
 
 ### 3. KI-Assistenten neu starten
 
-Nach der Installation oder Reparatur **starten Sie Ihren KI-Assistenten vollständig neu** (beenden und erneut öffnen), um die neue Konfiguration zu laden. VMark zeigt nach jeder Konfigurationsänderung eine Erinnerung.
+Nach der Installation oder Reparatur **starten Sie Ihren KI-Assistenten vollständig neu** (beenden und erneut öffnen), um die neue Konfiguration zu laden. TMark zeigt nach jeder Konfigurationsänderung eine Erinnerung.
 
 ### 4. Ausprobieren
 
 Versuchen Sie in Ihrem KI-Assistenten Befehle wie:
-- *"Was steht in meinem VMark-Dokument?"*
-- *"Schreibe eine Zusammenfassung zu Quantencomputing in VMark"*
+- *"Was steht in meinem TMark-Dokument?"*
+- *"Schreibe eine Zusammenfassung zu Quantencomputing in TMark"*
 - *"Füge ein Inhaltsverzeichnis zu meinem Dokument hinzu"*
 
 ## In Aktion sehen
 
-Stellen Sie Claude eine Frage und lassen Sie die Antwort direkt in Ihr VMark-Dokument schreiben:
+Stellen Sie Claude eine Frage und lassen Sie die Antwort direkt in Ihr TMark-Dokument schreiben:
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-claude.png" alt="Claude Desktop verwendet VMark MCP" />
-  <p class="screenshot-caption">Claude Desktop ruft <code>document</code> → <code>set_content</code> auf, um in VMark zu schreiben</p>
+  <img src="/screenshots/mcp-claude.png" alt="Claude Desktop verwendet TMark MCP" />
+  <p class="screenshot-caption">Claude Desktop ruft <code>document</code> → <code>set_content</code> auf, um in TMark zu schreiben</p>
 </div>
 
 <div class="screenshot-container">
-  <img src="/screenshots/mcp-result.png" alt="Inhalt wird in VMark gerendert" />
-  <p class="screenshot-caption">Der Inhalt erscheint sofort in VMark, vollständig formatiert</p>
+  <img src="/screenshots/mcp-result.png" alt="Inhalt wird in TMark gerendert" />
+  <p class="screenshot-caption">Der Inhalt erscheint sofort in TMark, vollständig formatiert</p>
 </div>
 
 <!-- Styles in style.css -->
@@ -98,8 +98,8 @@ Bearbeiten Sie `~/Library/Application Support/Claude/claude_desktop_config.json`
 ```json
 {
   "mcpServers": {
-    "vmark": {
-      "command": "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+    "tmark": {
+      "command": "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
     }
   }
 }
@@ -112,8 +112,8 @@ Bearbeiten Sie `~/.claude.json` oder das Projekt `.mcp.json`:
 ```json
 {
   "mcpServers": {
-    "vmark": {
-      "command": "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+    "tmark": {
+      "command": "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
     }
   }
 }
@@ -124,8 +124,8 @@ Bearbeiten Sie `~/.claude.json` oder das Projekt `.mcp.json`:
 Bearbeiten Sie `~/.codex/config.toml`:
 
 ```toml
-[mcp_servers.vmark]
-command = "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+[mcp_servers.tmark]
+command = "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
 ```
 
 ### Gemini CLI
@@ -135,22 +135,22 @@ Bearbeiten Sie `~/.gemini/settings.json`:
 ```json
 {
   "mcpServers": {
-    "vmark": {
-      "command": "/Applications/VMark.app/Contents/MacOS/vmark-mcp-server"
+    "tmark": {
+      "command": "/Applications/TMark.app/Contents/MacOS/tmark-mcp-server"
     }
   }
 }
 ```
 
 ::: tip Binary-Pfad finden
-Auf macOS befindet sich der MCP-Server-Binary innerhalb von VMark.app:
-- `VMark.app/Contents/MacOS/vmark-mcp-server`
+Auf macOS befindet sich der MCP-Server-Binary innerhalb von TMark.app:
+- `TMark.app/Contents/MacOS/tmark-mcp-server`
 
 Unter Windows:
-- `C:\Program Files\VMark\vmark-mcp-server.exe`
+- `C:\Program Files\TMark\tmark-mcp-server.exe`
 
 Unter Linux:
-- `/usr/bin/vmark-mcp-server` (oder wo Sie es installiert haben)
+- `/usr/bin/tmark-mcp-server` (oder wo Sie es installiert haben)
 
 Der Port wird automatisch erkannt — keine `args` erforderlich.
 :::
@@ -161,29 +161,29 @@ Das MCP-Server-Binary unterstützt einige Flags für Diagnose und ältere Setups
 
 | Flag | Funktion |
 |---|---|
-| `--version` (oder `-v`) | Gibt die Version aus (muss mit dem laufenden VMark übereinstimmen) und beendet sich. |
-| `--health-check` | Führt einen Selbsttest gegen die laufende VMark-Brücke durch und beendet sich. Verwenden Sie dieses Flag, um Ihre Installation zu überprüfen, bevor Sie einen KI-Assistenten anbinden. |
+| `--version` (oder `-v`) | Gibt die Version aus (muss mit dem laufenden TMark übereinstimmen) und beendet sich. |
+| `--health-check` | Führt einen Selbsttest gegen die laufende TMark-Brücke durch und beendet sich. Verwenden Sie dieses Flag, um Ihre Installation zu überprüfen, bevor Sie einen KI-Assistenten anbinden. |
 | `--port <number>` | Manuelles Port-Override. Überspringt den Auto-Discovery-Handshake und verbindet sich auf dem angegebenen Port. Nur für ältere Setups nützlich, bei denen der Brücken-Port extern fest vorgegeben ist; der Auto-Discovery-Pfad ist bevorzugt. |
 
 Beispiel:
 
 ```bash
-vmark-mcp-server --health-check
-vmark-mcp-server --version
-vmark-mcp-server --port 9223   # Legacy / manuell
+tmark-mcp-server --health-check
+tmark-mcp-server --version
+tmark-mcp-server --port 9223   # Legacy / manuell
 ```
 
 ## Funktionsweise
 
 ```text
-KI-Assistent <--stdio--> MCP-Server <--WebSocket--> VMark-Editor
+KI-Assistent <--stdio--> MCP-Server <--WebSocket--> TMark-Editor
 ```
 
-1. **VMark startet eine WebSocket-Brücke** auf einem verfügbaren Port beim Start
-2. **Der MCP-Server** liest den Port und das Authentifizierungstoken aus dem App-Datenverzeichnis von VMark
+1. **TMark startet eine WebSocket-Brücke** auf einem verfügbaren Port beim Start
+2. **Der MCP-Server** liest den Port und das Authentifizierungstoken aus dem App-Datenverzeichnis von TMark
 3. **Der MCP-Server** verbindet sich und authentifiziert sich über die WebSocket-Brücke
 4. **KI-Assistent** kommuniziert mit dem MCP-Server über stdio
-5. **Befehle werden weitergeleitet** an VMark's Editor über die Brücke
+5. **Befehle werden weitergeleitet** an TMark's Editor über die Brücke
 
 ## Verfügbare Fähigkeiten
 
@@ -204,7 +204,7 @@ Sehen Sie die [MCP-Werkzeuge-Referenz](/de/guide/mcp-tools) für vollständige D
 
 ## MCP-Status überprüfen
 
-VMark bietet mehrere Möglichkeiten, den MCP-Server-Status zu überprüfen:
+TMark bietet mehrere Möglichkeiten, den MCP-Server-Status zu überprüfen:
 
 ### Statusleisten-Indikator
 
@@ -244,14 +244,14 @@ In **Einstellungen → Integrationen**, wenn der Server läuft, sehen Sie:
 
 ### "Verbindung abgelehnt" oder "Kein aktiver Editor"
 
-- Sicherstellen, dass VMark läuft und ein Dokument geöffnet ist
+- Sicherstellen, dass TMark läuft und ein Dokument geöffnet ist
 - Überprüfen, ob der MCP-Server in Einstellungen → Integrationen aktiviert ist
 - Prüfen, ob die MCP-Brücke den Status "Läuft" anzeigt
-- VMark neu starten, wenn die Verbindung unterbrochen wurde
+- TMark neu starten, wenn die Verbindung unterbrochen wurde
 
-### Pfad-Diskrepanz nach dem Verschieben von VMark
+### Pfad-Diskrepanz nach dem Verschieben von TMark
 
-Wenn Sie VMark.app an einen anderen Ort verschoben haben (z.B. von Downloads zu Programme), verweist die Konfiguration auf den alten Pfad:
+Wenn Sie TMark.app an einen anderen Ort verschoben haben (z.B. von Downloads zu Programme), verweist die Konfiguration auf den alten Pfad:
 
 1. Öffnen Sie **Einstellungen → Integrationen**
 2. Achten Sie auf das amber ⚠ Warnsymbol neben betroffenen Anbietern
@@ -266,13 +266,13 @@ Wenn Sie VMark.app an einen anderen Ort verschoben haben (z.B. von Downloads zu 
 
 ### Befehle scheitern mit "Kein aktiver Editor"
 
-- Sicherstellen, dass ein Dokument-Tab in VMark aktiv ist
+- Sicherstellen, dass ein Dokument-Tab in TMark aktiv ist
 - In den Editor-Bereich klicken, um ihn zu fokussieren
 - Einige Befehle erfordern, dass Text zuerst ausgewählt wird
 
 ## Vorschlagssystem & Automatische Genehmigung
 
-Standardmäßig erstellt VMark **Vorschläge**, die Ihre Genehmigung erfordern, wenn KI-Assistenten Ihr Dokument ändern (Inhalt einfügen, ersetzen oder löschen):
+Standardmäßig erstellt TMark **Vorschläge**, die Ihre Genehmigung erfordern, wenn KI-Assistenten Ihr Dokument ändern (Inhalt einfügen, ersetzen oder löschen):
 
 - **Einfügen** - Neuer Text erscheint als Ghost-Text-Vorschau
 - **Ersetzen** - Originaltext hat Durchstreichung, neuer Text als Ghost-Text

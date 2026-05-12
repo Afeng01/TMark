@@ -1,6 +1,6 @@
 ---
 name: shortcut-audit
-description: Audit keyboard shortcuts in VMark code vs dev docs. Use when asked to review, reconcile, or optimize shortcuts, or when updating shortcut documentation.
+description: Audit keyboard shortcuts in TMark code vs dev docs. Use when asked to review, reconcile, or optimize shortcuts, or when updating shortcut documentation.
 ---
 
 # Shortcut Audit
@@ -22,4 +22,4 @@ Compare shortcut definitions in code against documentation and report gaps or co
 
 ## Notes
 - Confirm WYSIWYG and Source mode bindings separately.
-- Prefer existing conventions in VMark unless told to redesign.
+- Prefer existing conventions in TMark unless told to redesign.

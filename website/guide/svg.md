@@ -1,6 +1,6 @@
 # SVG Graphics
 
-VMark provides first-class support for SVG — Scalable Vector Graphics. There are two ways to use SVG in your documents, each suited to a different workflow.
+TMark provides first-class support for SVG — Scalable Vector Graphics. There are two ways to use SVG in your documents, each suited to a different workflow.
 
 | Method | Best For | Editable Source? |
 |--------|----------|-----------------|
@@ -37,8 +37,8 @@ Wrap raw SVG markup in a fenced code block with the `svg` language identifier:
 
 The SVG renders inline — just like Mermaid diagrams — with interactive controls.
 
-::: tip Unique to VMark
-Neither Typora nor Obsidian support ` ```svg ` code blocks. This is a VMark-exclusive feature, designed for AI workflows where tools generate SVG visualizations (charts, illustrations, icons) that don't fit Mermaid's grammar.
+::: tip Unique to TMark
+Neither Typora nor Obsidian support ` ```svg ` code blocks. This is a TMark-exclusive feature, designed for AI workflows where tools generate SVG visualizations (charts, illustrations, icons) that don't fit Mermaid's grammar.
 :::
 
 ### When to Use Code Blocks
@@ -103,7 +103,7 @@ The Source mode diagram preview must be enabled. Toggle it with the **Diagram Pr
 
 ## SVG Validation
 
-VMark validates SVG content before rendering:
+TMark validates SVG content before rendering:
 
 - The content must start with `<svg` or `<?xml`
 - The XML must be well-formed (no parse errors)
@@ -113,7 +113,7 @@ If validation fails, an **Invalid SVG** error message is shown instead of the re
 
 ## AI Workflow
 
-AI coding assistants can generate SVG directly into your VMark documents via MCP tools. The AI sends a code block with `language: "svg"` and the SVG content, which renders inline automatically.
+AI coding assistants can generate SVG directly into your TMark documents via MCP tools. The AI sends a code block with `language: "svg"` and the SVG content, which renders inline automatically.
 
 **Example prompt:**
 
@@ -137,7 +137,7 @@ The AI generates an SVG bar chart that renders inline in your document, with pan
 
 ### Security
 
-VMark sanitizes SVG content before rendering. Script tags and event handler attributes (`onclick`, `onerror`, etc.) are stripped. This protects against XSS when pasting SVG from untrusted sources.
+TMark sanitizes SVG content before rendering. Script tags and event handler attributes (`onclick`, `onerror`, etc.) are stripped. This protects against XSS when pasting SVG from untrusted sources.
 
 ### Sizing
 

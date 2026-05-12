@@ -1,4 +1,4 @@
-// WI-1.4 — vmark.session.get_state shape and tab-kind discrimination.
+// WI-1.4 — tmark.session.get_state shape and tab-kind discrimination.
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { useTabStore } from "@/stores/tabStore";
@@ -28,7 +28,7 @@ function resetStores() {
   useDocumentStore.setState({ documents: {} });
 }
 
-describe("vmark.session.get_state", () => {
+describe("tmark.session.get_state", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();

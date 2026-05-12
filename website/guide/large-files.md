@@ -1,17 +1,17 @@
 # Large Files
 
-VMark opens most markdown files instantly, but very large files need extra care to stay responsive. This page describes how VMark handles them and how you can tune the behavior.
+TMark opens most markdown files instantly, but very large files need extra care to stay responsive. This page describes how TMark handles them and how you can tune the behavior.
 
 ## What counts as "large"
 
-VMark classifies a file by size before it opens:
+TMark classifies a file by size before it opens:
 
 | Size | Tier | What happens |
 |------|------|--------------|
 | < 1 MB | Small | Opens in WYSIWYG (rich-text) mode instantly. |
 | 1 MB – 5 MB | Large | Opens in **Source mode** by default — sub-second. StatusBar offers "Switch to WYSIWYG". |
 | 5 MB – 50 MB | Huge | Confirmation dialog appears first. Opens in Source mode only. |
-| ≥ 50 MB | Refused | VMark refuses to open the file. Use `less`, `bat`, or a similar tool instead. |
+| ≥ 50 MB | Refused | TMark refuses to open the file. Use `less`, `bat`, or a similar tool instead. |
 
 Size is checked via the operating system without reading the file, so the decision is fast and does not preload data.
 
@@ -43,7 +43,7 @@ The 50 MB hard refusal is not user-adjustable. The webview cannot safely hold ar
 
 ## Edge cases
 
-- **File grows while open.** VMark decides the tier based on the size at open time. A file that grows to 2 MB while you edit it stays in whatever mode you chose.
+- **File grows while open.** TMark decides the tier based on the size at open time. A file that grows to 2 MB while you edit it stays in whatever mode you chose.
 - **Symlinks.** Sizes reflect the target file, so a symlink to a 10 MB file is treated as huge.
 - **Empty files.** Zero-byte files count as small and open in WYSIWYG.
 - **File vanishes between size-check and read.** The normal "file not found" error surfaces — no extra warning is raised.

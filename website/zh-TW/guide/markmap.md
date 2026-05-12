@@ -1,6 +1,6 @@
 # Markmap 心智圖
 
-VMark 支援 [Markmap](https://markmap.js.org/)，讓你直接在 Markdown 文件中建立互動式心智圖樹狀結構。與 Mermaid 靜態心智圖類型不同，Markmap 使用純 Markdown 標題作為輸入，並支援互動式平移/縮放/折疊。
+TMark 支援 [Markmap](https://markmap.js.org/)，讓你直接在 Markdown 文件中建立互動式心智圖樹狀結構。與 Mermaid 靜態心智圖類型不同，Markmap 使用純 Markdown 標題作為輸入，並支援互動式平移/縮放/折疊。
 
 ## 插入心智圖
 
@@ -90,7 +90,7 @@ Markmap 使用標準 Markdown 作為輸入。標題定義樹狀階層：
 以下是直接在本頁渲染的互動式心智圖——試試平移、縮放和摺疊節點：
 
 ```markmap
-# VMark Features
+# TMark Features
 
 ## Editor
 ### WYSIWYG Mode
@@ -129,7 +129,7 @@ Markmap 使用標準 Markdown 作為輸入。標題定義樹狀階層：
 
 ## 主題整合
 
-Markmap 心智圖會自動適應 VMark 目前的主題（White、Paper、Mint、Sepia 或 Night）。分支顏色在每種主題下均調整為易讀的配色。
+Markmap 心智圖會自動適應 TMark 目前的主題（White、Paper、Mint、Sepia 或 Night）。分支顏色在每種主題下均調整為易讀的配色。
 
 ## 匯出為 PNG
 
@@ -146,7 +146,7 @@ Markmap 心智圖會自動適應 VMark 目前的主題（White、Paper、Mint、
 
 ### Markmap vs Mermaid 心智圖
 
-VMark 同時支援 Markmap 和 Mermaid 的 `mindmap` 圖表類型：
+TMark 同時支援 Markmap 和 Mermaid 的 `mindmap` 圖表類型：
 
 | 功能 | Markmap | Mermaid 心智圖 |
 |------|---------|----------------|

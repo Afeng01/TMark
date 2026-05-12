@@ -1,6 +1,6 @@
 # Tastaturkürzel
 
-VMark ist für tastaturorientierte Workflows konzipiert. Die meisten Tastaturkürzel können in den Einstellungen angepasst werden. Eine kleine Anzahl von Primitiven ist fest belegt: die Mehrcursor-Selektoren `Mod+D` (Nächstes Vorkommen auswählen) und `Mod+Shift+L` (Alle Vorkommen auswählen) sowie die globalen Rückgängig-/Wiederholen-Tastaturkürzel. Die übrigen Mehrcursor-Tastaturkürzel (Vorkommen überspringen, Cursor-Rückgängig sanft, Cursor oben/unten hinzufügen) sind anpassbar. Mit _(kontextabhängig)_ markierte Tastaturkürzel werden im Editor für bestimmte Strukturen (z. B. Aufgaben-Checkbox-Umschalter) behandelt und sind nicht in der Anpassungs-Registratur sichtbar.
+TMark ist für tastaturorientierte Workflows konzipiert. Die meisten Tastaturkürzel können in den Einstellungen angepasst werden. Eine kleine Anzahl von Primitiven ist fest belegt: die Mehrcursor-Selektoren `Mod+D` (Nächstes Vorkommen auswählen) und `Mod+Shift+L` (Alle Vorkommen auswählen) sowie die globalen Rückgängig-/Wiederholen-Tastaturkürzel. Die übrigen Mehrcursor-Tastaturkürzel (Vorkommen überspringen, Cursor-Rückgängig sanft, Cursor oben/unten hinzufügen) sind anpassbar. Mit _(kontextabhängig)_ markierte Tastaturkürzel werden im Editor für bestimmte Strukturen (z. B. Aufgaben-Checkbox-Umschalter) behandelt und sind nicht in der Anpassungs-Registratur sichtbar.
 
 ## Notation
 
@@ -9,17 +9,17 @@ VMark ist für tastaturorientierte Workflows konzipiert. Die meisten Tastaturkü
 
 ## Funktionstaste auf macOS
 
-VMark verwendet Funktionstasten (F4–F10) für schnelle Moduswechsel. Auf macOS sind diese Tasten standardmäßig Systemfunktionen zugeordnet (Helligkeit, Lautstärke usw.).
+TMark verwendet Funktionstasten (F4–F10) für schnelle Moduswechsel. Auf macOS sind diese Tasten standardmäßig Systemfunktionen zugeordnet (Helligkeit, Lautstärke usw.).
 
 **Um F-Tasten direkt ohne Fn zu verwenden:**
 
 1. **Systemeinstellungen** → **Tastatur** öffnen
 2. **„F1, F2 usw. als Standard-Funktionstasten verwenden"** aktivieren
 
-Alternativ halten Sie die **Fn**-Taste beim Drücken von F4–F10, um VMark-Tastaturkürzel auszulösen.
+Alternativ halten Sie die **Fn**-Taste beim Drücken von F4–F10, um TMark-Tastaturkürzel auszulösen.
 
 ::: tip
-Wenn Sie die Systemfunktionen auf F-Tasten bevorzugen, können Sie VMark-Tastaturkürzel in den Einstellungen (`Mod + ,`) für andere Tastenkombinationen anpassen.
+Wenn Sie die Systemfunktionen auf F-Tasten bevorzugen, können Sie TMark-Tastaturkürzel in den Einstellungen (`Mod + ,`) für andere Tastenkombinationen anpassen.
 :::
 
 ### F-Taste Schnellübersicht

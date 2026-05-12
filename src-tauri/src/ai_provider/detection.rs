@@ -72,8 +72,8 @@ pub(crate) fn login_shell_path() -> String {
                 return std::env::var("PATH").unwrap_or_default();
             }
 
-            const START: &str = "__VMARK_PATH_START__";
-            const END: &str = "__VMARK_PATH_END__";
+            const START: &str = "__TMARK_PATH_START__";
+            const END: &str = "__TMARK_PATH_END__";
 
             let shell = std::env::var("SHELL").unwrap_or_else(|_| "/bin/sh".to_string());
 
@@ -123,7 +123,7 @@ pub(crate) fn login_shell_path() -> String {
                                     let _ = child.kill();
                                     let _ = child.wait();
                                     // Reader thread will see broken pipe and exit
-                                    log::warn!("[VMark] login_shell_path timed out after {}s", timeout.as_secs());
+                                    log::warn!("[TMark] login_shell_path timed out after {}s", timeout.as_secs());
                                     return None;
                                 }
                                 std::thread::sleep(std::time::Duration::from_millis(50));
@@ -157,8 +157,8 @@ pub(crate) fn login_shell_path() -> String {
 /// empty output.
 #[cfg(target_os = "windows")]
 fn windows_profile_path() -> Option<String> {
-    const START: &str = "__VMARK_PATH_START__";
-    const END: &str = "__VMARK_PATH_END__";
+    const START: &str = "__TMARK_PATH_START__";
+    const END: &str = "__TMARK_PATH_END__";
 
     // Try pwsh (PowerShell 7+) first, then powershell.exe (Windows PowerShell 5.x)
     let shells = ["pwsh.exe", "powershell.exe"];
@@ -209,7 +209,7 @@ fn windows_profile_path() -> Option<String> {
                     if start.elapsed() > timeout {
                         let _ = child.kill();
                         let _ = child.wait();
-                        log::warn!("[VMark] windows_profile_path: {shell} timed out");
+                        log::warn!("[TMark] windows_profile_path: {shell} timed out");
                         break;
                     }
                     std::thread::sleep(std::time::Duration::from_millis(50));

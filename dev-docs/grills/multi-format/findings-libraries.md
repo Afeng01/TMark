@@ -15,7 +15,7 @@
 All three clear AI gov rule 4 (>1000 weekly DL, commits in last 12 months, no published CVEs in npm/Snyk/GitHub Advisory DBs).
 
 **Pick:** `react-json-view-lite` v2.5.0
-**Mechanism:** It is the **only one of the three with documented keyboard navigation and ARIA labelling** (arrow-key tree traversal, screen-reader text via `ariaLabels` prop, dedicated v2 a11y release notes). VMark's accessibility-token + focus-indicator rules (`33-focus-indicators.md`) make a11y a hard requirement, not nice-to-have. Secondary: zero runtime deps and ~2.3 KB gzipped vs `@uiw`'s `@babel/runtime` dep + larger bundle, which matters per-tab.
+**Mechanism:** It is the **only one of the three with documented keyboard navigation and ARIA labelling** (arrow-key tree traversal, screen-reader text via `ariaLabels` prop, dedicated v2 a11y release notes). TMark's accessibility-token + focus-indicator rules (`33-focus-indicators.md`) make a11y a hard requirement, not nice-to-have. Secondary: zero runtime deps and ~2.3 KB gzipped vs `@uiw`'s `@babel/runtime` dep + larger bundle, which matters per-tab.
 
 **Trade-off accepted:** None of the three offer virtualization. For >10 MB JSON trees, the format adapter must either (a) gate behind a size threshold and fall back to source-only, or (b) virtualize at the adapter layer. Lite's smaller render footprint is the best base to add this on top of later.
 

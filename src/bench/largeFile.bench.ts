@@ -9,11 +9,11 @@
  *     the running app)
  *   - Full-doc descendants walk (baseline for plugin-scan costs)
  *
- * Fixture path is read from VMARK_BENCH_LARGE_FILE. If unset or missing,
+ * Fixture path is read from TMARK_BENCH_LARGE_FILE. If unset or missing,
  * benchmarks are skipped — keeps the suite portable across machines.
  *
  * Run:
- *   VMARK_BENCH_LARGE_FILE=/path/to/large.md pnpm vitest bench src/bench/largeFile.bench.ts
+ *   TMARK_BENCH_LARGE_FILE=/path/to/large.md pnpm vitest bench src/bench/largeFile.bench.ts
  */
 
 import { existsSync, readFileSync } from "node:fs";
@@ -23,11 +23,11 @@ import StarterKit from "@tiptap/starter-kit";
 import { EditorState } from "@tiptap/pm/state";
 import { parseMarkdown, serializeMarkdown } from "@/utils/markdownPipeline/adapter";
 
-const LARGE_FILE = process.env.VMARK_BENCH_LARGE_FILE;
+const LARGE_FILE = process.env.TMARK_BENCH_LARGE_FILE;
 
 if (!LARGE_FILE || !existsSync(LARGE_FILE)) {
   describe.skip("large file benchmark (fixture unavailable)", () => {
-    bench("skipped — set VMARK_BENCH_LARGE_FILE to a readable markdown path", () => {}, {
+    bench("skipped — set TMARK_BENCH_LARGE_FILE to a readable markdown path", () => {}, {
       iterations: 1,
     });
   });

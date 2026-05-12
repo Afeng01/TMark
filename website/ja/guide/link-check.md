@@ -1,6 +1,6 @@
 # Link Check
 
-VMark は Markdown 内のローカルリンクと画像のターゲットがディスク上に実際に存在するかを検証します。`Cmd-Shift-L` または **ツール → Markdown をチェック** を実行すると、[Markdown Lint エンジン](/ja/guide/lint) と並行して動作します。
+TMark は Markdown 内のローカルリンクと画像のターゲットがディスク上に実際に存在するかを検証します。`Cmd-Shift-L` または **ツール → Markdown をチェック** を実行すると、[Markdown Lint エンジン](/ja/guide/lint) と並行して動作します。
 
 ## チェックされるもの
 

@@ -1,9 +1,9 @@
 ---
 name: tauri-v2-integration
-description: Implement or adjust VMark frontend <-> Tauri v2 integration. Use when adding invoke/emit bridges, menu accelerators, or IPC-related UI behaviors.
+description: Implement or adjust TMark frontend <-> Tauri v2 integration. Use when adding invoke/emit bridges, menu accelerators, or IPC-related UI behaviors.
 ---
 
-# Tauri v2 Integration (VMark)
+# Tauri v2 Integration (TMark)
 
 ## Overview
 Ensure Tauri v2 bridge patterns and IPC flows are consistent across frontend and Rust.
@@ -24,4 +24,4 @@ Ensure Tauri v2 bridge patterns and IPC flows are consistent across frontend and
 ## Related Skills
 - **`tauri-app-dev`** — General Tauri 2.0 patterns (commands, state, plugins, security)
 - **`tauri-mcp-testing`** — E2E testing via Tauri MCP tools
-- **`rust-tauri-backend`** — VMark Rust backend implementation
+- **`rust-tauri-backend`** — TMark Rust backend implementation

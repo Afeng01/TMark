@@ -50,14 +50,14 @@ const hasChanges = computed(() => inputText.value !== outputText.value)
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">See how VMark formats mixed CJK and Latin text</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">See how TMark formats mixed CJK and Latin text</p>
 
     <div class="sample-pills">
       <button
         v-for="(sample, index) in sampleTexts"
         :key="index"
-        :class="['vmark-btn vmark-btn--pill', { 'active': selectedSample === index && !customInput }]"
+        :class="['tmark-btn tmark-btn--pill', { 'active': selectedSample === index && !customInput }]"
         @click="selectedSample = index; customInput = ''"
       >
         {{ sample.label }}
@@ -68,20 +68,20 @@ const hasChanges = computed(() => inputText.value !== outputText.value)
       {{ customInput ? 'Custom input' : sampleTexts[selectedSample].description }}
     </p>
 
-    <div class="vmark-comparison">
+    <div class="tmark-comparison">
       <div class="panel">
-        <div class="vmark-label">Before</div>
+        <div class="tmark-label">Before</div>
         <textarea
           v-model="customInput"
           :placeholder="sampleTexts[selectedSample].input"
-          class="vmark-textarea"
+          class="tmark-textarea"
         />
       </div>
-      <div class="vmark-comparison__arrow">→</div>
+      <div class="tmark-comparison__arrow">→</div>
       <div class="panel">
-        <div class="vmark-label">
+        <div class="tmark-label">
           After
-          <span v-if="hasChanges" class="vmark-badge vmark-badge--success">changed</span>
+          <span v-if="hasChanges" class="tmark-badge tmark-badge--success">changed</span>
         </div>
         <div class="output">{{ outputText }}</div>
       </div>
@@ -97,7 +97,7 @@ const hasChanges = computed(() => inputText.value !== outputText.value)
   </div>
 </template>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .sample-pills {
   display: flex;
@@ -120,7 +120,7 @@ const hasChanges = computed(() => inputText.value !== outputText.value)
 }
 
 /* Match textarea and output heights */
-.vmark-textarea {
+.tmark-textarea {
   min-height: 80px;
   padding: 12px;
   font-size: 15px;

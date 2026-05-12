@@ -1,6 +1,6 @@
 # Exportar e Imprimir
 
-VMark ofrece múltiples formas de exportar y compartir tus documentos.
+TMark ofrece múltiples formas de exportar y compartir tus documentos.
 
 ## Modos de Exportación
 
@@ -49,7 +49,7 @@ Todas las imágenes se embeben como URIs de datos, lo que lo hace completamente 
 
 ### Exportar a Otros Formatos
 
-VMark se integra con [Pandoc](https://pandoc.org/) — un convertidor de documentos universal — para exportar tu markdown a formatos adicionales. Elige un formato directamente desde el menú:
+TMark se integra con [Pandoc](https://pandoc.org/) — un convertidor de documentos universal — para exportar tu markdown a formatos adicionales. Elige un formato directamente desde el menú:
 
 **Archivo → Exportar → Otros Formatos →**
 
@@ -68,7 +68,7 @@ VMark se integra con [Pandoc](https://pandoc.org/) — un convertidor de documen
    - macOS: `brew install pandoc`
    - Windows: `winget install pandoc`
    - Linux: `apt install pandoc`
-2. Reinicia VMark (o ve a **Configuración → Archivos e Imágenes → Herramientas de Documentos** y haz clic en **Detectar**)
+2. Reinicia TMark (o ve a **Configuración → Archivos e Imágenes → Herramientas de Documentos** y haz clic en **Detectar**)
 3. Usa **Archivo → Exportar → Otros Formatos → [formato]** para exportar
 
 Si Pandoc no está instalado, el menú muestra un enlace **"Requiere Pandoc — pandoc.org"** al final del submenú Otros Formatos.
@@ -79,9 +79,9 @@ Puedes verificar que Pandoc ha sido detectado en **Configuración → Archivos e
 
 Presiona `Cmd/Ctrl + Shift + C` para copiar el HTML renderizado al portapapeles y pegarlo en otras aplicaciones.
 
-## VMark Reader
+## TMark Reader
 
-Cuando exportas a HTML (modo estilizado), tu documento incluye el **VMark Reader** — una experiencia de lectura interactiva con potentes características.
+Cuando exportas a HTML (modo estilizado), tu documento incluye el **TMark Reader** — una experiencia de lectura interactiva con potentes características.
 
 ### Panel de Configuración
 

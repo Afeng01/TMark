@@ -1,4 +1,4 @@
-# Common MCP Flows (VMark)
+# Common MCP Flows (TMark)
 
 Use these as entry points; expand with the full guide when needed.
 
@@ -13,10 +13,10 @@ Use these as entry points; expand with the full guide when needed.
 
 ## AI Content Acceptance Pattern
 
-**Critical**: When using vmark MCP tools to insert text (`document_insert_at_cursor`), the content appears as an AI suggestion that must be accepted.
+**Critical**: When using tmark MCP tools to insert text (`document_insert_at_cursor`), the content appears as an AI suggestion that must be accepted.
 
 ```
-1. mcp__vmark__document_insert_at_cursor (text: "Your content")
+1. mcp__tmark__document_insert_at_cursor (text: "Your content")
 2. mcp__tauri__tauri_webview_keyboard (action: "press", key: "Enter")  # Accept suggestion
 3. mcp__tauri__tauri_webview_keyboard (action: "press", key: "Escape") # Dismiss follow-up
 ```
@@ -31,13 +31,13 @@ To create a document with multiple paragraphs for testing:
 2. tauri_webview_keyboard: Backspace (delete)
 
 # Add first paragraph
-3. vmark document_insert_at_cursor: "First paragraph."
+3. tmark document_insert_at_cursor: "First paragraph."
 4. tauri_webview_keyboard: Enter (accept AI suggestion)
 5. tauri_webview_keyboard: Escape (dismiss follow-up)
 
 # Add second paragraph
 6. tauri_webview_keyboard: Enter (create new paragraph)
-7. vmark document_insert_at_cursor: "Second paragraph."
+7. tmark document_insert_at_cursor: "Second paragraph."
 8. tauri_webview_keyboard: Enter (accept)
 9. tauri_webview_keyboard: Escape (dismiss)
 
@@ -50,8 +50,8 @@ To verify `cursor_get_context` returns correct block boundaries:
 
 ```
 1. Create multi-paragraph document (see above)
-2. mcp__vmark__cursor_set_position (position: N)  # Position in target paragraph
-3. mcp__vmark__cursor_get_context (linesBefore: 3, linesAfter: 3)
+2. mcp__tmark__cursor_set_position (position: N)  # Position in target paragraph
+3. mcp__tmark__cursor_get_context (linesBefore: 3, linesAfter: 3)
 4. Verify currentLine matches expected paragraph text
 ```
 
@@ -63,8 +63,8 @@ To test format toggles (bold, italic, underline, highlight):
 
 ```
 1. Insert test text and accept it
-2. mcp__vmark__selection_set (from: X, to: Y)  # Select text to format
-3. mcp__vmark__format_toggle (format: "bold")  # or italic, underline, highlight
+2. mcp__tmark__selection_set (from: X, to: Y)  # Select text to format
+3. mcp__tmark__format_toggle (format: "bold")  # or italic, underline, highlight
 4. tauri_webview_screenshot to verify visual change
 ```
 

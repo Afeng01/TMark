@@ -1,6 +1,6 @@
 # Formatos Suportados
 
-O VMark abre diretamente todos os formatos de arquivo listados abaixo. O diferencial são as **prévias com reconhecimento de esquema**: quando o arquivo é um artefato conhecido, o VMark exibe a visualização *correta*, não uma árvore JSON genérica.
+O TMark abre diretamente todos os formatos de arquivo listados abaixo. O diferencial são as **prévias com reconhecimento de esquema**: quando o arquivo é um artefato conhecido, o TMark exibe a visualização *correta*, não uma árvore JSON genérica.
 
 [[toc]]
 
@@ -17,7 +17,7 @@ Markdown, texto simples e YAML/YML sempre abrem em seus editores completos — e
 
 Quando uma categoria está desativada, as extensões correspondentes recaem no fallback de texto simples, então o arquivo ainda abre — apenas sem a prévia ou visualização de esquema. Ative uma alternância e o registro é reconstruído no lugar; as abas abertas remontam com o adaptador correto.
 
-Na primeira execução após atualizar para o suporte a múltiplos formatos, o VMark exibe uma notificação única sugerindo que você acesse **Configurações → Formatos**. Se você a dispensou (ou instalou o VMark pela primeira vez), o painel está disponível em **Configurações → Formatos** a qualquer momento.
+Na primeira execução após atualizar para o suporte a múltiplos formatos, o TMark exibe uma notificação única sugerindo que você acesse **Configurações → Formatos**. Se você a dispensou (ou instalou o TMark pela primeira vez), o painel está disponível em **Configurações → Formatos** a qualquer momento.
 
 ## Visão geral
 
@@ -37,7 +37,7 @@ Arquivos de código abrem por padrão em modo somente leitura com um banner ofer
 
 ## Prévias com reconhecimento de esquema
 
-Quando o caminho ou o conteúdo corresponde a um esquema conhecido, o VMark substitui a visualização genérica de árvore pela visualização correta.
+Quando o caminho ou o conteúdo corresponde a um esquema conhecido, o TMark substitui a visualização genérica de árvore pela visualização correta.
 
 ### Workflow do GitHub Actions (`.github/workflows/*.yml`)
 
@@ -52,7 +52,7 @@ Abre com uma árvore de dependências Rust — dependências de runtime, de dese
 
 - Detecção por caminho: nome de arquivo `Cargo.toml` (sem distinção de maiúsculas) em caminhos POSIX ou Windows.
 - Detecção por conteúdo: cabeçalho `[package]` ou `[workspace]`.
-- Sem chamadas de rede — o VMark nunca resolve o crates.io.
+- Sem chamadas de rede — o TMark nunca resolve o crates.io.
 
 ### `package.json`
 
@@ -97,14 +97,14 @@ O validador exibe tags de script, URLs `javascript:` e manipuladores de eventos 
 Para arquivos de código, o botão **Abrir no editor externo** no banner de somente leitura inicia o editor de sua escolha. Ordem de resolução:
 
 1. **Configurações → Formatos → Editor externo** (o campo da interface — veja [Configurações](/pt-BR/guide/settings#formatos)). Escolha um bundle `.app` no macOS, um executável no Linux/Windows, ou qualquer coisa que seu shell resolva.
-2. `$VMARK_EXTERNAL_EDITOR` (sobrescrita de ambiente por projeto)
+2. `$TMARK_EXTERNAL_EDITOR` (sobrescrita de ambiente por projeto)
 3. `$VISUAL`
 4. `$EDITOR`
 5. Padrão da plataforma (`open -t` no macOS, `notepad.exe` no Windows, `xdg-open` no Linux)
 
 A configuração da interface substitui variáveis de ambiente — explícito prevalece sobre implícito. Deixe o campo vazio para usar a cadeia de fallback de variáveis de ambiente.
 
-O VMark roteia através de um PATH de login-shell para que wrappers do VS Code / Cursor / JetBrains sejam resolvidos corretamente quando iniciados em um app GUI do macOS.
+O TMark roteia através de um PATH de login-shell para que wrappers do VS Code / Cursor / JetBrains sejam resolvidos corretamente quando iniciados em um app GUI do macOS.
 
 ### Barreira de segurança
 
@@ -112,10 +112,10 @@ O comando Tauri `open_in_external_editor` rejeita:
 
 - caminhos inexistentes
 - diretórios e outros arquivos não regulares (sockets, dispositivos)
-- caminhos cuja extensão canônica não esteja no conjunto de formatos registrados do VMark
+- caminhos cuja extensão canônica não esteja no conjunto de formatos registrados do TMark
 - symlinks cujo alvo canônico falhe em qualquer uma das verificações acima
 
-Uma webview comprometida não pode usar o botão para iniciar o editor externo em arquivos de sistema arbitrários (senhas, chaves, etc.) — apenas em caminhos que o próprio VMark abriria.
+Uma webview comprometida não pode usar o botão para iniciar o editor externo em arquivos de sistema arbitrários (senhas, chaves, etc.) — apenas em caminhos que o próprio TMark abriria.
 
 ## O que não é suportado
 

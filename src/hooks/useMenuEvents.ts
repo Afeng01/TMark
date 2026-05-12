@@ -30,9 +30,9 @@ import { runOrphanCleanup } from "@/utils/orphanAssetCleanup";
 import { openSettingsWindow } from "@/utils/settingsWindow";
 import { safeUnlistenAll } from "@/utils/safeUnlisten";
 
-const HELP_URL = "https://vmark.app/guide/";
-const SHORTCUTS_URL = "https://vmark.app/guide/shortcuts";
-const REPORT_ISSUE_URL = "https://github.com/xiaolai/vmark/issues/new";
+const HELP_URL = "https://github.com/Afeng01/TMark/tree/main/website/guide";
+const SHORTCUTS_URL = "https://github.com/Afeng01/TMark/blob/main/website/guide/shortcuts.md";
+const REPORT_ISSUE_URL = "https://github.com/Afeng01/TMark/issues/new";
 
 /**
  * Handles miscellaneous menu events: preferences, history, and cleanup.
@@ -132,12 +132,12 @@ export function useMenuEvents(): void {
       unlistenRefs.current.push(unlistenCleanupImages);
 
       // Help menu items
-      const unlistenVMarkHelp = await currentWindow.listen<string>("menu:vmark-help", async (event) => {
+      const unlistenTMarkHelp = await currentWindow.listen<string>("menu:tmark-help", async (event) => {
         if (event.payload !== windowLabel) return;
         await openUrl(HELP_URL);
       });
-      if (cancelled) { unlistenVMarkHelp(); return; }
-      unlistenRefs.current.push(unlistenVMarkHelp);
+      if (cancelled) { unlistenTMarkHelp(); return; }
+      unlistenRefs.current.push(unlistenTMarkHelp);
 
       const unlistenKeyboardShortcuts = await currentWindow.listen<string>("menu:keyboard-shortcuts", async (event) => {
         if (event.payload !== windowLabel) return;

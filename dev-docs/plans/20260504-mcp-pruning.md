@@ -8,7 +8,7 @@
 
 ## Goal
 
-Reduce VMark's MCP surface from **12 tools / 76 actions** to **4 tools / 14 actions**, deleting in-document formatting tools that AI agents replicate trivially via Markdown round-trip. Keep workspace/file-level operations and the read/write spine. Preserve CJK formatting (deterministic rule-based rewriter) and the new GitHub Actions workflow CST-safe patch surface (preserves comments/anchors).
+Reduce TMark's MCP surface from **12 tools / 76 actions** to **4 tools / 14 actions**, deleting in-document formatting tools that AI agents replicate trivially via Markdown round-trip. Keep workspace/file-level operations and the read/write spine. Preserve CJK formatting (deterministic rule-based rewriter) and the new GitHub Actions workflow CST-safe patch surface (preserves comments/anchors).
 
 ## Non-goals
 
@@ -28,7 +28,7 @@ Reduce VMark's MCP surface from **12 tools / 76 actions** to **4 tools / 14 acti
 
 ### ADR-2: Keep CJK formatting via `document.transform`
 
-**Decision:** One new action `vmark.document.transform({kind: "cjk-format" | "cjk-spacing" | "cjk-punctuation"})` calls the deterministic CJK rewriter at `src/lib/cjkFormatter`.
+**Decision:** One new action `tmark.document.transform({kind: "cjk-format" | "cjk-spacing" | "cjk-punctuation"})` calls the deterministic CJK rewriter at `src/lib/cjkFormatter`.
 
 **Mechanism:** CJK rules are rule-based and nuanced (full-width punctuation conversion, em-dash spacing per `AGENTS.md`, half/full-width handling). Unlike Markdown formatting, AI re-implementing CJK in prose is lossy and slow; the server-side rewriter is the reference implementation. One action, three kinds — extensible later (Markmap normalization, etc.) without adding tools.
 
@@ -52,7 +52,7 @@ Reduce VMark's MCP surface from **12 tools / 76 actions** to **4 tools / 14 acti
 
 ### ADR-5: Expose `IRPatch` as the workflow patch contract
 
-**Decision:** `vmark.workflow.apply_patch({patches: IRPatch[], expected_revision?})` accepts the existing discriminated union from `src/lib/ghaWorkflow/save/mutators.ts` (8 patch kinds: `workflow.set`, `job.set`, `step.set`, `with.set`, `with.remove`, `needs.add`, `needs.remove`, `trigger.setFilters`).
+**Decision:** `tmark.workflow.apply_patch({patches: IRPatch[], expected_revision?})` accepts the existing discriminated union from `src/lib/ghaWorkflow/save/mutators.ts` (8 patch kinds: `workflow.set`, `job.set`, `step.set`, `with.set`, `with.remove`, `needs.add`, `needs.remove`, `trigger.setFilters`).
 
 **Mechanism:** When the AI changes one field of an existing YAML, naive raw rewrite risks losing comments and anchors that the AI didn't bother to preserve in its output. The CST mutator path makes that loss structurally impossible — the server only touches the bytes that correspond to the patched key. Treat the discriminated union as `apply_patch_v1`; future breaking shape changes bump to `_v2`.
 
@@ -70,7 +70,7 @@ There is deliberately no `workflow.read` (would duplicate `document.read` return
 
 ### ADR-6: One-shot `session.get_state` replaces five discovery tools
 
-**Decision:** Replace `get_capabilities` + `get_document_revision` + `tabs.list` + `workspace.{get_focused, list_windows, get_document_info}` with a single `vmark.session.get_state` call returning `{windows, capabilities}` with all open tabs and their `{id, filePath, dirty, revision, kind}`.
+**Decision:** Replace `get_capabilities` + `get_document_revision` + `tabs.list` + `workspace.{get_focused, list_windows, get_document_info}` with a single `tmark.session.get_state` call returning `{windows, capabilities}` with all open tabs and their `{id, filePath, dirty, revision, kind}`.
 
 **Mechanism:** AI orientation typically takes 2–5 round-trips today (capabilities → focused → tabs → revision per doc). Folding into one response saves both wall time and tool-selection ambiguity. The `kind` discriminator (`"markdown" | "yaml-workflow"`) tells the AI which mutation tool applies.
 
@@ -95,20 +95,20 @@ There is deliberately no `workflow.read` (would duplicate `document.read` return
 
 | Tool | Action | Args | Returns |
 |---|---|---|---|
-| `vmark.session` | `get_state` | `{}` | `{windows: [{label, focused, tabs: [{id, filePath?, title, dirty, revision, kind}]}], capabilities: {version, supportedKinds, mcpProtocol}}` |
-| `vmark.workspace` | `new` | `{kind?, windowLabel?}` | `{tabId}` |
+| `tmark.session` | `get_state` | `{}` | `{windows: [{label, focused, tabs: [{id, filePath?, title, dirty, revision, kind}]}], capabilities: {version, supportedKinds, mcpProtocol}}` |
+| `tmark.workspace` | `new` | `{kind?, windowLabel?}` | `{tabId}` |
 | | `open` | `{filePath, windowLabel?}` | `{tabId}` |
 | | `save` | `{tabId}` | `{filePath, revision}` |
 | | `save_as` | `{tabId, filePath}` | `{revision}` |
 | | `close` | `{tabId, force?: bool}` | `{closed: bool, reason?}` |
 | | `switch_tab` | `{tabId}` | `{}` |
 | | `focus_window` | `{windowLabel}` | `{}` |
-| `vmark.document` | `read` | `{tabId?}` | `{content, revision, filePath?, kind, dirty}` |
+| `tmark.document` | `read` | `{tabId?}` | `{content, revision, filePath?, kind, dirty}` |
 | | `write` | `{tabId?, content, expected_revision?}` | `{revision} \| {error: "STALE", current_revision}` |
 | | `transform` | `{tabId?, kind, expected_revision?}` where `kind ∈ {"cjk-format", "cjk-spacing", "cjk-punctuation"}` | `{revision} \| {error: "STALE", current_revision}` |
-| `vmark.workflow` | `apply_patch` | `{tabId?, patches: IRPatch[], expected_revision?}` | `{revision} \| {error: "STALE" \| "INVALID_PATCH", details?}` |
+| `tmark.workflow` | `apply_patch` | `{tabId?, patches: IRPatch[], expected_revision?}` | `{revision} \| {error: "STALE" \| "INVALID_PATCH", details?}` |
 | | `validate` | `{tabId?}` | `{ok: bool, diagnostics: [{line, col, message, severity}]}` |
-| `vmark.selection` | `get` | `{tabId?}` | `{text, isEmpty, range: {from, to}, mode: "wysiwyg"\|"source", kind, tabId, revision}` |
+| `tmark.selection` | `get` | `{tabId?}` | `{text, isEmpty, range: {from, to}, mode: "wysiwyg"\|"source", kind, tabId, revision}` |
 | | `set` | `{tabId?, content, expected_revision?}` | `{revision, replaced_chars} \| {error: "STALE" \| "NO_EDITOR" \| "INVALID_TAB", current_revision?}` |
 
 `tabId` is optional everywhere; defaults to the focused tab. `windowLabel` is optional; defaults to the focused window. For `selection.*`, when `tabId` is supplied it must match the focused tab — selection is view-state and only the focused editor has a live selection; mismatch returns `INVALID_TAB`.
@@ -121,7 +121,7 @@ There is deliberately no `workflow.read` (would duplicate `document.read` return
 
 - **WI-1.1** — Plan doc (this file). DoD: file present, all ADRs filled, work items linked.
 - **WI-1.2** — New dispatchers under `src/hooks/mcpBridge/dispatchers/` for `session`, `workspace`, `document`, `workflow`. DoD: each dispatcher has unit tests covering happy path + STALE error path.
-- **WI-1.3** — New server tool registrations replacing 11 files in `vmark-mcp-server/src/tools/` with 4 (`session.ts`, `workspace.ts`, `document.ts`, `workflow.ts`). DoD: `pnpm --filter vmark-mcp-server test` green.
+- **WI-1.3** — New server tool registrations replacing 11 files in `tmark-mcp-server/src/tools/` with 4 (`session.ts`, `workspace.ts`, `document.ts`, `workflow.ts`). DoD: `pnpm --filter tmark-mcp-server test` green.
 - **WI-1.4** — Tests for the new surface (TDD per `.claude/rules/10-tdd.md`). DoD: every action has at least one happy-path test, every mutation has a STALE-revision test, every error code has a test.
 - **WI-1.5** — Delete dropped handlers, dispatchers, server tool files, locale strings, and tests. Trim `src-tauri/capabilities/default.json` if any newly-unused commands remain. DoD: `git grep` finds no references to dropped tool names; `pnpm check:all` green.
 - **WI-1.6** — Website docs rewrite (`website/guide/mcp-tools.md`); scrub references in `mcp-setup.md`. DoD: `cd website && pnpm build` succeeds; new doc reflects 4-tool surface.
@@ -130,7 +130,7 @@ There is deliberately no `workflow.read` (would duplicate `document.read` return
 
 ### Phase 2 — Selection re-add (ADR-7)
 
-- **WI-2.1** — `vmark.selection.{get, set}` bridge handlers and MCP tool registration. New files: `src/hooks/mcpBridge/v2/selection.ts`, `vmark-mcp-server/src/tools/selection.ts`. Wire into `v2/dispatch.ts`, `READ_ONLY_BLOCKED`, `index.ts`/`TOOL_CATEGORIES`/`EXPECTED_TOOL_COUNT`. Extend `V2ErrorCode` with `NO_EDITOR` and `CheckpointTool` with `selection.set`. DoD: handler-level tests cover get/set across WYSIWYG and source modes, STALE rejection, no-editor rejection (including destroyed editors), tabId mismatch, single-marker emphasis detection; `--health-check` reports `toolCount: 5`; `pnpm check:all` green.
+- **WI-2.1** — `tmark.selection.{get, set}` bridge handlers and MCP tool registration. New files: `src/hooks/mcpBridge/v2/selection.ts`, `tmark-mcp-server/src/tools/selection.ts`. Wire into `v2/dispatch.ts`, `READ_ONLY_BLOCKED`, `index.ts`/`TOOL_CATEGORIES`/`EXPECTED_TOOL_COUNT`. Extend `V2ErrorCode` with `NO_EDITOR` and `CheckpointTool` with `selection.set`. DoD: handler-level tests cover get/set across WYSIWYG and source modes, STALE rejection, no-editor rejection (including destroyed editors), tabId mismatch, single-marker emphasis detection; `--health-check` reports `toolCount: 5`; `pnpm check:all` green.
 
 This is now a two-phase plan; phase boundary is "everything green".
 
@@ -180,15 +180,15 @@ Coverage target: no regression vs. the current `vitest.config.ts` thresholds (st
 ### Sidecar binary needs rebuilding
 
 The MCP server runs as a packaged native binary at
-`src-tauri/binaries/vmark-mcp-server-aarch64-apple-darwin`, built via
-`pnpm build:sidecar` in `vmark-mcp-server/`. `pnpm tauri dev` spawns
+`src-tauri/binaries/tmark-mcp-server-aarch64-apple-darwin`, built via
+`pnpm build:sidecar` in `tmark-mcp-server/`. `pnpm tauri dev` spawns
 whatever binary is present; it does **not** rebuild the sidecar
 automatically.
 
 Workflow after a sidecar source change:
 
 ```bash
-cd vmark-mcp-server && pnpm build:sidecar
+cd tmark-mcp-server && pnpm build:sidecar
 # then restart `pnpm tauri dev` so the parent picks up the new binary
 ```
 
@@ -199,7 +199,7 @@ even though the frontend bridge is up-to-date via Vite HMR.
 
 A live smoke against `pnpm tauri dev` (2026-05-04) confirmed:
 
-- Bridge routes `vmark.session/workspace/document/workflow.*` correctly.
+- Bridge routes `tmark.session/workspace/document/workflow.*` correctly.
 - Legacy types (`document.getContent` etc.) reject with `success:false`.
 - `document.write` end-to-end: content updates, revision bumps,
   checkpoint pushes, JSONL persistence fires.
@@ -223,8 +223,8 @@ at write time. New unit test guards against regression.
 
 ## What's not in scope
 
-- Selection-aware tools (`vmark.selection.get`) — defer until evidence of "fix this selection" flows.
-- Search tool (`vmark.search`) — defer until evidence of large-doc pain.
+- Selection-aware tools (`tmark.selection.get`) — defer until evidence of "fix this selection" flows.
+- Search tool (`tmark.search`) — defer until evidence of large-doc pain.
 - Markmap/Mermaid diagram surface — AI writes them as Markdown text.
 - Tracked-changes (suggestions) — see ADR-3.
 

@@ -7,7 +7,7 @@
 
 # Genie del workflow
 
-I Genie di VMark sono disponibili in due varianti:
+I Genie di TMark sono disponibili in due varianti:
 
 - **Genie markdown** (`.md`) — modelli di prompt a singolo turno. Il formato originale dei Genie. Vedi [AI Genies](/it/guide/ai-genies).
 - **Genie del workflow** (`.yml` / `.yaml`) — pipeline multi-passaggio che concatenano i genie markdown con un flusso di dati esplicito.
@@ -94,7 +94,7 @@ Quando un passaggio ha `approval: ask` (oppure il workflow imposta `defaults.app
 
 ## Esempio
 
-VMark include un workflow di esempio in `outline-and-polish.yml` tra i genie distribuiti. Copialo nella tua directory utente dei genie per personalizzarlo:
+TMark include un workflow di esempio in `outline-and-polish.yml` tra i genie distribuiti. Copialo nella tua directory utente dei genie per personalizzarlo:
 
 ```yaml
 name: Outline and Polish

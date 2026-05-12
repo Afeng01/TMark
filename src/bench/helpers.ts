@@ -1,7 +1,7 @@
 /**
  * Bench Helpers
  *
- * Shared fixture generators for VMark benchmarks. Lives in src/bench/ so it
+ * Shared fixture generators for TMark benchmarks. Lives in src/bench/ so it
  * isn't pulled into the production bundle and isn't covered by app tests.
  *
  * @module bench/helpers

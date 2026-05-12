@@ -2,7 +2,7 @@
  * Open Policy Helpers
  *
  * Pure decision logic for file opening, saving, and external change handling.
- * These helpers centralize VMark's workspace-first policies:
+ * These helpers centralize TMark's workspace-first policies:
  *
  * - Always open in a new tab (activate existing tab if same file)
  * - External/outside-workspace opens a new window rooted at file's folder

@@ -1,6 +1,6 @@
 # Mermaid-Diagramme
 
-VMark unterstützt [Mermaid](https://mermaid.js.org/)-Diagramme zum Erstellen von Flussdiagrammen, Sequenzdiagrammen und anderen Visualisierungen direkt in Ihren Markdown-Dokumenten.
+TMark unterstützt [Mermaid](https://mermaid.js.org/)-Diagramme zum Erstellen von Flussdiagrammen, Sequenzdiagrammen und anderen Visualisierungen direkt in Ihren Markdown-Dokumenten.
 
 [[toc]]
 
@@ -50,7 +50,7 @@ Das Vorschau-Panel merkt sich seine Position, wenn Sie es verschieben, sodass Si
 
 ## Unterstützte Diagrammtypen
 
-VMark unterstützt alle Mermaid-Diagrammtypen:
+TMark unterstützt alle Mermaid-Diagrammtypen:
 
 ### Flussdiagramm
 
@@ -245,7 +245,7 @@ Beim Bearbeiten eines Mermaid-Code-Blocks im WYSIWYG-Modus erscheint eine **Kopi
 
 ### Design-Integration
 
-Mermaid-Diagramme passen sich automatisch an das aktuelle VMark-Design an (White, Paper, Mint, Sepia oder Night).
+Mermaid-Diagramme passen sich automatisch an das aktuelle TMark-Design an (White, Paper, Mint, Sepia oder Night).
 
 ### Als PNG exportieren
 
@@ -264,7 +264,7 @@ Beim Exportieren des vollständigen Dokuments nach HTML oder PDF werden Mermaid-
 
 ## KI-generierte Diagramme korrigieren
 
-VMark verwendet **Mermaid v11**, das einen strengeren Parser (Langium) als ältere Versionen hat. KI-Tools (ChatGPT, Claude, Copilot usw.) generieren oft Syntax, die in älteren Mermaid-Versionen funktionierte, aber in v11 fehlschlägt. Hier sind die häufigsten Probleme und wie man sie behebt.
+TMark verwendet **Mermaid v11**, das einen strengeren Parser (Langium) als ältere Versionen hat. KI-Tools (ChatGPT, Claude, Copilot usw.) generieren oft Syntax, die in älteren Mermaid-Versionen funktionierte, aber in v11 fehlschlägt. Hier sind die häufigsten Probleme und wie man sie behebt.
 
 ### 1. Nicht-quotierte Beschriftungen mit Sonderzeichen
 
@@ -483,7 +483,7 @@ Beide Tools erfordern [Node.js](https://nodejs.org/) (v18 oder höher) auf Ihrem
 
 ## Mermaid-Syntax erlernen
 
-VMark rendert Standard-Mermaid-Syntax. Um die Diagrammerstellung zu meistern, lesen Sie die offizielle Mermaid-Dokumentation:
+TMark rendert Standard-Mermaid-Syntax. Um die Diagrammerstellung zu meistern, lesen Sie die offizielle Mermaid-Dokumentation:
 
 ### Offizielle Dokumentation
 
@@ -500,9 +500,9 @@ VMark rendert Standard-Mermaid-Syntax. Um die Diagrammerstellung zu meistern, le
 
 ### Übungstools
 
-- **[Mermaid Live Editor](https://mermaid.live/)** — Interaktive Spielwiese zum Testen und Voranzeigen von Diagrammen vor dem Einfügen in VMark
+- **[Mermaid Live Editor](https://mermaid.live/)** — Interaktive Spielwiese zum Testen und Voranzeigen von Diagrammen vor dem Einfügen in TMark
 - **[Mermaid-Dokumentation](https://mermaid.js.org/)** — Vollständige Referenz mit Beispielen für alle Diagrammtypen
 
 ::: tip
-Der Live Editor ist großartig zum Experimentieren mit komplexen Diagrammen. Sobald Ihr Diagramm richtig aussieht, kopieren Sie den Code in VMark.
+Der Live Editor ist großartig zum Experimentieren mit komplexen Diagrammen. Sobald Ihr Diagramm richtig aussieht, kopieren Sie den Code in TMark.
 :::

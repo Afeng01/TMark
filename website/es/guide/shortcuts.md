@@ -1,6 +1,6 @@
 # Atajos de Teclado
 
-VMark está diseñado para flujos de trabajo que priorizan el teclado. La mayoría de los atajos se pueden personalizar en Configuración. Un pequeño número de primitivas son fijas: los selectores multicursor `Mod+D` (Seleccionar Siguiente Ocurrencia) y `Mod+Shift+L` (Seleccionar Todas las Ocurrencias), y las asignaciones globales de Deshacer/Rehacer. Los demás atajos multicursor (Omitir Ocurrencia, Deshacer Cursor Suave, Añadir Cursor Arriba/Abajo) son configurables. Los atajos marcados como _(sensibles al contexto)_ son gestionados dentro del editor para estructuras específicas (por ejemplo, alternar la casilla de una lista de tareas) y no están expuestos en el registro de personalización.
+TMark está diseñado para flujos de trabajo que priorizan el teclado. La mayoría de los atajos se pueden personalizar en Configuración. Un pequeño número de primitivas son fijas: los selectores multicursor `Mod+D` (Seleccionar Siguiente Ocurrencia) y `Mod+Shift+L` (Seleccionar Todas las Ocurrencias), y las asignaciones globales de Deshacer/Rehacer. Los demás atajos multicursor (Omitir Ocurrencia, Deshacer Cursor Suave, Añadir Cursor Arriba/Abajo) son configurables. Los atajos marcados como _(sensibles al contexto)_ son gestionados dentro del editor para estructuras específicas (por ejemplo, alternar la casilla de una lista de tareas) y no están expuestos en el registro de personalización.
 
 ## Notación
 
@@ -9,17 +9,17 @@ VMark está diseñado para flujos de trabajo que priorizan el teclado. La mayor�
 
 ## Teclas de Función en macOS
 
-VMark usa teclas de función (F4–F10) para cambios rápidos de modo. En macOS, estas teclas están asignadas a funciones del sistema (brillo, volumen, etc.) de forma predeterminada.
+TMark usa teclas de función (F4–F10) para cambios rápidos de modo. En macOS, estas teclas están asignadas a funciones del sistema (brillo, volumen, etc.) de forma predeterminada.
 
 **Para usar las teclas F directamente sin mantener presionado Fn:**
 
 1. Abre **Configuración del Sistema** → **Teclado**
 2. Activa **"Usar F1, F2, etc. como teclas de función estándar"**
 
-Alternativamente, mantén presionada la tecla **Fn** al pulsar F4–F10 para activar los atajos de VMark.
+Alternativamente, mantén presionada la tecla **Fn** al pulsar F4–F10 para activar los atajos de TMark.
 
 ::: tip
-Si prefieres mantener las funciones del sistema en las teclas F, puedes personalizar los atajos de VMark en Configuración (`Mod + ,`) para usar diferentes combinaciones de teclas.
+Si prefieres mantener las funciones del sistema en las teclas F, puedes personalizar los atajos de TMark en Configuración (`Mod + ,`) para usar diferentes combinaciones de teclas.
 :::
 
 ### Referencia Rápida de Teclas F

@@ -1,10 +1,10 @@
 # Markdown-Lint
 
-VMark bringt eine integrierte Lint-Engine mit, die **Korrektheitsprobleme** erkennt — keine Stilvorlieben. Lint läuft auf Anforderung (Cmd-Shift-L oder **Werkzeuge → Markdown prüfen**) und zeigt Ergebnisse inline als Wellenlinien am Rand an, mit einem Status-Badge in der Statusleiste und F2-Navigation zwischen den Befunden.
+TMark bringt eine integrierte Lint-Engine mit, die **Korrektheitsprobleme** erkennt — keine Stilvorlieben. Lint läuft auf Anforderung (Cmd-Shift-L oder **Werkzeuge → Markdown prüfen**) und zeigt Ergebnisse inline als Wellenlinien am Rand an, mit einem Status-Badge in der Statusleiste und F2-Navigation zwischen den Befunden.
 
 ## Was Lint ist und was nicht
 
-VMarks Lint ist ein **Korrektheits**-Prüfer:
+TMarks Lint ist ein **Korrektheits**-Prüfer:
 
 - Defekte Querverweise
 - Undefinierte Link-/Fußnotenreferenzen
@@ -14,7 +14,7 @@ VMarks Lint ist ein **Korrektheits**-Prüfer:
 - Bilder ohne Alt-Text
 - Leerer Linktext oder leeres `href`
 
-VMarks Lint ist **kein** Stil-Erzwinger. Es markiert nicht:
+TMarks Lint ist **kein** Stil-Erzwinger. Es markiert nicht:
 
 - Zeilenlänge
 - Listenmarkierungs-Stil (`-` vs. `*`)
@@ -22,7 +22,7 @@ VMarks Lint ist **kein** Stil-Erzwinger. Es markiert nicht:
 - Überschriftenstil (`#` vs. Unterstreichung)
 - Nachgestellte Leerzeichen
 
-Verwenden Sie für Stil-Erzwingung ein separates Werkzeug wie `prettier --check` außerhalb von VMark.
+Verwenden Sie für Stil-Erzwingung ein separates Werkzeug wie `prettier --check` außerhalb von TMark.
 
 ## Regelreferenz
 

@@ -1,6 +1,6 @@
 # Settings
 
-VMark's settings panel lets you customize every aspect of the editor. Open it with `Mod + ,` or via **VMark > Settings** in the menu bar.
+TMark's settings panel lets you customize every aspect of the editor. Open it with `Mod + ,` or via **TMark > Settings** in the menu bar.
 
 The settings window has a sidebar with sections grouped by topic — the most-used sections appear first, with About and Advanced at the bottom. Changes take effect immediately — there is no save button.
 
@@ -93,7 +93,7 @@ Paste behavior, layout, and HTML rendering settings.
 | Setting | Description | Default | Options |
 |---------|-------------|---------|---------|
 | Enable regex in search | Show a regex toggle button in the Find & Replace bar | On | On / Off |
-| Paste mode | How VMark routes content from the clipboard | Smart | Smart, Plain |
+| Paste mode | How TMark routes content from the clipboard | Smart | Smart, Plain |
 | Markdown paste in WYSIWYG | When pasting text that looks like Markdown into the WYSIWYG editor, automatically convert it to rich content | Auto | Auto, Off |
 
 ### Layout
@@ -176,7 +176,7 @@ See [Large Files](/guide/large-files) for the full breakdown of how large files 
 
 | Setting | Description | Default | Options |
 |---------|-------------|---------|---------|
-| Check frequency | When to check for new VMark releases | On startup | On startup, Daily, Weekly, Manual |
+| Check frequency | When to check for new TMark releases | On startup | On startup, Daily, Weekly, Manual |
 | Auto-download updates | Download release artifacts in the background once an update is detected | Off | On / Off |
 | Skip a version | Suppresses the update prompt for a specific version (set per-update from the prompt itself) | None | — |
 
@@ -186,7 +186,7 @@ Enable **Auto-resize on paste** if you frequently paste screenshots or photos �
 
 ### Document Tools
 
-VMark detects [Pandoc](https://pandoc.org) to enable exporting to additional formats (DOCX, EPUB, LaTeX, and more). Click **Detect** to scan for Pandoc on your system. If found, its version and path are displayed.
+TMark detects [Pandoc](https://pandoc.org) to enable exporting to additional formats (DOCX, EPUB, LaTeX, and more). Click **Detect** to scan for Pandoc on your system. If found, its version and path are displayed.
 
 See [Export & Print](/guide/export) for details on all export options.
 
@@ -196,12 +196,12 @@ MCP server and AI provider configuration.
 
 ### MCP Server
 
-The MCP (Model Context Protocol) server allows external AI assistants like Claude Code and Cursor to control VMark programmatically.
+The MCP (Model Context Protocol) server allows external AI assistants like Claude Code and Cursor to control TMark programmatically.
 
 | Setting | Description | Default |
 |---------|-------------|---------|
 | Enable MCP Server | Start or stop the MCP server. When running, a status badge shows the port and connected clients | On (toggle) |
-| Start on launch | Automatically start the MCP server when VMark opens | On |
+| Start on launch | Automatically start the MCP server when TMark opens | On |
 | Auto-approve edits | Apply AI-initiated document changes without showing a preview for approval first. Use with caution | Off |
 
 When the server is running, the panel also displays:
@@ -210,7 +210,7 @@ When the server is running, the panel also displays:
 - **Tools / Resources** — number of available MCP tools and resources
 - **Connected Clients** — number of AI clients currently connected
 
-Below the MCP Server section, you can install VMark's MCP configuration into supported AI clients (Claude Desktop, Claude Code, Codex CLI, Gemini CLI) with a single click.
+Below the MCP Server section, you can install TMark's MCP configuration into supported AI clients (Claude Desktop, Claude Code, Codex CLI, Gemini CLI) with a single click.
 
 See [MCP Setup](/guide/mcp-setup) and [MCP Tools Reference](/guide/mcp-tools) for full details.
 
@@ -247,11 +247,11 @@ When a category is off, the matching extensions fall through to the plain-text f
 
 For the **Open in external editor** button on read-only code tabs, pick the editor that should launch. An app bundle (e.g. `/Applications/Visual Studio Code.app`) or an executable.
 
-The GUI setting overrides any environment variables — explicit beats implicit. Leave it empty to use the env-var fallback chain `$VMARK_EXTERNAL_EDITOR → $VISUAL → $EDITOR → platform default`. See [Open in external editor](/guide/formats#open-in-external-editor) for the full resolution order and security gate.
+The GUI setting overrides any environment variables — explicit beats implicit. Leave it empty to use the env-var fallback chain `$TMARK_EXTERNAL_EDITOR → $VISUAL → $EDITOR → platform default`. See [Open in external editor](/guide/formats#open-in-external-editor) for the full resolution order and security gate.
 
 ### One-time upgrade nudge
 
-On the first launch after upgrading to multi-format support, VMark surfaces a non-blocking toast pointing to **Settings → Formats**. The nudge fires once per install — once shown (or dismissed), it never reappears.
+On the first launch after upgrading to multi-format support, TMark surfaces a non-blocking toast pointing to **Settings → Formats**. The nudge fires once per install — once shown (or dismissed), it never reappears.
 
 ## Language
 
@@ -356,9 +356,9 @@ Developer and system-level configuration.
 
 | Setting | Description | Default |
 |---------|-------------|---------|
-| Custom link protocols | Additional URL protocols VMark should recognize when inserting links. Enter each protocol as a tag | `obsidian`, `vscode`, `dict`, `x-dictionary` |
+| Custom link protocols | Additional URL protocols TMark should recognize when inserting links. Enter each protocol as a tag | `obsidian`, `vscode`, `dict`, `x-dictionary` |
 
-This lets you create links like `obsidian://open?vault=...` or `vscode://file/...` that VMark will treat as valid URLs.
+This lets you create links like `obsidian://open?vault=...` or `vscode://file/...` that TMark will treat as valid URLs.
 
 ### Performance
 
@@ -379,7 +379,7 @@ See [Workflow Viewer](/guide/workflow-viewer) for the full feature surface.
 
 | Setting | Description | Default | Platforms |
 |---------|-------------|---------|-----------|
-| Clear macOS quarantine on open | When opening a file that carries the macOS quarantine attribute (`com.apple.quarantine`), strip it before reading. Helpful for files downloaded from the web that VMark would otherwise be blocked from opening | On | macOS |
+| Clear macOS quarantine on open | When opening a file that carries the macOS quarantine attribute (`com.apple.quarantine`), strip it before reading. Helpful for files downloaded from the web that TMark would otherwise be blocked from opening | On | macOS |
 | Mac Option as Meta (terminal) | Treat the macOS Option key as Meta in the integrated terminal. Required for tools like emacs and tmux that expect Alt-prefixed shortcuts | Off | macOS |
 
 ### Developer Tools
@@ -388,7 +388,7 @@ When **Developer tools** is toggled on, a **Hot Exit Dev Tools** panel appears w
 
 ## See Also
 
-- [Features](/guide/features) — Overview of VMark's capabilities
+- [Features](/guide/features) — Overview of TMark's capabilities
 - [Keyboard Shortcuts](/guide/shortcuts) — Full shortcut reference
 - [CJK Formatting](/guide/cjk-formatting) — Detailed CJK formatting rules
 - [Integrated Terminal](/guide/terminal) — Terminal sessions and usage

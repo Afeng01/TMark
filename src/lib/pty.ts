@@ -89,10 +89,10 @@ class EventEmitter<T> {
 }
 
 // ---------------------------------------------------------------------------
-// VMarkPty — the concrete implementation
+// TMarkPty — the concrete implementation
 // ---------------------------------------------------------------------------
 
-class VMarkPty implements IPty {
+class TMarkPty implements IPty {
   private _pid = 0;
   cols: number;
   rows: number;
@@ -237,5 +237,5 @@ export function spawn(
   options?: IPtySpawnOptions,
 ): IPty {
   const argArray = typeof args === "string" ? [args] : args;
-  return new VMarkPty(file, argArray, options);
+  return new TMarkPty(file, argArray, options);
 }

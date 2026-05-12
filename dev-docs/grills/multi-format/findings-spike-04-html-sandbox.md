@@ -27,7 +27,7 @@ The harness:
 4. After 1.5s, checks whether `document.title` on the outer page contains any payload's ID.
 5. Reports PASS/FAIL per payload and overall.
 
-**Expected result:** all 20 PASS. Title remains `"VMark HTML Sandbox Spike — WI-0.4"`.
+**Expected result:** all 20 PASS. Title remains `"TMark HTML Sandbox Spike — WI-0.4"`.
 
 ### Part B — Tauri webview verification (requires user)
 
@@ -35,7 +35,7 @@ The plan's actual security claim is about Tauri's webview, not a regular browser
 
 **Manual test steps for the user:**
 
-1. Build the harness as a temporary VMark page:
+1. Build the harness as a temporary TMark page:
    - Add a one-off Tauri command `dev_html_sandbox_spike()` to `src-tauri/src/lib.rs` that returns the harness HTML.
    - Add a one-off React route in dev mode that renders the harness inside the existing Tauri webview.
    - **Do not commit** — this is throwaway.

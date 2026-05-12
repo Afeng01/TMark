@@ -1,6 +1,6 @@
 //! PTY process management — async-safe replacement for tauri-plugin-pty.
 //!
-//! Purpose: Spawns and manages pseudo-terminal sessions for VMark's built-in
+//! Purpose: Spawns and manages pseudo-terminal sessions for TMark's built-in
 //! terminal. Each PTY reader runs on a dedicated OS thread so blocking I/O
 //! never starves the tokio async runtime. Data is pushed to the frontend via
 //! Tauri events instead of polling.

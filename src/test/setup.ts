@@ -1,6 +1,49 @@
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
 
+class MemoryStorage implements Storage {
+  private store = new Map<string, string>();
+
+  get length() {
+    return this.store.size;
+  }
+
+  clear() {
+    this.store.clear();
+  }
+
+  getItem(key: string) {
+    return this.store.get(key) ?? null;
+  }
+
+  key(index: number) {
+    return Array.from(this.store.keys())[index] ?? null;
+  }
+
+  removeItem(key: string) {
+    this.store.delete(key);
+  }
+
+  setItem(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+for (const storageName of ["localStorage", "sessionStorage"] as const) {
+  try {
+    globalThis[storageName]?.getItem("__tmark_storage_probe__");
+  } catch {
+    Object.defineProperty(globalThis, "Storage", {
+      configurable: true,
+      value: MemoryStorage,
+    });
+    Object.defineProperty(globalThis, storageName, {
+      configurable: true,
+      value: new MemoryStorage(),
+    });
+  }
+}
+
 // ---------------------------------------------------------------------------
 // react-i18next global mock
 // Makes t(key, opts) return the English translation string with interpolations

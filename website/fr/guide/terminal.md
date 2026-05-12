@@ -1,6 +1,6 @@
 # Terminal intégré
 
-VMark inclut un panneau de terminal intégré pour exécuter des commandes sans quitter l'éditeur.
+TMark inclut un panneau de terminal intégré pour exécuter des commandes sans quitter l'éditeur.
 
 Appuyez sur `` Ctrl + ` `` pour basculer le panneau de terminal.
 
@@ -62,13 +62,13 @@ Le terminal détecte deux types de liens dans la sortie des commandes :
 
 ## Environnement shell
 
-VMark définit ces variables d'environnement dans chaque session de terminal :
+TMark définit ces variables d'environnement dans chaque session de terminal :
 
 | Variable | Valeur |
 |----------|--------|
-| `TERM_PROGRAM` | `vmark` |
-| `EDITOR` | `vmark` |
-| `VMARK_WORKSPACE` | Chemin racine de l'espace de travail (lorsqu'un dossier est ouvert) |
+| `TERM_PROGRAM` | `tmark` |
+| `EDITOR` | `tmark` |
+| `TMARK_WORKSPACE` | Chemin racine de l'espace de travail (lorsqu'un dossier est ouvert) |
 | `PATH` | PATH complet du shell de connexion (identique à votre terminal système) |
 
 Le terminal intégré hérite du `PATH` de votre shell de connexion, de sorte que les outils CLI comme `node`, `claude` et d'autres binaires installés par l'utilisateur sont accessibles — tout comme dans une fenêtre de terminal ordinaire.
@@ -81,7 +81,7 @@ Lorsque vous ouvrez un espace de travail ou un fichier alors que le terminal est
 
 ## Pause / Reprise
 
-Pour les processus de longue durée produisant une sortie verbeuse, vous pouvez suspendre le processus shell sous-jacent depuis VMark afin de libérer du CPU sans tuer la session. La reprise continue le processus là où il s'est arrêté.
+Pour les processus de longue durée produisant une sortie verbeuse, vous pouvez suspendre le processus shell sous-jacent depuis TMark afin de libérer du CPU sans tuer la session. La reprise continue le processus là où il s'est arrêté.
 
 | Action | Comment |
 |---|---|

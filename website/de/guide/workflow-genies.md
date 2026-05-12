@@ -7,7 +7,7 @@
 
 # Workflow-Genies
 
-VMark-Genies gibt es in zwei Varianten:
+TMark-Genies gibt es in zwei Varianten:
 
 - **Markdown-Genies** (`.md`) — einmalige Prompt-Vorlagen. Das ursprüngliche Genie-Format. Siehe [AI Genies](/de/guide/ai-genies).
 - **Workflow-Genies** (`.yml` / `.yaml`) — mehrstufige Pipelines, die Markdown-Genies mit explizitem Datenfluss miteinander verketten.
@@ -94,7 +94,7 @@ Wenn ein Schritt `approval: ask` hat (oder Workflow-`defaults.approval: ask`), p
 
 ## Beispiel
 
-VMark wird mit einem Beispiel-Workflow `outline-and-polish.yml` in den mitgelieferten Genies ausgeliefert. Kopiere ihn in dein Benutzer-Genies-Verzeichnis, um ihn anzupassen:
+TMark wird mit einem Beispiel-Workflow `outline-and-polish.yml` in den mitgelieferten Genies ausgeliefert. Kopiere ihn in dein Benutzer-Genies-Verzeichnis, um ihn anzupassen:
 
 ```yaml
 name: Outline and Polish

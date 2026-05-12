@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: VMark
+  name: TMark
   text: The Plain-Text Workspace Where Humans and AI Collaborate
   tagline: Markdown · YAML · JSON · TOML · Mermaid · SVG · HTML · Code
   image:
     src: /logo.png
-    alt: VMark
+    alt: TMark
   actions:
     - theme: brand
       text: Download
@@ -26,7 +26,7 @@ features:
   - icon:
       src: /icons/bot.svg
     title: Humans + AI on the Same Files
-    details: Plain text is the un-mediated meeting point. VMark speaks MCP natively — Claude, Codex, or Gemini read and write the same artifacts you do. No translation layer.
+    details: Plain text is the un-mediated meeting point. TMark speaks MCP natively — Claude, Codex, or Gemini read and write the same artifacts you do. No translation layer.
 
   - icon:
       src: /icons/languages.svg
@@ -110,15 +110,15 @@ Claude Code, Claude Desktop, Codex CLI, Gemini CLI... can write directly to your
 <div class="screenshots-grid">
   <div class="screenshot-card">
     <img src="/screenshots/sending-from-claude-code.png" alt="Sending content from Claude Code CLI" loading="lazy" />
-    <div class="caption">Ask Claude Code to create a document directly in VMark</div>
+    <div class="caption">Ask Claude Code to create a document directly in TMark</div>
   </div>
   <div class="screenshot-card">
     <img src="/screenshots/sending-from-claude-desktop.png" alt="Sending content from Claude Desktop" loading="lazy" />
     <div class="caption">Or use Claude Desktop with the same prompt</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/content-received-by-vmark.png" alt="Content received by VMark" loading="lazy" />
-    <div class="caption">Content appears in VMark with full formatting</div>
+    <img src="/screenshots/content-received-by-tmark.png" alt="Content received by TMark" loading="lazy" />
+    <div class="caption">Content appears in TMark with full formatting</div>
   </div>
 </div>
 </div>
@@ -144,15 +144,15 @@ Claude Code, Claude Desktop, Codex CLI, Gemini CLI... can write directly to your
 <div class="screenshots-section">
 <div class="screenshots-grid">
   <div class="screenshot-card">
-    <img src="/screenshots/editor-main.png" alt="VMark Rich Text Editor" loading="lazy" />
+    <img src="/screenshots/editor-main.png" alt="TMark Rich Text Editor" loading="lazy" />
     <div class="caption">WYSIWYG Mode</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/source-mode.png" alt="VMark Source Mode" loading="lazy" />
+    <img src="/screenshots/source-mode.png" alt="TMark Source Mode" loading="lazy" />
     <div class="caption">Source Mode (F6)</div>
   </div>
   <div class="screenshot-card">
-    <img src="/screenshots/dark-theme.png" alt="VMark Night Theme" loading="lazy" />
+    <img src="/screenshots/dark-theme.png" alt="TMark Night Theme" loading="lazy" />
     <div class="caption">Night Theme</div>
   </div>
 </div>
@@ -201,9 +201,9 @@ Claude Code, Claude Desktop, Codex CLI, Gemini CLI... can write directly to your
 
 ## Available for macOS
 
-VMark is optimized for macOS with native Apple Silicon and Intel support. Download the latest version and start writing today.
+TMark is optimized for macOS with native Apple Silicon and Intel support. Download the latest version and start writing today.
 
-[Get VMark →](/download)
+[Get TMark →](/download)
 
 ## Credits
 

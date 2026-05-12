@@ -1,10 +1,10 @@
 # Lint Markdown
 
-VMark embarque un moteur de lint intégré qui détecte les **problèmes de correction**, pas les préférences de style. Le lint s'exécute à la demande (Cmd-Shift-L ou **Outils → Vérifier le Markdown**) et présente les résultats en ligne sous forme de surlignages dans la gouttière, avec un badge dans la barre d'état et une navigation F2 entre les diagnostics.
+TMark embarque un moteur de lint intégré qui détecte les **problèmes de correction**, pas les préférences de style. Le lint s'exécute à la demande (Cmd-Shift-L ou **Outils → Vérifier le Markdown**) et présente les résultats en ligne sous forme de surlignages dans la gouttière, avec un badge dans la barre d'état et une navigation F2 entre les diagnostics.
 
 ## Ce que le lint est et n'est pas
 
-Le lint de VMark est un vérificateur de **correction**&nbsp;:
+Le lint de TMark est un vérificateur de **correction**&nbsp;:
 
 - Références croisées cassées
 - Références de lien / note de bas de page non définies
@@ -14,7 +14,7 @@ Le lint de VMark est un vérificateur de **correction**&nbsp;:
 - Images sans texte alternatif
 - Texte de lien vide ou `href` vide
 
-Le lint de VMark n'est **pas** un applicateur de style. Il ne signalera pas&nbsp;:
+Le lint de TMark n'est **pas** un applicateur de style. Il ne signalera pas&nbsp;:
 
 - Longueur de ligne
 - Style de marqueur de liste (`-` vs `*`)
@@ -22,7 +22,7 @@ Le lint de VMark n'est **pas** un applicateur de style. Il ne signalera pas&nbsp
 - Style de titre (`#` vs souligné)
 - Espaces de fin de ligne
 
-Pour l'application du style, utilisez un outil distinct comme `prettier --check` en dehors de VMark.
+Pour l'application du style, utilisez un outil distinct comme `prettier --check` en dehors de TMark.
 
 ## Référence des règles
 

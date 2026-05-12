@@ -2,7 +2,7 @@
  * MCP Bridge — top-level request router.
  *
  * Routes every MCP bridge request to the pruned 4-tool dispatcher
- * (vmark.session/workspace/document/workflow). Unrecognized request
+ * (tmark.session/workspace/document/workflow). Unrecognized request
  * types respond with `Unknown request type`.
  *
  * Plan: dev-docs/plans/20260504-mcp-pruning.md (WI-1.5).
@@ -20,10 +20,10 @@ import { dispatchV2 } from "./v2/dispatch";
 import { v2ErrorString } from "./v2/types";
 
 const READ_ONLY_BLOCKED = new Set<string>([
-  "vmark.document.write",
-  "vmark.document.transform",
-  "vmark.workflow.apply_patch",
-  "vmark.selection.set",
+  "tmark.document.write",
+  "tmark.document.transform",
+  "tmark.workflow.apply_patch",
+  "tmark.selection.set",
 ]);
 
 /** Route an MCP request through the v2 dispatcher. */

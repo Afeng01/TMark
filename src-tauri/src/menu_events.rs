@@ -313,7 +313,7 @@ pub fn handle_menu_event(app: &AppHandle, event: tauri::menu::MenuEvent) {
         return;
     }
 
-    // "install-cli" — Install or manage the `vmark` shell command (macOS only).
+    // "install-cli" — Install or manage the `tmark` shell command (macOS only).
     // Toggles between install/uninstall based on current status.
     #[cfg(target_os = "macos")]
     if id == "install-cli" {
@@ -338,7 +338,7 @@ pub fn handle_menu_event(app: &AppHandle, event: tauri::menu::MenuEvent) {
             match result {
                 Ok(msg) => {
                     let display = if msg.contains("installed at") {
-                        format!("{}\n\nYou can now run 'vmark' from the terminal.", msg)
+                        format!("{}\n\nYou can now run 'tmark' from the terminal.", msg)
                     } else {
                         msg
                     };

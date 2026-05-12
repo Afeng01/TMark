@@ -1,6 +1,6 @@
 # Multi-Cursor Editing
 
-VMark supports powerful multi-cursor editing in both WYSIWYG and Source modes, allowing you to edit multiple locations simultaneously.
+TMark supports powerful multi-cursor editing in both WYSIWYG and Source modes, allowing you to edit multiple locations simultaneously.
 
 ## Quick Start
 

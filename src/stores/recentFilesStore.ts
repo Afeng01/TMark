@@ -122,7 +122,7 @@ export const useRecentFilesStore = create<RecentFilesState>()(
       },
     }),
     {
-      name: "vmark-recent-files",
+      name: "tmark-recent-files",
       storage: createJSONStorage(() => createSafeStorage()),
       version: 2,
       migrate: (persistedState) => {

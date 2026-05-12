@@ -4,7 +4,7 @@ Things that will bite you if you're not careful. Read this before modifying the 
 
 ## Architecture: Segment Extraction vs. Placeholders
 
-VMark uses **segment extraction** — protected regions are identified, formattable segments are extracted, and only those segments are formatted. Protected text is never touched.
+TMark uses **segment extraction** — protected regions are identified, formattable segments are extracted, and only those segments are formatted. Protected text is never touched.
 
 This is structurally superior to **placeholder-based** systems (e.g., Glean's Python formatter) which replace protected regions with UUID tokens, format the whole text, then restore. Placeholder systems have inherent risks:
 
@@ -12,7 +12,7 @@ This is structurally superior to **placeholder-based** systems (e.g., Glean's Py
 - **Restoration order** — nested placeholders must be restored in reverse order; forward-order restoration corrupts nested regions
 - **Cross-span matching** — greedy regexes applied to the full text can match across placeholder boundaries
 
-VMark's approach eliminates all three by design. Regression tests in `formatter.test.ts` document this.
+TMark's approach eliminates all three by design. Regression tests in `formatter.test.ts` document this.
 
 **However**, segment extraction requires the protected region scanner (`markdownParser.ts`) to be correct. If it misses a region, that text gets formatted and potentially corrupted. The integrity verification system (`integrity.ts`) serves as a safety net: it counts structural patterns before and after formatting and discards the result if any count changes.
 
@@ -83,8 +83,8 @@ Without this, `Python3.11` would become `Python3。11` in CJK context.
 Korean uses native word spacing and particles attach directly to preceding words:
 
 ```
-VMark에는        (correct — no space before particle)
-VMark 에는       (wrong — breaks Korean grammar)
+TMark에는        (correct — no space before particle)
+TMark 에는       (wrong — breaks Korean grammar)
 ```
 
 All CJK-Latin spacing patterns use `CJK_NO_KOREAN` which excludes Hangul (U+AC00-D7AF). Korean text is detected by `containsCJK()` but spacing rules skip it.

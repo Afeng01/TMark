@@ -1,6 +1,6 @@
 # Popups Inline
 
-O VMark fornece popups contextuais para editar links, imagens, mídia, matemática, rodapés e mais. Esses popups funcionam nos modos WYSIWYG e Fonte com navegação por teclado consistente.
+O TMark fornece popups contextuais para editar links, imagens, mídia, matemática, rodapés e mais. Esses popups funcionam nos modos WYSIWYG e Fonte com navegação por teclado consistente.
 
 ## Atalhos de Teclado Comuns
 
@@ -14,7 +14,7 @@ Todos os popups compartilham estes comportamentos de teclado:
 
 ## Dica e Popup de Link
 
-O VMark usa um sistema de dois níveis para links: uma dica somente leitura ao passar o mouse, e um popup de edição via atalho de teclado.
+O TMark usa um sistema de dois níveis para links: uma dica somente leitura ao passar o mouse, e um popup de edição via atalho de teclado.
 
 ### Dica ao Passar o Mouse (Somente Leitura)
 

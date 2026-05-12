@@ -1,12 +1,12 @@
 ---
 name: rust-tauri-backend
-description: Implement or modify VMark's Rust/Tauri backend. Use when adding Tauri commands, menu items, filesystem integration, or platform behaviors in src-tauri.
+description: Implement or modify TMark's Rust/Tauri backend. Use when adding Tauri commands, menu items, filesystem integration, or platform behaviors in src-tauri.
 ---
 
-# Rust + Tauri Backend (VMark)
+# Rust + Tauri Backend (TMark)
 
 ## Overview
-Apply VMark backend conventions for Tauri v2 and Rust code.
+Apply TMark backend conventions for Tauri v2 and Rust code.
 
 ## Workflow
 1) Identify the command or menu integration needed in `src-tauri/src`.

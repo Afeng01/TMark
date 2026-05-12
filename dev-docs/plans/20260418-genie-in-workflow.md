@@ -177,7 +177,7 @@ Observed in-tree at commit `7bc49c52` on `main`:
 ### Feature flag
 
 - `src/utils/workflowFeatureFlag.ts:15` — reads `settingsStore.advanced.workflowEngine`, default `false`.
-- `FileExplorer.tsx:50`, `useFileTree.ts:30`, `useFileOpen.ts:31`, `sourceEditorExtensions.ts:29` — all gate YAML-as-VMark-file behavior on this flag.
+- `FileExplorer.tsx:50`, `useFileTree.ts:30`, `useFileOpen.ts:31`, `sourceEditorExtensions.ts:29` — all gate YAML-as-TMark-file behavior on this flag.
 - No backend enforcement — any frontend that can construct a YAML string and call `run_workflow` runs. Frontend gating is sufficient because the command is not publicly exposed.
 
 ---
@@ -526,7 +526,7 @@ pub async fn run_ai_prompt_collect(
 - **Acceptance:**
   - Design token compliance (no hardcoded colors, focus indicators per `.claude/rules/33-focus-indicators.md`).
   - i18n: all strings via `t()` in `dialog.json` / new `workflow.json` namespace — all 10 locales.
-  - Esc = Deny (consistent with other VMark dialogs — confirm during impl).
+  - Esc = Deny (consistent with other TMark dialogs — confirm during impl).
   - Enter = Approve on focused button only (no auto-approve).
 - **Tests (first):**
   - `src/components/WorkflowApproval/ApprovalDialog.test.tsx` — behavior tests (click approve → `respond_workflow_approval` invoked; Esc → deny).
@@ -688,7 +688,7 @@ cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings
 | R-5 | JSON output schema validation false positives | M | L | Validation is minimum-viable: "required keys present, types match primitives". No regex, no length constraints. Document limits in the guide. |
 | R-6 | `serde_yaml` version conflict with TS-side `js-yaml` (e.g., different tag semantics) | L | L | Only used on Rust side for nested frontmatter; TS parser unchanged. |
 | R-7 | REST provider max_tokens silently ignored by some OpenAI-compatible endpoints | M | L | Document per-provider behavior in the guide. Add `model_capabilities` table in a follow-up. Note CLI providers never enforce (D8) — one warning log per run surfaces the fact without flooding. |
-| R-8 | Flaky tests in Phase 1 due to real CLI spawn | H | M | All provider-path tests use a `VMARK_AI_PROVIDER_OVERRIDE` env var with an `echo`-shim script under `src-tauri/test-fixtures/`. No real network calls in unit tests. |
+| R-8 | Flaky tests in Phase 1 due to real CLI spawn | H | M | All provider-path tests use a `TMARK_AI_PROVIDER_OVERRIDE` env var with an `echo`-shim script under `src-tauri/test-fixtures/`. No real network calls in unit tests. |
 | R-9 | Matrix expansion requested mid-implementation | M | L | Out of scope (documented). Accept matrix-free workflows only; error on `matrix:` key at the Rust parse step. |
 | R-10 | User enables the flag, runs a workflow on a machine with no provider installed | H | L | Provider detection already warns on startup; step-level error surfaces cleanly via R7. |
 

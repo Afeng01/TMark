@@ -1,6 +1,6 @@
 # Coding Guide
 
-This guide helps contributors understand VMark's project structure, conventions, and AI-assisted development setup.
+This guide helps contributors understand TMark's project structure, conventions, and AI-assisted development setup.
 
 ## Tech Stack
 
@@ -24,7 +24,7 @@ pnpm check:all          # Full quality gate (lint + coverage + build)
 ## Project Structure
 
 ```
-vmark/
+tmark/
 ├── src/                    # React frontend
 │   ├── components/         # UI components
 │   ├── hooks/              # Custom React hooks
@@ -37,7 +37,7 @@ vmark/
 │   └── src/                # Tauri commands, menu, plugins
 ├── shared/                 # Types shared between frontend and backend
 ├── website/                # VitePress documentation site
-├── vmark-mcp-server/       # MCP server sidecar
+├── tmark-mcp-server/       # MCP server sidecar
 ├── AGENTS.md               # AI instructions (shared across all tools)
 ├── CLAUDE.md               # Claude Code entry point
 ├── .claude/                # Claude Code configuration
@@ -101,7 +101,7 @@ This runs, in order:
 
 ## AI-Assisted Development
 
-VMark uses multiple AI coding tools. The configuration is checked into the repo so the whole team shares the same context.
+TMark uses multiple AI coding tools. The configuration is checked into the repo so the whole team shares the same context.
 
 ### Why `AGENTS.md`?
 
@@ -202,7 +202,7 @@ API keys still work as a fallback, but for regular development, subscription aut
 
 ### Using Codex as a Second Opinion
 
-VMark's `.mcp.json` registers an [OpenAI Codex](https://github.com/openai/codex) MCP server. This lets you ask Codex for help directly from Claude Code — useful as a second pair of eyes or for independent audits.
+TMark's `.mcp.json` registers an [OpenAI Codex](https://github.com/openai/codex) MCP server. This lets you ask Codex for help directly from Claude Code — useful as a second pair of eyes or for independent audits.
 
 **Prerequisite:** Install the Codex CLI globally and log in with your subscription:
 

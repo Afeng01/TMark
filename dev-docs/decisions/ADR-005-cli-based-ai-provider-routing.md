@@ -4,18 +4,18 @@
 
 ## Context
 
-VMark integrates AI capabilities for in-editor writing assistance (Genies). The
+TMark integrates AI capabilities for in-editor writing assistance (Genies). The
 app needed a way to route AI prompts to different providers (Codex CLI, Claude
 Code CLI, OpenAI API, Anthropic API) based on availability and user preference.
 
-The key constraint: VMark is a desktop app distributed outside app stores. It
+The key constraint: TMark is a desktop app distributed outside app stores. It
 cannot bundle API keys or manage OAuth flows for cloud AI services. Users
 already have CLI tools installed and authenticated on their machines.
 
 ## Considered Options
 
 1. **Direct API integration** — embed HTTP clients for OpenAI/Anthropic APIs,
-   manage API keys in VMark settings.
+   manage API keys in TMark settings.
 2. **CLI-based routing** — detect installed CLI tools (Codex, Claude Code) and
    invoke them as subprocesses, streaming results via Tauri events.
 3. **Plugin architecture** — let users install provider plugins that implement a

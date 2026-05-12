@@ -1,6 +1,6 @@
 # Lizenz
 
-VMark wird unter der **ISC-Lizenz** veröffentlicht — einer der einfachsten und permissivsten Open-Source-Lizenzen, funktional äquivalent zu MIT.
+TMark wird unter der **ISC-Lizenz** veröffentlicht — einer der einfachsten und permissivsten Open-Source-Lizenzen, funktional äquivalent zu MIT.
 
 ## Was die ISC-Lizenz erlaubt
 
@@ -42,7 +42,7 @@ PERFORMANCE OF THIS SOFTWARE.
 
 Die ISC-Lizenz ist funktional äquivalent zur MIT-Lizenz, aber mit einfacherer Sprache. Sie ist von der [Open Source Initiative (OSI)](https://opensource.org/licenses/ISC) genehmigt und ist die Standardlizenz von npm und OpenBSD.
 
-Sie wurde für VMark gewählt, weil:
+Sie wurde für TMark gewählt, weil:
 
 - **Einfachheit** — leicht zu lesen und zu verstehen
 - **Permissivität** — keine Einschränkungen bei der Nutzung der Software

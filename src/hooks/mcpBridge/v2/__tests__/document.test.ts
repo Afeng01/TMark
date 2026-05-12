@@ -1,4 +1,4 @@
-// WI-1.4 — vmark.document.{read, write, transform} including the
+// WI-1.4 — tmark.document.{read, write, transform} including the
 // load-bearing STALE-revision concurrency path (ADR-4).
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
@@ -70,7 +70,7 @@ function parseStructuredError(s: string | undefined) {
   }
 }
 
-describe("vmark.document.read", () => {
+describe("tmark.document.read", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();
@@ -116,7 +116,7 @@ describe("vmark.document.read", () => {
   });
 });
 
-describe("vmark.document.write — STALE concurrency", () => {
+describe("tmark.document.write — STALE concurrency", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();
@@ -230,7 +230,7 @@ describe("vmark.document.write — STALE concurrency", () => {
   });
 });
 
-describe("vmark.document.transform — CJK rewriter", () => {
+describe("tmark.document.transform — CJK rewriter", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();

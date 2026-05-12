@@ -1,5 +1,5 @@
 /**
- * VMark Website Custom Styles
+ * TMark Website Custom Styles
  *
  * Supports 5 themes: White, Paper, Mint, Sepia, Night
  * Default: Paper theme with blue brand color (#4a6fa5)
@@ -9,7 +9,7 @@
    BASE THEME VARIABLES (Paper - Default)
    ============================================ */
 :root {
-  /* Brand colors - VMark Blue */
+  /* Brand colors - TMark Blue */
   --vp-c-brand-1: #4a6fa5;
   --vp-c-brand-2: #5a7fb5;
   --vp-c-brand-3: #3a5f95;
@@ -66,10 +66,10 @@
   --vp-button-alt-hover-bg: #e5e4e4;
 
   /* Typography - Serif fonts with clear curly quotes (66/99 style) */
-  --vmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, serif;
-  --vmark-font-size: 17px;
-  --vmark-line-height: 1.6;
-  --vmark-paragraph-spacing: 1em;
+  --tmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, serif;
+  --tmark-font-size: 17px;
+  --tmark-line-height: 1.6;
+  --tmark-paragraph-spacing: 1em;
 }
 
 /* CJK locales: smaller base font, no italic (CJK glyphs don't have italic variants) */
@@ -78,7 +78,7 @@
 :root:lang(zh-TW),
 :root:lang(ja),
 :root:lang(ko) {
-  --vmark-font-size: 16px;
+  --tmark-font-size: 16px;
 }
 
 :root:lang(zh) .vp-doc em,
@@ -100,7 +100,7 @@
 /* ============================================
    WHITE THEME
    ============================================ */
-[data-vmark-theme="white"] {
+[data-tmark-theme="white"] {
   --vp-c-bg: #FFFFFF;
   --vp-c-bg-alt: #f8f8f8;
   --vp-c-bg-elv: #ffffff;
@@ -120,7 +120,7 @@
 /* ============================================
    PAPER THEME (Default - already set in :root)
    ============================================ */
-[data-vmark-theme="paper"] {
+[data-tmark-theme="paper"] {
   --vp-c-bg: #EEEDED;
   --vp-c-bg-alt: #e5e4e4;
   --vp-c-bg-elv: #f5f4f4;
@@ -140,7 +140,7 @@
 /* ============================================
    MINT THEME
    ============================================ */
-[data-vmark-theme="mint"] {
+[data-tmark-theme="mint"] {
   --vp-c-bg: #CCE6D0;
   --vp-c-bg-alt: #b8d9bd;
   --vp-c-bg-elv: #d8eedc;
@@ -171,7 +171,7 @@
 /* ============================================
    SEPIA THEME
    ============================================ */
-[data-vmark-theme="sepia"] {
+[data-tmark-theme="sepia"] {
   --vp-c-bg: #F9F0DB;
   --vp-c-bg-alt: #f0e5cc;
   --vp-c-bg-elv: #fdf8ea;
@@ -202,7 +202,7 @@
 /* ============================================
    NIGHT THEME
    ============================================ */
-[data-vmark-theme="night"] {
+[data-tmark-theme="night"] {
   --vp-c-bg: #23262b;
   --vp-c-bg-alt: #2a2e34;
   --vp-c-bg-elv: #2e3238;
@@ -269,40 +269,40 @@
    Latin fonts first, then platform-specific CJK fallbacks.
    ============================================ */
 :lang(zh-CN) {
-  --vmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", serif;
-  --vmark-line-height: 1.75;
+  --tmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", serif;
+  --tmark-line-height: 1.75;
 }
 
 :lang(zh-TW) {
-  --vmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", serif;
-  --vmark-line-height: 1.75;
+  --tmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", serif;
+  --tmark-line-height: 1.75;
 }
 
 :lang(ja) {
-  --vmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", "Noto Sans JP", serif;
-  --vmark-line-height: 1.75;
+  --tmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", "Noto Sans JP", serif;
+  --tmark-line-height: 1.75;
 }
 
 :lang(ko) {
-  --vmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", serif;
-  --vmark-line-height: 1.75;
+  --tmark-font-family: Charter, Palatino, "Book Antiqua", Georgia, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", serif;
+  --tmark-line-height: 1.75;
 }
 
 /* ============================================
-   TYPOGRAPHY - VMark Style
+   TYPOGRAPHY - TMark Style
    ============================================ */
 .vp-doc {
-  font-family: var(--vmark-font-family);
+  font-family: var(--tmark-font-family);
 }
 
 .vp-doc p,
 .vp-doc li {
-  font-size: var(--vmark-font-size);
-  line-height: var(--vmark-line-height);
+  font-size: var(--tmark-font-size);
+  line-height: var(--tmark-line-height);
 }
 
 .vp-doc p {
-  margin-bottom: var(--vmark-paragraph-spacing);
+  margin-bottom: var(--tmark-paragraph-spacing);
 }
 
 .vp-doc h1,
@@ -349,20 +349,20 @@
 }
 
 /* Theme-aware icon colors using CSS filter */
-[data-vmark-theme="white"] .VPFeature .box .VPImage,
-[data-vmark-theme="paper"] .VPFeature .box .VPImage {
+[data-tmark-theme="white"] .VPFeature .box .VPImage,
+[data-tmark-theme="paper"] .VPFeature .box .VPImage {
   filter: brightness(0) saturate(100%) invert(42%) sepia(15%) saturate(1095%) hue-rotate(178deg) brightness(92%) contrast(87%);
 }
 
-[data-vmark-theme="mint"] .VPFeature .box .VPImage {
+[data-tmark-theme="mint"] .VPFeature .box .VPImage {
   filter: brightness(0) saturate(100%) invert(35%) sepia(25%) saturate(800%) hue-rotate(100deg) brightness(95%) contrast(90%);
 }
 
-[data-vmark-theme="sepia"] .VPFeature .box .VPImage {
+[data-tmark-theme="sepia"] .VPFeature .box .VPImage {
   filter: brightness(0) saturate(100%) invert(30%) sepia(40%) saturate(600%) hue-rotate(350deg) brightness(95%) contrast(90%);
 }
 
-[data-vmark-theme="night"] .VPFeature .box .VPImage {
+[data-tmark-theme="night"] .VPFeature .box .VPImage {
   filter: brightness(0) saturate(100%) invert(65%) sepia(30%) saturate(600%) hue-rotate(180deg) brightness(105%) contrast(95%);
 }
 
@@ -507,7 +507,7 @@
 
 /* Dark/night themes: dark text on bright brand background */
 .dark,
-[data-vmark-theme="night"] {
+[data-tmark-theme="night"] {
   --badge-hover-text: #1a1a1a;
 }
 
@@ -620,5 +620,5 @@ a[class*="tag"]:hover {
 
 /* Mermaid diagram text smaller than paragraph text */
 .vp-doc .mermaid svg text {
-  font-size: calc(var(--vmark-font-size) * 0.8) !important;
+  font-size: calc(var(--tmark-font-size) * 0.8) !important;
 }

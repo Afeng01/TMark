@@ -1,42 +1,42 @@
-# Conversation: VMark File History & Auto-Save Strategy
+# Conversation: TMark File History & Auto-Save Strategy
 
 ---
 
 ## User
 
-Evaluate VMark's file history and auto-save strategy against industry conventions. Compare approaches for handling versioned file snapshots, auto-save intervals, and conflict resolution when the workspace is a Git repository. Recommend an architecture that avoids conflicting with Git while providing robust history recovery and doesn't duplicate version control functionality. Consider UX patterns from VSCode, Sublime Text, and JetBrains IDEs.
+Evaluate TMark's file history and auto-save strategy against industry conventions. Compare approaches for handling versioned file snapshots, auto-save intervals, and conflict resolution when the workspace is a Git repository. Recommend an architecture that avoids conflicting with Git while providing robust history recovery and doesn't duplicate version control functionality. Consider UX patterns from VSCode, Sublime Text, and JetBrains IDEs.
 
 ---
 
 ## Assistant
 
-I'll research VMark's current implementation and industry conventions in parallel.
+I'll research TMark's current implementation and industry conventions in parallel.
 
-- **Explore** (Explore VMark file history/auto-save) — *Done (38 tool uses · 116.4k tokens · 1m 28s)*
+- **Explore** (Explore TMark file history/auto-save) — *Done (38 tool uses · 116.4k tokens · 1m 28s)*
 
 - **coding-researcher** (Research industry auto-save patterns) — *Done (35 tool uses · 66.7k tokens · 4m 8s)*
 
-### Evaluation: VMark File History & Auto-Save vs. Industry Conventions
+### Evaluation: TMark File History & Auto-Save vs. Industry Conventions
 
-Xiaolai, here's a comprehensive analysis of where VMark stands and what could be improved.
+Xiaolai, here's a comprehensive analysis of where TMark stands and what could be improved.
 
 ---
 
 ### Current Architecture Summary
 
-VMark already implements a three-layer model closely mirroring VSCode's industry-leading approach:
+TMark already implements a three-layer model closely mirroring VSCode's industry-leading approach:
 
-| Layer             | VMark Implementation                                                                                                       | Industry Standard (VSCode)                                                 |
+| Layer             | TMark Implementation                                                                                                       | Industry Standard (VSCode)                                                 |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| **Hot Exit**      | Session capture/restore via Rust coordinator, stores content + undo history + cursor + UI state in `~/.vmark/session.json` | Debounced dirty-buffer backup to `Backups/` dir                            |
-| **Local History** | Full snapshots in `~/.vmark/history/{pathHash}/`, JSON index per file, count + age pruning                                 | Full snapshots in `User/History/{hash}/`, JSON index, count + merge window |
+| **Hot Exit**      | Session capture/restore via Rust coordinator, stores content + undo history + cursor + UI state in `~/.tmark/session.json` | Debounced dirty-buffer backup to `Backups/` dir                            |
+| **Local History** | Full snapshots in `~/.tmark/history/{pathHash}/`, JSON index per file, count + age pruning                                 | Full snapshots in `User/History/{hash}/`, JSON index, count + merge window |
 | **Git**           | Not managed — external changes detected via file watcher, user prompted for dirty conflicts                                | Not managed — coexists independently                                       |
 
-This is architecturally sound. VMark correctly separates concerns across the three layers, which is the consensus pattern across VSCode, JetBrains, and Sublime Text.
+This is architecturally sound. TMark correctly separates concerns across the three layers, which is the consensus pattern across VSCode, JetBrains, and Sublime Text.
 
 ---
 
-### What VMark Does Well
+### What TMark Does Well
 
 1. **Three-way conflict tracking** — `content` / `savedContent` / `lastDiskContent` is more sophisticated than most editors. This enables precise dirty detection and external change detection simultaneously.
 
@@ -67,7 +67,7 @@ else:
   → Create new snapshot
 ```
 
-Manual saves should always create a new entry (never merge). A 30-second merge window would pair well with VMark's 30-second default auto-save interval — effectively, auto-save snapshots consolidate until you stop editing, then a new snapshot starts.
+Manual saves should always create a new entry (never merge). A 30-second merge window would pair well with TMark's 30-second default auto-save interval — effectively, auto-save snapshots consolidate until you stop editing, then a new snapshot starts.
 
 #### Gap 2: No Max File Size Guard (Medium Priority)
 
@@ -77,13 +77,13 @@ Manual saves should always create a new entry (never merge). A 30-second merge w
 
 **Recommendation.** Add a `historyMaxFileSize` setting (default: 512KB, since Markdown files tend to be larger than code). Skip snapshot creation for files exceeding the threshold.
 
-#### Gap 3: History Doesn't Survive `~/.vmark/` Deletion (Low Priority)
+#### Gap 3: History Doesn't Survive `~/.tmark/` Deletion (Low Priority)
 
-**Problem.** All history is in `~/.vmark/history/`. If the user cleans up app data, everything is lost.
+**Problem.** All history is in `~/.tmark/history/`. If the user cleans up app data, everything is lost.
 
 **Industry convention.** This is actually standard — VSCode, JetBrains, and Sublime all store local history in app data directories. None of them back up history to the workspace. This is intentional: putting history in the workspace would pollute Git repos.
 
-**Recommendation.** No change needed. This is the correct behavior. Document it in user-facing help so users know not to delete `~/.vmark/` casually.
+**Recommendation.** No change needed. This is the correct behavior. Document it in user-facing help so users know not to delete `~/.tmark/` casually.
 
 #### Gap 4: No History UI Timeline Integration (Low Priority, UX Enhancement)
 
@@ -95,17 +95,17 @@ Manual saves should always create a new entry (never merge). A 30-second merge w
 
 #### Gap 5: Auto-Save Could Offer Focus-Change Mode (Low Priority)
 
-**Problem.** VMark only supports interval-based auto-save. VSCode also offers `onFocusChange` (save when switching tabs or windows) and `onWindowChange` (save when switching to another app).
+**Problem.** TMark only supports interval-based auto-save. VSCode also offers `onFocusChange` (save when switching tabs or windows) and `onWindowChange` (save when switching to another app).
 
 **Industry convention.** JetBrains saves on focus-loss + idle timeout. VSCode offers all three modes.
 
-**Recommendation.** The current interval-based approach is fine for a Markdown editor. Focus-change auto-save is more useful for code editors where you switch between editor and terminal frequently. Not a priority for VMark.
+**Recommendation.** The current interval-based approach is fine for a Markdown editor. Focus-change auto-save is more useful for code editors where you switch between editor and terminal frequently. Not a priority for TMark.
 
 ---
 
 ### Architecture Comparison Table
 
-| Aspect                        | VMark                               | VSCode                    | JetBrains                    | Sublime                     |
+| Aspect                        | TMark                               | VSCode                    | JetBrains                    | Sublime                     |
 | ----------------------------- | ----------------------------------- | ------------------------- | ---------------------------- | --------------------------- |
 | **Auto-save trigger**         | Interval (30s)                      | Delay/Focus/Window        | Idle + Events                | Focus-loss only             |
 | **Snapshot format**           | Full file + JSON index              | Full file + JSON index    | Binary changeset blob        | JSON session (full content) |

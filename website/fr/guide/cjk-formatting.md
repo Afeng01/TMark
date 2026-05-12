@@ -1,6 +1,6 @@
 # Guide de mise en forme CJK
 
-VMark inclut un ensemble complet de règles de mise en forme pour les textes chinois, japonais et coréen. Ces outils aident à maintenir une typographie cohérente lors du mélange de caractères CJK et latins.
+TMark inclut un ensemble complet de règles de mise en forme pour les textes chinois, japonais et coréen. Ces outils aident à maintenir une typographie cohérente lors du mélange de caractères CJK et latins.
 
 ## Démarrage rapide
 
@@ -62,7 +62,7 @@ Convertit les doubles tirets en tirets CJK appropriés.
 
 ### 6. Conversion des guillemets intelligents
 
-VMark utilise un **algorithme d'appariement de guillemets basé sur une pile** qui gère correctement :
+TMark utilise un **algorithme d'appariement de guillemets basé sur une pile** qui gère correctement :
 
 - **Apostrophes** : Les contractions comme `don't`, `it's`, `l'amour` sont préservées
 - **Possessifs** : `Xiaolai's` reste tel quel
@@ -124,7 +124,7 @@ Le contenu suivant **n'est pas** affecté par la mise en forme :
 
 ### Constructions techniques
 
-Le **scanner de plage latine** de VMark détecte et protège automatiquement les constructions techniques contre la conversion de ponctuation :
+Le **scanner de plage latine** de TMark détecte et protège automatiquement les constructions techniques contre la conversion de ponctuation :
 
 | Type | Exemples | Protection |
 |------|----------|------------|
@@ -200,7 +200,7 @@ Après chaque passage de mise en forme CJK, le formateur exécute une vérificat
 
 ## Espacement des lettres CJK
 
-VMark inclut une fonctionnalité d'espacement des lettres dédiée au texte CJK qui améliore la lisibilité en ajoutant un espacement subtil entre les caractères.
+TMark inclut une fonctionnalité d'espacement des lettres dédiée au texte CJK qui améliore la lisibilité en ajoutant un espacement subtil entre les caractères.
 
 ### Paramètres
 
@@ -235,7 +235,7 @@ La différence est subtile mais améliore la lisibilité, surtout pour les longs
 
 ## Styles de guillemets intelligents
 
-VMark peut automatiquement convertir les guillemets droits en guillemets typographiquement corrects. Cette fonctionnalité s'applique lors de la mise en forme CJK et prend en charge plusieurs styles de guillemets.
+TMark peut automatiquement convertir les guillemets droits en guillemets typographiquement corrects. Cette fonctionnalité s'applique lors de la mise en forme CJK et prend en charge plusieurs styles de guillemets.
 
 ### Styles de guillemets
 
@@ -247,7 +247,7 @@ VMark peut automatiquement convertir les guillemets droits en guillemets typogra
 
 ### Algorithme d'appariement basé sur une pile
 
-VMark utilise un algorithme sophistiqué basé sur une pile pour l'appariement des guillemets :
+TMark utilise un algorithme sophistiqué basé sur une pile pour l'appariement des guillemets :
 
 1. **Tokenisation** : Identifie tous les caractères de guillemets dans le texte
 2. **Classification** : Détermine si chaque guillemet est ouvrant ou fermant selon le contexte
@@ -327,7 +327,7 @@ La conversion en crochets d'angle se déclenche lorsque le contenu entre guillem
 
 ## Paragraphe de test
 
-Copiez ce texte non formaté dans VMark et appuyez sur `Alt + Mod + Shift + F` pour le formater :
+Copiez ce texte non formaté dans TMark et appuyez sur `Alt + Mod + Shift + F` pour le formater :
 
 ```text
 最近我在学习TypeScript和React,感觉收获很大.作为一个developer,掌握这些modern前端技术是必须的.

@@ -21,7 +21,7 @@ const SECONDS_PER_DAY: i64 = 86_400;
 pub struct SessionData {
     pub version: u32,
     pub timestamp: i64,
-    pub vmark_version: String,
+    pub tmark_version: String,
     pub windows: Vec<WindowState>,
     pub workspace: Option<WorkspaceState>,
 }
@@ -135,11 +135,11 @@ pub struct WorkspaceState {
 impl SessionData {
     /// Create empty session with current version (test helper)
     #[cfg(test)]
-    pub fn new(vmark_version: String) -> Self {
+    pub fn new(tmark_version: String) -> Self {
         Self {
             version: SCHEMA_VERSION,
             timestamp: chrono::Utc::now().timestamp(),
-            vmark_version,
+            tmark_version,
             windows: Vec::new(),
             workspace: None,
         }
@@ -190,7 +190,7 @@ mod tests {
         let json = serde_json::to_string(&session).unwrap();
         let deserialized: SessionData = serde_json::from_str(&json).unwrap();
         assert_eq!(session.version, deserialized.version);
-        assert_eq!(session.vmark_version, deserialized.vmark_version);
+        assert_eq!(session.tmark_version, deserialized.tmark_version);
     }
 
     #[test]

@@ -1,6 +1,6 @@
 # 媒体支持
 
-VMark 支持在 Markdown 文档中使用标准 HTML5 标签嵌入视频、音频和 YouTube 内容。
+TMark 支持在 Markdown 文档中使用标准 HTML5 标签嵌入视频、音频和 YouTube 内容。
 
 ## 支持的格式
 
@@ -68,7 +68,7 @@ VMark 支持在 Markdown 文档中使用标准 HTML5 标签嵌入视频、音频
 <iframe src="https://player.vimeo.com/video/VIDEO_ID" width="560" height="315" frameborder="0" allowfullscreen></iframe>
 ```
 
-你也可以直接粘贴 Vimeo URL（例如 `https://vimeo.com/123456789`），VMark 会自动将其转换为嵌入代码。
+你也可以直接粘贴 Vimeo URL（例如 `https://vimeo.com/123456789`），TMark 会自动将其转换为嵌入代码。
 
 ### Bilibili 嵌入
 
@@ -78,11 +78,11 @@ VMark 支持在 Markdown 文档中使用标准 HTML5 标签嵌入视频、音频
 <iframe src="https://player.bilibili.com/player.html?bvid=BV1xxxxxxxxx" width="560" height="350" frameborder="0" allowfullscreen></iframe>
 ```
 
-粘贴 Bilibili 视频 URL（例如 `https://bilibili.com/video/BV1xxxxxxxxx`），VMark 会自动将其转换为嵌入代码。请注意，短链接（`b23.tv`）不受支持，因为需要重定向解析。
+粘贴 Bilibili 视频 URL（例如 `https://bilibili.com/video/BV1xxxxxxxxx`），TMark 会自动将其转换为嵌入代码。请注意，短链接（`b23.tv`）不受支持，因为需要重定向解析。
 
 ### 图片语法回退
 
-你也可以使用带有媒体文件扩展名的图片语法——VMark 会自动将其提升为正确的媒体类型：
+你也可以使用带有媒体文件扩展名的图片语法——TMark 会自动将其提升为正确的媒体类型：
 
 ```markdown
 ![](video.mp4)
@@ -98,11 +98,11 @@ VMark 支持在 Markdown 文档中使用标准 HTML5 标签嵌入视频、音频
 - **视频**——打开视频文件选择器，将文件复制到 `.assets/`，并插入 `<video>` 标签
 - **音频**——打开音频文件选择器，将文件复制到 `.assets/`，并插入 `<audio>` 标签
 - **YouTube**——从剪贴板读取 YouTube URL 并插入隐私增强型嵌入代码
-- **Vimeo** 和 **Bilibili**——直接在编辑器中粘贴视频 URL，VMark 会自动识别平台
+- **Vimeo** 和 **Bilibili**——直接在编辑器中粘贴视频 URL，TMark 会自动识别平台
 
 ### 拖放
 
-将视频或音频文件从文件系统直接拖入编辑器。VMark 会：
+将视频或音频文件从文件系统直接拖入编辑器。TMark 会：
 
 1. 将文件复制到文档的 `.assets/` 文件夹
 2. 插入带有相对路径的相应媒体节点
@@ -130,7 +130,7 @@ VMark 支持在 Markdown 文档中使用标准 HTML5 标签嵌入视频、音频
 
 ## 路径解析
 
-VMark 支持三种媒体路径类型：
+TMark 支持三种媒体路径类型：
 
 | 路径类型 | 示例 | 行为 |
 |----------|------|------|

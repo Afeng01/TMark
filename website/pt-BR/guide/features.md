@@ -1,6 +1,6 @@
 # Recursos
 
-O VMark é um editor Markdown repleto de recursos projetado para fluxos de trabalho de escrita modernos. Veja o que está incluído.
+O TMark é um editor Markdown repleto de recursos projetado para fluxos de trabalho de escrita modernos. Veja o que está incluído.
 
 [[toc]]
 
@@ -59,7 +59,7 @@ O Peek de Fonte é útil para edição precisa de Markdown (corrigindo sintaxe d
 
 ## Edição com Múltiplos Cursores
 
-Edite vários locais simultaneamente — o VMark suporta múltiplos cursores completos nos modos WYSIWYG e Fonte.
+Edite vários locais simultaneamente — o TMark suporta múltiplos cursores completos nos modos WYSIWYG e Fonte.
 
 | Ação | Atalho |
 |------|--------|
@@ -77,7 +77,7 @@ Toda a edição padrão (digitação, exclusão, área de transferência, navega
 
 ## Auto-Par e Escape de Tab
 
-Quando você digita um parêntese de abertura, aspas ou acento grave, o VMark insere automaticamente o par de fechamento. Pressione **Tab** para pular o caractere de fechamento em vez de usar a tecla de seta.
+Quando você digita um parêntese de abertura, aspas ou acento grave, o TMark insere automaticamente o par de fechamento. Pressione **Tab** para pular o caractere de fechamento em vez de usar a tecla de seta.
 
 - Parênteses: `()` `[]` `{}`
 - Aspas: `""` `''` `` ` ` ``
@@ -125,7 +125,7 @@ Altere rapidamente o caso do texto via Formatar → Transformar:
 ### Quebras de Linha Duras
 
 Pressione `Shift + Enter` para inserir uma quebra de linha dura dentro de um parágrafo.
-O VMark usa o estilo de dois espaços por padrão para máxima compatibilidade.
+O TMark usa o estilo de dois espaços por padrão para máxima compatibilidade.
 Configure em **Configurações > Editor > Espaços em Branco**.
 
 ### Operações de Linha
@@ -270,7 +270,7 @@ Clique no chevron de expansão na barra de pesquisa para revelar a linha de subs
 
 ## Lint de Markdown
 
-O VMark inclui um linter de Markdown integrado que verifica seu documento em busca de erros de sintaxe comuns e problemas de acessibilidade. Habilite em **Configurações > Markdown > Lint**.
+O TMark inclui um linter de Markdown integrado que verifica seu documento em busca de erros de sintaxe comuns e problemas de acessibilidade. Habilite em **Configurações > Markdown > Lint**.
 
 **Como usar:**
 
@@ -311,7 +311,7 @@ Uma barra de ferramentas de formatação ancorada na parte inferior do editor, f
 
 ## Opções de Exportação
 
-O VMark oferece opções flexíveis de exportação para compartilhar seus documentos.
+O TMark oferece opções flexíveis de exportação para compartilhar seus documentos.
 
 ### Exportação HTML
 
@@ -320,7 +320,7 @@ Exportar para HTML autônomo com dois modos de empacotamento:
 - **Modo pasta** (padrão): Cria `Documento/index.html` com ativos em uma subpasta
 - **Modo arquivo único**: Cria um arquivo `.html` autocontido com imagens incorporadas
 
-O HTML exportado inclui o [**VMark Reader**](/pt-BR/guide/export#vmark-reader) — controles interativos para configurações, sumário, lightbox de imagens e mais.
+O HTML exportado inclui o [**TMark Reader**](/pt-BR/guide/export#tmark-reader) — controles interativos para configurações, sumário, lightbox de imagens e mais.
 
 [Saiba mais sobre exportação →](/pt-BR/guide/export)
 
@@ -352,7 +352,7 @@ Ferramentas de formatação de texto em Chinês/Japonês/Coreano integradas:
 
 ## Histórico de Documentos
 
-O VMark salva automaticamente snapshots dos seus documentos para que você possa recuperar versões anteriores.
+O TMark salva automaticamente snapshots dos seus documentos para que você possa recuperar versões anteriores.
 
 - **Salvamento automático** com intervalo configurável captura snapshots em segundo plano
 - **Histórico por documento** armazenado localmente em formato JSONL
@@ -366,7 +366,7 @@ O VMark salva automaticamente snapshots dos seus documentos para que você possa
 
 ## Recuperação de Sessão (Hot Exit)
 
-Quando você sai do VMark ou ele fecha inesperadamente, sua sessão é preservada e restaurada no próximo lançamento.
+Quando você sai do TMark ou ele fecha inesperadamente, sua sessão é preservada e restaurada no próximo lançamento.
 
 **O que é salvo:**
 - Todas as abas abertas e seu conteúdo (incluindo alterações não salvas)
@@ -376,7 +376,7 @@ Quando você sai do VMark ou ele fecha inesperadamente, sua sessão é preservad
 - Área de trabalho ativa e configurações do explorador de arquivos
 
 **Como funciona:**
-- Ao sair, o VMark captura o estado completo da sessão de todas as janelas
+- Ao sair, o TMark captura o estado completo da sessão de todas as janelas
 - Ao relançar, as abas são restauradas exatamente como você as deixou, com documentos modificados (não salvos) marcados adequadamente
 - A recuperação de falhas é executada automaticamente após uma saída inesperada, restaurando documentos a partir de snapshots de recuperação periódicos
 - Snapshots de recuperação com mais de 7 dias são limpos automaticamente
@@ -428,7 +428,7 @@ O zoom altera o tamanho da fonte do editor em incrementos de 2px (faixa: 12px a 
 
 ## Utilitários de Texto
 
-O VMark inclui utilitários para limpeza e formatação de texto, disponíveis no menu Formatar:
+O TMark inclui utilitários para limpeza e formatação de texto, disponíveis no menu Formatar:
 
 ### Limpeza de Texto (Formatar → Limpeza de Texto)
 
@@ -449,7 +449,7 @@ Painel de terminal integrado com múltiplas sessões, copiar/colar, pesquisa, ca
 
 ## Atualização Automática
 
-O VMark verifica atualizações automaticamente e pode baixar e instalar dentro do aplicativo:
+O TMark verifica atualizações automaticamente e pode baixar e instalar dentro do aplicativo:
 
 - Verificação automática de atualizações ao iniciar
 - Instalação de atualização com um clique
@@ -504,7 +504,7 @@ Todos os atalhos são personalizáveis em Configurações → Atalhos.
 
 ## Detalhes Técnicos
 
-O VMark é construído com tecnologia moderna:
+O TMark é construído com tecnologia moderna:
 
 | Componente | Tecnologia |
 |-----------|------------|

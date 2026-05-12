@@ -122,7 +122,7 @@ failing scenario has a clear, well-understood fix.
 3. **Stress test with multiple fences** in one document — the spike used
    one fence; a doc with 5 fences should be re-tested for cumulative
    listener behavior.
-4. **Test under VMark's actual Tiptap layer** (this spike used raw
+4. **Test under TMark's actual Tiptap layer** (this spike used raw
    ProseMirror). Tiptap adds its own NodeView wrapping; verify that wrap
    doesn't reintroduce listener leaks.
 5. **Test on a real touch device** (macOS Magic Trackpad / iPad

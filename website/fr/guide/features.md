@@ -1,6 +1,6 @@
 # Fonctionnalités
 
-VMark est un éditeur Markdown riche en fonctionnalités conçu pour les flux de travail d'écriture modernes. Voici ce qui est inclus.
+TMark est un éditeur Markdown riche en fonctionnalités conçu pour les flux de travail d'écriture modernes. Voici ce qui est inclus.
 
 [[toc]]
 
@@ -59,7 +59,7 @@ L'Aperçu source est utile pour l'édition précise de Markdown (correction de l
 
 ## Édition multi-curseur
 
-Modifiez plusieurs emplacements simultanément — VMark prend en charge le multi-curseur complet en mode WYSIWYG et Source.
+Modifiez plusieurs emplacements simultanément — TMark prend en charge le multi-curseur complet en mode WYSIWYG et Source.
 
 | Action | Raccourci |
 |--------|----------|
@@ -77,7 +77,7 @@ Toutes les éditions standard (frappe, suppression, presse-papiers, navigation) 
 
 ## Auto-paire et échappement par Tab
 
-Quand vous tapez un crochet ouvrant, une guillemet ou un accent grave, VMark insère automatiquement le caractère fermant correspondant. Appuyez sur **Tab** pour sauter après le caractère fermant au lieu d'utiliser la touche flèche.
+Quand vous tapez un crochet ouvrant, une guillemet ou un accent grave, TMark insère automatiquement le caractère fermant correspondant. Appuyez sur **Tab** pour sauter après le caractère fermant au lieu d'utiliser la touche flèche.
 
 - Crochets : `()` `[]` `{}`
 - Guillemets : `""` `''` `` ` ` ``
@@ -125,7 +125,7 @@ Changez rapidement la casse via Format → Transformer :
 ### Sauts de ligne forcés
 
 Appuyez sur `Shift + Entrée` pour insérer un saut de ligne forcé dans un paragraphe.
-VMark utilise le style deux espaces par défaut pour une compatibilité maximale.
+TMark utilise le style deux espaces par défaut pour une compatibilité maximale.
 Configurez dans **Paramètres > Éditeur > Espaces**.
 
 ### Opérations sur les lignes
@@ -270,7 +270,7 @@ Cliquez sur le chevron d'expansion de la barre de recherche pour révéler la li
 
 ## Lint Markdown
 
-VMark intègre un linter Markdown qui vérifie votre document pour détecter les erreurs de syntaxe courantes et les problèmes d'accessibilité. Activez-le dans **Paramètres > Markdown > Lint**.
+TMark intègre un linter Markdown qui vérifie votre document pour détecter les erreurs de syntaxe courantes et les problèmes d'accessibilité. Activez-le dans **Paramètres > Markdown > Lint**.
 
 **Utilisation :**
 
@@ -311,7 +311,7 @@ Une barre d'outils de mise en forme ancrée en bas de l'éditeur, offrant un acc
 
 ## Options d'exportation
 
-VMark offre des options d'exportation flexibles pour partager vos documents.
+TMark offre des options d'exportation flexibles pour partager vos documents.
 
 ### Export HTML
 
@@ -320,7 +320,7 @@ Exportez vers du HTML autonome avec deux modes d'empaquetage :
 - **Mode dossier** (par défaut) : Crée `Document/index.html` avec les ressources dans un sous-dossier
 - **Mode fichier unique** : Crée un fichier `.html` autonome avec des images intégrées
 
-L'HTML exporté inclut le [**Lecteur VMark**](/fr/guide/export#vmark-reader) — des contrôles interactifs pour les paramètres, la table des matières, la visionneuse d'images et plus encore.
+L'HTML exporté inclut le [**Lecteur TMark**](/fr/guide/export#tmark-reader) — des contrôles interactifs pour les paramètres, la table des matières, la visionneuse d'images et plus encore.
 
 [En savoir plus sur l'exportation →](/fr/guide/export)
 
@@ -352,7 +352,7 @@ Outils de mise en forme de texte chinois/japonais/coréen intégrés :
 
 ## Historique du document
 
-VMark sauvegarde automatiquement des instantanés de vos documents afin que vous puissiez récupérer des versions antérieures.
+TMark sauvegarde automatiquement des instantanés de vos documents afin que vous puissiez récupérer des versions antérieures.
 
 - **Sauvegarde automatique** avec intervalle configurable capture des instantanés en arrière-plan
 - **Historique par document** stocké localement au format JSONL
@@ -366,7 +366,7 @@ VMark sauvegarde automatiquement des instantanés de vos documents afin que vous
 
 ## Récupération de session (Hot Exit)
 
-Lorsque vous quittez VMark ou qu'il se ferme de manière inattendue, votre session est préservée et restaurée au prochain lancement.
+Lorsque vous quittez TMark ou qu'il se ferme de manière inattendue, votre session est préservée et restaurée au prochain lancement.
 
 **Ce qui est sauvegardé :**
 - Tous les onglets ouverts et leur contenu (y compris les modifications non enregistrées)
@@ -376,7 +376,7 @@ Lorsque vous quittez VMark ou qu'il se ferme de manière inattendue, votre sessi
 - Espace de travail actif et paramètres de l'explorateur de fichiers
 
 **Fonctionnement :**
-- À la fermeture, VMark capture l'état complet de la session de toutes les fenêtres
+- À la fermeture, TMark capture l'état complet de la session de toutes les fenêtres
 - Au relancement, les onglets sont restaurés exactement comme vous les avez laissés, les documents modifiés (non enregistrés) étant marqués en conséquence
 - La récupération après plantage s'exécute automatiquement après une fermeture inattendue, restaurant les documents à partir d'instantanés de récupération périodiques
 - Les instantanés de récupération de plus de 7 jours sont nettoyés automatiquement
@@ -428,7 +428,7 @@ Le zoom modifie la taille de police de l'éditeur par incréments de 2px (plage 
 
 ## Utilitaires de texte
 
-VMark inclut des utilitaires pour le nettoyage et la mise en forme du texte, disponibles dans le menu Format :
+TMark inclut des utilitaires pour le nettoyage et la mise en forme du texte, disponibles dans le menu Format :
 
 ### Nettoyage du texte (Format → Nettoyage du texte)
 
@@ -449,7 +449,7 @@ Panneau terminal intégré avec plusieurs sessions, copier/coller, recherche, ch
 
 ## Mise à jour automatique
 
-VMark vérifie automatiquement les mises à jour et peut les télécharger et les installer dans l'application :
+TMark vérifie automatiquement les mises à jour et peut les télécharger et les installer dans l'application :
 
 - Vérification automatique des mises à jour au lancement
 - Installation des mises à jour en un clic
@@ -504,7 +504,7 @@ Tous les raccourcis sont personnalisables dans Paramètres → Raccourcis.
 
 ## Détails techniques
 
-VMark est construit avec des technologies modernes :
+TMark est construit avec des technologies modernes :
 
 | Composant | Technologie |
 |-----------|------------|

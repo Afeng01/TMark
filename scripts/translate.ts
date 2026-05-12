@@ -132,7 +132,7 @@ async function callClaude(systemPrompt: string, userMessage: string): Promise<st
 function buildJsonSystemPrompt(lang: string): string {
   const langName = getLanguageName(lang);
   return [
-    `You are an expert localizer for VMark — a desktop Markdown editor built with Tauri and React.`,
+    `You are an expert localizer for TMark — a desktop Markdown editor built with Tauri and React.`,
     ``,
     `Your task is to translate English UI strings into ${langName} (language code: ${lang}).`,
     ``,
@@ -192,7 +192,7 @@ async function translateJsonContent(
 function buildYamlSystemPrompt(lang: string): string {
   const langName = getLanguageName(lang);
   return [
-    `You are an expert localizer for VMark — a desktop Markdown editor built with Tauri and React.`,
+    `You are an expert localizer for TMark — a desktop Markdown editor built with Tauri and React.`,
     ``,
     `Your task is to translate English UI strings in a YAML locale file into ${langName} (language code: ${lang}).`,
     ``,
@@ -414,7 +414,7 @@ async function main(): Promise<void> {
   }
 
   const langName = getLanguageName(args.lang);
-  console.log(`\nVMark i18n Translation`);
+  console.log(`\nTMark i18n Translation`);
   console.log(`  Language : ${args.lang} — ${langName}`);
   console.log(`  Source   : ${args.source}`);
   console.log(`  Target   : ${args.target}`);

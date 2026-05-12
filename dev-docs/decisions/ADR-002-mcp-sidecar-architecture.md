@@ -4,7 +4,7 @@
 
 ## Context
 
-VMark needed to expose editor capabilities to external AI clients (Claude
+TMark needed to expose editor capabilities to external AI clients (Claude
 Desktop, Cursor, etc.) via the Model Context Protocol (MCP). MCP servers are
 typically long-running Node.js processes that communicate over stdio. Tauri apps
 run a Rust backend — embedding a Node.js MCP server inside the Rust process was
@@ -20,12 +20,12 @@ not feasible without a JS runtime dependency.
 
 ## Decision
 
-Chosen: **Node.js sidecar** (`vmark-mcp-server/`), because MCP's ecosystem is
+Chosen: **Node.js sidecar** (`tmark-mcp-server/`), because MCP's ecosystem is
 JavaScript-first and a sidecar cleanly separates concerns.
 
 Architecture:
 
-- The MCP sidecar (`vmark-mcp-server`) handles stdio transport and tool
+- The MCP sidecar (`tmark-mcp-server`) handles stdio transport and tool
   registration per the MCP spec.
 - A WebSocket bridge connects the sidecar to the Tauri backend
   (`mcp_bridge.rs`), which manages port discovery and connection lifecycle.

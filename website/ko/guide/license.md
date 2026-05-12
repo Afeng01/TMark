@@ -1,6 +1,6 @@
 # 라이선스
 
-VMark는 **ISC 라이선스** — 가장 간단하고 허용적인 오픈 소스 라이선스 중 하나로, 기능적으로 MIT와 동일한 라이선스 — 로 출시됩니다.
+TMark는 **ISC 라이선스** — 가장 간단하고 허용적인 오픈 소스 라이선스 중 하나로, 기능적으로 MIT와 동일한 라이선스 — 로 출시됩니다.
 
 ## ISC 라이선스가 허용하는 것
 
@@ -42,7 +42,7 @@ PERFORMANCE OF THIS SOFTWARE.
 
 ISC 라이선스는 더 간단한 문구로 MIT 라이선스와 기능적으로 동일합니다. [Open Source Initiative (OSI)](https://opensource.org/licenses/ISC)의 승인을 받았으며 npm과 OpenBSD에서 기본 라이선스로 사용됩니다.
 
-VMark에 이 라이선스를 선택한 이유:
+TMark에 이 라이선스를 선택한 이유:
 
 - **단순성** — 읽고 이해하기 쉬움
 - **허용성** — 소프트웨어 사용 방법에 대한 제한 없음

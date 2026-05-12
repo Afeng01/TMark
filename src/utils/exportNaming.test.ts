@@ -506,10 +506,10 @@ Programming is a valuable skill...`;
     });
 
     it("handles README with project name", () => {
-      const md = `# VMark
+      const md = `# TMark
 
 A markdown editor for macOS.`;
-      expect(getExportFolderName(md, "/Users/dev/vmark/README.md")).toBe("VMark");
+      expect(getExportFolderName(md, "/Users/dev/tmark/README.md")).toBe("TMark");
     });
 
     it("handles document with long title", () => {

@@ -23,7 +23,7 @@ fixture corpus.
 
 ## Method
 
-7 fixture workflows from VMark's own `.github/workflows/`:
+7 fixture workflows from TMark's own `.github/workflows/`:
 - `ci.yml` (4 jobs, 16 steps, 1 matrix dim)
 - `claude.yml` (4 jobs, 17 steps)
 - `release.yml` (3 jobs, 26 steps)
@@ -113,9 +113,9 @@ ERR_IMPORT_ATTRIBUTE_MISSING: Module ".../workflow-v1.0.min.json" needs
 an import attribute of "type: json"
 ```
 
-**Impact in production (VMark):**
+**Impact in production (TMark):**
 - **Vite** transparently transforms JSON imports — no issue at build time.
-- The parser will Just Work in VMark's webview, both dev (`vite`) and prod
+- The parser will Just Work in TMark's webview, both dev (`vite`) and prod
   bundles.
 
 **Impact in test/CI:**

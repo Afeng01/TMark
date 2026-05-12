@@ -24,13 +24,13 @@ sed -i '' 's/"version": "[^"]*"/"version": "'$VERSION'"/' src-tauri/tauri.conf.j
 sed -i '' 's/^version = "[^"]*"/version = "'$VERSION'"/' src-tauri/Cargo.toml
 
 # MCP server files
-sed -i '' 's/"version": "[^"]*"/"version": "'$VERSION'"/' vmark-mcp-server/package.json
-sed -i '' "s/const VERSION = '[^']*'/const VERSION = '$VERSION'/" vmark-mcp-server/src/cli.ts
+sed -i '' 's/"version": "[^"]*"/"version": "'$VERSION'"/' tmark-mcp-server/package.json
+sed -i '' "s/const VERSION = '[^']*'/const VERSION = '$VERSION'/" tmark-mcp-server/src/cli.ts
 
 echo ""
 echo "Updated:"
-grep '"version"' package.json src-tauri/tauri.conf.json vmark-mcp-server/package.json
+grep '"version"' package.json src-tauri/tauri.conf.json tmark-mcp-server/package.json
 grep '^version' src-tauri/Cargo.toml
-grep 'const VERSION' vmark-mcp-server/src/cli.ts
+grep 'const VERSION' tmark-mcp-server/src/cli.ts
 echo ""
 echo "Done! Ready to commit."

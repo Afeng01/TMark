@@ -1,9 +1,9 @@
 ---
 name: translate-docs
-description: Translate VMark documentation and app strings to all 9 supported locales with subagent-driven audit, proofreading, and cultural polish. Use when adding or updating website pages, React locale JSON (src/locales/en/*.json), or Rust locale YAML (src-tauri/locales/en.yml) that need multi-language support.
+description: Translate TMark documentation and app strings to all 9 supported locales with subagent-driven audit, proofreading, and cultural polish. Use when adding or updating website pages, React locale JSON (src/locales/en/*.json), or Rust locale YAML (src-tauri/locales/en.yml) that need multi-language support.
 ---
 
-# VMark Translation
+# TMark Translation
 
 Two modes share the same 9 locales, the same subagent pipeline, and the same cultural rules:
 
@@ -60,14 +60,14 @@ Dispatch **up to 9 translation subagents in parallel** — one per locale. Each 
 
 1. **Translate all prose** — headings, paragraphs, list items, block quotes, alert blocks
 2. **Preserve markdown structure exactly** — headings levels, link URLs, code blocks, tables, images, front matter
-3. **Keep technical terms in English** — product names (VMark, Tauri, ProseMirror, Tiptap, CodeMirror, Mermaid, Vitest), programming terms in code context (LOC, TDD, CI/CD, API, MCP), file paths, command names
+3. **Keep technical terms in English** — product names (TMark, Tauri, ProseMirror, Tiptap, CodeMirror, Mermaid, Vitest), programming terms in code context (LOC, TDD, CI/CD, API, MCP), file paths, command names
 4. **Translate table headers and cell text** — but keep code/numbers as-is
 5. **Translate VitePress containers** — `::: info`, `::: tip`, `::: warning` labels stay as-is (VitePress renders them), but translate the content inside
 6. **Adapt culturally** — don't just word-swap. Use natural phrasing. Examples:
    - "TL;DR" → "太长不看版" (zh-CN), "要約" (ja), "요약" (ko)
    - "out of the box" → use the local idiom, not a literal translation
    - Currency/number formatting: use locale conventions in prose (but keep raw numbers in tables/code)
-7. **Em-dash spacing** — follow VMark convention: `word — word` with spaces in English/European locales. CJK locales use `——` (double em-dash) without spaces.
+7. **Em-dash spacing** — follow TMark convention: `word — word` with spaces in English/European locales. CJK locales use `——` (double em-dash) without spaces.
 
 **Additional CJK Rules (zh-CN, zh-TW, ja, ko):**
 
@@ -88,7 +88,7 @@ After all translations are written, dispatch **audit subagents in parallel** —
    - Untranslated fragments left behind
    - Meaning drift or mistranslation
    - Broken markdown (unclosed links, malformed tables, wrong heading levels)
-   - Links that should point to the locale version (e.g., `/guide/foo` → `/{locale}/guide/foo` if the site uses locale-prefixed links — note: VMark VitePress does NOT prefix internal links, so keep them as-is)
+   - Links that should point to the locale version (e.g., `/guide/foo` → `/{locale}/guide/foo` if the site uses locale-prefixed links — note: TMark VitePress does NOT prefix internal links, so keep them as-is)
    - Grammar and fluency issues
    - CJK formatting violations (for CJK locales):
      - Missing spaces between CJK and Latin/numbers
@@ -211,7 +211,7 @@ Sync newly-added keys across all locale files for the React frontend (`src/local
    - i18next: `{{name}}` — double-brace, lowercase names
    - rust-i18n: `%{name}` — percent-brace, lowercase names
    - Plural markers (`_one`, `_plural`) — keep the suffix in the key; translate the value appropriately.
-4. **Technical tokens stay English.** Product and protocol names inside strings: `Pandoc`, `Markdown`, `VMark`, `MCP`, `YAML`, `HTML`, `PDF`, keyboard shortcuts like `Cmd+S`, file extensions like `.pdf`.
+4. **Technical tokens stay English.** Product and protocol names inside strings: `Pandoc`, `Markdown`, `TMark`, `MCP`, `YAML`, `HTML`, `PDF`, keyboard shortcuts like `Cmd+S`, file extensions like `.pdf`.
 5. **Structure preservation.** JSON remains valid (2-space indent, trailing newline). YAML preserves comments and whitespace around the new block.
 
 ### Workflow
@@ -275,13 +275,13 @@ Same as docs mode: natural phrasing, idiomatic adjustments, consistent terminolo
 You are a professional technical translator.
 Translate these application UI strings from English to {LANGUAGE} ({LOCALE_CODE}).
 
-CONTEXT: These are UI strings for VMark, a markdown editor. The existing
+CONTEXT: These are UI strings for TMark, a markdown editor. The existing
 {LANGUAGE} locale file has {N} existing translations — I've included it
 below so you can match its style and terminology.
 
 RULES:
 1. Preserve placeholders exactly: {{name}}, %{name}
-2. Keep English technical terms: Pandoc, Markdown, VMark, MCP, YAML, HTML, PDF,
+2. Keep English technical terms: Pandoc, Markdown, TMark, MCP, YAML, HTML, PDF,
    keyboard shortcuts (Cmd+S), file extensions (.pdf)
 3. Match the register and punctuation style of existing entries
 4. UI strings — aim for similar visual weight; don't let a button label balloon

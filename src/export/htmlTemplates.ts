@@ -61,7 +61,7 @@ export function generateIndexHtml(
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(title)}</title>
   ${katexLink}
-  <link rel="stylesheet" href="assets/vmark-reader.css">
+  <link rel="stylesheet" href="assets/tmark-reader.css">
   <style>
 ${inlineStyles}
   </style>
@@ -72,7 +72,7 @@ ${inlineStyles}
 ${content}
     </div>
   </div>
-  <script src="assets/vmark-reader.js"></script>
+  <script src="assets/tmark-reader.js"></script>
 </body>
 </html>`;
 }
@@ -99,7 +99,7 @@ export function generateStandaloneHtml(
     `/* Theme Variables */\n${themeCSS}`,
     `/* Fonts */\n${fontCSS}`,
     `/* Content Styles */\n${contentCSS}`,
-    `/* VMark Reader */\n${readerCSS}`,
+    `/* TMark Reader */\n${readerCSS}`,
   ].filter(s => s.trim()).join("\n\n");
 
   const themeClass = isDark ? "dark-theme" : "";

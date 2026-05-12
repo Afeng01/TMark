@@ -1,7 +1,7 @@
 # Large-File Open UX Plan — 2026-04-22
 
 Branch: `feat/large-file-ux`
-Worktree: `/Users/joker/github/xiaolai/myprojects/vmark-largefile`
+Worktree: `/Users/joker/github/xiaolai/myprojects/tmark-largefile`
 
 **Revision note (2026-04-22, post-Codex review):** Re-sequenced so the Source-mode path ships **first** (highest value per day). Progress indicator collapsed to a single indeterminate state. The deferred-NodeView work is gated behind a real profile and is NOT committed in this plan — Mermaid/LaTeX/Markmap/SVG previews already render via async widget decorations (`src/plugins/codePreview/renderers/`), so that avenue is partly already taken.
 
@@ -68,7 +68,7 @@ The byte thresholds below are **proxies** for block count — the real bottlenec
 | `WARN_BEFORE_OPEN_BYTES`    |    5 MB | At/above this, show a pre-open warning dialog                                                          | Yes (setting)   |
 | `HARD_REFUSE_BYTES`         |   50 MB | At/above this, refuse entirely (no WYSIWYG, Source only, no warning path — the refusal IS the warning) | No              |
 
-The `50 MB` hard refuse is a liability floor: even Source mode is unsafe for multi-hundred-MB files (JS string allocation can OOM the webview). Above this cap, the user sees a clear error-style dialog: *"Files above 50 MB cannot be opened in VMark. Use a line-oriented editor like **`less`** or **`bat`**."*
+The `50 MB` hard refuse is a liability floor: even Source mode is unsafe for multi-hundred-MB files (JS string allocation can OOM the webview). Above this cap, the user sees a clear error-style dialog: *"Files above 50 MB cannot be opened in TMark. Use a line-oriented editor like **`less`** or **`bat`**."*
 
 Centralized in `src/utils/fileSizeThresholds.ts`:
 
@@ -184,7 +184,7 @@ Register in `lib.rs`; add `file_ops:allow-get-file-size-bytes` permission to `sr
 
 1. `dialog.largeFile.warnTitle` → `"Open {filename}?"`
 2. `dialog.largeFile.warnBody` → `"This file is {size}. It will open in Source mode — WYSIWYG is disabled for files this large."`
-3. `dialog.largeFile.refuseBody` → `"Files above {limit} cannot be opened in VMark. Use a line-oriented tool such as less, bat, or grep."`
+3. `dialog.largeFile.refuseBody` → `"Files above {limit} cannot be opened in TMark. Use a line-oriented tool such as less, bat, or grep."`
 4. `statusBar.largeFile.switchToWysiwyg` → `"Opened in Source mode (large file). Switch to WYSIWYG"` (the last 4 words are the link)
 
 ### Acceptance criteria
@@ -297,7 +297,7 @@ These are NOT the bottleneck. Any "deferred NodeView upgrade" scheme targeting t
 
 ### What we would need before committing any Phase C work
 
-A **native Tauri perf profile** of the 1.4 MB WYSIWYG mount, attributing the 15.5 s to concrete call sites. Note: **do not use Chrome DevTools MCP** — VMark is a Tauri app, not a browser app, and per `AGENTS.md` we measure in the running Tauri webview. Use:
+A **native Tauri perf profile** of the 1.4 MB WYSIWYG mount, attributing the 15.5 s to concrete call sites. Note: **do not use Chrome DevTools MCP** — TMark is a Tauri app, not a browser app, and per `AGENTS.md` we measure in the running Tauri webview. Use:
 
 - `performance.mark()` / `performance.measure()` around the suspect code paths in `TiptapEditor.tsx`, `parseMarkdown`, and `editorPlugins.tiptap.ts`.
 - Extract measurements via MCP: `performance.getEntriesByType("measure")`.
@@ -326,7 +326,7 @@ Deliverables:
 
 1. **Corpus generator** — `scripts/gen-large-fixture.ts` that produces a deterministic N-block markdown file from a seed. Output goes to a gitignored `tmp/` directory (corpus is too large to commit).
 2. **Harness** — `scripts/measure-open-latency.ts` driven by the Tauri MCP. For a given fixture path, it:
-   - spawns a fresh VMark window with the file,
+   - spawns a fresh TMark window with the file,
    - collects `performance.getEntriesByType("measure")` at reliable checkpoints (post-mount, post-first-transaction),
    - writes a JSON report to `tmp/perf/`.
 3. **Manual gate** — documented steps in `dev-docs/large-file-perf-qa.md` (local, not website) for running the harness before shipping each phase.
@@ -337,7 +337,7 @@ This is NOT wired into `pnpm check:all` (too slow, too environmental). It IS a m
 
 - Every phase includes RED-first tests per `.claude/rules/10-tdd.md`.
 - No phase ships without `pnpm check:all` green.
-- The 1.4 MB test fixture is not in the repo. Benchmarks use `VMARK_BENCH_LARGE_FILE` env var (already implemented). The perf harness above generates deterministic fixtures on demand.
+- The 1.4 MB test fixture is not in the repo. Benchmarks use `TMARK_BENCH_LARGE_FILE` env var (already implemented). The perf harness above generates deterministic fixtures on demand.
 - **Test honesty:** the Zustand/boundary/ARIA tests in each phase are wiring correctness tests, not perf regression tests. Perf regressions are caught by the harness above. This plan does not pretend otherwise.
 
 ### i18n
@@ -362,7 +362,7 @@ No feature flags. Thresholds are conservative; if 1 MB proves too low we raise i
 
 ### Telemetry
 
-None. VMark does not collect usage metrics; we measure our own perf via the benchmark suite + perf harness above.
+None. TMark does not collect usage metrics; we measure our own perf via the benchmark suite + perf harness above.
 
 ---
 
@@ -395,7 +395,7 @@ Numbers under "After A" and "After A+B" are **targets validated by the perf harn
 
 - ProseMirror's `EditorView` assumes the full DOM mirrors the document. Virtualization breaks selection mapping, contenteditable semantics, find-across-doc.
 - Community plugins (`prosemirror-virtual-scroll`) are immature and unmaintained.
-- Notion's virtualization took engineering-years; VMark is too small for that investment without proven demand.
+- Notion's virtualization took engineering-years; TMark is too small for that investment without proven demand.
 
 Not ruled out forever — just deferred. Source mode already delivers the practical benefit (sub-second open) for the use case users actually report.
 

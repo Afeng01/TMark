@@ -1,6 +1,6 @@
 # Terminal Integrado
 
-VMark incluye un panel de terminal integrado para que puedas ejecutar comandos sin salir del editor.
+TMark incluye un panel de terminal integrado para que puedas ejecutar comandos sin salir del editor.
 
 Presiona `` Ctrl + ` `` para alternar el panel del terminal.
 
@@ -61,13 +61,13 @@ El terminal detecta dos tipos de enlaces en la salida de comandos:
 
 ## Entorno de Shell
 
-VMark establece estas variables de entorno en cada sesión del terminal:
+TMark establece estas variables de entorno en cada sesión del terminal:
 
 | Variable | Valor |
 |----------|-------|
-| `TERM_PROGRAM` | `vmark` |
-| `EDITOR` | `vmark` |
-| `VMARK_WORKSPACE` | Ruta raíz del espacio de trabajo (cuando hay una carpeta abierta) |
+| `TERM_PROGRAM` | `tmark` |
+| `EDITOR` | `tmark` |
+| `TMARK_WORKSPACE` | Ruta raíz del espacio de trabajo (cuando hay una carpeta abierta) |
 | `PATH` | PATH completo del shell de inicio de sesión (igual que en tu terminal del sistema) |
 
 El terminal integrado hereda el `PATH` de tu shell de inicio de sesión, por lo que las herramientas CLI como `node`, `claude` y otros binarios instalados por el usuario son detectables — igual que en una ventana de terminal normal.
@@ -80,7 +80,7 @@ Cuando abres un espacio de trabajo o archivo después de que el terminal ya est�
 
 ## Pausar / Reanudar
 
-Para procesos de larga duración que producen una salida verbosa, puedes suspender el proceso de shell subyacente desde VMark para liberar CPU sin matar la sesión. Al reanudar, el proceso continúa desde donde se quedó.
+Para procesos de larga duración que producen una salida verbosa, puedes suspender el proceso de shell subyacente desde TMark para liberar CPU sin matar la sesión. Al reanudar, el proceso continúa desde donde se quedó.
 
 | Acción | Cómo |
 |---|---|

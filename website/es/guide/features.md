@@ -1,6 +1,6 @@
 # Características
 
-VMark es un editor Markdown con muchas funciones diseñado para flujos de trabajo de escritura modernos. Aquí tienes lo que incluye.
+TMark es un editor Markdown con muchas funciones diseñado para flujos de trabajo de escritura modernos. Aquí tienes lo que incluye.
 
 [[toc]]
 
@@ -59,7 +59,7 @@ La Vista Previa de Fuente es útil para la edición precisa de Markdown (corregi
 
 ## Edición Multicursor
 
-Edita múltiples ubicaciones simultáneamente — VMark soporta multicursor completo tanto en modos WYSIWYG como de Fuente.
+Edita múltiples ubicaciones simultáneamente — TMark soporta multicursor completo tanto en modos WYSIWYG como de Fuente.
 
 | Acción | Atajo |
 |--------|-------|
@@ -77,7 +77,7 @@ Toda la edición estándar (escritura, eliminación, portapapeles, navegación) 
 
 ## Auto-Emparejamiento y Escape con Tab
 
-Cuando escribes un corchete de apertura, comilla o acento grave, VMark inserta automáticamente el par de cierre. Pulsa **Tab** para saltar más allá del carácter de cierre en lugar de usar la tecla de flecha.
+Cuando escribes un corchete de apertura, comilla o acento grave, TMark inserta automáticamente el par de cierre. Pulsa **Tab** para saltar más allá del carácter de cierre en lugar de usar la tecla de flecha.
 
 - Corchetes: `()` `[]` `{}`
 - Comillas: `""` `''` `` ` ` ``
@@ -125,7 +125,7 @@ Cambia rápidamente el estilo de texto a través de Formato → Transformar:
 ### Saltos de Línea Duros
 
 Pulsa `Shift + Enter` para insertar un salto de línea duro dentro de un párrafo.
-VMark usa el estilo de dos espacios por defecto para mayor compatibilidad.
+TMark usa el estilo de dos espacios por defecto para mayor compatibilidad.
 Configura en **Configuración > Editor > Espacio en Blanco**.
 
 ### Operaciones de Línea
@@ -270,7 +270,7 @@ Haz clic en el chevron de expansión en la barra de búsqueda para revelar la fi
 
 ## Lint de Markdown
 
-VMark incluye un linter de Markdown integrado que revisa tu documento en busca de errores de sintaxis comunes y problemas de accesibilidad. Actívalo en **Configuración > Markdown > Lint**.
+TMark incluye un linter de Markdown integrado que revisa tu documento en busca de errores de sintaxis comunes y problemas de accesibilidad. Actívalo en **Configuración > Markdown > Lint**.
 
 **Cómo usar:**
 
@@ -311,7 +311,7 @@ Una barra de herramientas de formato anclada en la parte inferior del editor, qu
 
 ## Opciones de Exportación
 
-VMark ofrece opciones de exportación flexibles para compartir tus documentos.
+TMark ofrece opciones de exportación flexibles para compartir tus documentos.
 
 ### Exportación HTML
 
@@ -320,7 +320,7 @@ Exporta a HTML independiente con dos modos de empaquetado:
 - **Modo carpeta** (predeterminado): Crea `Documento/index.html` con recursos en una subcarpeta
 - **Modo archivo único**: Crea un archivo `.html` autocontenido con imágenes embebidas
 
-El HTML exportado incluye el [**VMark Reader**](/es/guide/export#vmark-reader) — controles interactivos para configuración, tabla de contenidos, lightbox de imágenes y más.
+El HTML exportado incluye el [**TMark Reader**](/es/guide/export#tmark-reader) — controles interactivos para configuración, tabla de contenidos, lightbox de imágenes y más.
 
 [Más información sobre exportación →](/es/guide/export)
 
@@ -352,7 +352,7 @@ Herramientas de formato de texto chino/japonés/coreano integradas:
 
 ## Historial de Documentos
 
-VMark guarda automáticamente instantáneas de tus documentos para que puedas recuperar versiones anteriores.
+TMark guarda automáticamente instantáneas de tus documentos para que puedas recuperar versiones anteriores.
 
 - **Guardado automático** con intervalo configurable captura instantáneas en segundo plano
 - **Historial por documento** almacenado localmente en formato JSONL
@@ -366,7 +366,7 @@ VMark guarda automáticamente instantáneas de tus documentos para que puedas re
 
 ## Recuperación de Sesión (Hot Exit)
 
-Cuando cierras VMark o sale inesperadamente, tu sesión se preserva y restaura en el siguiente inicio.
+Cuando cierras TMark o sale inesperadamente, tu sesión se preserva y restaura en el siguiente inicio.
 
 **Qué se guarda:**
 - Todas las pestañas abiertas y su contenido (incluyendo cambios no guardados)
@@ -376,7 +376,7 @@ Cuando cierras VMark o sale inesperadamente, tu sesión se preserva y restaura e
 - Espacio de trabajo activo y configuración del explorador de archivos
 
 **Cómo funciona:**
-- Al cerrar, VMark captura el estado completo de la sesión de todas las ventanas
+- Al cerrar, TMark captura el estado completo de la sesión de todas las ventanas
 - Al reiniciar, las pestañas se restauran exactamente como las dejaste, con documentos modificados (no guardados) marcados correspondientemente
 - La recuperación por caída se ejecuta automáticamente tras una salida inesperada, restaurando documentos desde instantáneas de recuperación periódicas
 - Las instantáneas de recuperación con más de 7 días se limpian automáticamente
@@ -428,7 +428,7 @@ El zoom cambia el tamaño de fuente del editor en incrementos de 2px (rango: 12p
 
 ## Utilidades de Texto
 
-VMark incluye utilidades para limpieza y formato de texto, disponibles en el menú Formato:
+TMark incluye utilidades para limpieza y formato de texto, disponibles en el menú Formato:
 
 ### Limpieza de Texto (Formato → Limpiar Texto)
 
@@ -449,7 +449,7 @@ Panel de terminal integrado con múltiples sesiones, copiar/pegar, búsqueda, ru
 
 ## Actualización Automática
 
-VMark verifica automáticamente las actualizaciones y puede descargarlas e instalarlas dentro de la aplicación:
+TMark verifica automáticamente las actualizaciones y puede descargarlas e instalarlas dentro de la aplicación:
 
 - Verificación automática de actualizaciones al iniciar
 - Instalación de actualización con un clic
@@ -504,7 +504,7 @@ Todos los atajos son personalizables en Configuración → Atajos.
 
 ## Detalles Técnicos
 
-VMark está construido con tecnología moderna:
+TMark está construido con tecnología moderna:
 
 | Componente | Tecnología |
 |------------|------------|

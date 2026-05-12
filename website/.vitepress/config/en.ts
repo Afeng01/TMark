@@ -62,7 +62,7 @@ export const en = {
           text: "Users as Developers",
           items: [
             { text: "Overview", link: "/guide/users-as-developers/" },
-            { text: "Why I Built VMark", link: "/guide/users-as-developers/why-i-built-vmark" },
+            { text: "Why I Built TMark", link: "/guide/users-as-developers/why-i-built-tmark" },
             { text: "Five Skills AI Can't Replace", link: "/guide/users-as-developers/what-are-indispensable" },
             { text: "Why Expensive Models Are Cheaper", link: "/guide/users-as-developers/why-expensive-models-are-cheaper" },
             { text: "Subscription vs API Pricing", link: "/guide/users-as-developers/subscription-vs-api" },
@@ -78,7 +78,7 @@ export const en = {
 
     footer: {
       copyright:
-        'Copyright © 2026 VMark · <a href="/guide/license">ISC License</a>',
+        'Copyright © 2026 TMark · <a href="/guide/license">ISC License</a>',
     },
 
     search: {

@@ -1,7 +1,7 @@
 # Housecleaning Plan — 2026-04-18
 
 Branch: `chore/housecleaning`
-Worktree: `/Users/joker/github/xiaolai/myprojects/vmark-housecleaning`
+Worktree: `/Users/joker/github/xiaolai/myprojects/tmark-housecleaning`
 
 ## Goal
 

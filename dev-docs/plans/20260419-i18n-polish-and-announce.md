@@ -1,13 +1,13 @@
 # i18n Polish + Announce Plan — 2026-04-19
 
 Branch: `feat/i18n-polish`
-Worktree: `/Users/joker/github/xiaolai/myprojects/vmark-i18n`
+Worktree: `/Users/joker/github/xiaolai/myprojects/tmark-i18n`
 
 ## Goal
 
 Close the remaining gaps between "app is technically multilingual" and "app ships as an international product". Four bounded phases, each independently shippable.
 
-VMark already has:
+TMark already has:
 - React i18next with 10 locales (en, zh-CN, zh-TW, ja, ko, de, es, fr, it, pt-BR) and ~1,136 keys across 9 namespaces.
 - Rust `rust-i18n` with the same 10 locales, full menu translation, `set_locale` command.
 - VitePress website with all 32 guide pages translated to all 10 locales.
@@ -116,11 +116,11 @@ Two-layer approach:
 
 **Layer A: key-based errors for user-facing paths.**
 - Add `errors:` top-level namespace to each `src-tauri/locales/*.yml`.
-- Introduce a `vmark_error!(key, arg1=value1, …)` helper macro in `src-tauri/src/errors.rs` (new, ~40 lines) that wraps `rust_i18n::t!()` with interpolation.
+- Introduce a `tmark_error!(key, arg1=value1, …)` helper macro in `src-tauri/src/errors.rs` (new, ~40 lines) that wraps `rust_i18n::t!()` with interpolation.
 - Migrate **only user-facing error paths** — errors that reach a toast or dialog. Not every `map_err` in a helper function.
 
 **Layer B: leave developer-facing errors English.**
-- Panics, log messages, debug output, internal plumbing errors (e.g., "BUG: queue empty") remain untranslated. They go to `~/Library/Logs/vmark/...` and are for us, not users.
+- Panics, log messages, debug output, internal plumbing errors (e.g., "BUG: queue empty") remain untranslated. They go to `~/Library/Logs/tmark/...` and are for us, not users.
 
 ### Classification (do this FIRST)
 
@@ -171,7 +171,7 @@ Group keys by module. Keep placeholders as `%{name}` (rust-i18n syntax).
 ```rust
 // src-tauri/src/errors.rs
 #[macro_export]
-macro_rules! vmark_error {
+macro_rules! tmark_error {
     ($key:expr) => { rust_i18n::t!($key).to_string() };
     ($key:expr, $($arg:ident = $val:expr),+ $(,)?) => {
         rust_i18n::t!($key, $($arg = $val),+).to_string()
@@ -186,8 +186,8 @@ Usage migration example:
 .map_err(|e| format!("Failed to get app data dir: {}", e))?;
 
 // AFTER
-use crate::vmark_error;
-.map_err(|e| vmark_error!("errors.storage.appDataUnavailable", detail = e.to_string()))?;
+use crate::tmark_error;
+.map_err(|e| tmark_error!("errors.storage.appDataUnavailable", detail = e.to_string()))?;
 ```
 
 ### Migration order
@@ -201,7 +201,7 @@ use crate::vmark_error;
 ### Tests
 
 Rust:
-- `src-tauri/src/errors.rs` unit tests: `vmark_error!("errors.pandoc.exitedWithCode", code = 2)` returns `"Pandoc exited with code 2"` when locale is `en`.
+- `src-tauri/src/errors.rs` unit tests: `tmark_error!("errors.pandoc.exitedWithCode", code = 2)` returns `"Pandoc exited with code 2"` when locale is `en`.
 - Switch locale to `zh-CN` via `rust_i18n::set_locale("zh-CN")` and assert translated output.
 - Missing-key case: calling with a non-existent key returns the key itself (rust-i18n default) — regression test so we notice typos.
 

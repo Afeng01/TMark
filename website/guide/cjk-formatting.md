@@ -1,6 +1,6 @@
 # CJK Formatting Guide
 
-VMark includes a comprehensive set of formatting rules for Chinese, Japanese, and Korean text. These tools help maintain consistent typography when mixing CJK and Latin characters.
+TMark includes a comprehensive set of formatting rules for Chinese, Japanese, and Korean text. These tools help maintain consistent typography when mixing CJK and Latin characters.
 
 ## Quick Start
 
@@ -75,7 +75,7 @@ Converts double hyphens to proper CJK dashes.
 
 ### 6. Smart Quote Conversion
 
-VMark uses a **stack-based quote pairing algorithm** that correctly handles:
+TMark uses a **stack-based quote pairing algorithm** that correctly handles:
 
 - **Apostrophes**: Contractions like `don't`, `it's`, `l'amour` are preserved
 - **Possessives**: `Xiaolai's` stays as-is
@@ -137,7 +137,7 @@ The following content is **not** affected by formatting:
 
 ### Technical Constructs
 
-VMark's **Latin Span Scanner** automatically detects and protects technical constructs from punctuation conversion:
+TMark's **Latin Span Scanner** automatically detects and protects technical constructs from punctuation conversion:
 
 | Type | Examples | Protection |
 |------|----------|------------|
@@ -213,7 +213,7 @@ After every CJK format pass, the formatter runs an integrity check that compares
 
 ## CJK Letter Spacing
 
-VMark includes a dedicated letter spacing feature for CJK text that improves readability by adding subtle spacing between characters.
+TMark includes a dedicated letter spacing feature for CJK text that improves readability by adding subtle spacing between characters.
 
 ### Settings
 
@@ -248,7 +248,7 @@ The difference is subtle but improves readability, especially for longer passage
 
 ## Smart Quote Styles
 
-VMark can automatically convert straight quotes to typographically correct smart quotes. This feature works during CJK formatting and supports multiple quote styles.
+TMark can automatically convert straight quotes to typographically correct smart quotes. This feature works during CJK formatting and supports multiple quote styles.
 
 ### Quote Styles
 
@@ -260,7 +260,7 @@ VMark can automatically convert straight quotes to typographically correct smart
 
 ### Stack-Based Pairing Algorithm
 
-VMark uses a sophisticated stack-based algorithm for quote pairing:
+TMark uses a sophisticated stack-based algorithm for quote pairing:
 
 1. **Tokenization**: Identifies all quote characters in text
 2. **Classification**: Determines if each quote is opening or closing based on context
@@ -340,7 +340,7 @@ Corner bracket conversion triggers when the quoted content contains **Chinese ch
 
 ## Test Paragraph
 
-Copy this unformatted text into VMark and press `Alt + Mod + Shift + F` to format:
+Copy this unformatted text into TMark and press `Alt + Mod + Shift + F` to format:
 
 ```text
 最近我在学习TypeScript和React,感觉收获很大.作为一个developer,掌握这些modern前端技术是必须的.

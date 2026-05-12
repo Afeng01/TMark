@@ -30,7 +30,7 @@ Spike D is what tells us whether the gate is achievable and what
 
 ## Method
 
-Same 7 fixtures from Spike A (vmark's own workflows). For each:
+Same 7 fixtures from Spike A (tmark's own workflows). For each:
 
 1. Run identity round-trip and count line diffs.
 2. Run 3 mutations:

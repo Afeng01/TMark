@@ -1,21 +1,21 @@
 //! Config file I/O — reading, writing, generating, and removing MCP entries.
 //!
 //! Handles the JSON (Claude Desktop, Claude Code, Gemini) and TOML (Codex)
-//! config formats for adding/removing the vmark MCP server entry.
+//! config formats for adding/removing the tmark MCP server entry.
 
 use chrono::Local;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-/// Read existing config and check if it has vmark entry
+/// Read existing config and check if it has tmark entry
 pub(crate) fn read_existing_config(path: &PathBuf, provider_id: &str) -> (Option<String>, bool) {
     let content = fs::read_to_string(path).ok();
-    let has_vmark = if let Some(ref c) = content {
+    let has_tmark = if let Some(ref c) = content {
         match provider_id {
             "claude-desktop" | "claude" | "gemini" => {
                 if let Ok(json) = serde_json::from_str::<serde_json::Value>(c) {
                     json.get("mcpServers")
-                        .and_then(|s| s.get("vmark"))
+                        .and_then(|s| s.get("tmark"))
                         .is_some()
                 } else {
                     false
@@ -24,7 +24,7 @@ pub(crate) fn read_existing_config(path: &PathBuf, provider_id: &str) -> (Option
             "codex" => {
                 if let Ok(toml) = c.parse::<toml::Table>() {
                     toml.get("mcp_servers")
-                        .and_then(|s| s.get("vmark"))
+                        .and_then(|s| s.get("tmark"))
                         .is_some()
                 } else {
                     false
@@ -35,17 +35,17 @@ pub(crate) fn read_existing_config(path: &PathBuf, provider_id: &str) -> (Option
     } else {
         false
     };
-    (content, has_vmark)
+    (content, has_tmark)
 }
 
-/// Extract the vmark binary path from config content
-pub(crate) fn extract_vmark_binary_path(content: &str, provider_id: &str) -> Option<String> {
+/// Extract the tmark binary path from config content
+pub(crate) fn extract_tmark_binary_path(content: &str, provider_id: &str) -> Option<String> {
     match provider_id {
         "claude-desktop" | "claude" | "gemini" => {
-            // JSON format: mcpServers.vmark.command
+            // JSON format: mcpServers.tmark.command
             if let Ok(json) = serde_json::from_str::<serde_json::Value>(content) {
                 json.get("mcpServers")
-                    .and_then(|s| s.get("vmark"))
+                    .and_then(|s| s.get("tmark"))
                     .and_then(|v| v.get("command"))
                     .and_then(|c| c.as_str())
                     .map(|s| s.to_string())
@@ -54,10 +54,10 @@ pub(crate) fn extract_vmark_binary_path(content: &str, provider_id: &str) -> Opt
             }
         }
         "codex" => {
-            // TOML format: mcp_servers.vmark.command
+            // TOML format: mcp_servers.tmark.command
             if let Ok(toml) = content.parse::<toml::Table>() {
                 toml.get("mcp_servers")
-                    .and_then(|s| s.get("vmark"))
+                    .and_then(|s| s.get("tmark"))
                     .and_then(|v| v.get("command"))
                     .and_then(|c| c.as_str())
                     .map(|s| s.to_string())
@@ -93,7 +93,7 @@ pub(crate) fn generate_config_content(
                 .as_object_mut()
                 .ok_or("mcpServers is not an object")?
                 .insert(
-                    "vmark".to_string(),
+                    "tmark".to_string(),
                     serde_json::json!({
                         "command": binary_path
                     }),
@@ -112,9 +112,9 @@ pub(crate) fn generate_config_content(
 
             if let toml::Value::Table(servers) = mcp_servers {
                 // No args needed - sidecar auto-discovers port from app data directory
-                let mut vmark_config = toml::Table::new();
-                vmark_config.insert("command".to_string(), toml::Value::String(binary_path.to_string()));
-                servers.insert("vmark".to_string(), toml::Value::Table(vmark_config));
+                let mut tmark_config = toml::Table::new();
+                tmark_config.insert("command".to_string(), toml::Value::String(binary_path.to_string()));
+                servers.insert("tmark".to_string(), toml::Value::Table(tmark_config));
             }
 
             toml::to_string_pretty(&toml_doc).map_err(|e| format!("TOML serialization error: {}", e))
@@ -123,15 +123,15 @@ pub(crate) fn generate_config_content(
     }
 }
 
-/// Remove vmark entry from config
-pub(crate) fn remove_vmark_from_config(provider_id: &str, content: &str) -> Result<String, String> {
+/// Remove tmark entry from config
+pub(crate) fn remove_tmark_from_config(provider_id: &str, content: &str) -> Result<String, String> {
     match provider_id {
         "claude-desktop" | "claude" | "gemini" => {
             let mut json: serde_json::Value =
                 serde_json::from_str(content).map_err(|e| format!("Invalid JSON: {}", e))?;
 
             if let Some(servers) = json.get_mut("mcpServers").and_then(|s| s.as_object_mut()) {
-                servers.remove("vmark");
+                servers.remove("tmark");
             }
 
             serde_json::to_string_pretty(&json).map_err(|e| format!("JSON serialization error: {}", e))
@@ -141,7 +141,7 @@ pub(crate) fn remove_vmark_from_config(provider_id: &str, content: &str) -> Resu
                 content.parse().map_err(|e| format!("Invalid TOML: {}", e))?;
 
             if let Some(toml::Value::Table(servers)) = toml_doc.get_mut("mcp_servers") {
-                servers.remove("vmark");
+                servers.remove("tmark");
             }
 
             toml::to_string_pretty(&toml_doc).map_err(|e| format!("TOML serialization error: {}", e))

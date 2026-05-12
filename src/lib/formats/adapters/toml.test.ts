@@ -43,7 +43,7 @@ describe("toml adapter", () => {
       expect(
         tomlValidator(`
 [package]
-name = "vmark"
+name = "tmark"
 version = "0.7.0"
         `.trim()),
       ).toEqual([]);

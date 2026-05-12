@@ -57,19 +57,19 @@ const fixtures: Array<{
   {
     label: "json",
     format: jsonFormat,
-    content: '{"name":"vmark"}',
+    content: '{"name":"tmark"}',
     path: "/x/data.json",
   },
   {
     label: "yaml",
     format: yamlFormat,
-    content: "name: vmark\nversion: 1\n",
+    content: "name: tmark\nversion: 1\n",
     path: "/x/data.yaml",
   },
   {
     label: "toml",
     format: tomlFormat,
-    content: 'name = "vmark"\n',
+    content: 'name = "tmark"\n',
     path: "/x/data.toml",
   },
 ];

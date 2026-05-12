@@ -7,7 +7,7 @@
 
 # 工作流精灵
 
-VMark 精灵分为两种形式：
+TMark 精灵分为两种形式：
 
 - **Markdown 精灵**（`.md`）——单次提示词模板，是最初的精灵格式。详见 [AI 精灵](/zh-CN/guide/ai-genies)。
 - **工作流精灵**（`.yml` / `.yaml`）——多步骤流水线，将多个 Markdown 精灵串接起来，并具有显式的数据流。
@@ -94,7 +94,7 @@ VMark 精灵分为两种形式：
 
 ## 示例
 
-VMark 内置了一个示例工作流 `outline-and-polish.yml`，位于内置精灵目录中。可将其复制到你的用户精灵目录进行自定义：
+TMark 内置了一个示例工作流 `outline-and-polish.yml`，位于内置精灵目录中。可将其复制到你的用户精灵目录进行自定义：
 
 ```yaml
 name: Outline and Polish

@@ -1,4 +1,4 @@
-// WI-2.1 — vmark.selection.{get, set} bridge handlers covering WYSIWYG +
+// WI-2.1 — tmark.selection.{get, set} bridge handlers covering WYSIWYG +
 // source modes, STALE concurrency, and the NO_EDITOR error path.
 // Restored after MCP pruning to avoid full-doc round-trips on large files
 // (see dev-docs/plans/20260504-mcp-pruning.md ADR-7).
@@ -142,10 +142,10 @@ afterEach(() => {
 });
 
 // ---------------------------------------------------------------------------
-// vmark.selection.get
+// tmark.selection.get
 // ---------------------------------------------------------------------------
 
-describe("vmark.selection.get — WYSIWYG mode", () => {
+describe("tmark.selection.get — WYSIWYG mode", () => {
   it("returns selected text, range, and metadata for a non-empty selection", async () => {
     seedTab("t-w", "Hello world", "/notes.md");
     // Doc structure: <p>Hello world</p> → "world" is at PM positions 7..12.
@@ -206,7 +206,7 @@ describe("vmark.selection.get — WYSIWYG mode", () => {
   });
 });
 
-describe("vmark.selection.get — source mode", () => {
+describe("tmark.selection.get — source mode", () => {
   it("returns selected text and range from CodeMirror", async () => {
     seedTab("t-src", "Hello world", "/notes.md");
     // CM positions: 'world' at offsets 6..11.
@@ -228,10 +228,10 @@ describe("vmark.selection.get — source mode", () => {
 });
 
 // ---------------------------------------------------------------------------
-// vmark.selection.set
+// tmark.selection.set
 // ---------------------------------------------------------------------------
 
-describe("vmark.selection.set — WYSIWYG mode", () => {
+describe("tmark.selection.set — WYSIWYG mode", () => {
   it("replaces the current selection and updates the document store", async () => {
     seedTab("t-set", "Hello world", "/notes.md");
     makeTiptap("<p>Hello world</p>", 7, 12); // Selects "world".
@@ -360,7 +360,7 @@ describe("vmark.selection.set — WYSIWYG mode", () => {
   });
 });
 
-describe("vmark.selection.set — source mode", () => {
+describe("tmark.selection.set — source mode", () => {
   it("replaces the current CodeMirror selection", async () => {
     seedTab("t-src-set", "Hello world", null);
     makeCm("Hello world", 6, 11); // Selects "world".
@@ -418,7 +418,7 @@ describe("vmark.selection.set — source mode", () => {
 // replacement, kind detection, and tab-resolution paths.
 // ---------------------------------------------------------------------------
 
-describe("vmark.selection — branch coverage", () => {
+describe("tmark.selection — branch coverage", () => {
   it("get returns INVALID_TAB when tabId does not match the focused tab", async () => {
     seedTab("t-focused", "x", null);
     makeTiptap("<p>x</p>", 1, 1);

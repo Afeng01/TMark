@@ -7,7 +7,7 @@
 
 # Workflow Genies
 
-VMark Genies come in two flavors:
+TMark Genies come in two flavors:
 
 - **Markdown genies** (`.md`) — single-shot prompt templates. The original Genie format. See [AI Genies](/guide/ai-genies).
 - **Workflow genies** (`.yml` / `.yaml`) — multi-step pipelines that chain markdown genies together with explicit data flow.
@@ -94,7 +94,7 @@ When a step has `approval: ask` (or workflow `defaults.approval: ask`), the runn
 
 ## Sample
 
-VMark ships with a sample workflow at `outline-and-polish.yml` in your bundled genies. Copy it into your user genies directory to customize:
+TMark ships with a sample workflow at `outline-and-polish.yml` in your bundled genies. Copy it into your user genies directory to customize:
 
 ```yaml
 name: Outline and Polish

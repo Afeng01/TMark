@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Capability for document windows only. Settings and PDF-export windows have separate, restricted capability files. SECURITY NOTE: Filesystem permissions use broad path patterns because VMark is a document editor that must access user-chosen files anywhere on disk. Path traversal attacks are mitigated at the application layer via validateImagePath() in src/plugins/imageView/security.ts. Windows drive letter patterns are in a separate windows.json capability file.",
+  "description": "Capability for document windows only. Settings and PDF-export windows have separate, restricted capability files. SECURITY NOTE: Filesystem permissions use broad path patterns because TMark is a document editor that must access user-chosen files anywhere on disk. Path traversal attacks are mitigated at the application layer via validateImagePath() in src/plugins/imageView/security.ts. Windows drive letter patterns are in a separate windows.json capability file.",
   "windows": ["main", "doc-*"],
   "permissions": [
     "core:default",
@@ -31,8 +31,8 @@
     {
       "identifier": "shell:allow-execute",
       "allow": [
-        { "name": "vmark-mcp-server", "sidecar": true },
-        { "name": "vmark-mcp-server", "sidecar": true, "args": ["--health-check"] }
+        { "name": "tmark-mcp-server", "sidecar": true },
+        { "name": "tmark-mcp-server", "sidecar": true, "args": ["--health-check"] }
       ]
     },
     {

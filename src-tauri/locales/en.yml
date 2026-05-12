@@ -1,14 +1,14 @@
-# VMark English locale — source of truth for all Rust-side translatable strings.
+# TMark English locale — source of truth for all Rust-side translatable strings.
 # Keys follow the convention: menu.<section>.<item>
 # Dynamic menu items (recent files, genies) have their structural labels here too.
 
 menu:
   # === App menu (macOS only) ===
-  app: "VMark"
-  app.about: "About VMark"
+  app: "TMark"
+  app.about: "About TMark"
   app.settings: "Settings..."
   app.saveAllQuit: "Save All and Quit"
-  app.quit: "Quit VMark"
+  app.quit: "Quit TMark"
 
   # === File menu ===
   file: "File"
@@ -185,9 +185,9 @@ menu:
 
   # === Help menu ===
   help: "Help"
-  help.vmarkHelp: "VMark Help"
+  help.tmarkHelp: "TMark Help"
   help.keyboardShortcuts: "Keyboard Shortcuts"
-  help.installCli: "Shell Command: Install 'vmark' in PATH..."
+  help.installCli: "Shell Command: Install 'tmark' in PATH..."
   help.reportIssue: "Report an Issue..."
 
   # === Dynamic menu labels ===

@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-Decision records for VMark. Each ADR captures the "why" behind a significant
+Decision records for TMark. Each ADR captures the "why" behind a significant
 architectural choice using the [MADR](https://adr.github.io/madr/) format.
 
 ## Index

@@ -196,7 +196,7 @@ tauri_ipc_get_backend_state()
 
 ```json
 {
-  "appName": "vmark",
+  "appName": "tmark",
   "appVersion": "1.0.0",
   "tauriVersion": "2.0.0",
   "environment": "development",

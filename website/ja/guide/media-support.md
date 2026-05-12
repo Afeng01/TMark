@@ -1,6 +1,6 @@
 # メディアサポート
 
-VMark は標準的な HTML5 タグを使って、Markdown ドキュメントにビデオ、オーディオ、YouTube の埋め込みをサポートします。
+TMark は標準的な HTML5 タグを使って、Markdown ドキュメントにビデオ、オーディオ、YouTube の埋め込みをサポートします。
 
 ## サポートされるフォーマット
 
@@ -68,7 +68,7 @@ Vimeo プレーヤーの iframe を使います:
 <iframe src="https://player.vimeo.com/video/VIDEO_ID" width="560" height="315" frameborder="0" allowfullscreen></iframe>
 ```
 
-Vimeo の URL を直接貼り付ける（例: `https://vimeo.com/123456789`）と、VMark が自動的に埋め込みに変換します。
+Vimeo の URL を直接貼り付ける（例: `https://vimeo.com/123456789`）と、TMark が自動的に埋め込みに変換します。
 
 ### Bilibili 埋め込み
 
@@ -78,11 +78,11 @@ BV ID を使って Bilibili プレーヤーの iframe を使います:
 <iframe src="https://player.bilibili.com/player.html?bvid=BV1xxxxxxxxx" width="560" height="350" frameborder="0" allowfullscreen></iframe>
 ```
 
-Bilibili の動画 URL（例: `https://bilibili.com/video/BV1xxxxxxxxx`）を貼り付けると、VMark が自動的に埋め込みに変換します。短縮 URL（`b23.tv`）はリダイレクト解決が必要なためサポートされていません。
+Bilibili の動画 URL（例: `https://bilibili.com/video/BV1xxxxxxxxx`）を貼り付けると、TMark が自動的に埋め込みに変換します。短縮 URL（`b23.tv`）はリダイレクト解決が必要なためサポートされていません。
 
 ### 画像構文へのフォールバック
 
-メディアファイルの拡張子を持つ画像構文も使えます — VMark が自動的に適切なメディアタイプに変換します:
+メディアファイルの拡張子を持つ画像構文も使えます — TMark が自動的に適切なメディアタイプに変換します:
 
 ```markdown
 ![](video.mp4)
@@ -98,11 +98,11 @@ Bilibili の動画 URL（例: `https://bilibili.com/video/BV1xxxxxxxxx`）を貼
 - **ビデオ** — ビデオファイルのファイルピッカーを開き、`.assets/`にコピーし、`<video>`タグを挿入
 - **オーディオ** — オーディオファイルのファイルピッカーを開き、`.assets/`にコピーし、`<audio>`タグを挿入
 - **YouTube** — クリップボードから YouTube URL を読み取り、プライバシー強化された埋め込みを挿入
-- **Vimeo** と **Bilibili** — エディタに動画 URL を直接貼り付けると、VMark がプロバイダーを自動検出します
+- **Vimeo** と **Bilibili** — エディタに動画 URL を直接貼り付けると、TMark がプロバイダーを自動検出します
 
 ### ドラッグ&ドロップ
 
-ファイルシステムからビデオまたはオーディオファイルをエディタに直接ドラッグします。VMark は次の処理を行います:
+ファイルシステムからビデオまたはオーディオファイルをエディタに直接ドラッグします。TMark は次の処理を行います:
 
 1. ドキュメントの`.assets/`フォルダーにファイルをコピー
 2. 相対パスを持つ適切なメディアノードを挿入
@@ -130,7 +130,7 @@ WYSIWYG モードでメディア要素をダブルクリックすると、メデ
 
 ## パスの解決
 
-VMark は 3 種類のメディアパスをサポートします:
+TMark は 3 種類のメディアパスをサポートします:
 
 | パスの種類 | 例 | 動作 |
 |-----------|---------|----------|

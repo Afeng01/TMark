@@ -257,7 +257,7 @@ const MENU_ICONS: &[(&str, &str)] = &[
     // ── Window menu ──
     ("bring-all-to-front", "macwindow.on.rectangle"),
     // ── Help menu ──
-    ("vmark-help", "questionmark.circle"),
+    ("tmark-help", "questionmark.circle"),
     ("keyboard-shortcuts", "keyboard"),
     ("install-cli", "terminal"),
     ("report-issue", "exclamationmark.bubble"),
@@ -278,7 +278,7 @@ const PREDEFINED_ICONS: &[(&str, &str)] = &[
     ("Paste", "doc.on.clipboard"),
     ("Select All", "checkmark.square"),
     ("Services", "gear"),
-    ("Hide VMark", "eye.slash"),
+    ("Hide TMark", "eye.slash"),
     ("Hide Others", "eye.slash.circle"),
     ("Show All", "eye"),
     ("Minimize", "minus.square"),

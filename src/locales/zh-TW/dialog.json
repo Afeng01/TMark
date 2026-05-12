@@ -71,7 +71,7 @@
     "failedToOpen": "無法開啟 {{filename}}",
     "quarantineCleared_one": "已清除此工作區中 1 個 Markdown 檔案的 macOS 隔離標記。",
     "quarantineCleared_other": "已清除此工作區中 {{count}} 個 Markdown 檔案的 macOS 隔離標記。",
-    "quarantineClearedDesc": "macOS 會在某些應用程式下載的檔案上加上一個標記，導致 VMark 執行時 Finder 雙擊開啟會被靜默攔截。VMark 已為你清除該標記，讓這些檔案可以正常開啟。可在設定 → 進階中關閉。",
+    "quarantineClearedDesc": "macOS 會在某些應用程式下載的檔案上加上一個標記，導致 TMark 執行時 Finder 雙擊開啟會被靜默攔截。TMark 已為你清除該標記，讓這些檔案可以正常開啟。可在設定 → 進階中關閉。",
     "failedToOpenFilesInNewWindow": "無法在新視窗開啟檔案",
     "onlyMarkdownViaDropDrop": "拖曳放置只能開啟 Markdown 檔案",
     "restored": "已還原：{{filename}}",
@@ -177,7 +177,7 @@
     "exportHtmlDialogTitle": "匯出 HTML",
     "exportFormatDialogTitle": "匯出 {{name}}",
     "tabFormatChanged": "Editor switched to {{format}}.",
-    "unsupportedFileViaDropDrop": "This file type is not supported by VMark."
+    "unsupportedFileViaDropDrop": "This file type is not supported by TMark."
   },
   "saveRequired": {
     "title": "需要儲存"
@@ -192,7 +192,7 @@
     "warnOk": "開啟",
     "warnCancel": "取消",
     "refuseTitle": "檔案過大，無法開啟",
-    "refuseBody": "「{{filename}}」大小為 {{size}}。VMark 無法安全開啟超過 {{limit}} 的檔案，請改用 less、bat 或 grep 等命令列工具。"
+    "refuseBody": "「{{filename}}」大小為 {{size}}。TMark 無法安全開啟超過 {{limit}} 的檔案，請改用 less、bat 或 grep 等命令列工具。"
   },
   "errorBoundary": {
     "title": "發生錯誤"

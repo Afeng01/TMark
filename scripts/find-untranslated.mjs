@@ -19,7 +19,7 @@ const LOCALES = ["zh-CN", "zh-TW", "ja", "ko", "de", "es", "fr", "it", "pt-BR"];
 
 // Short acronyms & proper nouns that are allowed to be identical across locales
 const ALLOWED_IDENTICAL = new Set([
-  "OK", "PDF", "HTML", "Markdown", "VMark", "MCP", "YAML", "JSON",
+  "OK", "PDF", "HTML", "Markdown", "TMark", "MCP", "YAML", "JSON",
   "Pandoc", "SVG", "CSS", "API", "URL", "CLI", "UI", "CJK", "macOS",
   "Windows", "Linux", "iOS", "Android", "Genie", "Genies",
   "Untitled",  // Keep English per existing convention

@@ -1,10 +1,10 @@
 # Markdown Lint
 
-VMark ships a built-in lint engine that catches **correctness issues**, not style preferences. Lint runs on demand (Cmd-Shift-L or **Tools → Check Markdown**) and surfaces results inline as gutter squiggles, with a status bar badge and F2 navigation between findings.
+TMark ships a built-in lint engine that catches **correctness issues**, not style preferences. Lint runs on demand (Cmd-Shift-L or **Tools → Check Markdown**) and surfaces results inline as gutter squiggles, with a status bar badge and F2 navigation between findings.
 
 ## What lint is and isn't
 
-VMark's lint is a **correctness** checker:
+TMark's lint is a **correctness** checker:
 
 - Broken cross-references
 - Undefined link / footnote references
@@ -14,7 +14,7 @@ VMark's lint is a **correctness** checker:
 - Images without alt text
 - Empty link text or empty `href`
 
-VMark's lint is **not** a style enforcer. It will not flag:
+TMark's lint is **not** a style enforcer. It will not flag:
 
 - Line length
 - List marker style (`-` vs `*`)
@@ -22,7 +22,7 @@ VMark's lint is **not** a style enforcer. It will not flag:
 - Heading style (`#` vs underline)
 - Trailing whitespace
 
-For style enforcement, use a separate tool like `prettier --check` outside VMark.
+For style enforcement, use a separate tool like `prettier --check` outside TMark.
 
 ## Rule Reference
 

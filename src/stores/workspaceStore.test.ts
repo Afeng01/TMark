@@ -541,8 +541,8 @@ describe("workspaceStore", () => {
       expect(DEFAULT_EXCLUDED_FOLDERS).toContain("node_modules");
     });
 
-    it("does not include .vmark (no longer created)", () => {
-      expect(DEFAULT_EXCLUDED_FOLDERS).not.toContain(".vmark");
+    it("does not include .tmark (no longer created)", () => {
+      expect(DEFAULT_EXCLUDED_FOLDERS).not.toContain(".tmark");
     });
   });
 });

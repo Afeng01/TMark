@@ -1,6 +1,6 @@
 # Controllo collegamenti
 
-VMark verifica che i target locali di collegamenti e immagini nel tuo markdown esistano effettivamente su disco. Viene eseguito insieme al [motore di lint markdown](/it/guide/lint) tramite `Cmd-Shift-L` o **Strumenti → Controlla Markdown**.
+TMark verifica che i target locali di collegamenti e immagini nel tuo markdown esistano effettivamente su disco. Viene eseguito insieme al [motore di lint markdown](/it/guide/lint) tramite `Cmd-Shift-L` o **Strumenti → Controlla Markdown**.
 
 ## Cosa controlla
 

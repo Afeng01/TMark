@@ -18,7 +18,7 @@ export type LineEnding = '\n' | '\r\n' | 'unknown';
 export interface SessionData {
   version: number;
   timestamp: number; // Unix timestamp
-  vmark_version: string;
+  tmark_version: string;
   windows: WindowState[];
   workspace: WorkspaceState | null;
 }

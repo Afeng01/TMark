@@ -1,17 +1,17 @@
 # File di grandi dimensioni
 
-VMark apre la maggior parte dei file Markdown all'istante, ma i file molto grandi richiedono qualche accorgimento per restare reattivi. Questa pagina descrive come VMark li gestisce e come puoi regolarne il comportamento.
+TMark apre la maggior parte dei file Markdown all'istante, ma i file molto grandi richiedono qualche accorgimento per restare reattivi. Questa pagina descrive come TMark li gestisce e come puoi regolarne il comportamento.
 
 ## Cosa si considera "grande"
 
-VMark classifica un file in base alla dimensione prima di aprirlo:
+TMark classifica un file in base alla dimensione prima di aprirlo:
 
 | Dimensione | Categoria | Cosa succede |
 |------------|-----------|--------------|
 | < 1 MB | Piccolo | Si apre immediatamente in modalità WYSIWYG (testo formattato). |
 | 1 MB – 5 MB | Grande | Si apre in **modalità Sorgente** per impostazione predefinita — in meno di un secondo. La barra di stato propone "Passa a WYSIWYG". |
 | 5 MB – 50 MB | Molto grande | Compare prima una finestra di conferma. Si apre solo in modalità Sorgente. |
-| ≥ 50 MB | Rifiutato | VMark rifiuta di aprire il file. Usa `less`, `bat` o uno strumento simile. |
+| ≥ 50 MB | Rifiutato | TMark rifiuta di aprire il file. Usa `less`, `bat` o uno strumento simile. |
 
 La dimensione viene letta dal sistema operativo senza leggere il file, quindi la decisione è rapida e non precarica dati.
 
@@ -43,7 +43,7 @@ Il rifiuto rigido a 50 MB non è regolabile dall'utente. La webview non può con
 
 ## Casi limite
 
-- **Il file cresce mentre è aperto.** VMark decide la categoria in base alla dimensione al momento dell'apertura. Un file che cresce fino a 2 MB mentre lo modifichi resta nella modalità che hai scelto.
+- **Il file cresce mentre è aperto.** TMark decide la categoria in base alla dimensione al momento dell'apertura. Un file che cresce fino a 2 MB mentre lo modifichi resta nella modalità che hai scelto.
 - **Symlink.** Le dimensioni si riferiscono al file di destinazione, quindi un symlink a un file da 10 MB viene trattato come molto grande.
 - **File vuoti.** I file da zero byte sono considerati piccoli e si aprono in WYSIWYG.
 - **Il file scompare tra il controllo della dimensione e la lettura.** Compare il normale errore "file non trovato" — non viene mostrato alcun avviso aggiuntivo.

@@ -105,14 +105,14 @@ onUnmounted(cleanup)
 </script>
 
 <template>
-  <div class="vmark-demo">
-    <p class="vmark-demo__subtitle">Watch multi-cursor rename "count" → "total" across all occurrences</p>
+  <div class="tmark-demo">
+    <p class="tmark-demo__subtitle">Watch multi-cursor rename "count" → "total" across all occurrences</p>
 
     <div class="demo-toolbar">
-      <button class="vmark-btn--pill vmark-btn" @click="runDemo" :disabled="phase === 'selecting' || phase === 'typing'">
+      <button class="tmark-btn--pill tmark-btn" @click="runDemo" :disabled="phase === 'selecting' || phase === 'typing'">
         ▶ {{ phase === 'idle' ? 'Run Demo' : phase === 'done' ? 'Run Again' : 'Running...' }}
       </button>
-      <button v-if="phase !== 'idle'" class="vmark-btn--pill vmark-btn" @click="reset">Reset</button>
+      <button v-if="phase !== 'idle'" class="tmark-btn--pill tmark-btn" @click="reset">Reset</button>
       <span v-if="phase === 'selecting'" class="step-label">Selecting with Mod + D...</span>
       <span v-if="phase === 'typing'" class="step-label">Typing "total"...</span>
       <span v-if="phase === 'done'" class="step-label done-label">Done — all 4 renamed at once</span>
@@ -144,7 +144,7 @@ onUnmounted(cleanup)
   </div>
 </template>
 
-<style src="./vmark-ui.css"></style>
+<style src="./tmark-ui.css"></style>
 <style scoped>
 .demo-toolbar {
   display: flex;

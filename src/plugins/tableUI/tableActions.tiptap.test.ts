@@ -1197,7 +1197,7 @@ describe("alignColumn - cursorPos null guard (line 186-188)", () => {
 describe("formatTable - paragraphType guard (line 262)", () => {
   it("returns false when paragraph type is not in schema", () => {
     // Need a state where isInTable is true but schema has no paragraph
-    // This requires a special schema. In practice, all VMark schemas have paragraph.
+    // This requires a special schema. In practice, all TMark schemas have paragraph.
     // The guard is defensive. We just verify existing coverage is sufficient.
     const noParagraphSchema = new Schema({
       nodes: {

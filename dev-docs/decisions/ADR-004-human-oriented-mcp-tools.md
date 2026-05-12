@@ -13,7 +13,7 @@
 
 ## Context
 
-VMark's MCP tools (~60 tools) needed a design philosophy. The initial tools
+TMark's MCP tools (~60 tools) needed a design philosophy. The initial tools
 mirrored the human editor interaction model: cursor positioning, selection
 management, format toggling. This is **procedural and stateful** — each
 operation depends on prior state (cursor position, selection). AI clients

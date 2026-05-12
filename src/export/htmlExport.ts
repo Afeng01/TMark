@@ -7,8 +7,8 @@
  *   |-- index.html           <- References external CSS/JS/images
  *   |-- standalone.html      <- All embedded (CSS, JS, images as data URIs)
  *   +-- assets/
- *       |-- vmark-reader.css
- *       |-- vmark-reader.js
+ *       |-- tmark-reader.css
+ *       |-- tmark-reader.js
  *       +-- images/
  *           |-- image1.png
  *           +-- ...
@@ -32,7 +32,7 @@
  * @coordinates-with fontEmbedder.ts — font downloading and embedding
  * @coordinates-with themeSnapshot.ts — theme CSS capture
  * @coordinates-with resourceResolver.ts — image/asset resolution
- * @coordinates-with reader/ — vmark-reader CSS/JS for interactive exports
+ * @coordinates-with reader/ — tmark-reader CSS/JS for interactive exports
  */
 
 import { writeTextFile, writeFile, mkdir, remove } from "@tauri-apps/plugin-fs";
@@ -104,8 +104,8 @@ export interface HtmlExportResult {
  * Creates:
  * - index.html (external CSS/JS references)
  * - standalone.html (all embedded)
- * - assets/vmark-reader.css
- * - assets/vmark-reader.js
+ * - assets/tmark-reader.css
+ * - assets/tmark-reader.js
  * - assets/images/ (copied images)
  *
  * @param html - The rendered HTML content from ExportSurface
@@ -254,17 +254,17 @@ export async function exportHtml(
     // Determine theme
     const useDarkTheme = !forceLightTheme && isDarkTheme();
 
-    // Write assets/vmark-reader.css
+    // Write assets/tmark-reader.css
     if (includeReader) {
-      const readerCSSPath = `${assetsPath}/vmark-reader.css`;
+      const readerCSSPath = `${assetsPath}/tmark-reader.css`;
       await writeTextFile(readerCSSPath, readerCSS);
       createdPaths.push(readerCSSPath);
       totalSize += new TextEncoder().encode(readerCSS).length;
     }
 
-    // Write assets/vmark-reader.js
+    // Write assets/tmark-reader.js
     if (includeReader) {
-      const readerJSPath = `${assetsPath}/vmark-reader.js`;
+      const readerJSPath = `${assetsPath}/tmark-reader.js`;
       await writeTextFile(readerJSPath, readerJS);
       createdPaths.push(readerJSPath);
       totalSize += new TextEncoder().encode(readerJS).length;

@@ -21,7 +21,7 @@ const RUST_LOCALES_DIR = resolve(ROOT, "src-tauri/locales");
 const LOCALES = ["zh-CN", "zh-TW", "ja", "ko", "de", "es", "fr", "it", "pt-BR"];
 
 const ALLOWED_IDENTICAL = new Set([
-  "OK", "PDF", "HTML", "Markdown", "VMark", "MCP", "YAML", "JSON",
+  "OK", "PDF", "HTML", "Markdown", "TMark", "MCP", "YAML", "JSON",
   "Pandoc", "SVG", "CSS", "API", "URL", "CLI", "UI", "CJK", "macOS",
   "Windows", "Linux", "iOS", "Android", "Genie", "Genies", "Untitled",
 ]);

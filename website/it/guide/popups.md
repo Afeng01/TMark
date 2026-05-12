@@ -1,6 +1,6 @@
 # Popup Inline
 
-VMark fornisce popup contestuali per la modifica di collegamenti, immagini, media, matematica, note a piè di pagina e altro. Questi popup funzionano sia in modalità WYSIWYG che Sorgente con una navigazione da tastiera coerente.
+TMark fornisce popup contestuali per la modifica di collegamenti, immagini, media, matematica, note a piè di pagina e altro. Questi popup funzionano sia in modalità WYSIWYG che Sorgente con una navigazione da tastiera coerente.
 
 ## Scorciatoie da Tastiera Comuni
 
@@ -14,7 +14,7 @@ Tutti i popup condividono questi comportamenti da tastiera:
 
 ## Tooltip e Popup dei Collegamenti
 
-VMark usa un sistema a due livelli per i collegamenti: un tooltip di sola lettura al passaggio del mouse e un popup di modifica tramite scorciatoia da tastiera.
+TMark usa un sistema a due livelli per i collegamenti: un tooltip di sola lettura al passaggio del mouse e un popup di modifica tramite scorciatoia da tastiera.
 
 ### Tooltip al Passaggio del Mouse (Sola Lettura)
 

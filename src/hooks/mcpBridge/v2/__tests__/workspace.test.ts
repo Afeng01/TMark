@@ -1,4 +1,4 @@
-// WI-1.4 — vmark.workspace lifecycle (new, save, save_as, close,
+// WI-1.4 — tmark.workspace lifecycle (new, save, save_as, close,
 // switch_tab). open/focus_window are integration paths covered by
 // the Tauri MCP smoke in WI-1.8.
 
@@ -59,7 +59,7 @@ function parseStructuredError(s: string | undefined) {
   }
 }
 
-describe("vmark.workspace.new", () => {
+describe("tmark.workspace.new", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();
@@ -75,7 +75,7 @@ describe("vmark.workspace.new", () => {
   });
 });
 
-describe("vmark.workspace.open — YAML routing", () => {
+describe("tmark.workspace.open — YAML routing", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();
@@ -110,7 +110,7 @@ describe("vmark.workspace.open — YAML routing", () => {
   });
 });
 
-describe("vmark.workspace.close", () => {
+describe("tmark.workspace.close", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();
@@ -165,7 +165,7 @@ describe("vmark.workspace.close", () => {
   });
 });
 
-describe("vmark.workspace.switch_tab", () => {
+describe("tmark.workspace.switch_tab", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();
@@ -189,7 +189,7 @@ describe("vmark.workspace.switch_tab", () => {
   });
 });
 
-describe("vmark.workspace.save / save_as", () => {
+describe("tmark.workspace.save / save_as", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     resetStores();

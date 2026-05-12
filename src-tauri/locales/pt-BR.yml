@@ -1,14 +1,14 @@
-# VMark Português Brasileiro (pt-BR) — traduzido do locale inglês.
+# TMark Português Brasileiro (pt-BR) — traduzido do locale inglês.
 # Keys follow the convention: menu.<section>.<item>
 # Dynamic menu items (recent files, genies) have their structural labels here too.
 
 menu:
   # === App menu (macOS only) ===
-  app: "VMark"
-  app.about: "Sobre o VMark"
+  app: "TMark"
+  app.about: "Sobre o TMark"
   app.settings: "Configurações..."
   app.saveAllQuit: "Salvar tudo e sair"
-  app.quit: "Sair do VMark"
+  app.quit: "Sair do TMark"
 
   # === File menu ===
   file: "Arquivo"
@@ -184,9 +184,9 @@ menu:
 
   # === Help menu ===
   help: "Ajuda"
-  help.vmarkHelp: "Ajuda do VMark"
+  help.tmarkHelp: "Ajuda do TMark"
   help.keyboardShortcuts: "Atalhos de teclado"
-  help.installCli: "Comando shell: instalar 'vmark' no PATH..."
+  help.installCli: "Comando shell: instalar 'tmark' no PATH..."
   help.reportIssue: "Relatar um problema..."
 
   # === Dynamic menu labels ===

@@ -1,10 +1,10 @@
-# Erste Schritte mit VMark
+# Erste Schritte mit TMark
 
-VMark ist ein lokal-erster Markdown-Editor mit zwei Bearbeitungsmodi, umfangreichen Formatierungswerkzeugen und hervorragender CJK-Unterstützung (Chinesisch/Japanisch/Koreanisch).
+TMark ist ein lokal-erster Markdown-Editor mit zwei Bearbeitungsmodi, umfangreichen Formatierungswerkzeugen und hervorragender CJK-Unterstützung (Chinesisch/Japanisch/Koreanisch).
 
 ## Schnellstart
 
-1. **VMark herunterladen und installieren** von der [Download-Seite](/de/download)
+1. **TMark herunterladen und installieren** von der [Download-Seite](/de/download)
 2. **Die App starten** und sofort mit dem Schreiben beginnen
 3. **Eine Datei öffnen** mit `Cmd/Strg + O` oder eine `.md`-Datei per Drag & Drop
 4. **Einen Ordner öffnen** mit `Cmd/Strg + Umschalt + O` für den Arbeitsbereichsmodus
@@ -30,7 +30,7 @@ VMark ist ein lokal-erster Markdown-Editor mit zwei Bearbeitungsmodi, umfangreic
 
 ### Bearbeitungsmodi
 
-VMark unterstützt zwei Bearbeitungsmodi, zwischen denen Sie wechseln können:
+TMark unterstützt zwei Bearbeitungsmodi, zwischen denen Sie wechseln können:
 
 | Modus | Beschreibung | Tastenkürzel |
 |-------|-------------|--------------|
@@ -82,11 +82,11 @@ Verbessern Sie Ihren Schreibfokus mit diesen Ansichtsmodi:
 
 ### Exportieren
 
-- **HTML exportieren**: Verwenden Sie **Datei → HTML exportieren** — enthält interaktiven VMark Reader
+- **HTML exportieren**: Verwenden Sie **Datei → HTML exportieren** — enthält interaktiven TMark Reader
 - **PDF exportieren**: Drucken (`Cmd/Strg + P`) und als PDF speichern
 - **Als HTML kopieren**: `Cmd/Strg + Umschalt + C`
 
-Exportiertes HTML enthält den VMark Reader mit Inhaltsverzeichnis, Einstellungsbereich und mehr. [Mehr erfahren →](/de/guide/export)
+Exportiertes HTML enthält den TMark Reader mit Inhaltsverzeichnis, Einstellungsbereich und mehr. [Mehr erfahren →](/de/guide/export)
 
 ## Einstellungen
 
@@ -103,7 +103,7 @@ Exportiertes HTML enthält den VMark Reader mit Inhaltsverzeichnis, Einstellungs
 
 ## KI-Schreibassistenz
 
-VMark enthält integrierte KI-Genies — wählen Sie Text aus und drücken Sie `Mod + Y`, um mit KI zu verfeinern, zu erweitern, zu übersetzen oder Ihren Text zu transformieren. Konfigurieren Sie Ihren bevorzugten Anbieter unter **Einstellungen > Integrationen**.
+TMark enthält integrierte KI-Genies — wählen Sie Text aus und drücken Sie `Mod + Y`, um mit KI zu verfeinern, zu erweitern, zu übersetzen oder Ihren Text zu transformieren. Konfigurieren Sie Ihren bevorzugten Anbieter unter **Einstellungen > Integrationen**.
 
 [Mehr über KI-Genies →](/de/guide/ai-genies) | [Anbieter konfigurieren →](/de/guide/ai-providers)
 

@@ -6,7 +6,7 @@ Problemas comuns e onde encontrar a correção:
 
 | Sintoma | Causa provável | Onde procurar |
 |---------|----------------|---------------|
-| Cliente MCP não consegue conectar | Arquivo de porta antigo ou VMark não está em execução | [Problemas de conexão do servidor MCP](#problemas-de-conexao-do-servidor-mcp) |
+| Cliente MCP não consegue conectar | Arquivo de porta antigo ou TMark não está em execução | [Problemas de conexão do servidor MCP](#problemas-de-conexao-do-servidor-mcp) |
 | Arquivo não abre ou mostra texto truncado | Codificação não-UTF-8 ou atributo de quarentena | [O arquivo não abre](#o-arquivo-nao-abre) |
 | Gênio de IA trava ou não retorna nada | Provedor mal configurado ou CLI fora do PATH | [O Gênio de IA não responde](#o-genio-de-ia-nao-responde) |
 | Atalho de teclado não faz nada | Reatribuído nas Configurações ou sobrescrito pelo sistema | [O atalho de teclado não funciona](#o-atalho-de-teclado-nao-funciona) |
@@ -19,15 +19,15 @@ Para qualquer coisa não listada acima, veja [Reportar bugs](#reportar-bugs).
 
 ## Arquivos de log
 
-O VMark grava arquivos de log para ajudar a diagnosticar problemas. Os logs incluem avisos e erros tanto do backend Rust quanto do frontend.
+O TMark grava arquivos de log para ajudar a diagnosticar problemas. Os logs incluem avisos e erros tanto do backend Rust quanto do frontend.
 
 ### Localização dos arquivos de log
 
 | Plataforma | Caminho |
 |------------|---------|
-| macOS | `~/Library/Logs/app.vmark/` |
-| Windows | `%APPDATA%\app.vmark\logs\` |
-| Linux | `~/.local/share/app.vmark/logs/` |
+| macOS | `~/Library/Logs/app.tmark/` |
+| Windows | `%APPDATA%\app.tmark\logs\` |
+| Linux | `~/.local/share/app.tmark/logs/` |
 
 ### Níveis de log
 
@@ -48,7 +48,7 @@ O VMark grava arquivos de log para ajudar a diagnosticar problemas. Os logs incl
 
 Ao reportar um bug, inclua:
 
-1. **Versão do VMark** — exibida no badge da barra de navegação ou no diálogo Sobre
+1. **Versão do TMark** — exibida no badge da barra de navegação ou no diálogo Sobre
 2. **Sistema operacional** — versão do macOS, build do Windows ou distribuição Linux
 3. **Passos para reproduzir** — o que você fez antes do problema ocorrer
 4. **Arquivo de log** — anexe ou cole as entradas de log relevantes
@@ -66,14 +66,14 @@ As entradas de log possuem carimbo de data/hora e são marcadas por módulo (por
 
 ### O aplicativo inicia lentamente no Windows
 
-O VMark é otimizado para macOS. No Windows, a inicialização pode ser mais lenta devido à inicialização do WebView2. Certifique-se de que:
+O TMark é otimizado para macOS. No Windows, a inicialização pode ser mais lenta devido à inicialização do WebView2. Certifique-se de que:
 
 - O WebView2 Runtime esteja atualizado
 - O software antivírus não esteja verificando o diretório de dados do aplicativo em tempo real
 
 ### A barra de menus mostra inglês após a troca de idioma
 
-Se a barra de menus permanecer em inglês após trocar o idioma nas Configurações, reinicie o VMark. O menu é reconstruído na próxima inicialização com o idioma salvo.
+Se a barra de menus permanecer em inglês após trocar o idioma nas Configurações, reinicie o TMark. O menu é reconstruído na próxima inicialização com o idioma salvo.
 
 ### O terminal não aceita pontuação CJK
 
@@ -83,8 +83,8 @@ Corrigido na versão v0.6.5+. Atualize para a versão mais recente.
 
 O servidor MCP pode falhar ao iniciar ou os clientes podem não conseguir se conectar.
 
-- Certifique-se de que o VMark está em execução — o servidor MCP só inicia quando o aplicativo está aberto.
-- Verifique se nenhum outro processo está usando a mesma porta. O servidor MCP grava um arquivo de porta para descoberta de clientes; arquivos de porta obsoletos de uma sessão anterior podem causar conflitos. Reinicie o VMark para regenerá-lo.
+- Certifique-se de que o TMark está em execução — o servidor MCP só inicia quando o aplicativo está aberto.
+- Verifique se nenhum outro processo está usando a mesma porta. O servidor MCP grava um arquivo de porta para descoberta de clientes; arquivos de porta obsoletos de uma sessão anterior podem causar conflitos. Reinicie o TMark para regenerá-lo.
 - Verifique o arquivo de log em busca de entradas `[MCP Bridge]` para identificar erros de conexão.
 
 ### O atalho de teclado não funciona
@@ -100,15 +100,15 @@ Um atalho pode parecer não responder se estiver em conflito com outra associaç
 A exportação em PDF pode travar ou produzir saída incompleta.
 
 - Se imagens estão faltando na exportação, verifique se os caminhos das imagens são relativos ao documento e se os arquivos existem no disco. URLs absolutas e imagens remotas devem ser acessíveis.
-- Verifique as permissões de arquivo no diretório de saída — o VMark precisa de acesso de escrita para salvar o arquivo exportado.
+- Verifique as permissões de arquivo no diretório de saída — o TMark precisa de acesso de escrita para salvar o arquivo exportado.
 - Para documentos grandes, a exportação pode demorar mais. Verifique o arquivo de log em busca de entradas `[Export]` se parecer travado.
 
 ### O arquivo não abre
 
-O VMark pode se recusar a abrir um arquivo ou mostrar conteúdo ilegível.
+O TMark pode se recusar a abrir um arquivo ou mostrar conteúdo ilegível.
 
 - Verifique se o arquivo tem permissões de leitura para sua conta de usuário.
-- O VMark espera Markdown codificado em UTF-8. Arquivos em outras codificações (por exemplo, GB2312, Shift-JIS) podem não ser exibidos corretamente — converta-os para UTF-8 primeiro.
+- O TMark espera Markdown codificado em UTF-8. Arquivos em outras codificações (por exemplo, GB2312, Shift-JIS) podem não ser exibidos corretamente — converta-os para UTF-8 primeiro.
 - Se o arquivo está bloqueado por outro processo (por exemplo, um cliente de sincronização ou ferramenta de backup), feche esse processo e tente novamente.
 
 ### Desempenho do editor

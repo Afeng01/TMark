@@ -15,7 +15,7 @@
  *     defined exactly once.
  *
  * @coordinates-with plugins/inactiveSelection/inactiveSelectionPlugin.ts —
- *   sibling plugin for ProseMirror; both target `.vmark-inactive-selection`
+ *   sibling plugin for ProseMirror; both target `.tmark-inactive-selection`
  * @module plugins/codemirror/inactiveSelectionPlugin
  */
 import {

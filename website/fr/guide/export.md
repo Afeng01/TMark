@@ -1,6 +1,6 @@
 # Exportation et impression
 
-VMark offre plusieurs façons d'exporter et de partager vos documents.
+TMark offre plusieurs façons d'exporter et de partager vos documents.
 
 ## Modes d'exportation
 
@@ -49,7 +49,7 @@ Toutes les images sont intégrées en tant qu'URI de données, le rendant compl�
 
 ### Exporter vers d'autres formats
 
-VMark s'intègre avec [Pandoc](https://pandoc.org/) — un convertisseur de documents universel — pour exporter votre markdown vers des formats supplémentaires. Choisissez un format directement depuis le menu :
+TMark s'intègre avec [Pandoc](https://pandoc.org/) — un convertisseur de documents universel — pour exporter votre markdown vers des formats supplémentaires. Choisissez un format directement depuis le menu :
 
 **Fichier → Exporter → Autres formats →**
 
@@ -68,7 +68,7 @@ VMark s'intègre avec [Pandoc](https://pandoc.org/) — un convertisseur de docu
    - macOS : `brew install pandoc`
    - Windows : `winget install pandoc`
    - Linux : `apt install pandoc`
-2. Redémarrez VMark (ou allez dans **Paramètres → Fichiers & Images → Outils de document** et cliquez sur **Détecter**)
+2. Redémarrez TMark (ou allez dans **Paramètres → Fichiers & Images → Outils de document** et cliquez sur **Détecter**)
 3. Utilisez **Fichier → Exporter → Autres formats → [format]** pour exporter
 
 Si Pandoc n'est pas installé, le menu affiche un lien **« Nécessite Pandoc — pandoc.org »** en bas du sous-menu Autres formats.
@@ -79,9 +79,9 @@ Vous pouvez vérifier que Pandoc est détecté dans **Paramètres → Fichiers &
 
 Appuyez sur `Cmd/Ctrl + Shift + C` pour copier le HTML rendu dans le presse-papiers pour le coller dans d'autres applications.
 
-## Lecteur VMark
+## Lecteur TMark
 
-Lorsque vous exportez en HTML (mode stylisé), votre document inclut le **Lecteur VMark** — une expérience de lecture interactive avec des fonctionnalités puissantes.
+Lorsque vous exportez en HTML (mode stylisé), votre document inclut le **Lecteur TMark** — une expérience de lecture interactive avec des fonctionnalités puissantes.
 
 ### Panneau de paramètres
 

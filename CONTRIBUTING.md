@@ -1,6 +1,6 @@
-# Contributing to VMark
+# Contributing to TMark
 
-Thank you for your interest in contributing to VMark. This guide covers the
+Thank you for your interest in contributing to TMark. This guide covers the
 essentials for getting started, making changes, and submitting pull requests.
 
 For coding conventions, style rules, and architectural patterns, see
@@ -18,8 +18,8 @@ For coding conventions, style rules, and architectural patterns, see
 ## Setup
 
 ```bash
-git clone https://github.com/xiaolai/vmark.git
-cd vmark
+git clone https://github.com/xiaolai/tmark.git
+cd tmark
 pnpm install
 pnpm tauri dev
 ```
@@ -30,7 +30,7 @@ builds are incremental and much faster.
 ## Project Structure
 
 ```
-vmark/
+tmark/
 ├── src/                  # React frontend (Vite + React 19)
 │   ├── components/       # UI components
 │   ├── hooks/            # Custom React hooks
@@ -41,7 +41,7 @@ vmark/
 ├── src-tauri/            # Rust backend (Tauri v2)
 │   ├── src/              # Commands, menu, MCP bridge, AI providers
 │   └── capabilities/     # Tauri security permissions
-├── vmark-mcp-server/     # MCP sidecar server (Node.js)
+├── tmark-mcp-server/     # MCP sidecar server (Node.js)
 ├── website/              # Documentation site (VitePress)
 └── dev-docs/             # Internal architecture docs (local only)
 ```

@@ -2,7 +2,7 @@
  * App Storage Adapter for Zustand Persist (sensitive data)
  *
  * Purpose: Stores sensitive data (API keys) outside localStorage using
- *   Tauri's store plugin. Data goes to the app data directory (~/.config/app.vmark/)
+ *   Tauri's store plugin. Data goes to the app data directory (~/.config/app.tmark/)
  *   instead of browser localStorage, so it's not visible in DevTools.
  *
  * IMPORTANT: This is NOT OS-backed encrypted storage (Keychain/Credential Manager).
@@ -45,7 +45,7 @@ let storePromise: Promise<{ get: (key: string) => Promise<string | null>; set: (
 async function getStore() {
   if (!storePromise) {
     storePromise = import("@tauri-apps/plugin-store").then(async (mod) => {
-      const store = await mod.load(".vmark-secure.json");
+      const store = await mod.load(".tmark-secure.json");
       return store as unknown as {
         get: (key: string) => Promise<string | null>;
         set: (key: string, value: string) => Promise<void>;

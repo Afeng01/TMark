@@ -1,11 +1,7 @@
 name: Claude Daily Cost Report
 
 on:
-  schedule:
-    # Daily at noon UTC (3h after audit at 9am)
-    - cron: "0 12 * * *"
-
-  # Allow manual trigger
+  # Manual only until TMark has its own data branch and cost-report policy.
   workflow_dispatch:
 
 permissions:

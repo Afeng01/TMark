@@ -9,8 +9,8 @@ When bumping the version number, **all five files must be updated together**.
 | `package.json` | `"version"` | Frontend/npm |
 | `src-tauri/tauri.conf.json` | `"version"` | Bundle (CFBundleShortVersionString) |
 | `src-tauri/Cargo.toml` | `version` | Rust (`env!("CARGO_PKG_VERSION")`) |
-| `vmark-mcp-server/package.json` | `"version"` | MCP sidecar npm |
-| `vmark-mcp-server/src/cli.ts` | `VERSION` | MCP sidecar health check |
+| `tmark-mcp-server/package.json` | `"version"` | MCP sidecar npm |
+| `tmark-mcp-server/src/cli.ts` | `VERSION` | MCP sidecar health check |
 
 ## Why All Five Matter
 
@@ -24,7 +24,7 @@ When bumping the version number, **all five files must be updated together**.
 - Must match main app to avoid user confusion
 
 **Website version (automatic):**
-- The website reads version from `package.json` at build time via `__VMARK_VERSION__` (defined in `website/.vitepress/config/shared.ts`)
+- The website reads version from `package.json` at build time via `__TMARK_VERSION__` (defined in `website/.vitepress/config/shared.ts`)
 - Displayed in the navbar beta badge (`BetaBadge.vue`)
 - No extra file to update — just rebuild/deploy the website after bumping
 
@@ -41,21 +41,21 @@ When bumping the version number, **all five files must be updated together**.
    sed -i '' 's/^version = "[^"]*"/version = "'$VERSION'"/' src-tauri/Cargo.toml
 
    # MCP server files
-   sed -i '' 's/"version": "[^"]*"/"version": "'$VERSION'"/' vmark-mcp-server/package.json
-   sed -i '' 's/const VERSION = "[^"]*"/const VERSION = "'$VERSION'"/' vmark-mcp-server/src/cli.ts
+   sed -i '' 's/"version": "[^"]*"/"version": "'$VERSION'"/' tmark-mcp-server/package.json
+   sed -i '' 's/const VERSION = "[^"]*"/const VERSION = "'$VERSION'"/' tmark-mcp-server/src/cli.ts
    ```
 
 2. **Verify all match**:
    ```bash
-   grep '"version"' package.json src-tauri/tauri.conf.json vmark-mcp-server/package.json
+   grep '"version"' package.json src-tauri/tauri.conf.json tmark-mcp-server/package.json
    grep '^version' src-tauri/Cargo.toml
-   grep 'const VERSION' vmark-mcp-server/src/cli.ts
+   grep 'const VERSION' tmark-mcp-server/src/cli.ts
    ```
 
 3. **Commit together**:
    ```bash
    git add package.json src-tauri/tauri.conf.json src-tauri/Cargo.toml \
-           vmark-mcp-server/package.json vmark-mcp-server/src/cli.ts
+           tmark-mcp-server/package.json tmark-mcp-server/src/cli.ts
    git commit -m "chore: bump version to 0.4.0"
    ```
 
@@ -82,6 +82,6 @@ When bumping the version number, **all five files must be updated together**.
 
 ## Verification
 
-1. Check About VMark dialog shows single version number
-2. Run `vmark-mcp-server --version` shows same version
+1. Check About TMark dialog shows single version number
+2. Run `tmark-mcp-server --version` shows same version
 3. MCP Status dialog in Settings shows same version

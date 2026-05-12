@@ -46,10 +46,10 @@ beforeEach(() => {
 
 describe("handleRequest — READ_ONLY envelope", () => {
   it.each([
-    "vmark.document.write",
-    "vmark.document.transform",
-    "vmark.workflow.apply_patch",
-    "vmark.selection.set",
+    "tmark.document.write",
+    "tmark.document.transform",
+    "tmark.workflow.apply_patch",
+    "tmark.selection.set",
   ])("rejects %s with a structured READ_ONLY envelope on read-only docs", async (type) => {
     mockIsActiveDocReadOnly.mockReturnValue(true);
 
@@ -70,7 +70,7 @@ describe("handleRequest — READ_ONLY envelope", () => {
     mockIsActiveDocReadOnly.mockReturnValue(true);
     mockDispatchV2.mockResolvedValue(true); // the dispatcher would handle it
 
-    await handleRequest({ id: "req-read", type: "vmark.document.read", args: {} });
+    await handleRequest({ id: "req-read", type: "tmark.document.read", args: {} });
 
     expect(mockDispatchV2).toHaveBeenCalledTimes(1);
     // No respond call from THIS function — the routed handler would respond.
@@ -81,7 +81,7 @@ describe("handleRequest — READ_ONLY envelope", () => {
     mockIsActiveDocReadOnly.mockReturnValue(true);
     mockDispatchV2.mockResolvedValue(true);
 
-    await handleRequest({ id: "req-sg", type: "vmark.selection.get", args: {} });
+    await handleRequest({ id: "req-sg", type: "tmark.selection.get", args: {} });
 
     expect(mockDispatchV2).toHaveBeenCalledTimes(1);
     expect(respond).not.toHaveBeenCalled();
@@ -92,12 +92,12 @@ describe("handleRequest — unknown types", () => {
   it("responds with an Unknown request error when dispatchV2 returns false", async () => {
     mockDispatchV2.mockResolvedValue(false);
 
-    await handleRequest({ id: "req-?", type: "vmark.bogus", args: {} });
+    await handleRequest({ id: "req-?", type: "tmark.bogus", args: {} });
 
     const r = lastRespond();
     expect(r.success).toBe(false);
     expect(r.error).toContain("Unknown request type");
-    expect(r.error).toContain("vmark.bogus");
+    expect(r.error).toContain("tmark.bogus");
   });
 });
 
@@ -105,7 +105,7 @@ describe("handleRequest — error handling", () => {
   it("catches handler exceptions and responds with the error message", async () => {
     mockDispatchV2.mockRejectedValueOnce(new Error("boom"));
 
-    await handleRequest({ id: "req-err", type: "vmark.document.read", args: {} });
+    await handleRequest({ id: "req-err", type: "tmark.document.read", args: {} });
 
     const r = lastRespond();
     expect(r.success).toBe(false);
@@ -115,7 +115,7 @@ describe("handleRequest — error handling", () => {
   it("stringifies non-Error throws", async () => {
     mockDispatchV2.mockRejectedValueOnce("plain string failure");
 
-    await handleRequest({ id: "req-str", type: "vmark.document.read", args: {} });
+    await handleRequest({ id: "req-str", type: "tmark.document.read", args: {} });
 
     const r = lastRespond();
     expect(r.success).toBe(false);

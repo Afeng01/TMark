@@ -1,7 +1,7 @@
 /**
- * Purpose: Route the pruned 5-tool MCP surface — `vmark.session.*`,
- *   `vmark.workspace.*`, `vmark.document.*`, `vmark.workflow.*`,
- *   `vmark.selection.*` — to their handlers. Returns `true` iff the
+ * Purpose: Route the pruned 5-tool MCP surface — `tmark.session.*`,
+ *   `tmark.workspace.*`, `tmark.document.*`, `tmark.workflow.*`,
+ *   `tmark.selection.*` — to their handlers. Returns `true` iff the
  *   request type matched.
  *
  * Plan: dev-docs/plans/20260504-mcp-pruning.md WI-1.2 (initial 4 tools)
@@ -37,7 +37,7 @@ import { handleSelectionGet, handleSelectionSet } from "./selection";
  * App version used in the `session.get_state` capabilities payload.
  *
  * Sourced from `package.json` at build time via Vite's `import.meta.env`
- * is the cleanest path, but VMark currently propagates the version
+ * is the cleanest path, but TMark currently propagates the version
  * through other channels (Cargo, MCP CLI). For now we hard-code; a
  * follow-up wires this through the build pipeline.
  */
@@ -46,53 +46,53 @@ const APP_VERSION = "0.7.0";
 export async function dispatchV2(event: McpRequestEvent): Promise<boolean> {
   const { id, type, args } = event;
   switch (type) {
-    case "vmark.session.get_state":
+    case "tmark.session.get_state":
       await handleSessionGetState(id, APP_VERSION);
       return true;
 
-    case "vmark.workspace.new":
+    case "tmark.workspace.new":
       await handleWorkspaceNew(id, args);
       return true;
-    case "vmark.workspace.open":
+    case "tmark.workspace.open":
       await handleWorkspaceOpen(id, args);
       return true;
-    case "vmark.workspace.save":
+    case "tmark.workspace.save":
       await handleWorkspaceSave(id, args);
       return true;
-    case "vmark.workspace.save_as":
+    case "tmark.workspace.save_as":
       await handleWorkspaceSaveAs(id, args);
       return true;
-    case "vmark.workspace.close":
+    case "tmark.workspace.close":
       await handleWorkspaceClose(id, args);
       return true;
-    case "vmark.workspace.switch_tab":
+    case "tmark.workspace.switch_tab":
       await handleWorkspaceSwitchTab(id, args);
       return true;
-    case "vmark.workspace.focus_window":
+    case "tmark.workspace.focus_window":
       await handleWorkspaceFocusWindow(id, args);
       return true;
 
-    case "vmark.document.read":
+    case "tmark.document.read":
       await handleDocumentRead(id, args);
       return true;
-    case "vmark.document.write":
+    case "tmark.document.write":
       await handleDocumentWrite(id, args);
       return true;
-    case "vmark.document.transform":
+    case "tmark.document.transform":
       await handleDocumentTransform(id, args);
       return true;
 
-    case "vmark.workflow.apply_patch":
+    case "tmark.workflow.apply_patch":
       await handleWorkflowApplyPatch(id, args);
       return true;
-    case "vmark.workflow.validate":
+    case "tmark.workflow.validate":
       await handleWorkflowValidate(id, args);
       return true;
 
-    case "vmark.selection.get":
+    case "tmark.selection.get":
       await handleSelectionGet(id, args);
       return true;
-    case "vmark.selection.set":
+    case "tmark.selection.set":
       await handleSelectionSet(id, args);
       return true;
 

@@ -1,6 +1,6 @@
-//! Disable macOS App Nap for the VMark process.
+//! Disable macOS App Nap for the TMark process.
 //!
-//! App Nap suspends the webview when VMark is backgrounded, causing MCP
+//! App Nap suspends the webview when TMark is backgrounded, causing MCP
 //! bridge timeouts because `app.emit()` events are never handled by the
 //! frozen frontend JavaScript. Disabling App Nap keeps the webview alive.
 

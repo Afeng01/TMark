@@ -5,7 +5,7 @@
 //! inside the read-only code viewer.
 //!
 //! Pipeline: frontend `invoke("open_in_external_editor", { path })` →
-//! resolve editor command via `$VMARK_EXTERNAL_EDITOR` → `$VISUAL` →
+//! resolve editor command via `$TMARK_EXTERNAL_EDITOR` → `$VISUAL` →
 //! `$EDITOR` → platform default → spawn detached → return.
 //!
 //! Key decisions:
@@ -40,7 +40,7 @@ use std::path::Path;
 /// arbitrary code via the editor's own interpreter.
 ///
 /// Mitigation: the override must be a SINGLE token (no whitespace, no
-/// args). Multi-arg invocations belong in `$VMARK_EXTERNAL_EDITOR` env
+/// args). Multi-arg invocations belong in `$TMARK_EXTERNAL_EDITOR` env
 /// var — env vars aren't webview-supplied so they can't be poisoned by
 /// XSS. Combined with the no-shell-metachar check and the exists-on-disk
 /// check, this leaves a webview attacker with only two options: pick a
@@ -56,7 +56,7 @@ fn validate_editor_override(raw: &str) -> Result<String, String> {
     }
     // The entire override is treated as a single executable path or
     // command name (NOT split into exe + args). Args belong in
-    // $VMARK_EXTERNAL_EDITOR env var, which isn't webview-supplied so
+    // $TMARK_EXTERNAL_EDITOR env var, which isn't webview-supplied so
     // an XSS attacker can't poison it.
     //
     // Reject shell metacharacters as defense-in-depth — they would
@@ -102,7 +102,7 @@ fn validate_editor_override(raw: &str) -> Result<String, String> {
             return Err(format!(
                 "external editor override with whitespace must be an absolute \
                  path that exists on disk (e.g. /Applications/My App.app). To \
-                 pass arguments, set the $VMARK_EXTERNAL_EDITOR environment \
+                 pass arguments, set the $TMARK_EXTERNAL_EDITOR environment \
                  variable instead. Got: {trimmed:?}"
             ));
         }
@@ -113,7 +113,7 @@ fn validate_editor_override(raw: &str) -> Result<String, String> {
 /// Resolve which editor command to launch. Order:
 ///   1. `editor_override` from the GUI setting (explicit beats implicit;
 ///      already validated by `validate_editor_override`)
-///   2. `$VMARK_EXTERNAL_EDITOR` (project override)
+///   2. `$TMARK_EXTERNAL_EDITOR` (project override)
 ///   3. `$VISUAL`
 ///   4. `$EDITOR`
 ///   5. Platform default (`open -t` on macOS, `notepad.exe` on Windows,
@@ -124,7 +124,7 @@ fn resolve_editor(editor_override: Option<&str>) -> String {
             return v.to_string();
         }
     }
-    if let Ok(v) = std::env::var("VMARK_EXTERNAL_EDITOR") {
+    if let Ok(v) = std::env::var("TMARK_EXTERNAL_EDITOR") {
         if !v.trim().is_empty() {
             return v;
         }
@@ -185,7 +185,7 @@ fn maybe_open_app_bundle(
 ///
 /// Accepts only paths that:
 ///   1. Resolve to a regular file (not a directory or device).
-///   2. Have a registered VMark format extension (mirrors the
+///   2. Have a registered TMark format extension (mirrors the
 ///      `validate_openable_path` security gate so a compromised
 ///      webview can't aim the external editor at arbitrary targets).
 /// Canonicalization runs first so symlinks resolve before the
@@ -203,7 +203,7 @@ pub fn open_in_external_editor(
     }
     if !crate::is_openable_supported(&canonical) {
         return Err(format!(
-            "path '{path}' is not an openable VMark file"
+            "path '{path}' is not an openable TMark file"
         ));
     }
 
@@ -287,7 +287,7 @@ mod tests {
     /// Serializes tests that mutate the process environment. `cargo test`
     /// runs `#[test]` functions in parallel threads, but `std::env` is
     /// process-wide — without this guard the three `resolve_editor_*`
-    /// tests below race on `VMARK_EXTERNAL_EDITOR` / `VISUAL` / `EDITOR`,
+    /// tests below race on `TMARK_EXTERNAL_EDITOR` / `VISUAL` / `EDITOR`,
     /// producing platform-dependent flaky failures (notably on Linux CI).
     /// Holding `_guard` for the duration of each test makes the env
     /// mutations effectively atomic across the suite.
@@ -297,38 +297,38 @@ mod tests {
     fn resolve_editor_prefers_gui_override_above_all() {
         let _guard = ENV_LOCK.lock().unwrap_or_else(|e| e.into_inner());
         // GUI setting beats every env var.
-        let _vmark = std::env::var("VMARK_EXTERNAL_EDITOR").ok();
+        let _tmark = std::env::var("TMARK_EXTERNAL_EDITOR").ok();
         let _visual = std::env::var("VISUAL").ok();
         let _editor = std::env::var("EDITOR").ok();
-        std::env::set_var("VMARK_EXTERNAL_EDITOR", "vmark-env");
+        std::env::set_var("TMARK_EXTERNAL_EDITOR", "tmark-env");
         std::env::set_var("VISUAL", "visual-env");
         std::env::set_var("EDITOR", "editor-env");
         assert_eq!(resolve_editor(Some("/Applications/Cursor.app")), "/Applications/Cursor.app");
         // Empty / whitespace override falls through to env var chain.
-        assert_eq!(resolve_editor(Some("")), "vmark-env");
-        assert_eq!(resolve_editor(Some("   ")), "vmark-env");
-        std::env::remove_var("VMARK_EXTERNAL_EDITOR");
+        assert_eq!(resolve_editor(Some("")), "tmark-env");
+        assert_eq!(resolve_editor(Some("   ")), "tmark-env");
+        std::env::remove_var("TMARK_EXTERNAL_EDITOR");
         std::env::remove_var("VISUAL");
         std::env::remove_var("EDITOR");
-        if let Some(v) = _vmark { std::env::set_var("VMARK_EXTERNAL_EDITOR", v); }
+        if let Some(v) = _tmark { std::env::set_var("TMARK_EXTERNAL_EDITOR", v); }
         if let Some(v) = _visual { std::env::set_var("VISUAL", v); }
         if let Some(v) = _editor { std::env::set_var("EDITOR", v); }
     }
 
     #[test]
-    fn resolve_editor_prefers_vmark_env_when_no_override() {
+    fn resolve_editor_prefers_tmark_env_when_no_override() {
         let _guard = ENV_LOCK.lock().unwrap_or_else(|e| e.into_inner());
-        let _vmark = std::env::var("VMARK_EXTERNAL_EDITOR").ok();
+        let _tmark = std::env::var("TMARK_EXTERNAL_EDITOR").ok();
         let _visual = std::env::var("VISUAL").ok();
         let _editor = std::env::var("EDITOR").ok();
-        std::env::set_var("VMARK_EXTERNAL_EDITOR", "myeditor");
+        std::env::set_var("TMARK_EXTERNAL_EDITOR", "myeditor");
         std::env::set_var("VISUAL", "should-be-ignored");
         std::env::set_var("EDITOR", "should-be-ignored");
         assert_eq!(resolve_editor(None), "myeditor");
-        std::env::remove_var("VMARK_EXTERNAL_EDITOR");
+        std::env::remove_var("TMARK_EXTERNAL_EDITOR");
         std::env::remove_var("VISUAL");
         std::env::remove_var("EDITOR");
-        if let Some(v) = _vmark { std::env::set_var("VMARK_EXTERNAL_EDITOR", v); }
+        if let Some(v) = _tmark { std::env::set_var("TMARK_EXTERNAL_EDITOR", v); }
         if let Some(v) = _visual { std::env::set_var("VISUAL", v); }
         if let Some(v) = _editor { std::env::set_var("EDITOR", v); }
     }
@@ -336,15 +336,15 @@ mod tests {
     #[test]
     fn resolve_editor_falls_through_to_platform_default() {
         let _guard = ENV_LOCK.lock().unwrap_or_else(|e| e.into_inner());
-        let _vmark = std::env::var("VMARK_EXTERNAL_EDITOR").ok();
+        let _tmark = std::env::var("TMARK_EXTERNAL_EDITOR").ok();
         let _visual = std::env::var("VISUAL").ok();
         let _editor = std::env::var("EDITOR").ok();
-        std::env::remove_var("VMARK_EXTERNAL_EDITOR");
+        std::env::remove_var("TMARK_EXTERNAL_EDITOR");
         std::env::remove_var("VISUAL");
         std::env::remove_var("EDITOR");
         let resolved = resolve_editor(None);
         assert!(!resolved.is_empty());
-        if let Some(v) = _vmark { std::env::set_var("VMARK_EXTERNAL_EDITOR", v); }
+        if let Some(v) = _tmark { std::env::set_var("TMARK_EXTERNAL_EDITOR", v); }
         if let Some(v) = _visual { std::env::set_var("VISUAL", v); }
         if let Some(v) = _editor { std::env::set_var("EDITOR", v); }
     }
@@ -397,7 +397,7 @@ mod tests {
     #[test]
     fn validate_editor_override_rejects_relative_with_whitespace() {
         // Multi-token bare overrides (relative or PATH-resolved) belong
-        // in $VMARK_EXTERNAL_EDITOR env var — the env var isn't
+        // in $TMARK_EXTERNAL_EDITOR env var — the env var isn't
         // webview-supplied so XSS can't poison it.
         for input in &["code --wait", "subl -n", "nvim +0", "python -c x"] {
             let result = validate_editor_override(input);

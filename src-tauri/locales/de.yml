@@ -1,14 +1,14 @@
-# VMark Deutsches Locale — Übersetzung der Rust-seitigen Zeichenketten.
+# TMark Deutsches Locale — Übersetzung der Rust-seitigen Zeichenketten.
 # Keys follow the convention: menu.<section>.<item>
 # Dynamic menu items (recent files, genies) have their structural labels here too.
 
 menu:
   # === App menu (macOS only) ===
-  app: "VMark"
-  app.about: "Über VMark"
+  app: "TMark"
+  app.about: "Über TMark"
   app.settings: "Einstellungen..."
   app.saveAllQuit: "Alle speichern und beenden"
-  app.quit: "VMark beenden"
+  app.quit: "TMark beenden"
 
   # === File menu ===
   file: "Datei"
@@ -184,9 +184,9 @@ menu:
 
   # === Help menu ===
   help: "Hilfe"
-  help.vmarkHelp: "VMark-Hilfe"
+  help.tmarkHelp: "TMark-Hilfe"
   help.keyboardShortcuts: "Tastenkürzel"
-  help.installCli: "Shell-Befehl: 'vmark' in PATH installieren..."
+  help.installCli: "Shell-Befehl: 'tmark' in PATH installieren..."
   help.reportIssue: "Problem melden..."
 
   # === Dynamic menu labels ===

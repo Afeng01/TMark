@@ -1,6 +1,6 @@
 # Keyboard Shortcuts
 
-VMark is designed for keyboard-first workflows. Most shortcuts can be customized in Settings. A small number of primitives are fixed: the multi-cursor selectors `Mod+D` (Select Next Occurrence) and `Mod+Shift+L` (Select All Occurrences), and the global Undo/Redo bindings. The other multi-cursor shortcuts (Skip Occurrence, Soft Undo Cursor, Add Cursor Above/Below) are configurable. Shortcuts marked _(context-aware)_ are handled inside the editor for specific structures (e.g., task list checkbox toggle) and are not exposed in the customization registry.
+TMark is designed for keyboard-first workflows. Most shortcuts can be customized in Settings. A small number of primitives are fixed: the multi-cursor selectors `Mod+D` (Select Next Occurrence) and `Mod+Shift+L` (Select All Occurrences), and the global Undo/Redo bindings. The other multi-cursor shortcuts (Skip Occurrence, Soft Undo Cursor, Add Cursor Above/Below) are configurable. Shortcuts marked _(context-aware)_ are handled inside the editor for specific structures (e.g., task list checkbox toggle) and are not exposed in the customization registry.
 
 ## Notation
 
@@ -9,17 +9,17 @@ VMark is designed for keyboard-first workflows. Most shortcuts can be customized
 
 ## Function Keys on macOS
 
-VMark uses function keys (F4–F10) for quick mode toggles. On macOS, these keys are mapped to system functions (brightness, volume, etc.) by default.
+TMark uses function keys (F4–F10) for quick mode toggles. On macOS, these keys are mapped to system functions (brightness, volume, etc.) by default.
 
 **To use F-keys directly without holding Fn:**
 
 1. Open **System Settings** → **Keyboard**
 2. Enable **"Use F1, F2, etc. keys as standard function keys"**
 
-Alternatively, hold the **Fn** key when pressing F4–F10 to trigger VMark shortcuts.
+Alternatively, hold the **Fn** key when pressing F4–F10 to trigger TMark shortcuts.
 
 ::: tip
-If you prefer keeping system functions on F-keys, you can customize VMark shortcuts in Settings (`Mod + ,`) to use different key combinations.
+If you prefer keeping system functions on F-keys, you can customize TMark shortcuts in Settings (`Mod + ,`) to use different key combinations.
 :::
 
 ### F-Key Quick Reference

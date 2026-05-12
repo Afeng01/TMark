@@ -5,7 +5,7 @@
  *   `largeFile.bench.ts` measures pure ProseMirror `state.apply()` cost — it
  *   does NOT exercise the Tiptap plugin stack (no `view.update`, no plugin
  *   `view`-layer work, no decoration rebuild via the view). This file mounts
- *   a real `Editor` with VMark's full extension stack so plugin `apply()`
+ *   a real `Editor` with TMark's full extension stack so plugin `apply()`
  *   chains (codePreview, search, CJK letter-spacing, lint, etc.) are part
  *   of every measured transaction.
  *

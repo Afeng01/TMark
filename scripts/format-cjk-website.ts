@@ -2,7 +2,7 @@
 /**
  * CJK Website Formatter
  *
- * Applies VMark's CJK formatting rules to translated website markdown files.
+ * Applies TMark's CJK formatting rules to translated website markdown files.
  * Safe config: CJK-Latin spacing, fullwidth alphanumeric normalization,
  * ellipsis cleanup, space collapsing. Skips bracket/paren/quote conversions
  * that would break markdown syntax.

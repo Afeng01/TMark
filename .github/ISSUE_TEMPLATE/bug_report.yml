@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a reproducible problem in VMark.
+description: Report a reproducible problem in TMark.
 title: "[Bug] "
 labels:
   - bug
@@ -9,7 +9,7 @@ body:
     attributes:
       value: |
         Thanks for the report.
-        VMark is a vibe-coded codebase, so maintainers prioritize detailed, reproducible bug facts over code-level fix suggestions.
+        TMark is a vibe-coded codebase, so maintainers prioritize detailed, reproducible bug facts over code-level fix suggestions.
         Please keep one bug per issue and include enough detail to reproduce it.
   - type: checkboxes
     id: preflight
@@ -27,7 +27,7 @@ body:
     attributes:
       label: Bug Summary
       description: Short description of the problem.
-      placeholder: "When I ..., VMark ..."
+      placeholder: "When I ..., TMark ..."
     validations:
       required: true
   - type: dropdown
@@ -44,7 +44,7 @@ body:
   - type: input
     id: app_version
     attributes:
-      label: VMark Version
+      label: TMark Version
       description: Release version (for example `0.4.16`) or commit hash if built from source.
       placeholder: "0.4.16"
     validations:
@@ -89,7 +89,7 @@ body:
       label: Logs, Screenshots, or Repro
       description: |
         Paste logs in code fences and attach screenshots/video if helpful.
-        Log file location: macOS ~/Library/Logs/app.vmark/, Windows %APPDATA%\app.vmark\logs\
+        Log file location: macOS ~/Library/Logs/app.tmark/, Windows %APPDATA%\app.tmark\logs\
       placeholder: |
         ```text
         Paste logs here

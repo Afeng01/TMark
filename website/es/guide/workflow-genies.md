@@ -7,7 +7,7 @@
 
 # Genies de Flujo de Trabajo
 
-Los Genies de VMark vienen en dos variantes:
+Los Genies de TMark vienen en dos variantes:
 
 - **Genies Markdown** (`.md`) — plantillas de prompt de un solo disparo. El formato Genie original. Consulta [AI Genies](/es/guide/ai-genies).
 - **Genies de flujo de trabajo** (`.yml` / `.yaml`) — pipelines de varios pasos que encadenan genies markdown con un flujo de datos explícito.
@@ -94,7 +94,7 @@ Cuando un paso tiene `approval: ask` (o `defaults.approval: ask` del flujo de tr
 
 ## Ejemplo
 
-VMark incluye un flujo de trabajo de muestra en `outline-and-polish.yml` dentro de los genies empaquetados. Cópialo en tu directorio de genies de usuario para personalizarlo:
+TMark incluye un flujo de trabajo de muestra en `outline-and-polish.yml` dentro de los genies empaquetados. Cópialo en tu directorio de genies de usuario para personalizarlo:
 
 ```yaml
 name: Outline and Polish

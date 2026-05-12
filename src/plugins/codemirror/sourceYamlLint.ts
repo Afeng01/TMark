@@ -9,7 +9,7 @@
  *   schema validation, no opinionated style rules.
  *
  *   Uses the `yaml` package's `Document.errors` and `.warnings`
- *   arrays. The package already runs in VMark for workflow detection,
+ *   arrays. The package already runs in TMark for workflow detection,
  *   so this adds zero new dependencies.
  *
  * @coordinates-with src/utils/sourceEditorExtensions.ts — wired for any YAML

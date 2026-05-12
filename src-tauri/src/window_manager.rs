@@ -366,7 +366,7 @@ pub(crate) fn pick_reopen_workspace_root() -> Option<String> {
 /// Canonicalization resolves symlinks so the registered-extension check
 /// runs on the real target, not the link name (e.g. a `.md` symlink
 /// pointing to `/etc/passwd` is rejected because the canonical target
-/// isn't a registered VMark format).
+/// isn't a registered TMark format).
 ///
 /// Returns `Ok(())` when the raw path is acceptable. The raw string is
 /// intentionally used downstream — the scope pattern must match what the
@@ -383,7 +383,7 @@ fn validate_openable_path(raw: &str) -> Result<(), String> {
     // target lives outside the registered set fails this check.
     if !crate::is_openable_supported(&canonical) {
         return Err(format!(
-            "path '{raw}' is not an openable VMark file"
+            "path '{raw}' is not an openable TMark file"
         ));
     }
     Ok(())
@@ -915,7 +915,7 @@ mod tests {
 
     #[test]
     fn validate_rejects_missing_path() {
-        let missing = "/definitely/does/not/exist-vmark-test.md";
+        let missing = "/definitely/does/not/exist-tmark-test.md";
         let err = validate_openable_path(missing).unwrap_err();
         assert!(err.contains("invalid path"), "got: {err}");
     }
@@ -928,7 +928,7 @@ mod tests {
         let md_dir = dir.path().join("looks-like-note.md");
         std::fs::create_dir(&md_dir).expect("mkdir");
         let err = validate_openable_path(md_dir.to_str().unwrap()).unwrap_err();
-        assert!(err.contains("not an openable VMark file"), "got: {err}");
+        assert!(err.contains("not an openable TMark file"), "got: {err}");
     }
 
     #[test]
@@ -941,7 +941,7 @@ mod tests {
         let file = dir.path().join("photo.png");
         std::fs::write(&file, b"\x89PNG").expect("write");
         let err = validate_openable_path(file.to_str().unwrap()).unwrap_err();
-        assert!(err.contains("not an openable VMark file"), "got: {err}");
+        assert!(err.contains("not an openable TMark file"), "got: {err}");
     }
 
     #[test]
@@ -972,6 +972,6 @@ mod tests {
         let link = dir.path().join("looks-markdown.md");
         std::os::unix::fs::symlink(&target, &link).expect("symlink");
         let err = validate_openable_path(link.to_str().unwrap()).unwrap_err();
-        assert!(err.contains("not an openable VMark file"), "got: {err}");
+        assert!(err.contains("not an openable TMark file"), "got: {err}");
     }
 }

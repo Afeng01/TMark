@@ -32,7 +32,7 @@ function createMockSession(windowConfigs: Array<{
   return {
     version: 1,
     timestamp: Math.floor(Date.now() / 1000),
-    vmark_version: '0.3.24',
+    tmark_version: '0.3.24',
     windows: windowConfigs.map(config => ({
       window_label: config.label,
       is_main_window: config.isMain,

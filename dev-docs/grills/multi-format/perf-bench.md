@@ -75,7 +75,7 @@ The user must run this from a desktop session. Reproducible recipe:
    # Total: 50 files across 7 formats
    ```
 
-3. **Open the workspace** in VMark; open all 50 files (Shift-click in the
+3. **Open the workspace** in TMark; open all 50 files (Shift-click in the
    file explorer, or open via `Cmd+O` 50 times).
 
 4. **Switch tabs rapidly** using `Cmd+Alt+Right` (50 cycles). Open the

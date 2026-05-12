@@ -1,6 +1,6 @@
 # Supporto Media
 
-VMark supporta video, audio ed embed YouTube nei tuoi documenti Markdown usando i tag HTML5 standard.
+TMark supporta video, audio ed embed YouTube nei tuoi documenti Markdown usando i tag HTML5 standard.
 
 ## Formati Supportati
 
@@ -68,7 +68,7 @@ Usa iframe del player Vimeo:
 <iframe src="https://player.vimeo.com/video/VIDEO_ID" width="560" height="315" frameborder="0" allowfullscreen></iframe>
 ```
 
-Puoi anche incollare direttamente un URL Vimeo (ad esempio `https://vimeo.com/123456789`) e VMark lo convertirà automaticamente in un embed.
+Puoi anche incollare direttamente un URL Vimeo (ad esempio `https://vimeo.com/123456789`) e TMark lo convertirà automaticamente in un embed.
 
 ### Embed Bilibili
 
@@ -78,11 +78,11 @@ Usa l'iframe del player Bilibili con un BV ID:
 <iframe src="https://player.bilibili.com/player.html?bvid=BV1xxxxxxxxx" width="560" height="350" frameborder="0" allowfullscreen></iframe>
 ```
 
-Incolla un URL di un video Bilibili (ad esempio `https://bilibili.com/video/BV1xxxxxxxxx`) e VMark lo convertirà automaticamente in un embed. Nota che gli URL brevi (`b23.tv`) non sono supportati poiché richiedono la risoluzione del reindirizzamento.
+Incolla un URL di un video Bilibili (ad esempio `https://bilibili.com/video/BV1xxxxxxxxx`) e TMark lo convertirà automaticamente in un embed. Nota che gli URL brevi (`b23.tv`) non sono supportati poiché richiedono la risoluzione del reindirizzamento.
 
 ### Fallback Sintassi Immagine
 
-Puoi anche usare la sintassi delle immagini con estensioni di file multimediali — VMark le promuove automaticamente al tipo di media corretto:
+Puoi anche usare la sintassi delle immagini con estensioni di file multimediali — TMark le promuove automaticamente al tipo di media corretto:
 
 ```markdown
 ![](video.mp4)
@@ -98,11 +98,11 @@ Usa il menu Inserisci nella barra degli strumenti:
 - **Video** — apre un selettore di file per i file video, copia in `.assets/`, inserisce un tag `<video>`
 - **Audio** — apre un selettore di file per i file audio, copia in `.assets/`, inserisce un tag `<audio>`
 - **YouTube** — legge un URL YouTube dagli appunti e inserisce un embed con privacy migliorata
-- **Vimeo** e **Bilibili** — incolla un URL video direttamente nell'editor e VMark rileva automaticamente il provider
+- **Vimeo** e **Bilibili** — incolla un URL video direttamente nell'editor e TMark rileva automaticamente il provider
 
 ### Trascina e Rilascia
 
-Trascina file video o audio dal tuo filesystem direttamente nell'editor. VMark:
+Trascina file video o audio dal tuo filesystem direttamente nell'editor. TMark:
 
 1. Copierà il file nella cartella `.assets/` del documento
 2. Inserirà il nodo media appropriato con un percorso relativo
@@ -130,7 +130,7 @@ Premi `Escape` per chiudere il popup e tornare all'editor.
 
 ## Risoluzione dei Percorsi
 
-VMark supporta tre tipi di percorsi media:
+TMark supporta tre tipi di percorsi media:
 
 | Tipo di Percorso | Esempio | Comportamento |
 |-----------------|---------|--------------|

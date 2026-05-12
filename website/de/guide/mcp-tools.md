@@ -1,8 +1,8 @@
 # MCP-Tools-Referenz
 
-VMark stellt KI-Assistenten **vier zusammengesetzte MCP-Tools** zur Verfügung: `session`, `workspace`, `document` und `workflow`. Zusammen decken sie **14 Aktionen** ab — das Lese-/Schreibgerüst, den Datei- und Fenster-Lebenszyklus sowie CST-sichere Bearbeitungen für GitHub Actions YAML.
+TMark stellt KI-Assistenten **vier zusammengesetzte MCP-Tools** zur Verfügung: `session`, `workspace`, `document` und `workflow`. Zusammen decken sie **14 Aktionen** ab — das Lese-/Schreibgerüst, den Datei- und Fenster-Lebenszyklus sowie CST-sichere Bearbeitungen für GitHub Actions YAML.
 
-Die frühere Oberfläche mit 12 Tools und 76 Aktionen wurde reduziert, weil dokumentinterne Formatierungs-Tools (Fettdruck, Überschriften, Tabellen usw.) Arbeit duplizieren, die KI-Agenten ohnehin trivial über einen Markdown-Roundtrip erledigen. Die vollständige Begründung steht im [MCP-Pruning-Plan](https://github.com/xiaolai/vmark/blob/main/dev-docs/plans/20260504-mcp-pruning.md).
+Die frühere Oberfläche mit 12 Tools und 76 Aktionen wurde reduziert, weil dokumentinterne Formatierungs-Tools (Fettdruck, Überschriften, Tabellen usw.) Arbeit duplizieren, die KI-Agenten ohnehin trivial über einen Markdown-Roundtrip erledigen. Die vollständige Begründung steht im [MCP-Pruning-Plan](https://github.com/Afeng01/TMark/blob/main/dev-docs/plans/20260504-mcp-pruning.md).
 
 ::: tip Empfohlener Arbeitsablauf
 1. Rufen Sie `session.get_state` einmal auf, um offene Fenster, Tabs und pro Tab `{filePath, dirty, revision, kind}` zu sehen.
@@ -54,7 +54,7 @@ Keine Argumente.
     }
   ],
   "capabilities": {
-    "version": "<vmark-mcp-server version>",
+    "version": "<tmark-mcp-server version>",
     "supportedKinds": ["markdown", "yaml-workflow"],
     "mcpProtocol": "0.1.0"
   }
@@ -205,7 +205,7 @@ Verwenden Sie `apply_patch`, wenn Sie ein einzelnes Feld ändern und alles ander
 
 ### `apply_patch`
 
-Ein Array von `IRPatch`-Objekten anwenden. Patches werden über die CST-bewussten Mutatoren von VMark abgewickelt, die Kommentare, Anker und Schlüsselreihenfolge bewahren. Ein einfacher `document.write` auf eine YAML-Datei würde sie verlieren.
+Ein Array von `IRPatch`-Objekten anwenden. Patches werden über die CST-bewussten Mutatoren von TMark abgewickelt, die Kommentare, Anker und Schlüsselreihenfolge bewahren. Ein einfacher `document.write` auf eine YAML-Datei würde sie verlieren.
 
 | Parameter | Typ | Erforderlich |
 |-----------|-----|--------------|

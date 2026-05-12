@@ -4,7 +4,7 @@
 // feature. Blocks Write/Edit on production source files unless a sibling
 // .test.ts exists.
 //
-// Scope (intentionally narrow to avoid disrupting existing VMark workflow):
+// Scope (intentionally narrow to avoid disrupting existing TMark workflow):
 //   - src/lib/ghaWorkflow/**/*.ts
 //   - src/lib/workflowRouting/**/*.ts
 //   - src/components/Editor/WorkflowPanel/**/*.{ts,tsx}
@@ -126,7 +126,7 @@ const msg = [
   "  Write the failing test first, then this hook will allow the source edit.",
   "",
   "  This guard is scoped to the GHA workflow viewer feature paths only.",
-  "  Other VMark code is not affected.",
+  "  Other TMark code is not affected.",
   "",
 ].join("\n");
 

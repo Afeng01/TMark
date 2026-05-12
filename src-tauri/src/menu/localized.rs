@@ -576,7 +576,7 @@ pub fn create_localized_menu(
         &t!("menu.help").to_string(),
         true,
         &[
-            &MenuItem::with_id(app, "vmark-help", &t!("menu.help.vmarkHelp").to_string(), true, None::<&str>)?,
+            &MenuItem::with_id(app, "tmark-help", &t!("menu.help.tmarkHelp").to_string(), true, None::<&str>)?,
             &MenuItem::with_id(app, "keyboard-shortcuts", &t!("menu.help.keyboardShortcuts").to_string(), true, None::<&str>)?,
             &PredefinedMenuItem::separator(app)?,
             &MenuItem::with_id(app, "install-cli", &t!("menu.help.installCli").to_string(), true, None::<&str>)?,
@@ -592,7 +592,7 @@ pub fn create_localized_menu(
         &t!("menu.help").to_string(),
         true,
         &[
-            &MenuItem::with_id(app, "vmark-help", &t!("menu.help.vmarkHelp").to_string(), true, None::<&str>)?,
+            &MenuItem::with_id(app, "tmark-help", &t!("menu.help.tmarkHelp").to_string(), true, None::<&str>)?,
             &MenuItem::with_id(app, "keyboard-shortcuts", &t!("menu.help.keyboardShortcuts").to_string(), true, None::<&str>)?,
             &PredefinedMenuItem::separator(app)?,
             &MenuItem::with_id(app, "report-issue", &t!("menu.help.reportIssue").to_string(), true, None::<&str>)?,

@@ -40,7 +40,7 @@ describe('Schema Migration', () => {
       const session: SessionData = {
         version: SCHEMA_VERSION,
         timestamp: Date.now() / 1000,
-        vmark_version: '0.3.24',
+        tmark_version: '0.3.24',
         windows: [],
         workspace: null,
       };
@@ -54,7 +54,7 @@ describe('Schema Migration', () => {
       const futureSession = {
         version: SCHEMA_VERSION + 1,
         timestamp: Date.now() / 1000,
-        vmark_version: '1.0.0',
+        tmark_version: '1.0.0',
         windows: [],
         workspace: null,
       } as SessionData;
@@ -66,7 +66,7 @@ describe('Schema Migration', () => {
       const invalidSession = {
         version: 0,
         timestamp: Date.now() / 1000,
-        vmark_version: '0.0.1',
+        tmark_version: '0.0.1',
         windows: [],
         workspace: null,
       } as SessionData;
@@ -80,7 +80,7 @@ describe('Schema Migration', () => {
       const session: SessionData = {
         version: 1,
         timestamp: Date.now() / 1000,
-        vmark_version: '0.3.24',
+        tmark_version: '0.3.24',
         windows: [],
         workspace: null,
       };
@@ -95,7 +95,7 @@ describe('Schema Migration', () => {
       const v1Session: SessionData = {
         version: 1,
         timestamp: Date.now() / 1000,
-        vmark_version: '0.3.24',
+        tmark_version: '0.3.24',
         windows: [
           {
             window_label: 'main',
@@ -154,7 +154,7 @@ describe('Schema Migration', () => {
       const oldSession = {
         version: 1,
         timestamp: Date.now() / 1000,
-        vmark_version: '0.3.20',
+        tmark_version: '0.3.20',
         windows: [
           {
             window_label: 'main',
@@ -188,7 +188,7 @@ describe('Schema Migration', () => {
       const emptySession: SessionData = {
         version: 1,
         timestamp: Date.now() / 1000,
-        vmark_version: '0.3.24',
+        tmark_version: '0.3.24',
         windows: [],
         workspace: null,
       };
@@ -201,7 +201,7 @@ describe('Schema Migration', () => {
       const sessionWithWorkspace: SessionData = {
         version: 1,
         timestamp: Date.now() / 1000,
-        vmark_version: '0.3.24',
+        tmark_version: '0.3.24',
         windows: [],
         workspace: {
           root_path: '/projects/myapp',
@@ -219,7 +219,7 @@ describe('Schema Migration', () => {
       const session: SessionData = {
         version: 1,
         timestamp: originalTimestamp,
-        vmark_version: '0.3.24',
+        tmark_version: '0.3.24',
         windows: [],
         workspace: null,
       };

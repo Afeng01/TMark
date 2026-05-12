@@ -1,14 +1,14 @@
-# VMark 繁體中文（zh-TW）locale — 翻譯自英文原始檔。
+# TMark 繁體中文（zh-TW）locale — 翻譯自英文原始檔。
 # 鍵值遵循慣例：menu.<section>.<item>
 # 動態選單項目（最近使用的檔案、精靈）的結構標籤也在此處。
 
 menu:
   # === App 選單（僅限 macOS）===
-  app: "VMark"
-  app.about: "關於 VMark"
+  app: "TMark"
+  app.about: "關於 TMark"
   app.settings: "設定..."
   app.saveAllQuit: "全部儲存並結束"
-  app.quit: "結束 VMark"
+  app.quit: "結束 TMark"
 
   # === 檔案選單 ===
   file: "檔案"
@@ -184,9 +184,9 @@ menu:
 
   # === 輔助說明選單 ===
   help: "輔助說明"
-  help.vmarkHelp: "VMark 輔助說明"
+  help.tmarkHelp: "TMark 輔助說明"
   help.keyboardShortcuts: "鍵盤快捷鍵"
-  help.installCli: "Shell 指令：在 PATH 中安裝「vmark」..."
+  help.installCli: "Shell 指令：在 PATH 中安裝「tmark」..."
   help.reportIssue: "回報問題..."
 
   # === 動態選單標籤 ===

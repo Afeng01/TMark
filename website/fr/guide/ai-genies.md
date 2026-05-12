@@ -36,7 +36,7 @@ La barre d'état affiche également la progression de l'IA — une icône tourna
 
 ## Génies intégrés
 
-VMark est livré avec 13 génies répartis en quatre catégories :
+TMark est livré avec 13 génies répartis en quatre catégories :
 
 ### Édition
 
@@ -126,9 +126,9 @@ Les génies sont stockés dans votre répertoire de données d'application :
 
 | Plateforme | Chemin |
 |------------|--------|
-| macOS | `~/Library/Application Support/app.vmark/genies/` |
-| Windows | `%APPDATA%\app.vmark\genies\` |
-| Linux | `~/.local/share/app.vmark/genies/` |
+| macOS | `~/Library/Application Support/app.tmark/genies/` |
+| Windows | `%APPDATA%\app.tmark\genies\` |
+| Linux | `~/.local/share/app.tmark/genies/` |
 
 Ouvrez ce dossier depuis le menu **Outils > Ouvrir le dossier des génies**.
 
@@ -188,7 +188,7 @@ Le nom de fichier `polish.md` devient le nom d'affichage « Polish » dans le s�
 
 ### L'espace réservé `{{content}}`
 
-L'espace réservé `{{content}}` est au cœur de chaque génie. Quand un génie s'exécute, VMark :
+L'espace réservé `{{content}}` est au cœur de chaque génie. Quand un génie s'exécute, TMark :
 
 1. **Extrait le texte** selon la portée (texte sélectionné, bloc actuel ou document complet)
 2. **Remplace** chaque `{{content}}` dans votre modèle par le texte extrait
@@ -227,7 +227,7 @@ L'espace réservé `{{context}}` donne à l'IA le texte environnant en lecture s
 
 **Restrictions de portée** — Le contexte fonctionne uniquement avec les portées `selection` et `block`. Pour la portée `document`, le contenu est déjà le document complet.
 
-**Invites libres** — Quand vous tapez une instruction libre dans le sélecteur, VMark inclut automatiquement ±1 bloc environnant comme contexte pour les portées `selection` et `block`. Aucune configuration nécessaire.
+**Invites libres** — Quand vous tapez une instruction libre dans le sélecteur, TMark inclut automatiquement ±1 bloc environnant comme contexte pour les portées `selection` et `block`. Aucune configuration nécessaire.
 
 **Rétrocompatible** — Les génies sans `{{context}}` fonctionnent exactement comme avant. Si le modèle ne contient pas `{{context}}`, aucun texte environnant n'est extrait.
 
@@ -498,7 +498,7 @@ Formatez comme une liste à puces. Si tout semble solide, dites
 
 ## Suggestions IA
 
-Lorsqu'un Génie renvoie un texte destiné à remplacer la sélection (plutôt qu'une réponse de chat libre), VMark le présente comme une **suggestion** avec un diff en ligne&nbsp;: barré rouge pour le texte original, soulignement vert pour le texte proposé. Vous examinez et approuvez avant qu'aucun changement ne soit appliqué de manière persistante.
+Lorsqu'un Génie renvoie un texte destiné à remplacer la sélection (plutôt qu'une réponse de chat libre), TMark le présente comme une **suggestion** avec un diff en ligne&nbsp;: barré rouge pour le texte original, soulignement vert pour le texte proposé. Vous examinez et approuvez avant qu'aucun changement ne soit appliqué de manière persistante.
 
 | Action | Raccourci |
 |---|---|

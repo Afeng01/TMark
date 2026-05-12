@@ -15,18 +15,18 @@
  *     allowlists (Claude Code's /terminal-setup, etc.) recognize the host as a
  *     CSI-u-capable terminal. WezTerm chosen for lowest side-effect risk among
  *     the four recognized values. See dev-docs/decisions/ADR-006-terminal-program-identity.md.
- *     Do NOT change to "vmark" — third-party tools will fall through to a
+ *     Do NOT change to "tmark" — third-party tools will fall through to a
  *     generic "unknown terminal" path. The impersonation is kept honest by
  *     terminalKeyHandler.ts, which translates Shift+Enter into the matching
  *     CSI-u sequence ("\x1b[13;2u") that real WezTerm sends.
- *   - Sets EDITOR=vmark so $EDITOR-aware CLI tools open files back in VMark.
+ *   - Sets EDITOR=tmark so $EDITOR-aware CLI tools open files back in TMark.
  *   - Injects login shell PATH via get_login_shell_path Tauri command so CLI
  *     tools (node, claude, etc.) are discoverable — macOS GUI apps have minimal
  *     PATH by default. Fallback PATH is platform-aware (Windows vs Unix).
  *   - Sets LC_CTYPE=UTF-8 because macOS GUI apps have minimal env; without it
  *     the shell defaults to C locale and tools emit "?" for CJK characters.
  *     LC_CTYPE (not LANG) avoids overriding the user's full locale.
- *   - Sets VMARK_WORKSPACE when a workspace is open, enabling shell scripts
+ *   - Sets TMARK_WORKSPACE when a workspace is open, enabling shell scripts
  *     to access the workspace root.
  *   - The disposed() callback lets the caller abort if the session was removed
  *     while the async spawn was in flight.
@@ -184,9 +184,9 @@ export async function spawnPty(options: SpawnOptions): Promise<IPty> {
     // Ensure consistent color capabilities in xterm.js; Tauri GUI apps may not inherit terminal env vars.
     TERM: "xterm-256color",
     // Impersonate WezTerm so CLI tools with terminal allowlists (Claude Code's
-    // /terminal-setup, etc.) recognize the host. See ADR-006. Do NOT change to "vmark".
+    // /terminal-setup, etc.) recognize the host. See ADR-006. Do NOT change to "tmark".
     TERM_PROGRAM: "WezTerm",
-    EDITOR: "vmark",
+    EDITOR: "tmark",
     // macOS GUI apps launched from Dock/Spotlight have minimal environment —
     // set UTF-8 encoding so the shell and tools handle CJK/multibyte correctly.
     // LC_CTYPE (not LANG) to only affect encoding without overriding the user's locale.
@@ -196,7 +196,7 @@ export async function spawnPty(options: SpawnOptions): Promise<IPty> {
     PATH: loginPath,
   };
   if (workspaceRoot) {
-    env.VMARK_WORKSPACE = workspaceRoot;
+    env.TMARK_WORKSPACE = workspaceRoot;
   }
 
   const spawnOpts = { cols: term.cols || 80, rows: term.rows || 24, cwd, env };

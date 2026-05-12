@@ -101,8 +101,8 @@ export const de = {
               link: "/de/guide/users-as-developers/",
             },
             {
-              text: "Warum ich VMark entwickelt habe",
-              link: "/de/guide/users-as-developers/why-i-built-vmark",
+              text: "Warum ich TMark entwickelt habe",
+              link: "/de/guide/users-as-developers/why-i-built-tmark",
             },
             {
               text: "Fünf Fähigkeiten, die KI nicht ersetzen kann",
@@ -143,7 +143,7 @@ export const de = {
 
     footer: {
       copyright:
-        'Copyright © 2026 VMark · <a href="/de/guide/license">ISC-Lizenz</a>',
+        'Copyright © 2026 TMark · <a href="/de/guide/license">ISC-Lizenz</a>',
     },
 
     lastUpdated: {

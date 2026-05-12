@@ -71,8 +71,11 @@ const detailRows = computed(() => {
 })
 
 onMounted(async () => {
+  const statsUrl = import.meta.env.VITE_TMARK_STATS_URL
+  if (!statsUrl) return
+
   try {
-    const res = await fetch('https://log.vmark.app/api/stats')
+    const res = await fetch(statsUrl)
     stats.value = await res.json()
   } catch {
     error.value = true

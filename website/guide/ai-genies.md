@@ -36,7 +36,7 @@ The status bar also shows AI progress — a spinning icon with elapsed time whil
 
 ## Built-in Genies
 
-VMark ships with 13 genies across four categories:
+TMark ships with 13 genies across four categories:
 
 ### Editing
 
@@ -126,9 +126,9 @@ Genies are stored in your application data directory:
 
 | Platform | Path |
 |----------|------|
-| macOS | `~/Library/Application Support/app.vmark/genies/` |
-| Windows | `%APPDATA%\app.vmark\genies\` |
-| Linux | `~/.local/share/app.vmark/genies/` |
+| macOS | `~/Library/Application Support/app.tmark/genies/` |
+| Windows | `%APPDATA%\app.tmark\genies\` |
+| Linux | `~/.local/share/app.tmark/genies/` |
 
 Open this folder from menu **Tools > Open Genies Folder**.
 
@@ -188,7 +188,7 @@ The filename `polish.md` becomes the display name "Polish" in the picker.
 
 ### The `{{content}}` Placeholder
 
-The `{{content}}` placeholder is the core of every genie. When a genie runs, VMark:
+The `{{content}}` placeholder is the core of every genie. When a genie runs, TMark:
 
 1. **Extracts text** based on the scope (selected text, current block, or full document)
 2. **Replaces** every `{{content}}` in your template with the extracted text
@@ -227,7 +227,7 @@ The `{{context}}` placeholder gives the AI read-only surrounding text — so it 
 
 **Scope restrictions** — Context only works with `selection` and `block` scope. For `document` scope, the content already IS the full document.
 
-**Freeform prompts** — When you type a freeform instruction in the picker, VMark automatically includes ±1 surrounding block as context for `selection` and `block` scope. No configuration needed.
+**Freeform prompts** — When you type a freeform instruction in the picker, TMark automatically includes ±1 surrounding block as context for `selection` and `block` scope. No configuration needed.
 
 **Backward compatible** — Genies without `{{context}}` work exactly as before. If the template doesn't contain `{{context}}`, no surrounding text is extracted.
 
@@ -498,7 +498,7 @@ Format as a bullet list. If everything looks solid, say
 
 ## AI Suggestions
 
-When a Genie returns text intended as a replacement for the selection (rather than a free-form chat reply), VMark surfaces it as a **suggestion** with an inline diff: red strikethrough for the original text, green underline for the proposed text. You review and approve before any change persists.
+When a Genie returns text intended as a replacement for the selection (rather than a free-form chat reply), TMark surfaces it as a **suggestion** with an inline diff: red strikethrough for the original text, green underline for the proposed text. You review and approve before any change persists.
 
 | Action | Shortcut |
 |---|---|

@@ -36,7 +36,7 @@ La barra de estado también muestra el progreso de IA — un icono giratorio con
 
 ## Genios Integrados
 
-VMark viene con 13 genios en cuatro categorías:
+TMark viene con 13 genios en cuatro categorías:
 
 ### Edición
 
@@ -126,9 +126,9 @@ Los genios se almacenan en el directorio de datos de la aplicación:
 
 | Plataforma | Ruta |
 |------------|------|
-| macOS | `~/Library/Application Support/app.vmark/genies/` |
-| Windows | `%APPDATA%\app.vmark\genies\` |
-| Linux | `~/.local/share/app.vmark/genies/` |
+| macOS | `~/Library/Application Support/app.tmark/genies/` |
+| Windows | `%APPDATA%\app.tmark\genies\` |
+| Linux | `~/.local/share/app.tmark/genies/` |
 
 Abre esta carpeta desde el menú **Herramientas > Abrir Carpeta de Genios**.
 
@@ -188,7 +188,7 @@ El nombre de archivo `polish.md` se convierte en el nombre de visualización "Po
 
 ### El Marcador de Posición `{{content}}`
 
-El marcador de posición `{{content}}` es el núcleo de cada genio. Cuando se ejecuta un genio, VMark:
+El marcador de posición `{{content}}` es el núcleo de cada genio. Cuando se ejecuta un genio, TMark:
 
 1. **Extrae el texto** basándose en el alcance (texto seleccionado, bloque actual o documento completo)
 2. **Reemplaza** cada `{{content}}` en tu plantilla con el texto extraído
@@ -227,7 +227,7 @@ El marcador de posición `{{context}}` le da a la IA texto circundante de solo l
 
 **Restricciones de alcance** — El contexto solo funciona con alcance `selection` y `block`. Para el alcance `document`, el contenido ya ES el documento completo.
 
-**Prompts de forma libre** — Cuando escribes una instrucción de forma libre en el selector, VMark automáticamente incluye ±1 bloque circundante como contexto para los alcances `selection` y `block`. No se necesita configuración.
+**Prompts de forma libre** — Cuando escribes una instrucción de forma libre en el selector, TMark automáticamente incluye ±1 bloque circundante como contexto para los alcances `selection` y `block`. No se necesita configuración.
 
 **Compatible con versiones anteriores** — Los genios sin `{{context}}` funcionan exactamente como antes. Si la plantilla no contiene `{{context}}`, no se extrae texto circundante.
 
@@ -498,7 +498,7 @@ Formatea como una lista con viñetas. Si todo parece sólido, di
 
 ## Sugerencias de IA
 
-Cuando un Genio devuelve texto destinado a reemplazar la selección (en lugar de una respuesta de chat de forma libre), VMark lo presenta como una **sugerencia** con un diff en línea: tachado rojo para el texto original, subrayado verde para el texto propuesto. Tú revisas y apruebas antes de que cualquier cambio se persista.
+Cuando un Genio devuelve texto destinado a reemplazar la selección (en lugar de una respuesta de chat de forma libre), TMark lo presenta como una **sugerencia** con un diff en línea: tachado rojo para el texto original, subrayado verde para el texto propuesto. Tú revisas y apruebas antes de que cualquier cambio se persista.
 
 | Acción | Atajo |
 |---|---|
