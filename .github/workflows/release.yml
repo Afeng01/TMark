@@ -76,6 +76,9 @@ jobs:
 
   build-tauri:
     needs: create-release
+    env:
+      HAS_APPLE_SIGNING: ${{ secrets.APPLE_CERTIFICATE != '' && secrets.APPLE_CERTIFICATE_PASSWORD != '' && secrets.APPLE_SIGNING_IDENTITY != '' }}
+      HAS_TAURI_UPDATER_SIGNING: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY != '' }}
     strategy:
       fail-fast: false
       matrix:
@@ -137,7 +140,7 @@ jobs:
 
       # macOS: Import code signing certificate (signing enabled, notarization disabled)
       - name: Import Apple certificate
-        if: matrix.platform == 'macos-latest'
+        if: matrix.platform == 'macos-latest' && env.HAS_APPLE_SIGNING == 'true'
         env:
           APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
@@ -199,7 +202,7 @@ jobs:
       # Pre-sign sidecar with JIT entitlements (required for pkg/Node.js binaries)
       # This must happen BEFORE Tauri signs the app
       - name: Sign sidecar with JIT entitlements (macOS)
-        if: matrix.platform == 'macos-latest'
+        if: matrix.platform == 'macos-latest' && env.HAS_APPLE_SIGNING == 'true'
         env:
           APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
           SIDECAR_TARGET: ${{ matrix.sidecar_target }}
@@ -227,6 +230,21 @@ jobs:
           codesign -dv --verbose=2 "$SIDECAR_PATH"
           echo "Checking entitlements..."
           codesign -d --entitlements - "$SIDECAR_PATH"
+
+      - name: Disable updater artifacts when signing key is unavailable
+        if: env.HAS_TAURI_UPDATER_SIGNING != 'true'
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+
+          const path = 'src-tauri/tauri.conf.json';
+          const config = JSON.parse(fs.readFileSync(path, 'utf8'));
+          config.bundle ??= {};
+          config.bundle.createUpdaterArtifacts = false;
+          fs.writeFileSync(path, `${JSON.stringify(config, null, 2)}\n`);
+          NODE
+          echo "TAURI_SIGNING_PRIVATE_KEY is not configured; building release artifacts without updater signatures."
 
       - name: Build MCP server sidecar (Windows)
         if: matrix.platform == 'windows-latest'
@@ -301,8 +319,11 @@ jobs:
     needs: [create-release, build-tauri]
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      HAS_TAURI_UPDATER_SIGNING: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY != '' }}
     steps:
       - name: Generate and upload latest.json
+        if: env.HAS_TAURI_UPDATER_SIGNING == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
