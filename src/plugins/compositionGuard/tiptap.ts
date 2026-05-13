@@ -34,6 +34,7 @@ import {
   getImeCleanupPreeditPrefixLength,
   getImeCleanupPreeditRangeBeforeCursor,
   getImeCleanupPreeditSuffixLength,
+  hasImeComposedCharacters,
   HANGUL_RE,
   IME_GRACE_PERIOD_MS,
   isImeKeyEvent,
@@ -52,6 +53,7 @@ export const compositionGuardExtension = Extension.create({
     let compositionStartPos: number | null = null;
     let compositionData = "";
     let compositionPinyin = "";
+    let compositionEndData = "";
 
     // Korean Hangul: Enter during composition confirms the syllable AND
     // requests a newline. Our handleKeyDown blocks Enter to prevent premature
@@ -103,6 +105,13 @@ export const compositionGuardExtension = Extension.create({
         return;
       }
 
+      const canCleanupPreedit =
+        // Empty compositionend.data is a browser quirk from the original
+        // pinyin-cleanup bug; non-empty Latin data is an intentional raw commit.
+        compositionEndData.length === 0 ||
+        hasImeComposedCharacters(compositionData) ||
+        hasImeComposedCharacters(compositionPinyin);
+
       let cleanupEnd = $start.end();
       let allowNewlines = false;
 
@@ -123,7 +132,9 @@ export const compositionGuardExtension = Extension.create({
       let deleteTo = compositionStartPos;
       const forwardPrefixLen =
         getImeCleanupPrefixLength(textBetween, compositionData, { allowNewlines }) ??
-        getImeCleanupPreeditPrefixLength(textBetween, compositionPinyin, { allowNewlines });
+        (canCleanupPreedit
+          ? getImeCleanupPreeditPrefixLength(textBetween, compositionPinyin, { allowNewlines })
+          : null);
       if (forwardPrefixLen) {
         deleteTo = compositionStartPos + forwardPrefixLen;
       } else {
@@ -137,23 +148,27 @@ export const compositionGuardExtension = Extension.create({
         }
 
         const textBeforeStart = state.doc.textBetween(blockStart, compositionStartPos, "\n");
-        const cleanupRange = getImeCleanupPreeditRangeBeforeCursor(
-          textBeforeStart,
-          textBetween,
-          compositionPinyin,
-          compositionData,
-          { allowNewlines },
-        );
+        const cleanupRange = canCleanupPreedit
+          ? getImeCleanupPreeditRangeBeforeCursor(
+            textBeforeStart,
+            textBetween,
+            compositionPinyin,
+            compositionData,
+            { allowNewlines },
+          )
+          : null;
         if (cleanupRange) {
           deleteFrom = blockStart + cleanupRange.fromOffset;
           deleteTo = blockStart + cleanupRange.toOffset;
         } else {
-          const backwardPrefixLen = getImeCleanupPreeditSuffixLength(
-            textBeforeStart,
-            textBetween,
-            compositionPinyin,
-            { allowNewlines },
-          );
+          const backwardPrefixLen = canCleanupPreedit
+            ? getImeCleanupPreeditSuffixLength(
+              textBeforeStart,
+              textBetween,
+              compositionPinyin,
+              { allowNewlines },
+            )
+            : null;
           if (!backwardPrefixLen) return;
           deleteFrom = compositionStartPos - backwardPrefixLen;
           deleteTo = compositionStartPos;
@@ -270,26 +285,27 @@ export const compositionGuardExtension = Extension.create({
               // AND requests a newline. We block it to prevent premature block
               // splitting, but queue a deferred split for after the grace
               // period so the newline intent is not lost (Tiptap #4108).
-              if (
-                event.key === "Enter" &&
-                (isComposing || grace) &&
-                compositionData &&
-                HANGUL_RE.test(compositionData)
-              ) {
-                if (grace && !isComposing) {
-                  // Enter during grace period (compositionend rAF already ran).
-                  // Schedule splitBlock directly since no rAF callback will
-                  // consume the flag.
-                  if (pendingEnterTimer) clearTimeout(pendingEnterTimer);
-                  const snapshotFrom = view.state.selection.from;
-                  pendingEnterTimer = setTimeout(() => {
-                    pendingEnterTimer = null;
-                    if (!isComposing && view.state.selection.from === snapshotFrom) {
-                      splitBlock(view.state, view.dispatch);
-                    }
-                  }, IME_GRACE_PERIOD_MS);
-                } else {
-                  pendingEnterAfterComposition = true;
+              if (event.key === "Enter" && (isComposing || grace)) {
+                if (compositionData && HANGUL_RE.test(compositionData)) {
+                  if (grace && !isComposing) {
+                    // Enter during grace period (compositionend rAF already ran).
+                    // Schedule splitBlock directly since no rAF callback will
+                    // consume the flag.
+                    if (pendingEnterTimer) clearTimeout(pendingEnterTimer);
+                    const snapshotFrom = view.state.selection.from;
+                    pendingEnterTimer = setTimeout(() => {
+                      pendingEnterTimer = null;
+                      if (!isComposing && view.state.selection.from === snapshotFrom) {
+                        splitBlock(view.state, view.dispatch);
+                      }
+                    }, IME_GRACE_PERIOD_MS);
+                  } else {
+                    pendingEnterAfterComposition = true;
+                  }
+                } else if (isComposing && compositionData && !hasImeComposedCharacters(compositionData)) {
+                  // Chinese IMEs use Enter to commit raw Latin preedit text.
+                  // Blocking that keydown can cancel the commit and drop the text.
+                  return false;
                 }
               }
               return true;
@@ -301,6 +317,7 @@ export const compositionGuardExtension = Extension.create({
               isComposing = true;
               compositionData = "";
               compositionPinyin = "";
+              compositionEndData = "";
               splitDetected = false;
               pendingEnterAfterComposition = false;
               if (pendingEnterTimer) {
@@ -335,6 +352,7 @@ export const compositionGuardExtension = Extension.create({
               isComposing = false;
               markProseMirrorCompositionEnd(view);
               const data = (event as CompositionEvent).data;
+              compositionEndData = typeof data === "string" ? data : "";
               compositionPinyin = compositionData;
               if (typeof data === "string" && data.length > 0) {
                 compositionData = data;
@@ -427,6 +445,7 @@ export const compositionGuardExtension = Extension.create({
               compositionStartPos = null;
               compositionData = "";
               compositionPinyin = "";
+              compositionEndData = "";
               splitDetected = false;
               markProseMirrorCompositionEnd(view);
               requestAnimationFrame(() => {

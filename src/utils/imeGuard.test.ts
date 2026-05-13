@@ -26,6 +26,7 @@ import {
   getImeCleanupPreeditPrefixLength,
   getImeCleanupPreeditSuffixLength,
   getImeCleanupPreeditRangeBeforeCursor,
+  hasImeComposedCharacters,
 } from "./imeGuard";
 
 // ---- isImeKeyEvent ----
@@ -72,6 +73,21 @@ describe("isImeKeyEvent", () => {
 describe("IME_GRACE_PERIOD_MS", () => {
   it("is 50ms", () => {
     expect(IME_GRACE_PERIOD_MS).toBe(50);
+  });
+});
+
+// ---- hasImeComposedCharacters ----
+
+describe("hasImeComposedCharacters", () => {
+  it("detects East Asian composition text", () => {
+    expect(hasImeComposedCharacters("你好")).toBe(true);
+    expect(hasImeComposedCharacters("こんにちは")).toBe(true);
+    expect(hasImeComposedCharacters("한글")).toBe(true);
+  });
+
+  it("returns false for Latin text committed through an IME", () => {
+    expect(hasImeComposedCharacters("hello")).toBe(false);
+    expect(hasImeComposedCharacters("di'yi'bj")).toBe(false);
   });
 });
 

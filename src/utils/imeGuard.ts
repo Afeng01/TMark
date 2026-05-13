@@ -54,6 +54,11 @@ export function isImeKeyEvent(event: ImeKeyEvent | null | undefined): boolean {
   return Boolean(event.isComposing || event.keyCode === IME_KEYCODE);
 }
 
+/** Return true when composition text contains East Asian characters committed by an IME. */
+export function hasImeComposedCharacters(text: string | null | undefined): boolean {
+  return Boolean(text && CJK_COMPOSED_RE.test(text));
+}
+
 /** Return true if the ProseMirror view is currently inside an IME composition. */
 export function isProseMirrorComposing(view: ProseMirrorView | null | undefined): boolean {
   return Boolean(view && view.composing);

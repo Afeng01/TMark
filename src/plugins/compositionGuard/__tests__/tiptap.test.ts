@@ -12,6 +12,9 @@ const mockGetImeCleanupPrefixLength = vi.fn(() => 0);
 const mockGetImeCleanupPreeditPrefixLength = vi.fn(() => null);
 const mockGetImeCleanupPreeditSuffixLength = vi.fn(() => null);
 const mockGetImeCleanupPreeditRangeBeforeCursor = vi.fn(() => null);
+const mockHasImeComposedCharacters = vi.fn((text: string | null | undefined) =>
+  /[\u3040-\u30ff\u4e00-\u9fff\uac00-\ud7af]/.test(text ?? ""),
+);
 const mockIsImeKeyEvent = vi.fn(() => false);
 const mockIsProseMirrorInCompositionGrace = vi.fn(() => false);
 const mockMarkProseMirrorCompositionEnd = vi.fn();
@@ -22,6 +25,7 @@ vi.mock("@/utils/imeGuard", () => ({
   getImeCleanupPreeditPrefixLength: (...args: unknown[]) => mockGetImeCleanupPreeditPrefixLength(...args),
   getImeCleanupPreeditSuffixLength: (...args: unknown[]) => mockGetImeCleanupPreeditSuffixLength(...args),
   getImeCleanupPreeditRangeBeforeCursor: (...args: unknown[]) => mockGetImeCleanupPreeditRangeBeforeCursor(...args),
+  hasImeComposedCharacters: (...args: [string | null | undefined]) => mockHasImeComposedCharacters(...args),
   HANGUL_RE: /[\uac00-\ud7af\u1100-\u11ff\u3130-\u318f]/,
   IME_GRACE_PERIOD_MS: 50,
   isImeKeyEvent: (...args: unknown[]) => mockIsImeKeyEvent(...args),
@@ -51,6 +55,9 @@ beforeEach(() => {
   mockGetImeCleanupPreeditPrefixLength.mockReturnValue(null);
   mockGetImeCleanupPreeditSuffixLength.mockReturnValue(null);
   mockGetImeCleanupPreeditRangeBeforeCursor.mockReturnValue(null);
+  mockHasImeComposedCharacters.mockImplementation((text: string | null | undefined) =>
+    /[\u3040-\u30ff\u4e00-\u9fff\uac00-\ud7af]/.test(text ?? ""),
+  );
   mockIsImeKeyEvent.mockReturnValue(false);
   mockIsProseMirrorInCompositionGrace.mockReturnValue(false);
   mockFixCompositionSplitBlock.mockReturnValue(null);
@@ -136,7 +143,7 @@ describe("compositionGuardExtension addProseMirrorPlugins", () => {
 // ---------------------------------------------------------------------------
 
 describe("compositionGuard handleKeyDown", () => {
-  function getHandleKeyDown() {
+  function getPluginProps() {
     const plugins = compositionGuardExtension.config.addProseMirrorPlugins!.call({
       editor: {},
       name: "compositionGuard",
@@ -145,7 +152,16 @@ describe("compositionGuard handleKeyDown", () => {
       type: undefined,
       parent: undefined,
     } as never);
-    return (plugins[0] as { props: { handleKeyDown: (view: unknown, event: unknown) => boolean } }).props.handleKeyDown;
+    return (plugins[0] as {
+      props: {
+        handleKeyDown: (view: unknown, event: unknown) => boolean;
+        handleDOMEvents: Record<string, (view: unknown, event?: unknown) => boolean>;
+      };
+    }).props;
+  }
+
+  function getHandleKeyDown() {
+    return getPluginProps().handleKeyDown;
   }
 
   it("returns true (block) for IME key events", () => {
@@ -168,6 +184,26 @@ describe("compositionGuard handleKeyDown", () => {
     mockIsProseMirrorInCompositionGrace.mockReturnValue(false);
     const handleKeyDown = getHandleKeyDown();
     const result = handleKeyDown({}, {});
+    expect(result).toBe(false);
+  });
+
+  it("allows Enter to confirm Latin preedit text from a Chinese IME", () => {
+    mockIsImeKeyEvent.mockReturnValue(true);
+    const { handleKeyDown, handleDOMEvents } = getPluginProps();
+    const mockView = {
+      state: {
+        selection: { from: 5 },
+        doc: {
+          resolve: () => ({ depth: 1, node: () => ({ type: { name: "paragraph" } }) }),
+        },
+      },
+    };
+
+    handleDOMEvents.compositionstart(mockView);
+    handleDOMEvents.compositionupdate(mockView, { data: "hello" });
+
+    const result = handleKeyDown(mockView, { key: "Enter", isComposing: true, keyCode: 13 });
+
     expect(result).toBe(false);
   });
 });
@@ -985,6 +1021,44 @@ describe("compositionGuard scheduleImeCleanup", () => {
 
     expect(deleteSpy).toHaveBeenCalledWith(1, 9);
     expect(mockView.dispatch).toHaveBeenCalledWith(mockView.state.tr);
+  });
+
+  it("does not delete Latin text committed through a Chinese IME", () => {
+    mockGetImeCleanupPrefixLength.mockReturnValue(null);
+    mockGetImeCleanupPreeditPrefixLength.mockReturnValue(5);
+
+    const events = getFullPlugin();
+    const deleteSpy = vi.fn().mockReturnThis();
+    const mockResolve = (_pos: number) => ({
+      depth: 1,
+      node: (d: number) => ({ type: { name: d === 1 ? "paragraph" : "doc" } }),
+      start: () => 1,
+      end: (d?: number) => d !== undefined ? 30 : 20,
+    });
+    const mockView = {
+      state: {
+        selection: { from: 1 },
+        doc: {
+          resolve: mockResolve,
+          textBetween: () => "hello中文",
+          content: { size: 40 },
+        },
+        tr: {
+          delete: deleteSpy,
+          setMeta: vi.fn().mockReturnThis(),
+        },
+      },
+      dispatch: vi.fn(),
+    };
+
+    events.compositionstart(mockView);
+    events.compositionupdate(mockView, { data: "hello" });
+    events.compositionend(mockView, { data: "hello" });
+
+    vi.runAllTimers();
+
+    expect(deleteSpy).not.toHaveBeenCalled();
+    expect(mockView.dispatch).not.toHaveBeenCalled();
   });
 
   it("scheduleImeCleanup handles compositionStartPos > cleanupEnd gracefully", () => {
