@@ -246,6 +246,20 @@ jobs:
           NODE
           echo "TAURI_SIGNING_PRIVATE_KEY is not configured; building release artifacts without updater signatures."
 
+      - name: Prepare Tauri build args
+        id: tauri-args
+        shell: bash
+        env:
+          MATRIX_ARGS: ${{ matrix.args }}
+          MATRIX_PLATFORM: ${{ matrix.platform }}
+        run: |
+          BUILD_ARGS="$MATRIX_ARGS"
+          if [ "$MATRIX_PLATFORM" = "macos-latest" ] && [ "$HAS_APPLE_SIGNING" != "true" ]; then
+            BUILD_ARGS="$BUILD_ARGS --no-sign"
+          fi
+          echo "args=$BUILD_ARGS" >> "$GITHUB_OUTPUT"
+          echo "Tauri args: $BUILD_ARGS"
+
       - name: Build MCP server sidecar (Windows)
         if: matrix.platform == 'windows-latest'
         working-directory: tmark-mcp-server
@@ -310,7 +324,7 @@ jobs:
           CI: true
         with:
           releaseId: ${{ needs.create-release.outputs.release_id }}
-          args: ${{ matrix.args }}
+          args: ${{ steps.tauri-args.outputs.args }}
           # Disable per-job latest.json upload to avoid race condition
           # We generate and upload it once in publish-release job
           includeUpdaterJson: false
